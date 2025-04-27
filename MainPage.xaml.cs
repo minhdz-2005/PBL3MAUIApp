@@ -1,24 +1,31 @@
-﻿namespace PBL3MAUIApp
+﻿using System.Diagnostics;
+using System.Net.Http;
+using System.Text.Json;
+
+using PBL3MAUIApp.Models;
+using PBL3MAUIApp.Services;
+
+namespace PBL3MAUIApp
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
 
+        private readonly CustomerService _accountService = new CustomerService();
         public MainPage()
         {
             InitializeComponent();
         }
-
-        private void OnCounterClicked(object sender, EventArgs e)
+        protected override async void OnAppearing()
         {
-            count++;
+            base.OnAppearing();
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            var accs = await _accountService.GetCustomersAsync();
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            foreach (var a in accs)
+            {
+                Debug.WriteLine($"Cus: {a.Id}, {a.Name}, {a.Username}, {a.PhoneNumber}");
+            }
         }
     }
 

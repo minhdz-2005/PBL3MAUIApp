@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 
+using PBL3MAUIApp.Services;
+
 namespace PBL3MAUIApp
 {
     public static class MauiProgram
@@ -15,10 +17,20 @@ namespace PBL3MAUIApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            //builder.Services.AddSingleton<AccountService>();
+            //builder.Services.AddSingleton<CustomerService>();
+            //builder.Services.AddSingleton<OrderService>();
+            //builder.Services.AddSingleton<OrderDetailService>();
+            //builder.Services.AddSingleton<ProductService>();
+            //builder.Services.AddSingleton<ShiftService>();
+            //builder.Services.AddSingleton<ShiftStaffsService>();
+            //builder.Services.AddSingleton<StaffService>();
+            //builder.Services.AddSingleton<VoucherService>();
 
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
+            
             return builder.Build();
         }
     }
