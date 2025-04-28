@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PBL3MAUIApp.Views.LoginView.LoginView">
+
+	<Grid>
+		<!--  Nền  -->
+		<Image
+            Aspect="AspectFill"
+            Opacity="1"
+            Source="login.jpg"
+			ZIndex="0"/>
+
+		<!--  Form đăng nhập (vị trí giữ nguyên)  -->
+		<Frame
+            Margin="1085,150,335,330"
+            BackgroundColor="#80FFFFFF"
+            BorderColor="LightGray"
+            CornerRadius="20"
+            HasShadow="True"
+            HeightRequest="600"
+            WidthRequest="500">
+
+			<Grid Padding="30" RowSpacing="20">
+
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<!--  Tiêu đề LOGIN  -->
+				<Label
+                    Grid.Row="0"
+                    FontAttributes="Bold"
+                    FontSize="50"
+                    HorizontalOptions="Center"
+                    Text="LOGIN"
+                    TextColor="#000000" />
+
+				<!--  Label Account  -->
+				<Label
+                    Grid.Row="1"
+                    FontSize="24"
+                    Text="Account"
+                    TextColor="#000000" />
+
+				<!--  Entry Account  -->
+				<Border
+                    Grid.Row="2"
+                    BackgroundColor="White"
+                    Stroke="Gray"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1">
+					<Entry
+                        Margin="10,5"
+                        BackgroundColor="Transparent"
+                        FontSize="18"
+                        Placeholder="Enter username..."
+                        TextColor="Black" />
+				</Border>
+
+				<!--  Label Password  -->
+				<Label
+                    Grid.Row="3"
+                    FontSize="24"
+                    Text="Password"
+                    TextColor="#000000" />
+
+				<!--  Entry Password  -->
+				<Border
+                    Grid.Row="4"
+                    BackgroundColor="White"
+                    Stroke="Gray"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1">
+					<Entry
+                        Margin="10,5"
+                        BackgroundColor="Transparent"
+                        FontSize="18"
+                        IsPassword="True"
+                        Placeholder="Enter password..."
+                        TextColor="Black" />
+				</Border>
+
+				<!--  Nút Đăng nhập  -->
+				<Button
+                    Grid.Row="5"
+                    Margin="0,20,0,0"
+                    BackgroundColor="#8EB8BB"
+                    CornerRadius="25"
+                    FontSize="20"
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Text="Đăng nhập"
+                    TextColor="Black"
+                    WidthRequest="200"
+					Clicked="OnLoginClicked"/>
+			</Grid>
+		</Frame>
+	</Grid>
+</ContentPage>
