@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PBL3MAUIApp.Views.CashierView.DoanhThuPage"
+    ControlTemplate="{StaticResource SharedPageTemplate}"
+    BackgroundColor="#F7EFE9"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid Padding="15" RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <VerticalStackLayout Grid.Row="0" Spacing="5">
+            <Label Text="☕" FontSize="32" HorizontalOptions="Center"/>
+            <Label Text="THỐNG KÊ DOANH THU THEO CA"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#4B3621"
+                   HorizontalOptions="Center"/>
+            <Label Text="Theo ca làm việc"
+                   FontSize="16"
+                   TextColor="#7B6A54"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+        </VerticalStackLayout>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="1.5*,3*"
+              ColumnSpacing="15">
+
+            <!-- LEFT: Filters -->
+            <Frame BackgroundColor="White"
+                   BorderColor="#F2E2D6"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="False">
+
+                <VerticalStackLayout Spacing="20">
+                    <!-- Date Picker -->
+                    <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 10" Padding="10">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="📅" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Chọn ngày:" FontSize="14" TextColor="#4B3621"/>
+                                <DatePicker TextColor="#4B3621" BackgroundColor="Transparent"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <!-- Shift Picker -->
+                    <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 10" Padding="10">
+                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                            <Label Text="⏰" FontSize="20" VerticalOptions="Center"/>
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Chọn ca làm việc:" FontSize="14" TextColor="#4B3621"/>
+                                <Picker TextColor="#4B3621" BackgroundColor="Transparent">
+                                    <Picker.Items>
+                                        <x:String>Ca sáng (7h00 - 12h00)</x:String>
+                                        <x:String>Ca chiều (12h00 - 17h00)</x:String>
+                                        <x:String>Ca tối (17h00 - 22h00)</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <Button Text="XEM THỐNG KÊ"
+                            BackgroundColor="#4B3621"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HeightRequest="50"
+                            HorizontalOptions="Fill"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- RIGHT: Static Sample Result -->
+            <Frame Grid.Column="1"
+                   BackgroundColor="White"
+                   BorderColor="#F2E2D6"
+                   CornerRadius="15"
+                   Padding="20"
+                   HasShadow="False">
+
+                <ScrollView>
+                    <VerticalStackLayout Spacing="15">
+
+                        <!-- Ca sáng -->
+                        <Frame Padding="20" 
+                               BackgroundColor="White" 
+                               BorderColor="#F2E2D6"
+                               CornerRadius="12"
+                               HasShadow="False">
+                            <VerticalStackLayout Spacing="10">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="⏰" FontSize="18"/>
+                                    <Label Text="Ca sáng (7h00 - 12h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                </HorizontalStackLayout>
+                                <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="💰" FontSize="16"/>
+                                            <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Column="1"
+                                               Text="1.200.000đ"
+                                               FontSize="18"
+                                               TextColor="#C41E3A"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="End"/>
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Ca chiều -->
+                        <Frame Padding="20" 
+                               BackgroundColor="White" 
+                               BorderColor="#F2E2D6"
+                               CornerRadius="12"
+                               HasShadow="False">
+                            <VerticalStackLayout Spacing="10">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="⏰" FontSize="18"/>
+                                    <Label Text="Ca chiều (12h00 - 17h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                </HorizontalStackLayout>
+                                <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="💰" FontSize="16"/>
+                                            <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Column="1"
+                                               Text="1.800.000đ"
+                                               FontSize="18"
+                                               TextColor="#C41E3A"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="End"/>
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Ca tối -->
+                        <Frame Padding="20" 
+                               BackgroundColor="White" 
+                               BorderColor="#F2E2D6"
+                               CornerRadius="12"
+                               HasShadow="False">
+                            <VerticalStackLayout Spacing="10">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Text="⏰" FontSize="18"/>
+                                    <Label Text="Ca tối (17h00 - 22h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                </HorizontalStackLayout>
+                                <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
+                                    <Grid ColumnDefinitions="Auto,*">
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="💰" FontSize="16"/>
+                                            <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Column="1"
+                                               Text="2.500.000đ"
+                                               FontSize="18"
+                                               TextColor="#C41E3A"
+                                               FontAttributes="Bold"
+                                               HorizontalOptions="End"/>
+                                    </Grid>
+                                </Border>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                    </VerticalStackLayout>
+                </ScrollView>
+
+            </Frame>
+
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

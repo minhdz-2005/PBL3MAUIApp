@@ -5,12 +5,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PBL3MAUIApp"
     xmlns:loginViews="clr-namespace:PBL3MAUIApp.Views.LoginView"
+    xmlns:cashierViews="clr-namespace:PBL3MAUIApp.Views.CashierView"
+    
     Shell.FlyoutBehavior="Disabled"
     Title="PBL3MAUIApp">
 
+    <!-- Trang chủ -->
+    <ShellContent
+        ContentTemplate="{DataTemplate cashierViews:DoanhThuPage}"
+        Route="MainPage" />
+
+    <!-- Trang đặt hàng -->
+    <ShellContent
+        ContentTemplate="{DataTemplate cashierViews:DSOrderPage}"
+        Route="OrderPage" />
+
+    <!-- Danh sách đơn hàng -->
+    <ShellContent
+        ContentTemplate="{DataTemplate cashierViews:MainPageCashier}"
+        Route="DSOrderPage" />
+
+    <!-- Ưu đãi -->
+    <ShellContent
+        ContentTemplate="{DataTemplate cashierViews:OrderPage}"
+        Route="UuDaiPage" />
+
+    <!-- Doanh thu -->
+    <ShellContent
+        ContentTemplate="{DataTemplate cashierViews:UuDaiPage}"
+        Route="DoanhThuPage" />
+    
+    
+    
+    
+    
     <ShellContent
         ContentTemplate="{DataTemplate loginViews:LoginView}"
         Route="LoginView" />
+    
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />

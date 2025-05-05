@@ -1,0 +1,163 @@
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PBL3MAUIApp.Views.CashierView.DSOrderPage"
+    BackgroundColor="#F7EFE9"
+    ControlTemplate="{StaticResource SharedPageTemplate}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="24">
+
+            <!-- Tiêu đề -->
+            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
+                <Label Text="📜" FontSize="36" HorizontalOptions="Center"/>
+                <Label Text="DANH SÁCH ĐƠN HÀNG"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="#3B0A0A"
+                       HorizontalOptions="Center"/>
+                <Label Text="Lịch sử các đơn hàng đã đặt"
+                       FontSize="15"
+                       TextColor="#7B6A54"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <!-- Bố cục 2 cột -->
+            <Grid ColumnDefinitions="2*,5*" ColumnSpacing="16">
+
+                <!-- Bên trái: Bộ lọc -->
+                <Frame BackgroundColor="White" CornerRadius="18" Padding="16" HasShadow="True" Grid.Column="0">
+                    <VerticalStackLayout Spacing="18">
+                        <Label Text="Lọc đơn hàng"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#3B0A0A"
+                               HorizontalOptions="Center"/>
+
+                        <Entry Placeholder="Nhập mã đơn..."
+                               BackgroundColor="#F6ECE3"
+                               PlaceholderColor="#BCAAA4"
+                               TextColor="#3B0A0A"
+                               FontSize="16"
+                               HeightRequest="44"/>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Từ ngày" FontSize="14" TextColor="#3B0A0A"/>
+                            <DatePicker Format="dd/MM/yyyy"
+                                        BackgroundColor="White"
+                                        TextColor="#3B0A0A"
+                                        FontSize="15"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Đến ngày" FontSize="14" TextColor="#3B0A0A"/>
+                            <DatePicker Format="dd/MM/yyyy"
+                                        BackgroundColor="White"
+                                        TextColor="#3B0A0A"
+                                        FontSize="15"/>
+                        </VerticalStackLayout>
+
+                        <Button Text="🔍 Lọc đơn"
+                                BackgroundColor="#C41E3A"
+                                TextColor="White"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                HeightRequest="48"
+                                CornerRadius="12"
+                                HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Bên phải: Danh sách đơn hàng -->
+                <ScrollView Grid.Column="1">
+                    <VerticalStackLayout Spacing="8">
+                        <!-- Đơn hàng 1 -->
+                        <Frame BackgroundColor="White" CornerRadius="18" HasShadow="True" Padding="16" BorderColor="#E0DAD2" Margin="0,4">
+                            <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
+
+                                <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
+                                    <Label Text="📦" FontSize="18"/>
+                                    <Label Text="DH001"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#3B0A0A"/>
+                                </HorizontalStackLayout>
+
+                                <Label Text="25/04/2025"
+                                       FontSize="14"
+                                       TextColor="#7B6A54"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
+
+                                <Label Text="120.000₫"
+                                       FontSize="17"
+                                       TextColor="#C41E3A"
+                                       FontAttributes="Bold"
+                                       Grid.Column="2"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       Margin="0,0,8,0"/>
+
+                                <Button Text="Chi tiết"
+                                        BackgroundColor="#5D4037"
+                                        TextColor="White"
+                                        FontSize="13"
+                                        CornerRadius="18"
+                                        HeightRequest="38"
+                                        WidthRequest="88"
+                                        Padding="0"
+                                        Grid.Column="3"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+
+                        <!-- Đơn hàng 2 -->
+                        <Frame BackgroundColor="White" CornerRadius="18" HasShadow="True" Padding="16" BorderColor="#E0DAD2" Margin="0,4">
+                            <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
+
+                                <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
+                                    <Label Text="📦" FontSize="18"/>
+                                    <Label Text="DH002"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#3B0A0A"/>
+                                </HorizontalStackLayout>
+
+                                <Label Text="26/04/2025"
+                                       FontSize="14"
+                                       TextColor="#7B6A54"
+                                       Grid.Column="1"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
+
+                                <Label Text="85.000₫"
+                                       FontSize="17"
+                                       TextColor="#C41E3A"
+                                       FontAttributes="Bold"
+                                       Grid.Column="2"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="End"
+                                       Margin="0,0,8,0"/>
+
+                                <Button Text="Chi tiết"
+                                        BackgroundColor="#5D4037"
+                                        TextColor="White"
+                                        FontSize="13"
+                                        CornerRadius="18"
+                                        HeightRequest="38"
+                                        WidthRequest="88"
+                                        Padding="0"
+                                        Grid.Column="3"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
