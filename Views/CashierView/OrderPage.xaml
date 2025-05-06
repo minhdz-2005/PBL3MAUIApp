@@ -4,10 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="PBL3MAUIApp.Views.CashierView.OrderPage"
     x:Name="OrderPageRoot"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels"
+    
     BackgroundColor="#F7EFE9"
     ControlTemplate="{StaticResource SharedPageTemplate}"
-    NavigationPage.HasNavigationBar="False"
-             >
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:ProductViewModel x:Name="ProductViewModel" />
+    </ContentPage.BindingContext>
 
     <Grid ColumnDefinitions="250,*,300" Padding="15" RowDefinitions="Auto,*">
 
@@ -51,51 +56,54 @@
         <ScrollView Grid.Row="1" Grid.Column="1">
             <VerticalStackLayout Spacing="10">
 
-                <!-- Món 1 -->
-                <Frame Padding="10" BackgroundColor="White" BorderColor="#F2E2D6" CornerRadius="10">
-                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto,Auto" RowSpacing="5">
-                        <Image Grid.RowSpan="2" Source="coffee.png" WidthRequest="50" HeightRequest="50" Margin="0,0,15,0"/>
-                        <Label Grid.Column="1" Text="Cà phê đen" FontSize="16" TextColor="#4B3621"/>
-                        <Label Grid.Column="1" Grid.Row="1" Text="Đậm đà, nguyên chất" FontSize="12" TextColor="#7B6A54"/>
-                        <Label Grid.Column="2" Text="25.000₫" TextColor="#4B3621" FontSize="16" VerticalOptions="Center" Margin="0,0,10,0"/>
-                        <Button Grid.Column="3" Text="+" WidthRequest="30" HeightRequest="30"
-                        BackgroundColor="#4B3621" TextColor="White"
-                        CornerRadius="15" FontSize="18"
-                        HorizontalOptions="Center" VerticalOptions="Center"
-                        BorderWidth="0" />
-                    </Grid>
-                </Frame>
-
-                <!-- Món 2 -->
-                <Frame Padding="10" BackgroundColor="White" BorderColor="#F2E2D6" CornerRadius="10">
-                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto,Auto" RowSpacing="5">
-                        <Image Grid.RowSpan="2" Source="milk_tea.png" WidthRequest="50" HeightRequest="50" Margin="0,0,15,0"/>
-                        <Label Grid.Column="1" Text="Trà sữa" FontSize="16" TextColor="#4B3621"/>
-                        <Label Grid.Column="1" Grid.Row="1" Text="Trà xanh thơm mát" FontSize="12" TextColor="#7B6A54"/>
-                        <Label Grid.Column="2" Text="30.000₫" TextColor="#4B3621" FontSize="16" VerticalOptions="Center" Margin="0,0,10,0"/>
-                        <Button Grid.Column="3" Text="+" WidthRequest="30" HeightRequest="30"
-                        BackgroundColor="#4B3621" TextColor="White"
-                        CornerRadius="15" FontSize="18"
-                        HorizontalOptions="Center" VerticalOptions="Center"
-                        BorderWidth="0" />
-                    </Grid>
-                </Frame>
-
-                <!-- Món 3 -->
-                <Frame Padding="10" BackgroundColor="White" BorderColor="#F2E2D6" CornerRadius="10">
-                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" RowDefinitions="Auto,Auto" RowSpacing="5">
-                        <Image Grid.RowSpan="2" Source="cake.png" WidthRequest="50" HeightRequest="50" Margin="0,0,15,0"/>
-                        <Label Grid.Column="1" Text="Bánh ngọt" FontSize="16" TextColor="#4B3621"/>
-                        <Label Grid.Column="1" Grid.Row="1" Text="Bánh kem mềm mịn" FontSize="12" TextColor="#7B6A54"/>
-                        <Label Grid.Column="2" Text="40.000₫" TextColor="#4B3621" FontSize="16" VerticalOptions="Center" Margin="0,0,10,0"/>
-                        <Button Grid.Column="3" Text="+" WidthRequest="30" HeightRequest="30"
-                        BackgroundColor="#4B3621" TextColor="White"
-                        CornerRadius="15" FontSize="18"
-                        HorizontalOptions="Center" VerticalOptions="Center"
-                        BorderWidth="0" />
-                    </Grid>
-                </Frame>
-
+                <!-- Món -->
+                <CollectionView ItemsSource="{Binding Products}" Margin="20">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame 
+                                Padding="10" 
+                                BackgroundColor="White" 
+                                BorderColor="#F2E2D6" 
+                                CornerRadius="10">
+                                <Grid 
+                                    ColumnDefinitions="Auto,*,Auto,Auto" 
+                                    RowDefinitions="Auto,Auto" 
+                                    RowSpacing="5">
+                                    <Image 
+                                        Grid.RowSpan="2" 
+                                        Source="coffee.png"
+                                        WidthRequest="50"
+                                        HeightRequest="50"
+                                        Margin="0,0,15,0"/>
+                                    <Label 
+                                        Grid.Column="1"
+                                        Text="{Binding Name}"
+                                        FontSize="16"
+                                        TextColor="#4B3621"/>
+                                    <Label 
+                                        Grid.Column="1" 
+                                        Grid.Row="1" 
+                                        Text="{Binding Description}"
+                                        FontSize="12" 
+                                        TextColor="#7B6A54"/>
+                                    <Label 
+                                        Grid.Column="2" 
+                                        Text="{Binding Price, StringFormat='${0:0.00}'}" 
+                                        TextColor="#4B3621" 
+                                        FontSize="16"
+                                        VerticalOptions="Center"
+                                        Margin="0,0,10,0"/>
+                                    <Button 
+                                        Grid.Column="3" Text="+" WidthRequest="30" HeightRequest="30"
+                                        BackgroundColor="#4B3621" TextColor="White"
+                                        CornerRadius="15" FontSize="18"
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        BorderWidth="0" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
 

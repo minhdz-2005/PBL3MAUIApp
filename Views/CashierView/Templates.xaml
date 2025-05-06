@@ -17,7 +17,7 @@
             <!-- Navigation Bar -->
             <Grid Grid.Row="0"
                   BackgroundColor="#5D4037"
-                  HeightRequest="60"
+                  HeightRequest="{DynamicResource NavBoxSize}"
                   Padding="20,0"
                   ZIndex="2">
 
@@ -29,8 +29,8 @@
 
                 <!-- Icon tab menu -->
                 <Image Source="tabmenu.png"
-                       WidthRequest="30"
-                       HeightRequest="30"
+                       WidthRequest="{DynamicResource NavIconSize}"
+                       HeightRequest="{DynamicResource NavIconSize}"
                        VerticalOptions="Center"
                        Grid.Column="0" />
 
@@ -42,9 +42,11 @@
                             JustifyContent="End"
                             Wrap="NoWrap"
                             Grid.Column="2"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
                             Margin="0,0,70,0">
 
-                    <Label Text="Trang chủ" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Trang chủ" Style="{StaticResource MenuItemStyle}" x:Name="MyLabel">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnHomeTapped" />
                         </Label.GestureRecognizers>
@@ -87,11 +89,11 @@
 
     <!-- Style cho các menu item -->
     <Style x:Key="MenuItemStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="{DynamicResource MenuFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="White" />
-        <Setter Property="Margin" Value="10,0" />
-        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Margin" Value="{DynamicResource MenuItemMargin}" />
+        <Setter Property="Padding" Value="{DynamicResource MenuItemPadding}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>

@@ -1,4 +1,5 @@
-﻿<ContentPage
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="PBL3MAUIApp.Views.CashierView.MainPageCashier"
@@ -7,29 +8,30 @@
 
     <!-- Ảnh nền -->
     <Grid>
+        <!-- Ảnh nền full màn hình -->
         <Image Source="program.jpg"
                Aspect="AspectFill"
-               HorizontalOptions="Fill"
-               VerticalOptions="Fill"
                ZIndex="0" />
 
         <!-- Lớp phủ màu đen nhẹ -->
         <BoxView Color="#66000000"
-                 HorizontalOptions="Fill"
-                 VerticalOptions="Fill"
                  ZIndex="1" />
-
-        <!-- Dòng chữ chào -->
-        <StackLayout VerticalOptions="Center"
-                     HorizontalOptions="Center"
-                     ZIndex="2"
-                     Padding="24">
+        <!-- Nội dung chào -->
+        <Grid
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            ZIndex="2">
             <Label Text="Xin chào, Chúc bạn một ngày mới tốt lành"
-                   FontSize="36"
+                   FontSize="{OnPlatform Default=36, MacCatalyst=28, Android=30, iOS=30}"
                    FontAttributes="Bold"
                    TextColor="White"
-                   HorizontalTextAlignment="Center" />
-        </StackLayout>
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="24"
+                   x:Name="MyLabel"/>
+        </Grid>
     </Grid>
 
 </ContentPage>

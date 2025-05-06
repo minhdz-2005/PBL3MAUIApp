@@ -8,7 +8,7 @@
 
             MainPage = new AppShell();
 
-            Shell.Current.GoToAsync("//LoginView");
+            Shell.Current.GoToAsync("//MainPageCashier", animate: false);
         }
     }
 }

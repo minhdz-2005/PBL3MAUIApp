@@ -8,7 +8,18 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Views/CashierView/Templates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <!-- Kích thước font cho menu -->
+            <x:Double x:Key="MenuFontSize">20</x:Double>
+
+            <!-- Padding và Margin động -->
+            <Thickness x:Key="MenuItemPadding">8,4</Thickness>
+            <Thickness x:Key="MenuItemMargin">10,0</Thickness>
+
+            <!-- Kích thước ảnh động -->
+            <x:Double x:Key="NavIconSize">30</x:Double>
+            <x:Double x:Key="NavBoxSize">60</x:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

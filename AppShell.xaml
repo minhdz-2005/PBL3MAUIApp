@@ -13,27 +13,27 @@
     <!-- Trang chủ -->
     <ShellContent
         ContentTemplate="{DataTemplate cashierViews:DoanhThuPage}"
-        Route="MainPage" />
+        Route="DoanhThuPage" />
 
     <!-- Trang đặt hàng -->
     <ShellContent
         ContentTemplate="{DataTemplate cashierViews:DSOrderPage}"
-        Route="OrderPage" />
+        Route="DSOrderPage" />
 
     <!-- Danh sách đơn hàng -->
     <ShellContent
         ContentTemplate="{DataTemplate cashierViews:MainPageCashier}"
-        Route="DSOrderPage" />
+        Route="MainPageCashier" />
 
     <!-- Ưu đãi -->
     <ShellContent
         ContentTemplate="{DataTemplate cashierViews:OrderPage}"
-        Route="UuDaiPage" />
+        Route="OrderPage" />
 
     <!-- Doanh thu -->
     <ShellContent
         ContentTemplate="{DataTemplate cashierViews:UuDaiPage}"
-        Route="DoanhThuPage" />
+        Route="UuDaiPage" />
     
     
     
