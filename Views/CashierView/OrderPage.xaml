@@ -157,8 +157,8 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,5">
-                                        <Label Text="{Binding ProductId}" TextColor="#4B3621" VerticalOptions="Center"/>
-                                        <Button Style="{StaticResource HoverButtonStyle}" Grid.Column="1" Text="-" FontSize="18" BackgroundColor="Transparent" TextColor="#4B3621" CornerRadius="15"/>
+                                        <Label Text="{Binding Product.Name}" TextColor="#4B3621" VerticalOptions="Center"/>
+                                        <Button Style="{StaticResource HoverButtonStyle}" Grid.Column="1" Text="-" FontSize="18" BackgroundColor="Transparent" TextColor="#4B3621" CornerRadius="15" Clicked="DelQuantityClicked"/>
                                         <Label Grid.Column="2" Text="{Binding Quantity}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#4B3621" Margin="10,0"/>
                                         <Button Style="{StaticResource HoverButtonStyle}" Grid.Column="3" Text="+" FontSize="18" BackgroundColor="Transparent" TextColor="#4B3621" CornerRadius="15" Clicked="AddQuantityClicked"/>
                                     </Grid>
@@ -191,7 +191,7 @@
                         </Grid>
 
                         <!-- Order Button -->
-                        <Button Style="{StaticResource HoverButtonStyle}" Text="ĐẶT HÀNG" BackgroundColor="#C41E3A" TextColor="White" CornerRadius="5" HeightRequest="45" Margin="0,15,0,0"/>
+                        <Button Style="{StaticResource HoverButtonStyle}" Text="XÁC NHẬN" BackgroundColor="#C41E3A" TextColor="White" CornerRadius="5" HeightRequest="45" Margin="0,15,0,0" Clicked="OnOrderButtonClicked"/>
                     </StackLayout>
                 </VerticalStackLayout>
             </ScrollView>

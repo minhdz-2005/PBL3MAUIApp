@@ -8,7 +8,6 @@ namespace PBL3MAUIApp.Views.CashierView;
 
 public partial class OrderPage : ContentPage
 {
-    private ProductViewModel? viewModel;
     public CashierViewModel? mainViewModel;
     public OrderPage()
     {
@@ -140,12 +139,37 @@ public partial class OrderPage : ContentPage
         if(mainViewModel != null)
         {
             var button = sender as Button;
-            var orderDetail = button?.BindingContext as OrderDetail;
+            var orderItem = button?.BindingContext as OrderItemViewModel;
 
-            if (orderDetail != null)
+            if (orderItem != null)
             {
-                mainViewModel.OrderDetailVM.IncreaseQuantity(orderDetail);
+                mainViewModel.OrderDetailVM.IncreaseQuantity(orderItem);
             }
         }
     }
+    // Giam QUANTITY
+    private void DelQuantityClicked(object sender, EventArgs e)
+    {
+        if (mainViewModel != null)
+        {
+            var button = sender as Button;
+            var orderItem = button?.BindingContext as OrderItemViewModel;
+
+            if (orderItem != null)
+            {
+                mainViewModel.OrderDetailVM.DecreaseQuantity(orderItem);
+            }
+        }
+    }
+    // XAC NHAN DAT MON
+    public async void OnOrderButtonClicked(object sender, EventArgs e)
+    {
+        if (mainViewModel != null)
+        {
+            await mainViewModel .OrderDetailVM.UpdateTotalPrice();
+            
+        }
+    }
+
+
 }

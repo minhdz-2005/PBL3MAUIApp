@@ -5,6 +5,7 @@ namespace PBL3MAUIApp.Models;
 public class OrderDetail : INotifyPropertyChanged
 {
     public int Id { get; set; }
+    public int OrderId { get; set; }
     public int ProductId { get; set; }
     private int _quantity;
     public int Quantity

@@ -14,40 +14,58 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
 {
     public class OrderDetailViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<OrderDetail> OrderDetails { get; set; } = new();
+        public ObservableCollection<OrderItemViewModel> OrderDetails { get; set; } = new();
+
         public OrderDetailService orderDetailService = new OrderDetailService();
+        public ProductService productService = new ProductService();
 
-        public async Task GetAllOrderDetail()
-        {
-            List<OrderDetail> listOrderDetail = await orderDetailService.GetOrderDetailsAsync();
-            OrderDetails.Clear();
-            foreach (var item in listOrderDetail)
-                OrderDetails.Add(item);
-        }
-
+        // CHON SAN PHAM
         public void ChooseProduct(Product p)
         {
-            var existing = OrderDetails.FirstOrDefault(x => x.ProductId == p.Id);
+            var existing = OrderDetails.FirstOrDefault(x => x.Product.Id == p.Id);
             if (existing == null)
             {
-                OrderDetails.Add(new OrderDetail(p.Id, 1, p.Price));
+                OrderDetails.Add(new OrderItemViewModel(new OrderDetail(p.Id, 1, p.Price), p));
             }
                 
         }
         
-        public void IncreaseQuantity(OrderDetail orderDetail)
+        // THEM QUANTITY
+        public void IncreaseQuantity(OrderItemViewModel orderItem)
         {
-            foreach (var item in OrderDetails)
+            var item = OrderDetails.FirstOrDefault(x => x.OrderDetail.ProductId == orderItem.OrderDetail.ProductId);
+            if (item != null)
             {
-                if(item.ProductId == orderDetail.ProductId)
+                item.Quantity += 1;
+                //Debug.WriteLine($"Quantity: {item.Quantity}");
+            }
+        }
+        // GIAM QUANTITY
+        public void DecreaseQuantity(OrderItemViewModel orderItem)
+        {
+            var item = OrderDetails.FirstOrDefault(x => x.OrderDetail.ProductId == orderItem.OrderDetail.ProductId);
+            if (item != null)
+            {
+                item.Quantity -= 1;
+                if (item.Quantity < 1)
                 {
-                    item.Quantity += 1;
-                    Debug.WriteLine($"quantity: {item.Quantity}");
+                    OrderDetails.Remove(item);
                 }
             }
         }
-
-
+        // CAP NHAT GIA CUOI CUNG CHO OrderDetail
+        public async Task UpdateTotalPrice()
+        {
+            foreach (var item in OrderDetails)
+            {
+                var product = await productService.GetProductByIdAsync(item.OrderDetail.ProductId);
+                if (product != null)
+                {
+                    item.OrderDetail.TotalPrice = product.Price * item.OrderDetail.Quantity;
+                    Debug.WriteLine($"TotalPrice: {item.OrderDetail.TotalPrice}");
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }
