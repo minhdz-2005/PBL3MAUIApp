@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
                 <ResourceDictionary Source="Views/CashierView/Templates.xaml"/>
+                <ResourceDictionary Source="Views/ManagerView/Templates_Manager.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Kích thước font cho menu -->
             <x:Double x:Key="MenuFontSize">20</x:Double>

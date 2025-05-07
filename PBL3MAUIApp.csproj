@@ -62,6 +62,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="Views\ManagerView\OrderPageManager.xaml.cs">
+	    <DependentUpon>OrderPageManager.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 	
 
 </Project>

@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  x:Class="PBL3MAUIApp.Views.ManagerView.ShiftPage"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:local="clr-namespace:PBL3_Interface.Pages;assembly=PBL3_Interface"
+  BackgroundColor="#F7EFE9"
+  ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+  <Grid Margin="100,0,100,100" RowDefinitions="auto,*">
+    <VerticalStackLayout Grid.Row="0">
+      <Label
+        Margin="0,10,0,0"
+        FontSize="35"
+        HorizontalOptions="Center"
+        Text="📅" />
+      <Label
+        FontAttributes="Bold"
+        FontSize="28"
+        HorizontalOptions="Center"
+        Text="QUẢN LÝ CA LÀM VIỆC"
+        TextColor="Black"
+        VerticalOptions="End" />
+    </VerticalStackLayout>
+
+    <!--  Grid chính  -->
+    <Frame
+      Grid.Row="1"
+      BackgroundColor="White"
+      BorderColor="Brown"
+      HasShadow="False">
+      <Grid
+        Padding="20"
+        ColumnDefinitions="3*, *"
+        ColumnSpacing="20">
+        <!--  Phần 1: Hiển thị ca làm (bên trái)  -->
+        <ScrollView Grid.Column="0">
+          <Frame
+            Padding="15"
+            BackgroundColor="#FFEFD5"
+            BorderColor="#F4A460"
+            CornerRadius="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Start">
+            <VerticalStackLayout Spacing="15">
+              <!--  Ca 1  -->
+              <Frame
+                Padding="10"
+                BackgroundColor="#F4A460"
+                BorderColor="Transparent"
+                CornerRadius="5">
+                <Grid ColumnDefinitions="3*,*">
+                  <Frame
+                    x:Name="Shift1Header"
+                    Grid.Column="0"
+                    Margin="0,0,0,5"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="5">
+                    <Frame.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="ToggleShift1_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Label
+                      FontAttributes="Bold"
+                      FontSize="20"
+                      HorizontalOptions="Start"
+                      Text="Ca 1"
+                      TextColor="Black" />
+                  </Frame>
+                  <Button
+                    Grid.Column="1"
+                    Padding="10,5"
+                    BackgroundColor="#FAEBD7"
+                    Clicked="AddEmployeeToShift1_Clicked"
+                    CornerRadius="5"
+                    FontSize="14"
+                    Text="Thêm nhân viên"
+                    VerticalOptions="Center" />
+                </Grid>
+              </Frame>
+              <VerticalStackLayout
+                x:Name="Shift1Details"
+                IsVisible="False"
+                Spacing="10">
+                <!--  Vai trò: Thu ngân  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn A"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2001"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+                <!--  Vai trò: Pha chế  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn B"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2002"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+                <!--  Vai trò: Phục vụ  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn C"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2003"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+              </VerticalStackLayout>
+
+              <!--  Ca 2  -->
+              <Frame
+                Padding="10"
+                BackgroundColor="#F4A460"
+                BorderColor="Transparent"
+                CornerRadius="5">
+                <Grid ColumnDefinitions="3*,*">
+                  <Frame
+                    x:Name="Shift2Header"
+                    Grid.Column="0"
+                    Margin="0,0,0,5"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="5">
+                    <Frame.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="ToggleShift2_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Label
+                      FontAttributes="Bold"
+                      FontSize="20"
+                      HorizontalOptions="Start"
+                      Text="Ca 2"
+                      TextColor="Black" />
+                  </Frame>
+                  <Button
+                    Grid.Column="1"
+                    Padding="10,5"
+                    BackgroundColor="#FAEBD7"
+                    Clicked="AddEmployeeToShift2_Clicked"
+                    CornerRadius="5"
+                    FontSize="14"
+                    Text="Thêm nhân viên"
+                    VerticalOptions="Center" />
+                </Grid>
+              </Frame>
+              <VerticalStackLayout
+                x:Name="Shift2Details"
+                IsVisible="False"
+                Spacing="10">
+                <!--  Vai trò: Thu ngân  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn D"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2004"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+                <!--  Vai trò: Pha chế  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn E"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2005"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+                <!--  Vai trò: Phục vụ  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn F"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2006"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+              </VerticalStackLayout>
+
+              <!--  Ca 3  -->
+              <Frame
+                Padding="10"
+                BackgroundColor="#F4A460"
+                BorderColor="Transparent"
+                CornerRadius="5">
+                <Grid ColumnDefinitions="3*,*">
+                  <Frame
+                    x:Name="Shift3Header"
+                    Grid.Column="0"
+                    Margin="0,0,0,5"
+                    Padding="10"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="5">
+                    <Frame.GestureRecognizers>
+                      <TapGestureRecognizer Tapped="ToggleShift3_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Label
+                      FontAttributes="Bold"
+                      FontSize="20"
+                      HorizontalOptions="Start"
+                      Text="Ca 3"
+                      TextColor="Black" />
+                  </Frame>
+                  <Button
+                    Grid.Column="1"
+                    Padding="10,5"
+                    BackgroundColor="#FAEBD7"
+                    Clicked="AddEmployeeToShift3_Clicked"
+                    CornerRadius="5"
+                    FontSize="14"
+                    Text="Thêm nhân viên"
+                    VerticalOptions="Center" />
+                </Grid>
+              </Frame>
+              <VerticalStackLayout
+                x:Name="Shift3Details"
+                IsVisible="False"
+                Spacing="10">
+                <!--  Vai trò: Thu ngân  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn G"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2007"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+                <!--  Vai trò: Pha chế  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn H"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2008"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+                <!--  Vai trò: Phục vụ  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn I"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="1/1/2009"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                  </Grid>
+                </Frame>
+              </VerticalStackLayout>
+
+              <!--  Ngày làm  -->
+              <Grid ColumnDefinitions="*,auto">
+                <ScrollView
+                  Grid.Column="0"
+                  BackgroundColor="Transparent"
+                  Orientation="Horizontal">
+                  <HorizontalStackLayout Margin="0,10,0,0" Spacing="10">
+                    <Button
+                      x:Name="DateButton1"
+                      Padding="10,5"
+                      BackgroundColor="#FF9999"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="01/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton2"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="02/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton3"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="03/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton4"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="04/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton5"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="05/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton6"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="06/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton7"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="07/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton8"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="08/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton9"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="09/04"
+                      TextColor="White" />
+                    <Button
+                      x:Name="DateButton10"
+                      Padding="10,5"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="20"
+                      FontSize="14"
+                      Text="10/04"
+                      TextColor="White" />
+                  </HorizontalStackLayout>
+                </ScrollView>
+                <Button
+                  Grid.Column="1"
+                  Padding="10,5"
+                  BackgroundColor="#FAEBD7"
+                  Clicked="AddDate_Clicked"
+                  CornerRadius="20"
+                  FontSize="14"
+                  Text="+"
+                  TextColor="Black" />
+              </Grid>
+            </VerticalStackLayout>
+          </Frame>
+        </ScrollView>
+
+        <!--  Phần 2: Thống kê chi tiết ca làm (bên phải)  -->
+        <ScrollView Grid.Column="1">
+          <VerticalStackLayout Spacing="15" VerticalOptions="Start">
+            <Label
+              x:Name="SelectedDateLabel"
+              FontAttributes="Bold"
+              FontSize="20"
+              HorizontalOptions="Start"
+              Text="Ngày làm: 01/04/2025"
+              TextColor="Black" />
+            <Label
+              Margin="0,10,0,5"
+              FontAttributes="Bold"
+              FontSize="18"
+              Text="Tổng nhân viên:"
+              TextColor="Black" />
+            <Label
+              Margin="10,0,0,0"
+              FontSize="16"
+              Text="Ca 1: 3"
+              TextColor="Black" />
+            <Label
+              Margin="10,0,0,0"
+              FontSize="16"
+              Text="Ca 2: 3"
+              TextColor="Black" />
+            <Label
+              Margin="10,0,0,0"
+              FontSize="16"
+              Text="Ca 3: 3"
+              TextColor="Black" />
+            <Label
+              Margin="0,10,0,5"
+              FontAttributes="Bold"
+              FontSize="18"
+              Text="Tổng nhân viên theo vị trí:"
+              TextColor="Black" />
+            <!--  Ca 1  -->
+            <Label
+              Margin="10,0,0,0"
+              FontAttributes="Bold"
+              FontSize="16"
+              Text="Ca 1:"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Thu ngân: 1"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Pha chế: 1"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Phục vụ: 1"
+              TextColor="Black" />
+            <!--  Ca 2  -->
+            <Label
+              Margin="10,0,0,0"
+              FontAttributes="Bold"
+              FontSize="16"
+              Text="Ca 2:"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Thu ngân: 1"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Pha chế: 1"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Phục vụ: 1"
+              TextColor="Black" />
+            <!--  Ca 3  -->
+            <Label
+              Margin="10,0,0,0"
+              FontAttributes="Bold"
+              FontSize="16"
+              Text="Ca 3:"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Thu ngân: 1"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Pha chế: 1"
+              TextColor="Black" />
+            <Label
+              Margin="20,0,0,0"
+              FontSize="16"
+              Text="Phục vụ: 1"
+              TextColor="Black" />
+          </VerticalStackLayout>
+        </ScrollView>
+      </Grid>
+    </Frame>
+  </Grid>
+</ContentPage>

@@ -1,15 +1,18 @@
-using PBL3MAUIApp.ViewModels;
+using PBL3MAUIApp.ViewModels.CashierViewModels;
 
 namespace PBL3MAUIApp.Views.CashierView;
 
 public partial class OrderPage : ContentPage
 {
     private ProductViewModel? viewModel;
+    public CashierViewModel? mainViewModel;
     public OrderPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
-        viewModel = BindingContext as ProductViewModel;
+        // viewModel = BindingContext as ProductViewModel;
+
+        mainViewModel = BindingContext as CashierViewModel;
 
         this.SizeChanged += (s, e) =>
         {
@@ -33,6 +36,6 @@ public partial class OrderPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        if(viewModel != null) await viewModel.LoadProductsAsync();
+        if (mainViewModel != null) await mainViewModel.ProductVM.LoadProductsAsync();
     }
 }

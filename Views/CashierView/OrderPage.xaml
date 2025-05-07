@@ -4,14 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="PBL3MAUIApp.Views.CashierView.OrderPage"
     x:Name="OrderPageRoot"
-    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
     
     BackgroundColor="#F7EFE9"
     ControlTemplate="{StaticResource SharedPageTemplate}"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
-        <viewModels:ProductViewModel x:Name="ProductViewModel" />
+        <viewModels:CashierViewModel />
     </ContentPage.BindingContext>
 
     <Grid ColumnDefinitions="250,*,300" Padding="15" RowDefinitions="Auto,*">
@@ -57,7 +57,7 @@
             <VerticalStackLayout Spacing="10">
 
                 <!-- Món -->
-                <CollectionView ItemsSource="{Binding Products}" Margin="20">
+                <CollectionView ItemsSource="{Binding ProductVM.Products}" Margin="20">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame 
@@ -94,6 +94,7 @@
                                         VerticalOptions="Center"
                                         Margin="0,0,10,0"/>
                                     <Button 
+                                        Style="{StaticResource HoverButtonStyle}"
                                         Grid.Column="3" Text="+" WidthRequest="30" HeightRequest="30"
                                         BackgroundColor="#4B3621" TextColor="White"
                                         CornerRadius="15" FontSize="18"
@@ -115,13 +116,13 @@
             <StackLayout>
                 <Label Text="CHI TIẾT ĐƠN HÀNG" FontSize="20" FontAttributes="Bold" TextColor="#4B3621" Margin="0,0,0,15"/>
 
-                <CollectionView ItemsSource="{Binding OrderItems}">
+                <CollectionView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,5">
-                                <Label Text="{Binding Name}" TextColor="#4B3621"/>
+                                <Label Text="nam" TextColor="#4B3621"/>
                                 <Button Grid.Column="1" Text="-" BackgroundColor="Transparent" TextColor="#4B3621" WidthRequest="30" HeightRequest="30" Padding="0" CornerRadius="15"/>
-                                <Label Grid.Column="2" Text="{Binding Quantity}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#4B3621" Margin="10,0"/>
+                                <Label Grid.Column="2" Text="quantity" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#4B3621" Margin="10,0"/>
                                 <Button Grid.Column="3" Text="+" BackgroundColor="Transparent" TextColor="#4B3621" WidthRequest="30" HeightRequest="30" Padding="0" CornerRadius="15"/>
                             </Grid>
                         </DataTemplate>
@@ -143,17 +144,17 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Text="Tổng tiền:" Grid.Row="0" TextColor="#4B3621"/>
-                    <Label Text="{Binding SubTotal, StringFormat='{0:N0}₫'}" Grid.Row="0" Grid.Column="1" TextColor="#4B3621" HorizontalOptions="End"/>
+                    <Label Text="total" Grid.Row="0" Grid.Column="1" TextColor="#4B3621" HorizontalOptions="End"/>
 
                     <Label Text="Chiết khấu:" Grid.Row="1" TextColor="#4B3621"/>
-                    <Label Text="{Binding Discount, StringFormat='{0:N0}₫'}" Grid.Row="1" Grid.Column="1" TextColor="#4B3621" HorizontalOptions="End"/>
+                    <Label Text="chietkhau" Grid.Row="1" Grid.Column="1" TextColor="#4B3621" HorizontalOptions="End"/>
 
                     <Label Text="Thành tiền:" Grid.Row="2" TextColor="#4B3621" FontAttributes="Bold"/>
-                    <Label Text="{Binding TotalAmount, StringFormat='{0:N0}₫'}" Grid.Row="2" Grid.Column="1" TextColor="#C41E3A" FontAttributes="Bold" HorizontalOptions="End"/>
+                    <Label Text="money" Grid.Row="2" Grid.Column="1" TextColor="#C41E3A" FontAttributes="Bold" HorizontalOptions="End"/>
                 </Grid>
 
                 <!-- Order Button -->
-                <Button Text="ĐẶT HÀNG" BackgroundColor="#C41E3A" TextColor="White" CornerRadius="5" HeightRequest="45" Margin="0,15,0,0"/>
+                <Button Style="{StaticResource HoverButtonStyle}" Text="ĐẶT HÀNG" BackgroundColor="#C41E3A" TextColor="White" CornerRadius="5" HeightRequest="45" Margin="0,15,0,0"/>
             </StackLayout>
         </Frame>
     </Grid>

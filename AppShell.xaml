@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:PBL3MAUIApp"
     xmlns:loginViews="clr-namespace:PBL3MAUIApp.Views.LoginView"
     xmlns:cashierViews="clr-namespace:PBL3MAUIApp.Views.CashierView"
-    
+    xmlns:managerViews="clr-namespace:PBL3MAUIApp.Views.ManagerView"
     Shell.FlyoutBehavior="Disabled"
     Title="PBL3MAUIApp">
 
@@ -34,11 +34,35 @@
     <ShellContent
         ContentTemplate="{DataTemplate cashierViews:UuDaiPage}"
         Route="UuDaiPage" />
-    
-    
-    
-    
-    
+
+
+
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:Manager_MainPage}"
+        Route="Manager_MainPage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:OrderPageManager}"
+        Route="OrderPageManager" />
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:ProductPage}"
+        Route="ProductPage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:PromotionPage}"
+        Route="PromotionPage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:RevenuePage}"
+        Route="RevenuePage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:ShiftPage}"
+        Route="ShiftPage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate managerViews:StaffPage}"
+        Route="StaffPage" />
+
+
+
+
+
     <ShellContent
         ContentTemplate="{DataTemplate loginViews:LoginView}"
         Route="LoginView" />

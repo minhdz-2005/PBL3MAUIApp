@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  x:Class="PBL3MAUIApp.Views.ManagerView.ProductPage"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  BackgroundColor="#F7EFE9"
+  ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+
+  <AbsoluteLayout>
+    <Border
+      Margin="50,0,50,10"
+      Stroke="#F2E2D6"
+      StrokeShape="RoundRectangle 10" />
+    <Grid
+      Padding="15"
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      ColumnDefinitions="*,4*"
+      RowDefinitions="Auto,*">
+
+      <!--  Header  -->
+      <VerticalStackLayout Grid.ColumnSpan="2" Spacing="5">
+        <Label
+          FontSize="32"
+          HorizontalOptions="Center"
+          Text="📦" />
+        <Label
+          FontAttributes="Bold"
+          FontSize="28"
+          HorizontalOptions="Center"
+          Text="QUẢN LÍ SẢN PHẨM"
+          TextColor="#4B3621" />
+      </VerticalStackLayout>
+
+
+      <Frame
+        Grid.Row="1"
+        Grid.Column="0"
+        Margin="0,0,15,0"
+        Padding="15"
+        BackgroundColor="White"
+        BorderColor="#F2E2D6"
+        CornerRadius="10">
+        <StackLayout Spacing="15">
+          <Label
+            FontAttributes="Bold"
+            FontSize="20"
+            Text="DANH MỤC"
+            TextColor="#4B3621" />
+          <Grid RowSpacing="10">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+              <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border
+              Grid.Row="0"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Label
+                x:Name="CategoryCoffee"
+                FontSize="16"
+                Text="☕ CÀ PHÊ"
+                TextColor="#4B3621"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="OnCategoryTapped" />
+                </Label.GestureRecognizers>
+              </Label>
+            </Border>
+
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Label
+                x:Name="CategoryMilkTea"
+                FontSize="16"
+                Text="🍵 TRÀ"
+                TextColor="#4B3621"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="OnCategoryTapped" />
+                </Label.GestureRecognizers>
+              </Label>
+            </Border>
+
+          </Grid>
+
+          <BoxView
+            Margin="0,10"
+            HeightRequest="1"
+            Color="#F2E2D6" />
+        </StackLayout>
+      </Frame>
+
+      <!--  them, xoa, xem danh sach  -->
+      <Grid
+        Grid.Row="1"
+        Grid.Column="1"
+        RowDefinitions="Auto,*">
+        <!--  tim kiem, them  -->
+        <Grid
+          Grid.Row="0"
+          Margin="0,0,0,15"
+          ColumnDefinitions="*,Auto">
+          <Frame
+            Grid.Column="0"
+            Padding="5"
+            BackgroundColor="White"
+            CornerRadius="10">
+            <Grid>
+              <Entry
+                FontSize="16"
+                Placeholder="Tìm kiếm..."
+                VerticalOptions="Center" />
+              <Button
+                Grid.Column="1"
+                Margin="5"
+                BackgroundColor="#D9D9D9"
+                Clicked="OnSearchClicked"
+                CornerRadius="20"
+                HeightRequest="30"
+                HorizontalOptions="End"
+                Text="Tìm"
+                TextColor="Black"
+                VerticalOptions="Center"
+                WidthRequest="60" />
+            </Grid>
+          </Frame>
+          <Button
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            Padding="10,5"
+            BackgroundColor="#B7B7B7"
+            Clicked="OnAddProductClicked"
+            CornerRadius="20"
+            FontSize="16"
+            Text="Thêm sản phẩm"
+            TextColor="Black" />
+        </Grid>
+        <ScrollView Grid.Row="1">
+          <VerticalStackLayout Spacing="10">
+
+            <!--  Món 1  -->
+
+            <Frame
+              Padding="10"
+              BackgroundColor="White"
+              BorderColor="#F2E2D6"
+              CornerRadius="10">
+              <Grid
+                ColumnDefinitions="Auto,*,Auto,Auto,Auto"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="5">
+                <Image
+                  Grid.RowSpan="2"
+                  Margin="0,0,15,0"
+                  HeightRequest="50"
+                  Source="coffee.png"
+                  WidthRequest="50" />
+                <Label
+                  Grid.Column="1"
+                  FontSize="16"
+                  Text="Cà phê đen"
+                  TextColor="#4B3621" />
+                <Label
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  FontSize="12"
+                  Text="Đậm đà, nguyên chất"
+                  TextColor="#7B6A54" />
+                <Label
+                  Grid.Column="2"
+                  Margin="0,0,10,0"
+                  FontSize="16"
+                  Text="25.000₫"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center" />
+                <Button
+                  Grid.Column="3"
+                  Padding="5"
+                  BackgroundColor="#79CDCD"
+                  Clicked="OnEditProductClicked"
+                  CornerRadius="15"
+                  FontSize="18"
+                  Text="Sửa"
+                  TextColor="Black" />
+                <Button
+                  Grid.Column="4"
+                  BackgroundColor="#FF0000"
+                  BorderWidth="0"
+                  CornerRadius="15"
+                  FontSize="18"
+                  HeightRequest="30"
+                  HorizontalOptions="Center"
+                  Text="Xoá"
+                  TextColor="White"
+                  VerticalOptions="Center" />
+              </Grid>
+            </Frame>
+
+            <!--  Món 2  -->
+            <Frame
+              Padding="10"
+              BackgroundColor="White"
+              BorderColor="#F2E2D6"
+              CornerRadius="10">
+              <Grid
+                ColumnDefinitions="Auto,*,Auto,Auto,Auto"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="5">
+                <Image
+                  Grid.RowSpan="2"
+                  Margin="0,0,15,0"
+                  HeightRequest="50"
+                  Source="milk_tea.png"
+                  WidthRequest="50" />
+                <Label
+                  Grid.Column="1"
+                  FontSize="16"
+                  Text="Trà sữa"
+                  TextColor="#4B3621" />
+                <Label
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  FontSize="12"
+                  Text="Trà xanh thơm mát"
+                  TextColor="#7B6A54" />
+                <Label
+                  Grid.Column="2"
+                  Margin="0,0,10,0"
+                  FontSize="16"
+                  Text="30.000₫"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center" />
+                <Button
+                  Grid.Column="3"
+                  Padding="5"
+                  BackgroundColor="#79CDCD"
+                  Clicked="OnEditProductClicked"
+                  CornerRadius="15"
+                  FontSize="18"
+                  Text="Sửa"
+                  TextColor="Black" />
+                <Button
+                  Grid.Column="4"
+                  BackgroundColor="#FF0000"
+                  BorderWidth="0"
+                  CornerRadius="15"
+                  FontSize="18"
+                  HeightRequest="30"
+                  HorizontalOptions="Center"
+                  Text="Xoá"
+                  TextColor="White"
+                  VerticalOptions="Center" />
+              </Grid>
+            </Frame>
+
+            <!--  Món 3  -->
+            <Frame
+              Padding="10"
+              BackgroundColor="White"
+              BorderColor="#F2E2D6"
+              CornerRadius="10">
+              <Grid
+                ColumnDefinitions="Auto,*,Auto,Auto,Auto"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="5">
+                <Image
+                  Grid.RowSpan="2"
+                  Margin="0,0,15,0"
+                  HeightRequest="50"
+                  Source="cake.png"
+                  WidthRequest="50" />
+                <Label
+                  Grid.Column="1"
+                  FontSize="16"
+                  Text="Bánh ngọt"
+                  TextColor="#4B3621" />
+                <Label
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  FontSize="12"
+                  Text="Bánh kem mềm mịn"
+                  TextColor="#7B6A54" />
+                <Label
+                  Grid.Column="2"
+                  Margin="0,0,10,0"
+                  FontSize="16"
+                  Text="40.000₫"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center" />
+                <Button
+                  Grid.Column="3"
+                  Padding="5"
+                  BackgroundColor="#79CDCD"
+                  Clicked="OnEditProductClicked"
+                  CornerRadius="15"
+                  FontSize="18"
+                  Text="Sửa"
+                  TextColor="Black" />
+                <Button
+                  Grid.Column="4"
+                  BackgroundColor="#FF0000"
+                  BorderWidth="0"
+                  CornerRadius="15"
+                  FontSize="18"
+                  HeightRequest="30"
+                  HorizontalOptions="Center"
+                  Text="Xoá"
+                  TextColor="White"
+                  VerticalOptions="Center" />
+              </Grid>
+            </Frame>
+
+          </VerticalStackLayout>
+        </ScrollView>
+      </Grid>
+
+
+    </Grid>
+    <Grid
+      x:Name="PopupOverlay"
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      BackgroundColor="#80000000"
+      IsVisible="False">
+      <ContentView
+        x:Name="AddProductPopup"
+        Padding="20"
+        AbsoluteLayout.LayoutBounds="0.5, 0.5, 300, 200"
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        BackgroundColor="#F7EFE9">
+        <Frame
+          Margin="200,100,200,200"
+          BackgroundColor="White"
+          BorderColor="black"
+          CornerRadius="10">
+          <VerticalStackLayout Spacing="10">
+            <Label
+              FontAttributes="Bold"
+              FontSize="25"
+              HorizontalOptions="Center"
+              Text="THÊM SẢN PHẨM"
+              TextColor="Black" />
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="ProductNameEntry"
+                FontSize="16"
+                Placeholder="Tên sản phẩm" />
+            </Border>
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="ProductDescriptionEntry"
+                FontSize="16"
+                Placeholder="Mô tả" />
+            </Border>
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="ProductPriceEntry"
+                FontSize="16"
+                Placeholder="Giá (VNĐ)" />
+            </Border>
+            <HorizontalStackLayout>
+              <Button
+                Clicked="OnSaveProductClicked"
+                HorizontalOptions="Center"
+                Text="Lưu" />
+              <Button
+                BackgroundColor="#FF0000"
+                Clicked="OnCancelProductClicked"
+                Text="Hủy"
+                TextColor="White" />
+            </HorizontalStackLayout>
+
+          </VerticalStackLayout>
+        </Frame>
+      </ContentView>
+    </Grid>
+
+    <!-- <Grid
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      RowDefinitions="Auto, *">
+      <Label
+        Grid.Row="0"
+        Margin="0,30,0,20"
+        FontAttributes="Bold"
+        FontSize="30"
+        HorizontalOptions="Center"
+        Text="QUẢN LÝ SẢN PHẨM"
+        TextColor="Black" />
+      <Border
+        Grid.Row="1"
+        Margin="50,0,50,10"
+        BackgroundColor="Transparent">
+
+        <Grid
+          Margin="10,0,10,10"
+          ColumnDefinitions="1*, 3*"
+          RowDefinitions="Auto, *"
+          VerticalOptions="FillAndExpand">
+
+
+          <Frame
+            Grid.Column="0"
+            BackgroundColor="#F8DADA"
+            VerticalOptions="FillAndExpand">
+
+            <VerticalStackLayout Grid.Row="1" VerticalOptions="FillAndExpand">
+              <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="DANH MỤC"
+                TextColor="Black" />
+              <Label
+                x:Name="CategoryCoffee"
+                Padding="10"
+                BackgroundColor="White"
+                FontSize="20"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="Cà phê"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="OnCategoryTapped" />
+                </Label.GestureRecognizers>
+              </Label>
+              <Label
+                x:Name="CategoryMilkTea"
+                Padding="10"
+                FontSize="20"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="Trà sữa"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                  <TapGestureRecognizer Tapped="OnCategoryTapped" />
+                </Label.GestureRecognizers>
+              </Label>
+            </VerticalStackLayout>
+
+          </Frame>
+
+
+          <Grid Grid.Column="1" RowDefinitions="Auto,Auto">
+            <Frame
+              Grid.Row="0"
+              Padding="5"
+              BackgroundColor="#D9D9D9"
+              CornerRadius="10">
+              <Grid>
+                <Entry
+                  FontSize="16"
+                  Placeholder="Tìm kiếm..."
+                  VerticalOptions="Center" />
+                <Button
+                  Grid.Column="1"
+                  Margin="5"
+                  BackgroundColor="White"
+                  Clicked="OnSearchClicked"
+                  CornerRadius="5"
+                  HeightRequest="30"
+                  HorizontalOptions="End"
+                  Text="Tìm"
+                  TextColor="Black"
+                  WidthRequest="60" />
+              </Grid>
+            </Frame>
+            <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+              <Button
+                Margin="0,10,0,0"
+                Padding="10,5"
+                BackgroundColor="#B7B7B7"
+                Clicked="OnAddProductClicked"
+                CornerRadius="10"
+                FontSize="16"
+                Text="Thêm sản phẩm"
+                TextColor="Black" />
+              <Button
+                Margin="0,10,0,0"
+                Padding="10,5"
+                BackgroundColor="Red"
+                Clicked="OnAddProductClicked"
+                CornerRadius="10"
+                FontSize="16"
+                Text="Xoá sản phẩm"
+                TextColor="#FFFFFF" />
+
+            </HorizontalStackLayout>
+          </Grid>
+
+
+          <ScrollView Grid.Row="1" Grid.Column="1">
+            <StackLayout
+              x:Name="ProductList"
+              Padding="10"
+              Spacing="10">
+
+            </StackLayout>
+          </ScrollView>
+        </Grid>
+      </Border>
+    </Grid>
+
+
+    <Grid
+      x:Name="PopupOverlay"
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      BackgroundColor="#80000000"
+      IsVisible="False">
+      <ContentView
+        x:Name="AddProductPopup"
+        Padding="20"
+        AbsoluteLayout.LayoutBounds="0.5, 0.5, 300, 200"
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        BackgroundColor="White">
+        <VerticalStackLayout Spacing="10">
+          <Label
+            FontAttributes="Bold"
+            FontSize="20"
+            HorizontalOptions="Center"
+            Text="THÊM SẢN PHẨM" />
+          <Entry
+            x:Name="ProductNameEntry"
+            FontSize="16"
+            Placeholder="Tên sản phẩm" />
+          <Entry
+            x:Name="ProductPriceEntry"
+            FontSize="16"
+            Placeholder="Giá (VNĐ)" />
+          <Button Clicked="OnSaveProductClicked" Text="Lưu" />
+          <Button Clicked="OnCancelProductClicked" Text="Hủy" />
+        </VerticalStackLayout>
+      </ContentView>
+    </Grid>-->
+  </AbsoluteLayout>
+</ContentPage>

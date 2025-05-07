@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  x:Class="PBL3MAUIApp.Views.ManagerView.StaffPage"
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  BackgroundColor="#F7EFE9"
+  ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+  <AbsoluteLayout>
+    <!--  Nội dung chính của trang  -->
+    <Grid
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      RowDefinitions="Auto,*">
+      <Label
+        Grid.Row="0"
+        Margin="0,30,0,20"
+        FontAttributes="Bold"
+        FontSize="28"
+        HorizontalOptions="Center"
+        Text="QUẢN LÝ NHÂN VIÊN"
+        TextColor="Black"
+        VerticalOptions="End" />
+      <Frame
+        Grid.Row="1"
+        Margin="50,0,50,10"
+        Padding="15"
+        BackgroundColor="White">
+        <Grid
+          Padding="10"
+          ColumnSpacing="15"
+          RowSpacing="15">
+          <!--  Định nghĩa cột: Sidebar trái (1*) + nội dung chính (3*)  -->
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+          </Grid.ColumnDefinitions>
+
+          <!--  Danh mục vai trò bên trái  -->
+          <Frame
+            Grid.Column="0"
+            Padding="10"
+            BackgroundColor="White"
+            BorderColor="#FFAE6227"
+            CornerRadius="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <VerticalStackLayout Margin="20" Spacing="30">
+              <Button
+                x:Name="RoleAll"
+                Margin="0,0,0,0"
+                Padding="10,5"
+                BackgroundColor="#FFE4B5"
+                BorderColor="#8B4513"
+                Clicked="OnRoleClicked"
+                CornerRadius="20"
+                FontSize="20"
+                Text="Tất cả" />
+              <Button
+                x:Name="RoleCashier"
+                Margin="0,0,0,0"
+                Padding="10,5"
+                BackgroundColor="#FFE4B5"
+                BorderColor="#8B4513"
+                Clicked="OnRoleClicked"
+                CornerRadius="20"
+                FontSize="20"
+                Text="Thu ngân" />
+              <Button
+                x:Name="RoleBartender"
+                Margin="0,0,0,0"
+                Padding="10,5"
+                BackgroundColor="#FFE4B5"
+                BorderColor="#8B4513"
+                Clicked="OnRoleClicked"
+                CornerRadius="20"
+                FontSize="20"
+                Text="Pha chế" />
+              <Button
+                x:Name="RoleWaiter"
+                Margin="0,0,0,0"
+                Padding="10,5"
+                BackgroundColor="#FFE4B5"
+                BorderColor="#8B4513"
+                Clicked="OnRoleClicked"
+                CornerRadius="20"
+                FontSize="20"
+                Text="Phục vụ" />
+            </VerticalStackLayout>
+          </Frame>
+
+          <!--  Nội dung bên phải  -->
+          <VerticalStackLayout Grid.Column="1" Spacing="15">
+            <!--  Hàng đầu: thanh tìm kiếm và nút  -->
+            <Grid ColumnDefinitions="auto,*">
+              <Label
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                FontSize="20"
+                Text="Tổng: 3"
+                TextColor="Black"
+                VerticalOptions="Center" />
+              <Grid
+                Grid.Column="1"
+                Margin="10,0,10,0"
+                Padding="5"
+                ColumnDefinitions="*,Auto">
+                <Frame
+                  Grid.Column="0"
+                  Padding="5"
+                  BackgroundColor="White"
+                  CornerRadius="10">
+                  <Grid>
+                    <Entry
+                      FontSize="16"
+                      Placeholder="Tìm kiếm..."
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="1"
+                      Margin="5"
+                      BackgroundColor="#D9D9D9"
+                      Clicked="OnSearchClicked"
+                      CornerRadius="20"
+                      HeightRequest="30"
+                      HorizontalOptions="End"
+                      Text="Tìm"
+                      TextColor="Black"
+                      VerticalOptions="Center"
+                      WidthRequest="60" />
+                  </Grid>
+                </Frame>
+                <Button
+                  Grid.Column="1"
+                  Margin="5,0,5,0"
+                  Padding="10,5"
+                  BackgroundColor="#C6E2FF"
+                  Clicked="OnAddStaffClicked"
+                  CornerRadius="20"
+                  FontSize="16"
+                  Text="Thêm"
+                  TextColor="Black" />
+              </Grid>
+            </Grid>
+
+            <!--  Danh sách nhân viên  -->
+            <ScrollView BackgroundColor="Transparent">
+              <StackLayout x:Name="StaffList" Spacing="5">
+                <!--  Nhóm Thu ngân  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Nguyễn Văn A"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="01/01/1990"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0901234567"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                    <Button
+                      Grid.Column="5"
+                      Padding="5"
+                      BackgroundColor="#79CDCD"
+                      Clicked="OnEditStaffClicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Sửa"
+                      TextColor="Black" />
+                  </Grid>
+                </Frame>
+
+                <!--  Nhóm Pha chế  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Trần Thị B"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="15/05/1995"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0912345678"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                    <Button
+                      Grid.Column="5"
+                      Padding="5"
+                      BackgroundColor="#79CDCD"
+                      Clicked="OnEditStaffClicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Sửa"
+                      TextColor="Black" />
+                  </Grid>
+                </Frame>
+
+                <!--  Nhóm Phục vụ  -->
+                <Label
+                  Margin="0,0,0,5"
+                  FontAttributes="Bold"
+                  FontSize="18"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                <Frame
+                  Margin="0,0,0,5"
+                  Padding="10"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="5">
+                  <Grid ColumnDefinitions="2*, *, *, *, Auto, Auto" ColumnSpacing="10">
+                    <Label
+                      Grid.Column="0"
+                      FontSize="16"
+                      Text="Lê Văn C"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="1"
+                      FontSize="16"
+                      Text="20/10/1998"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="2"
+                      FontSize="16"
+                      Text="0923456789"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Label
+                      Grid.Column="3"
+                      FontSize="16"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                    <Button
+                      Grid.Column="4"
+                      Padding="5"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Xóa"
+                      TextColor="White" />
+                    <Button
+                      Grid.Column="5"
+                      Padding="5"
+                      BackgroundColor="#79CDCD"
+                      Clicked="OnEditStaffClicked"
+                      CornerRadius="5"
+                      FontSize="14"
+                      Text="Sửa"
+                      TextColor="Black" />
+                  </Grid>
+                </Frame>
+              </StackLayout>
+            </ScrollView>
+          </VerticalStackLayout>
+        </Grid>
+      </Frame>
+    </Grid>
+
+    <!--  Popup thêm nhân viên  -->
+    <Grid
+      x:Name="AddPopupOverlay"
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      BackgroundColor="#80000000"
+      IsVisible="False">
+      <ContentView
+        x:Name="AddStaffPopup"
+        Padding="20"
+        AbsoluteLayout.LayoutBounds="0.5, 0.5, 400, 300"
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        BackgroundColor="#F7EFE9">
+        <Frame Margin="200,0,200,300" BackgroundColor="White">
+          <VerticalStackLayout Spacing="10">
+
+            <Label
+              FontAttributes="Bold"
+              FontSize="25"
+              HorizontalOptions="Center"
+              Text="THÊM NHÂN VIÊN"
+              TextColor="Black" />
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="StaffNameEntry"
+                FontSize="16"
+                Placeholder="Họ tên" />
+            </Border>
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+
+              <Entry
+                x:Name="StaffDOBEntry"
+                FontSize="16"
+                Placeholder="Ngày sinh (dd/MM/yyyy)" />
+            </Border>
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="StaffPhoneEntry"
+                FontSize="16"
+                Placeholder="Số điện thoại" />
+            </Border>
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="StaffAddressEntry"
+                FontSize="16"
+                Placeholder="Địa chỉ" />
+            </Border>
+            <Border
+              Grid.Row="1"
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="StaffRoleEntry"
+                FontSize="16"
+                Placeholder="Vị trí (Thu ngân/Pha chế/Phục vụ)" />
+            </Border>
+            <Grid ColumnDefinitions="*,*">
+              <Button
+                Grid.Column="0"
+                Clicked="OnSaveStaffClicked"
+                HorizontalOptions="Center"
+                Text="Lưu" />
+              <Button
+                Grid.Column="1"
+                BackgroundColor="Red"
+                Clicked="OnCancelStaffClicked"
+                HorizontalOptions="Center"
+                Text="Hủy" />
+            </Grid>
+          </VerticalStackLayout>
+        </Frame>
+      </ContentView>
+    </Grid>
+
+    <!--  chinh sua nhan vien  -->
+    <Grid
+      x:Name="EditPopupOverlay"
+      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+      AbsoluteLayout.LayoutFlags="All"
+      BackgroundColor="#80000000"
+      IsVisible="False">
+      <ContentView
+        x:Name="EditStaffPopup"
+        Padding="20"
+        AbsoluteLayout.LayoutBounds="0.5, 0.5, 400, 300"
+        AbsoluteLayout.LayoutFlags="PositionProportional"
+        BackgroundColor="#F7EFE9">
+        <Frame Margin="200,0,200,300" BackgroundColor="White">
+          <VerticalStackLayout Spacing="10">
+            <Label
+              FontAttributes="Bold"
+              FontSize="25"
+              HorizontalOptions="Center"
+              Text="CHỈNH SỬA NHÂN VIÊN"
+              TextColor="Black" />
+            <Border
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="EditStaffNameEntry"
+                FontSize="16"
+                Placeholder="Họ tên"
+                TextColor="Black" />
+            </Border>
+            <Border
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="EditStaffDOBEntry"
+                FontSize="16"
+                Placeholder="Ngày sinh (dd/MM/yyyy)"
+                TextColor="Black" />
+            </Border>
+            <Border
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="EditStaffPhoneEntry"
+                FontSize="16"
+                Placeholder="Số điện thoại"
+                TextColor="Black" />
+            </Border>
+            <Border
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="EditStaffAddressEntry"
+                FontSize="16"
+                Placeholder="Địa chỉ"
+                TextColor="Black" />
+            </Border>
+            <Border
+              Padding="10"
+              BackgroundColor="Transparent"
+              Stroke="#F2E2D6"
+              StrokeShape="RoundRectangle 10"
+              StrokeThickness="1">
+              <Entry
+                x:Name="EditStaffRoleEntry"
+                FontSize="16"
+                Placeholder="Vị trí (Thu ngân/Pha chế/Phục vụ)"
+                TextColor="Black" />
+            </Border>
+            <Grid ColumnDefinitions="*,*">
+              <Button
+                Grid.Column="0"
+                Clicked="OnSaveEditStaffClicked"
+                HorizontalOptions="Center"
+                Text="Lưu" />
+              <Button
+                Grid.Column="1"
+                BackgroundColor="Red"
+                Clicked="OnCancelEditStaffClicked"
+                HorizontalOptions="Center"
+                Text="Hủy"
+                TextColor="White" />
+            </Grid>
+          </VerticalStackLayout>
+        </Frame>
+      </ContentView>
+    </Grid>
+  </AbsoluteLayout>
+</ContentPage>
