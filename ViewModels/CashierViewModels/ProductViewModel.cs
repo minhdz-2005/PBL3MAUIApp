@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PBL3MAUIApp.Models;
+using PBL3MAUIApp.Services;
 
 namespace PBL3MAUIApp.ViewModels.CashierViewModels;
 
@@ -16,19 +17,46 @@ public class ProductViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Product> Products { get; set; } = new();
 
-    public async Task LoadProductsAsync()
-    {
-        var httpClient = new HttpClient();
-        var response = await httpClient.GetFromJsonAsync<List<Product>>("https://localhost:7221/api/Product");
+    public ProductService productService = new ProductService();
 
-        if (response != null)
-        {
-            Debug.WriteLine("LoadProductsAsync: " + response.Count);
-            Products.Clear();
-            foreach (var item in response)
-                Products.Add(item);
-        }
+    public async Task GetAllProduct()
+    {
+        List<Product> listProduct = await productService.GetProductsAsync();
+
+        Products.Clear();
+        foreach (var item in listProduct)
+            Products.Add(item);
     }
 
+    public async Task CoffeeCategory()
+    {
+        List<Product> listProduct = await productService.GetProductsAsync();
+
+        Products.Clear();
+        foreach (var item in listProduct)
+        {
+            if (item.Category == "Cà Phê") Products.Add(item);
+        }
+    }
+    public async Task TeaCategory()
+    {
+        List<Product> listProduct = await productService.GetProductsAsync();
+
+        Products.Clear();
+        foreach (var item in listProduct)
+        {
+            if (item.Category == "Trà") Products.Add(item);
+        }
+    }
+    public async Task CakeCategory()
+    {
+        List<Product> listProduct = await productService.GetProductsAsync();
+
+        Products.Clear();
+        foreach (var item in listProduct)
+        {
+            if (item.Category == "Bánh Ngọt") Products.Add(item);
+        }
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 }

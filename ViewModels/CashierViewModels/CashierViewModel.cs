@@ -9,11 +9,13 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
     public class CashierViewModel
     {
         public ProductViewModel ProductVM { get; set; }
+        public OrderDetailViewModel OrderDetailVM { get; set; }
 
 
         public CashierViewModel()
         {
             ProductVM = new ProductViewModel();
+            OrderDetailVM = new OrderDetailViewModel();
         }
     }
 }
