@@ -42,6 +42,25 @@ public class AccountService
         
         return new List<Account>();
     }
+    public async Task<Account> GetAccountByUsername(string username)
+    {
+        var url = $"{GetBaseUrl()}/api/Account/Username/{username}";
+        var response = await _client.GetAsync(url);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+
+            var account = JsonSerializer.Deserialize<Account>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return account ?? new Account();
+        }
+
+        return new Account();
+    }
 
     // CREATE
     public async Task<bool> AddAccountAsync (Account a)

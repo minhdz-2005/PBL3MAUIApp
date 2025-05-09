@@ -21,6 +21,8 @@
             <!-- Kích thước ảnh động -->
             <x:Double x:Key="NavIconSize">30</x:Double>
             <x:Double x:Key="NavBoxSize">60</x:Double>
+            
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -40,63 +40,44 @@
             <Grid ColumnDefinitions="350,*" ColumnSpacing="20">
 
                 <!-- Left Panel - Info Display -->
-                <Frame Grid.Column="0"
-                       BackgroundColor="#4B3621"
-                       CornerRadius="12"
-                       Padding="20"
-                       HasShadow="False">
-                    <VerticalStackLayout Spacing="15">
-                        <Label Text="THÔNG TIN ƯU ĐÃI" 
-                               TextColor="White" 
-                               FontSize="18"
-                               FontAttributes="Bold"
-                               Margin="0,0,0,10"/>
+                <Frame 
+                    Grid.Column="0"
+                    BackgroundColor="#4B3621"
+                    CornerRadius="12"
+                    Padding="40"
+                    HasShadow="False">
+                    <ScrollView>
+                        <VerticalStackLayout Spacing="10">
+                            <Label 
+                                Text="THÔNG TIN ƯU ĐÃI" 
+                                TextColor="White" 
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                Margin="0,0,0,10"/>
+                            <CollectionView ItemsSource="{Binding VoucherVM.Vouchers}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
 
-                        <!-- Tên ưu đãi -->
-                        <Border StrokeShape="RoundRectangle 8" Stroke="White" StrokeThickness="1" Padding="10,8">
-                            <Entry Text="Giảm giá 20% toàn bộ menu"
-                                   TextColor="White"
-                                   IsEnabled="False" />
-                        </Border>
-
-                        <!-- Mã ưu đãi -->
-                        <Border StrokeShape="RoundRectangle 8" Stroke="White" StrokeThickness="1" Padding="10,8">
-                            <Entry Text="KM20MENU"
-                                   TextColor="White"
-                                   IsEnabled="False" />
-                        </Border>
-
-                        <!-- Mô tả -->
-                        <Border StrokeShape="RoundRectangle 8" Stroke="White" StrokeThickness="1" HeightRequest="100" Padding="10,8">
-                            <Editor Text="Áp dụng cho toàn bộ thực đơn từ ngày 01/05 đến 31/05."
-                                    TextColor="White"
-                                    AutoSize="TextChanges"
-                                    IsEnabled="False"/>
-                        </Border>
-
-                        <!-- Số tiền ưu đãi -->
-                        <Border StrokeShape="RoundRectangle 8" Stroke="White" StrokeThickness="1" Padding="10,8">
-                            <Entry Text="20%"
-                                   TextColor="White"
-                                   IsEnabled="False" />
-                        </Border>
-
-                        <!-- Ngày bắt đầu / kết thúc -->
-                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                            <Border StrokeShape="RoundRectangle 8" Stroke="White" StrokeThickness="1" Padding="10,8">
-                                <DatePicker TextColor="White"
-                                            Date="2025-05-01"
-                                            IsEnabled="False"/>
-                            </Border>
-
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 8" Stroke="White" StrokeThickness="1" Padding="10,8">
-                                <DatePicker TextColor="White"
-                                            Date="2025-05-31"
-                                            IsEnabled="False"/>
-                            </Border>
-                        </Grid>
-
-                    </VerticalStackLayout>
+                                        <!-- ID ưu đãi -->
+                                        <Border 
+                                            StrokeShape="RoundRectangle 8" 
+                                            Stroke="White" 
+                                            StrokeThickness="1"
+                                            Padding="5">
+                                            <Button 
+                                                x:Name="VoucherSelectButton"
+                                                Style="{StaticResource HoverButtonStyle}"
+                                                Text="{Binding Id, StringFormat='{}KM{0:0}'}"
+                                                TextColor="White"
+                                                VerticalOptions="Fill"
+                                                HorizontalOptions="Fill"
+                                                Clicked="OnVoucherButtonClicked"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </ScrollView>
                 </Frame>
 
                 <!-- Right Panel - Promotions List -->

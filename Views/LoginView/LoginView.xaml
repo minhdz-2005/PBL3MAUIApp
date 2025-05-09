@@ -2,105 +2,128 @@
 <ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="PBL3MAUIApp.Views.LoginView.LoginView">
+    x:Class="PBL3MAUIApp.Views.LoginView.LoginView"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.LoginViewModels">
 
-	<Grid>
-		<!--  Nền  -->
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <!--  Nền  -->
 		<Image
             Aspect="AspectFill"
             Opacity="1"
             Source="login.jpg"
 			ZIndex="0"/>
 
-		<!--  Form đăng nhập (vị trí giữ nguyên)  -->
-		<Frame
-            Margin="1085,150,335,330"
-            BackgroundColor="#80FFFFFF"
-            BorderColor="LightGray"
-            CornerRadius="20"
-            HasShadow="True"
-            HeightRequest="600"
-            WidthRequest="500">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-			<Grid Padding="30" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
+            <!--  Form đăng nhập (vị trí giữ nguyên)  -->
+            <Frame
+                Grid.Column="3"
+                Grid.Row="1"
+                Padding="20,20,20,0"
+                
+                BackgroundColor="#80FFFFFF"
+                BorderColor="LightGray"
+                CornerRadius="20"
+                HasShadow="True"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill">
+                <Grid>
 
-				<!--  Tiêu đề LOGIN  -->
-				<Label
-                    Grid.Row="0"
-                    FontAttributes="Bold"
-                    FontSize="50"
-                    HorizontalOptions="Center"
-                    Text="LOGIN"
-                    TextColor="#000000" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-				<!--  Label Account  -->
-				<Label
-                    Grid.Row="1"
-                    FontSize="24"
-                    Text="Account"
-                    TextColor="#000000" />
+                    <!--  Tiêu đề LOGIN  -->
+                    <Label
+                        x:Name="LoginLabel"
+                        Grid.Row="0"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        Text="LOGIN"
+                        TextColor="#000000" />
 
-				<!--  Entry Account  -->
-				<Border
-                    Grid.Row="2"
-                    BackgroundColor="White"
-                    Stroke="Gray"
-                    StrokeShape="RoundRectangle 10"
-                    StrokeThickness="1">
-					<Entry
-                        Margin="10,5"
-                        BackgroundColor="Transparent"
-                        FontSize="18"
-                        Placeholder="Enter username..."
-                        TextColor="Black" />
-				</Border>
+                    <!--  Label Account  -->
+                    <Label
+                        x:Name="AccountLabel"
+                        Grid.Row="1"
+                        Text="Account"
+                        TextColor="#000000" />
 
-				<!--  Label Password  -->
-				<Label
-                    Grid.Row="3"
-                    FontSize="24"
-                    Text="Password"
-                    TextColor="#000000" />
+                    <!--  Entry Account  -->
+                    <Border
+                        x:Name="AccountBorder"
+                        Grid.Row="2"
+                        BackgroundColor="White"
+                        Stroke="Gray"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
+                        <Entry
+                            x:Name="AccountEntry"
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            Placeholder="Enter username..."
+                            TextColor="Black" />
+                    </Border>
 
-				<!--  Entry Password  -->
-				<Border
-                    Grid.Row="4"
-                    BackgroundColor="White"
-                    Stroke="Gray"
-                    StrokeShape="RoundRectangle 10"
-                    StrokeThickness="1">
-					<Entry
-                        Margin="10,5"
-                        BackgroundColor="Transparent"
-                        FontSize="18"
-                        IsPassword="True"
-                        Placeholder="Enter password..."
-                        TextColor="Black" />
-				</Border>
+                    <!--  Label Password  -->
+                    <Label
+                        x:Name="PasswordLabel"
+                        Grid.Row="3"
+                        
+                        Text="Password"
+                        TextColor="#000000" />
 
-				<!--  Nút Đăng nhập  -->
-				<Button
-                    Grid.Row="5"
-                    Margin="0,20,0,0"
-                    BackgroundColor="#8EB8BB"
-                    CornerRadius="25"
-                    FontSize="20"
-                    HeightRequest="50"
-                    HorizontalOptions="Center"
-                    Text="Đăng nhập"
-                    TextColor="Black"
-                    WidthRequest="200"
-					Clicked="OnLoginClicked"/>
-			</Grid>
-		</Frame>
-	</Grid>
+                    <!--  Entry Password  -->
+                    <Border
+                        x:Name="PasswordBorder"
+                        Grid.Row="4"
+                        BackgroundColor="White"
+                        Stroke="Gray"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
+                        <Entry
+                            x:Name="PasswordEntry"
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            IsPassword="True"
+                            Placeholder="Enter password..."
+                            TextColor="Black" 
+                            VerticalOptions="Center"/>
+                    </Border>
+
+                    <!--  Nút Đăng nhập  -->
+                    <Button
+                        x:Name="LoginButton"
+                        Grid.Row="5"
+                        BackgroundColor="#8EB8BB"
+                        CornerRadius="25"
+                        HorizontalOptions="Center"
+                        Text="Đăng nhập"
+                        TextColor="Black"
+			            Clicked="OnLoginClicked"/>
+                </Grid>
+            </Frame>
+        </Grid>
+    </Grid>
 </ContentPage>

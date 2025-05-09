@@ -27,6 +27,17 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
 
+        // GET VOUCHER BY ID
+        public async Task GetVoucherById(int id)
+        {
+            Vouchers.Clear();
+            var voucher = await voucherService.GetVoucherByIdAsync(id);
+            if (voucher != null)
+            {
+                Vouchers.Add(voucher);
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
     }
 }
