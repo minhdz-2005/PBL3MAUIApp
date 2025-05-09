@@ -156,11 +156,13 @@
                         <CollectionView ItemsSource="{Binding OrderDetailVM.OrderDetails}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid ColumnDefinitions="*,Auto,Auto,Auto" Margin="0,5">
+                                    <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto" Margin="0,5">
                                         <Label Text="{Binding Product.Name}" TextColor="#4B3621" VerticalOptions="Center"/>
                                         <Button Style="{StaticResource HoverButtonStyle}" Grid.Column="1" Text="-" FontSize="18" BackgroundColor="Transparent" TextColor="#4B3621" CornerRadius="15" Clicked="DelQuantityClicked"/>
                                         <Label Grid.Column="2" Text="{Binding Quantity}" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#4B3621" Margin="10,0"/>
                                         <Button Style="{StaticResource HoverButtonStyle}" Grid.Column="3" Text="+" FontSize="18" BackgroundColor="Transparent" TextColor="#4B3621" CornerRadius="15" Clicked="AddQuantityClicked"/>
+                                        <Button Style="{StaticResource HoverButtonStyle}" Grid.Column="4" Text="X" FontSize="18" BackgroundColor="Transparent" TextColor="#4B3621" CornerRadius="15" Clicked="AddQuantityClicked"/>
+                                        <!-- THEM NUT XOA VAO DAY-->
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
