@@ -85,27 +85,33 @@
 
                     <!-- Filter Tabs -->
                     <HorizontalStackLayout Grid.Row="0" Spacing="10" Margin="0,0,0,15">
-                        <Button Text="🔥 Đang diễn ra"
-                                BackgroundColor="#C41E3A"
-                                TextColor="White"
-                                FontAttributes="Bold"
-                                HeightRequest="40"
-                                CornerRadius="20"
-                                Padding="20,0"/>
-                        <Button Text="📅 Sắp tới"
-                                BackgroundColor="#7B6A54"
-                                TextColor="White"
-                                FontAttributes="Bold"
-                                HeightRequest="40"
-                                CornerRadius="20"
-                                Padding="20,0"/>
-                        <Button Text="📦 Đã kết thúc"
-                                BackgroundColor="#D4BFAA"
-                                TextColor="#4B3621"
-                                FontAttributes="Bold"
-                                HeightRequest="40"
-                                CornerRadius="20"
-                                Padding="20,0"/>
+                        <Button 
+                            Style="{StaticResource HoverButtonStyle}"
+                            Text="🔥 Đang diễn ra"
+                            BackgroundColor="#C41E3A"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="40"
+                            CornerRadius="20"
+                            Padding="20,0"/>
+                        <Button 
+                            Style="{StaticResource HoverButtonStyle}"
+                            Text="📅 Sắp tới"
+                            BackgroundColor="#7B6A54"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="40"
+                            CornerRadius="20"
+                            Padding="20,0"/>
+                        <Button 
+                            Style="{StaticResource HoverButtonStyle}"
+                            Text="📦 Đã kết thúc"
+                            BackgroundColor="#D4BFAA"
+                            TextColor="#4B3621"
+                            FontAttributes="Bold"
+                            HeightRequest="40"
+                            CornerRadius="20"
+                            Padding="20,0"/>
                     </HorizontalStackLayout>
 
                     <!-- Promotions List (static) -->

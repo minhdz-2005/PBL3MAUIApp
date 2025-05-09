@@ -50,9 +50,27 @@ public partial class LoginView : ContentPage
         PasswordEntry.Unfocus();
         string passwordCopy = password;
         PasswordEntry.Text = string.Empty;
+        PasswordEntry.IsPassword = true;
 
         if (loginViewModel != null) await loginViewModel.CheckAccount(account, passwordCopy);
 
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
+    ///// Chinh sua giao dien
+
+
+
+
 }

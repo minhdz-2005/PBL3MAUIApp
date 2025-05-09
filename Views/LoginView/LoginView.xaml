@@ -8,6 +8,8 @@
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
     </ContentPage.BindingContext>
+    
+    
     <Grid>
         <!--  Nền  -->
 		<Image
@@ -83,14 +85,14 @@
                             Margin="0"
                             BackgroundColor="Transparent"
                             Placeholder="Enter username..."
-                            TextColor="Black" />
+                            TextColor="Black" 
+                            Completed="OnLoginClicked"/>
                     </Border>
 
                     <!--  Label Password  -->
                     <Label
                         x:Name="PasswordLabel"
                         Grid.Row="3"
-                        
                         Text="Password"
                         TextColor="#000000" />
 
@@ -109,7 +111,8 @@
                             IsPassword="True"
                             Placeholder="Enter password..."
                             TextColor="Black" 
-                            VerticalOptions="Center"/>
+                            VerticalOptions="Center"
+                            Completed="OnLoginClicked"/>
                     </Border>
 
                     <!--  Nút Đăng nhập  -->
