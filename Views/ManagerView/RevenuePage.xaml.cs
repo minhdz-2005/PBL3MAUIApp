@@ -199,7 +199,7 @@ public class ProductRevenue : INotifyPropertyChanged
 // Model cho Doanh thu theo nhân viên
 public class EmployeeRevenue : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     private string _employeeName = string.Empty;
     private int _ordersCount;

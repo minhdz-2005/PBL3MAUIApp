@@ -3,7 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="PBL3MAUIApp.Views.CashierView.DSOrderPage"
     BackgroundColor="#F7EFE9"
-    ControlTemplate="{StaticResource SharedPageTemplate}">
+    ControlTemplate="{StaticResource SharedPageTemplate}"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels">
+
+    <ContentPage.BindingContext>
+        <viewModels:CashierViewModel />
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="24">
@@ -34,7 +39,9 @@
                                TextColor="#3B0A0A"
                                HorizontalOptions="Center"/>
 
-                        <Entry Placeholder="Nhập mã đơn..."
+                        <Entry x:Name="OrderIdEntry"
+                               Placeholder="Nhập mã đơn..."
+                               Keyboard="Numeric"
                                BackgroundColor="#F6ECE3"
                                PlaceholderColor="#BCAAA4"
                                TextColor="#3B0A0A"
@@ -43,7 +50,8 @@
 
                         <VerticalStackLayout Spacing="8">
                             <Label Text="Từ ngày" FontSize="14" TextColor="#3B0A0A"/>
-                            <DatePicker Format="dd/MM/yyyy"
+                            <DatePicker x:Name="FromDatePicker"
+                                        Format="dd/MM/yyyy"
                                         BackgroundColor="White"
                                         TextColor="#3B0A0A"
                                         FontSize="15"/>
@@ -51,7 +59,8 @@
 
                         <VerticalStackLayout Spacing="8">
                             <Label Text="Đến ngày" FontSize="14" TextColor="#3B0A0A"/>
-                            <DatePicker Format="dd/MM/yyyy"
+                            <DatePicker x:Name="ToDatePicker"
+                                        Format="dd/MM/yyyy"
                                         BackgroundColor="White"
                                         TextColor="#3B0A0A"
                                         FontSize="15"/>
@@ -64,94 +73,85 @@
                                 FontAttributes="Bold"
                                 HeightRequest="48"
                                 CornerRadius="12"
-                                HorizontalOptions="Center"/>
+                                HorizontalOptions="Center"
+                                Style="{StaticResource HoverButtonStyle}"
+                                Clicked="OnFilteringClicked"/>
                     </VerticalStackLayout>
                 </Frame>
 
                 <!-- Bên phải: Danh sách đơn hàng -->
                 <ScrollView Grid.Column="1">
                     <VerticalStackLayout Spacing="8">
-                        <!-- Đơn hàng 1 -->
-                        <Frame BackgroundColor="White" CornerRadius="18" HasShadow="True" Padding="16" BorderColor="#E0DAD2" Margin="0,4">
-                            <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
+                        <!-- Đơn hàng -->
+                        <CollectionView ItemsSource="{Binding OrderVM.Orders}" Margin="20">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame 
+                                        x:Name="FrameList" 
+                                        IsVisible="True"
+                                        BackgroundColor="White" 
+                                        CornerRadius="18" HasShadow="True" 
+                                        Padding="16" BorderColor="#E0DAD2" 
+                                        Margin="0,4">
 
-                                <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
-                                    <Label Text="📦" FontSize="18"/>
-                                    <Label Text="DH001"
-                                           FontSize="16"
-                                           FontAttributes="Bold"
-                                           TextColor="#3B0A0A"/>
-                                </HorizontalStackLayout>
+                                        <StackLayout x:Name="ContainerLayout">
+                                            <StackLayout x:Name="SummaryLayout">
+                                                <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
 
-                                <Label Text="25/04/2025"
-                                       FontSize="14"
-                                       TextColor="#7B6A54"
-                                       Grid.Column="1"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Center"/>
+                                                    <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
+                                                        <Label Text="📦" FontSize="18"/>
+                                                        <Label Text="{Binding Id, StringFormat='DH{0:0}'}"
+                                                            FontSize="16"
+                                                            FontAttributes="Bold"
+                                                            TextColor="#3B0A0A"/>
+                                                    </HorizontalStackLayout>
 
-                                <Label Text="120.000₫"
-                                       FontSize="17"
-                                       TextColor="#C41E3A"
-                                       FontAttributes="Bold"
-                                       Grid.Column="2"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="End"
-                                       Margin="0,0,8,0"/>
+                                                    <Label 
+                                                        Text="{Binding TimeAndDate, StringFormat='{}{0:dd/MM/yyyy}'}"
+                                                        FontSize="14"
+                                                        TextColor="#7B6A54"
+                                                        Grid.Column="1"
+                                                        VerticalOptions="Center"
+                                                        HorizontalOptions="Center"/>
 
-                                <Button Text="Chi tiết"
-                                        BackgroundColor="#5D4037"
-                                        TextColor="White"
-                                        FontSize="13"
-                                        CornerRadius="18"
-                                        HeightRequest="38"
-                                        WidthRequest="88"
-                                        Padding="0"
-                                        Grid.Column="3"
-                                        VerticalOptions="Center"/>
-                            </Grid>
-                        </Frame>
+                                                    <Label 
+                                                        Text="{Binding FinalAmount, StringFormat='${0:0.00}'}"
+                                                        FontSize="17"
+                                                        TextColor="#C41E3A"
+                                                        FontAttributes="Bold"
+                                                        Grid.Column="2"
+                                                        VerticalOptions="Center"
+                                                        HorizontalOptions="End"
+                                                        Margin="0,0,8,0"/>
 
-                        <!-- Đơn hàng 2 -->
-                        <Frame BackgroundColor="White" CornerRadius="18" HasShadow="True" Padding="16" BorderColor="#E0DAD2" Margin="0,4">
-                            <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
+                                                    <Button 
+                                                        Text="Chi tiết"
+                                                        BackgroundColor="#5D4037"
+                                                        TextColor="White"
+                                                        FontSize="13"
+                                                        CornerRadius="18"
+                                                        HeightRequest="38"
+                                                        WidthRequest="88"
+                                                        Padding="0"
+                                                        Grid.Column="3"
+                                                        VerticalOptions="Center"
+                                                        Style="{StaticResource HoverButtonStyle}"
+                                                        Clicked="DetailButton_Clicked"/>
+                                                </Grid>
+                                            </StackLayout>
 
-                                <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
-                                    <Label Text="📦" FontSize="18"/>
-                                    <Label Text="DH002"
-                                           FontSize="16"
-                                           FontAttributes="Bold"
-                                           TextColor="#3B0A0A"/>
-                                </HorizontalStackLayout>
+                                            <StackLayout x:Name="DetailLayout" IsVisible="False">
+                                                <Label Text="ngu"/>
+                                                <Button Text="Quay lại" Clicked="BackButton_Clicked"/>
+                                            </StackLayout>
+                                            
+                                        </StackLayout>
+                                    </Frame>
 
-                                <Label Text="26/04/2025"
-                                       FontSize="14"
-                                       TextColor="#7B6A54"
-                                       Grid.Column="1"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Center"/>
-
-                                <Label Text="85.000₫"
-                                       FontSize="17"
-                                       TextColor="#C41E3A"
-                                       FontAttributes="Bold"
-                                       Grid.Column="2"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="End"
-                                       Margin="0,0,8,0"/>
-
-                                <Button Text="Chi tiết"
-                                        BackgroundColor="#5D4037"
-                                        TextColor="White"
-                                        FontSize="13"
-                                        CornerRadius="18"
-                                        HeightRequest="38"
-                                        WidthRequest="88"
-                                        Padding="0"
-                                        Grid.Column="3"
-                                        VerticalOptions="Center"/>
-                            </Grid>
-                        </Frame>
+                                    
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </VerticalStackLayout>
                 </ScrollView>
 

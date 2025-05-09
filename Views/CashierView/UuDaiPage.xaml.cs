@@ -1,10 +1,16 @@
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+
 namespace PBL3MAUIApp.Views.CashierView;
 
 public partial class UuDaiPage : ContentPage
 {
-	public UuDaiPage()
+    public CashierViewModel? mainViewModel;
+    public UuDaiPage()
 	{
 		InitializeComponent();
+
+        mainViewModel = BindingContext as CashierViewModel;
+
         this.SizeChanged += (s, e) =>
         {
             double width = this.Width;
@@ -23,5 +29,10 @@ public partial class UuDaiPage : ContentPage
                 Application.Current.Resources["NavBoxSize"] = 60 * scale;
             }
         };
+    }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (mainViewModel != null) await mainViewModel.VoucherVM.GetAllVouchers();
     }
 }

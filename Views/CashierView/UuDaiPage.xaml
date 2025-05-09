@@ -5,7 +5,12 @@
     x:Class="PBL3MAUIApp.Views.CashierView.UuDaiPage"
     ControlTemplate="{StaticResource SharedPageTemplate}"
     BackgroundColor="#F7EFE9"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
     NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:CashierViewModel />
+    </ContentPage.BindingContext>
 
     <Grid Padding="15" RowDefinitions="Auto,*">
 
@@ -125,96 +130,42 @@
                     <!-- Promotions List (static) -->
                     <ScrollView Grid.Row="1">
                         <VerticalStackLayout Spacing="10">
+                            <CollectionView ItemsSource="{Binding VoucherVM.Vouchers}" Margin="20">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <!-- Ưu đãi -->
+                                        <Frame Padding="15"
+                                            BorderColor="#F2E2D6"
+                                            CornerRadius="10"
+                                            HasShadow="False">
+                                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                                <VerticalStackLayout Grid.Column="0" Grid.Row="0">
+                                                    <Label Text="{Binding Name}"
+                                                        TextColor="#FFFFFF"
+                                                        FontSize="16"
+                                                        FontAttributes="Bold"/>
+                                                    <Label Text="{Binding Id, StringFormat='KM{0:0}'}"
+                                                        TextColor="#FFFFFF"
+                                                        FontSize="14"/>
+                                                </VerticalStackLayout>
+                                                <Label Grid.Column="1" Grid.Row="0"
+                                                    Text="{Binding DiscountValue, StringFormat='${0:0.00}'}"
+                                                    TextColor="#FFFFFF"
+                                                    FontSize="18"
+                                                    FontAttributes="Bold"
+                                                    VerticalOptions="Center"/>
+                                                <Label Grid.Column="0" Grid.Row="1"
+                                                    Grid.ColumnSpan="2"
+                                                    Text="{Binding StartDate}"
+                                                    TextColor="#FFFFFF"
+                                                    FontSize="14"
+                                                    Margin="0,10,0,0"/>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
-                            <!-- Ưu đãi 1 -->
-                            <Frame Padding="15"
-                                   BorderColor="#F2E2D6"
-                                   CornerRadius="10"
-                                   HasShadow="False">
-                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <VerticalStackLayout Grid.Column="0" Grid.Row="0">
-                                        <Label Text="Giảm giá 20% toàn bộ menu"
-                                               TextColor="#4B3621"
-                                               FontSize="16"
-                                               FontAttributes="Bold"/>
-                                        <Label Text="KM20MENU"
-                                               TextColor="#7B6A54"
-                                               FontSize="14"/>
-                                    </VerticalStackLayout>
-                                    <Label Grid.Column="1" Grid.Row="0"
-                                           Text="20%"
-                                           TextColor="#C41E3A"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="Center"/>
-                                    <Label Grid.Column="0" Grid.Row="1"
-                                           Grid.ColumnSpan="2"
-                                           Text="Áp dụng toàn menu từ 01/05 đến 31/05."
-                                           TextColor="#7B6A54"
-                                           FontSize="14"
-                                           Margin="0,10,0,0"/>
-                                </Grid>
-                            </Frame>
-
-                            <!-- Ưu đãi 2 -->
-                            <Frame Padding="15"
-                                   BorderColor="#F2E2D6"
-                                   CornerRadius="10"
-                                   HasShadow="False">
-                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <VerticalStackLayout Grid.Column="0" Grid.Row="0">
-                                        <Label Text="Mua 1 tặng 1 - Trà Sữa Trân Châu"
-                                               TextColor="#4B3621"
-                                               FontSize="16"
-                                               FontAttributes="Bold"/>
-                                        <Label Text="BOGO-TS"
-                                               TextColor="#7B6A54"
-                                               FontSize="14"/>
-                                    </VerticalStackLayout>
-                                    <Label Grid.Column="1" Grid.Row="0"
-                                           Text="1+1"
-                                           TextColor="#C41E3A"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="Center"/>
-                                    <Label Grid.Column="0" Grid.Row="1"
-                                           Grid.ColumnSpan="2"
-                                           Text="Áp dụng vào các ngày thứ 7, Chủ Nhật trong tháng 5."
-                                           TextColor="#7B6A54"
-                                           FontSize="14"
-                                           Margin="0,10,0,0"/>
-                                </Grid>
-                            </Frame>
-
-                            <!-- Ưu đãi 3 -->
-                            <Frame Padding="15"
-                                   BorderColor="#F2E2D6"
-                                   CornerRadius="10"
-                                   HasShadow="False">
-                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <VerticalStackLayout Grid.Column="0" Grid.Row="0">
-                                        <Label Text="Ưu đãi thành viên - Giảm 10%"
-                                               TextColor="#4B3621"
-                                               FontSize="16"
-                                               FontAttributes="Bold"/>
-                                        <Label Text="MEMBER10"
-                                               TextColor="#7B6A54"
-                                               FontSize="14"/>
-                                    </VerticalStackLayout>
-                                    <Label Grid.Column="1" Grid.Row="0"
-                                           Text="10%"
-                                           TextColor="#C41E3A"
-                                           FontSize="18"
-                                           FontAttributes="Bold"
-                                           VerticalOptions="Center"/>
-                                    <Label Grid.Column="0" Grid.Row="1"
-                                           Grid.ColumnSpan="2"
-                                           Text="Áp dụng cho khách thành viên đăng ký trước ngày 15/05."
-                                           TextColor="#7B6A54"
-                                           FontSize="14"
-                                           Margin="0,10,0,0"/>
-                                </Grid>
-                            </Frame>
 
                         </VerticalStackLayout>
                     </ScrollView>

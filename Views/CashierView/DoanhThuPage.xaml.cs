@@ -1,9 +1,15 @@
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+
 namespace PBL3MAUIApp.Views.CashierView;
 public partial class DoanhThuPage : ContentPage
 {
-	public DoanhThuPage()
+    public CashierViewModel? mainViewModel;
+    public DoanhThuPage()
 	{
 		InitializeComponent();
+
+        mainViewModel = BindingContext as CashierViewModel;
+
         this.SizeChanged += (s, e) =>
         {
             double width = this.Width;
@@ -23,4 +29,5 @@ public partial class DoanhThuPage : ContentPage
             }
         };
     }
+    
 }

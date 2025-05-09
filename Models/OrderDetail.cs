@@ -23,7 +23,8 @@ public class OrderDetail : INotifyPropertyChanged
     public decimal TotalPrice { get; set; }
 
     public OrderDetail () {}
-    public OrderDetail (int productId, int quantity, decimal totalPrice) {
+    public OrderDetail (int orderId ,int productId, int quantity, decimal totalPrice) {
+        OrderId = orderId;
         ProductId = productId;
         Quantity = quantity;
         TotalPrice = totalPrice;

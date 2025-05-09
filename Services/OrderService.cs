@@ -42,6 +42,21 @@ public class OrderService
 
         return new List<Order>();
     }
+    public async Task<List<Order>> GetOrdersByDateAsync(DateTime date)
+    {
+        var url = $"{GetBaseUrl()}/api/Order/Date/{date:yyyy-MM-dd}";
+        var response = await _client.GetAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            var listOrder = JsonSerializer.Deserialize<List<Order>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return listOrder ?? new List<Order>();
+        }
+        return new List<Order>();
+    }
 
     // CREATE
     public async Task<bool> AddOrderAsync(Order a)

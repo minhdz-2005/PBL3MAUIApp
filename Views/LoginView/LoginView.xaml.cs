@@ -1,4 +1,4 @@
-namespace PBL3MAUIApp.Views.LoginView;
+﻿namespace PBL3MAUIApp.Views.LoginView;
 
 public partial class LoginView : ContentPage
 {
@@ -11,4 +11,5 @@ public partial class LoginView : ContentPage
     {
         await Shell.Current.GoToAsync("//MainPageCashier");
     }
+    
 }

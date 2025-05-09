@@ -162,11 +162,11 @@ public partial class OrderPage : ContentPage
         }
     }
     // XAC NHAN DAT MON
-    public async void OnOrderButtonClicked(object sender, EventArgs e)
+    public void OnOrderButtonClicked(object sender, EventArgs e)
     {
         if (mainViewModel != null)
         {
-            await mainViewModel .OrderDetailVM.UpdateTotalPrice();
+            mainViewModel .OrderDetailVM.UpdateTotalPrice();
             
         }
     }

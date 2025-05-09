@@ -23,6 +23,8 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
 
+        
+
         public OrderItemViewModel(OrderDetail o, Product p)
         {
             OrderDetail = o;
