@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 
+using PBL3MAUIApp.Models;
 using PBL3MAUIApp.ViewModels.CashierViewModels;
 
 namespace PBL3MAUIApp.Views.CashierView;
@@ -37,6 +38,7 @@ public partial class DSOrderPage : ContentPage
         base.OnAppearing();
         if (mainViewModel != null) await mainViewModel.OrderVM.GetAllOrders();
     }
+    
     // LOC DON HANG
     public void OnFilteringClicked(object sender, EventArgs e)
     {
@@ -54,61 +56,30 @@ public partial class DSOrderPage : ContentPage
             mainViewModel.OrderVM.OrderFiltering(orderId, fromDate, toDate);
         }
     }
+    
     // XEM CHI TIET DON HANG
-    public void DetailButton_Clicked(object sender, EventArgs e)
+    private async void OnViewDetailClicked(object sender, EventArgs e)
     {
-        if (sender is Button button)
+        var button = sender as Button;
+        var order = button?.BindingContext as Order;
+        // if(order != null) Debug.WriteLine($"id: {order.Id}");
+        if (button != null)
         {
-            // Debug.WriteLine("Chay 1");
-            var container = FindContainerLayout(button);
-            if (container != null)
+            var grid = button.Parent as Grid;
+            if (grid != null)
             {
-                // Debug.WriteLine("Chay 2");
-                var summary = container.FindByName<StackLayout>("SummaryLayout");
-                var detail = container.FindByName<StackLayout>("DetailLayout");
 
-                if (summary != null && detail != null)
-                {
-                    // Debug.WriteLine("Chay 3");
-                    summary.IsVisible = false;
-                    detail.IsVisible = true;
-                }
+                DetailPopupOverlay.IsVisible = true;
+                if(mainViewModel != null && order != null) await mainViewModel.OrderDetailVM.ViewOrder(order.Id);
+
             }
         }
     }
-    public void BackButton_Clicked(object sender, EventArgs e)
+
+    // Sự kiện khi nhấn nút "Đóng" trong popup chi tiết
+    private void OnCloseDetailClicked(object sender, EventArgs e)
     {
-        if (sender is Button button)
-        {
-            var container = FindContainerLayout(button);
-            if (container != null)
-            {
-                var summary = container.FindByName<StackLayout>("SummaryLayout");
-                var detail = container.FindByName<StackLayout>("DetailLayout");
-
-                if (summary != null && detail != null)
-                {
-                    summary.IsVisible = true;
-                    detail.IsVisible = false;
-                }
-            }
-        }
-    }
-    private StackLayout? FindContainerLayout(Element element)
-    {
-        while (element != null)
-        {
-            if (element is StackLayout layout &&
-                layout.FindByName<StackLayout>("SummaryLayout") != null &&
-                layout.FindByName<StackLayout>("DetailLayout") != null)
-            {
-                return layout;
-            }
-
-            element = element.Parent;
-        }
-
-        return null;
+        DetailPopupOverlay.IsVisible = false;
     }
 
 }

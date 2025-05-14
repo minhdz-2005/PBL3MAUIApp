@@ -9,104 +9,109 @@
     <ContentPage.BindingContext>
         <viewModels:CashierViewModel />
     </ContentPage.BindingContext>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="24">
+        </Grid.RowDefinitions>
 
-            <!-- Tiêu đề -->
-            <VerticalStackLayout Spacing="2" HorizontalOptions="Center">
-                <Label Text="📜" FontSize="36" HorizontalOptions="Center"/>
-                <Label Text="DANH SÁCH ĐƠN HÀNG"
-                       FontSize="26"
-                       FontAttributes="Bold"
-                       TextColor="#3B0A0A"
-                       HorizontalOptions="Center"/>
-                <Label Text="Lịch sử các đơn hàng đã đặt"
-                       FontSize="15"
-                       TextColor="#7B6A54"
-                       HorizontalOptions="Center"/>
-            </VerticalStackLayout>
+        <!-- Tiêu đề -->
+        <VerticalStackLayout Grid.Row="0" Spacing="2" HorizontalOptions="Center">
+            <Label Text="📜" FontSize="36" HorizontalOptions="Center"/>
+            <Label Text="DANH SÁCH ĐƠN HÀNG"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="#3B0A0A"
+                HorizontalOptions="Center"/>
+            <Label Text="Lịch sử các đơn hàng đã đặt"
+                        FontSize="15"
+                        TextColor="#7B6A54"
+                        HorizontalOptions="Center"/>
+        </VerticalStackLayout>
 
-            <!-- Bố cục 2 cột -->
-            <Grid ColumnDefinitions="2*,5*" ColumnSpacing="16">
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- Bên trái: Bộ lọc -->
-                <Frame BackgroundColor="White" CornerRadius="18" Padding="16" HasShadow="True" Grid.Column="0">
-                    <VerticalStackLayout Spacing="18">
-                        <Label Text="Lọc đơn hàng"
-                               FontSize="20"
-                               FontAttributes="Bold"
-                               TextColor="#3B0A0A"
-                               HorizontalOptions="Center"/>
+            <!-- Bên trái: Bộ lọc -->
+            <Frame BackgroundColor="White" CornerRadius="18" Padding="16" HasShadow="True" Grid.Column="0" Margin="30">
+                <VerticalStackLayout Spacing="18">
+                    <Label Text="Lọc đơn hàng"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#3B0A0A"
+                        HorizontalOptions="Center"/>
 
-                        <Entry x:Name="OrderIdEntry"
-                               Placeholder="Nhập mã đơn..."
-                               Keyboard="Numeric"
-                               BackgroundColor="#F6ECE3"
-                               PlaceholderColor="#BCAAA4"
-                               TextColor="#3B0A0A"
-                               FontSize="16"
-                               HeightRequest="44"/>
+                    <Entry x:Name="OrderIdEntry"
+                        Placeholder="Nhập mã đơn..."
+                        Keyboard="Numeric"
+                        BackgroundColor="#F6ECE3"
+                        PlaceholderColor="#BCAAA4"
+                        TextColor="#3B0A0A"
+                        FontSize="16"
+                        HeightRequest="44"/>
 
-                        <VerticalStackLayout Spacing="8">
-                            <Label Text="Từ ngày" FontSize="14" TextColor="#3B0A0A"/>
-                            <DatePicker x:Name="FromDatePicker"
-                                        Format="dd/MM/yyyy"
-                                        BackgroundColor="White"
-                                        TextColor="#3B0A0A"
-                                        FontSize="15"/>
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Spacing="8">
-                            <Label Text="Đến ngày" FontSize="14" TextColor="#3B0A0A"/>
-                            <DatePicker x:Name="ToDatePicker"
-                                        Format="dd/MM/yyyy"
-                                        BackgroundColor="White"
-                                        TextColor="#3B0A0A"
-                                        FontSize="15"/>
-                        </VerticalStackLayout>
-
-                        <Button Text="🔍 Lọc đơn"
-                                BackgroundColor="#C41E3A"
-                                TextColor="White"
-                                FontSize="16"
-                                FontAttributes="Bold"
-                                HeightRequest="48"
-                                CornerRadius="12"
-                                HorizontalOptions="Center"
-                                Style="{StaticResource HoverButtonStyle}"
-                                Clicked="OnFilteringClicked"/>
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Bên phải: Danh sách đơn hàng -->
-                <ScrollView Grid.Column="1">
                     <VerticalStackLayout Spacing="8">
-                        <!-- Đơn hàng -->
-                        <CollectionView ItemsSource="{Binding OrderVM.Orders}" Margin="20">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame 
+                        <Label Text="Từ ngày" FontSize="14" TextColor="#3B0A0A"/>
+                        <DatePicker x:Name="FromDatePicker"
+                            Format="dd/MM/yyyy"
+                            BackgroundColor="White"
+                            TextColor="#3B0A0A"
+                            FontSize="15"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Đến ngày" FontSize="14" TextColor="#3B0A0A"/>
+                        <DatePicker x:Name="ToDatePicker"
+                            Format="dd/MM/yyyy"
+                            BackgroundColor="White"
+                            TextColor="#3B0A0A"
+                            FontSize="15"/>
+                    </VerticalStackLayout>
+
+                    <Button Text="🔍 Lọc đơn"
+                        BackgroundColor="#C41E3A"
+                        TextColor="White"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HeightRequest="48"
+                        CornerRadius="12"
+                        HorizontalOptions="Center"
+                        Style="{StaticResource HoverButtonStyle}"
+                        Clicked="OnFilteringClicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <ScrollView Grid.Column="1" Margin="30">
+                <!-- Bên phải: Danh sách đơn hàng -->
+                <VerticalStackLayout Spacing="8">
+                    <!-- Đơn hàng -->
+                    <CollectionView ItemsSource="{Binding OrderVM.Orders}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame 
                                         x:Name="FrameList" 
                                         IsVisible="True"
                                         BackgroundColor="White" 
                                         CornerRadius="18" HasShadow="True" 
                                         Padding="16" BorderColor="#E0DAD2" 
-                                        Margin="0,4">
+                                        Margin="0">
+                                    <StackLayout x:Name="ContainerLayout">
+                                        <StackLayout x:Name="SummaryLayout">
+                                            <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
 
-                                        <StackLayout x:Name="ContainerLayout">
-                                            <StackLayout x:Name="SummaryLayout">
-                                                <Grid ColumnDefinitions="3*,2*,1*,Auto" ColumnSpacing="8">
-
-                                                    <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
-                                                        <Label Text="📦" FontSize="18"/>
-                                                        <Label Text="{Binding Id, StringFormat='DH{0:0}'}"
+                                                <HorizontalStackLayout Spacing="6" Grid.Column="0" VerticalOptions="Center">
+                                                    <Label Text="📦" FontSize="18"/>
+                                                    <Label Text="{Binding Id, StringFormat='DH{0:0}'}"
                                                             FontSize="16"
                                                             FontAttributes="Bold"
                                                             TextColor="#3B0A0A"/>
-                                                    </HorizontalStackLayout>
+                                                </HorizontalStackLayout>
 
-                                                    <Label 
+                                                <Label 
                                                         Text="{Binding TimeAndDate, StringFormat='{}{0:dd/MM/yyyy}'}"
                                                         FontSize="14"
                                                         TextColor="#7B6A54"
@@ -114,7 +119,7 @@
                                                         VerticalOptions="Center"
                                                         HorizontalOptions="Center"/>
 
-                                                    <Label 
+                                                <Label 
                                                         Text="{Binding FinalAmount, StringFormat='${0:0.00}'}"
                                                         FontSize="17"
                                                         TextColor="#C41E3A"
@@ -124,7 +129,7 @@
                                                         HorizontalOptions="End"
                                                         Margin="0,0,8,0"/>
 
-                                                    <Button 
+                                                <Button 
                                                         Text="Chi tiết"
                                                         BackgroundColor="#5D4037"
                                                         TextColor="White"
@@ -136,28 +141,348 @@
                                                         Grid.Column="3"
                                                         VerticalOptions="Center"
                                                         Style="{StaticResource HoverButtonStyle}"
-                                                        Clicked="DetailButton_Clicked"/>
-                                                </Grid>
-                                            </StackLayout>
-
-                                            <StackLayout x:Name="DetailLayout" IsVisible="False">
-                                                <Label Text="ngu"/>
-                                                <Button Text="Quay lại" Clicked="BackButton_Clicked"/>
-                                            </StackLayout>
-                                            
+                                                        Clicked="OnViewDetailClicked"/>
+                                            </Grid>
                                         </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+            </ScrollView>
+        </Grid>
+
+        <!-- POP UP -->
+        <Grid
+            x:Name="DetailPopupOverlay"
+            Grid.RowSpan="2"
+            BackgroundColor="#80000000"
+            ColumnDefinitions="1*,1*,2*,1*,1*"
+            IsVisible="False"
+            RowDefinitions="1*,7*,1*">
+            <Grid
+                x:Name="DetailPopup"
+                Grid.Row="1"
+                Grid.Column="2"
+                BackgroundColor="White"
+                HorizontalOptions="Center"
+                RowDefinitions="Auto,*"
+                VerticalOptions="Center">
+                <CollectionView ItemsSource="{Binding OrderDetailVM.Orders}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout Grid.Row="0">
+                                <Label
+                                    Grid.Row="0"
+                                    FontAttributes="Bold"
+                                    FontSize="30"
+                                    HorizontalOptions="Center"
+                                    Text="CHI TIẾT ĐƠN HÀNG 🧾"
+                                    TextColor="Black" />
+                                <Border
+                                    Grid.Row="1"
+                                    Padding="5"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="Center"
+                                    Stroke="#F2E2D6"
+                                    StrokeShape="Rectangle"
+                                    StrokeThickness="1">
+                                    <Label
+                                        x:Name="DetailOrderIdLabel"
+                                        FontSize="18"
+                                        Text="{Binding Id, StringFormat='{}Mã HĐ: {0:0}'}"
+                                        TextColor="Black" />
+                                </Border>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Grid Grid.Row="1" RowDefinitions="*,Auto">
+                    <Frame
+                        Grid.Row="0"
+                        Padding="5"
+                        BackgroundColor="White">
+                        <ScrollView>
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*" RowSpacing="5">
+
+                                <VerticalStackLayout>
+                                    <!--  Thu Ngan  -->
+                                    <Label
+                                        x:Name="DetailCashierLabel"
+                                        Grid.Row="0"
+                                        FontSize="18"
+                                        Text="{Binding OrderDetailVM.StaffName, StringFormat='{}Thu ngân: {0}'}"
+                                        TextColor="Black" />
+                                    <!--  Thời gian  -->
+                                    <CollectionView ItemsSource="{Binding OrderDetailVM.Orders}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label
+                                                    x:Name="DetailTimeLabel"
+                                                    Grid.Row="1"
+                                                    FontSize="18"
+                                                    Text="{Binding TimeAndDate, StringFormat='{}{0:dd/MM/yyyy}'}"
+                                                    TextColor="Black" />
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                                <!--  Sản phẩm  -->
+                                <Grid
+                                    Grid.Row="2"
+                                    Padding="5"
+                                    BackgroundColor="Transparent"
+                                    RowDefinitions="Auto,Auto">
+                                    <Frame
+                                        Grid.Row="0"
+                                        Margin="0"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Black"
+                                        CornerRadius="0">
+                                        <Grid
+                                            BackgroundColor="Transparent"
+                                            ColumnDefinitions="1*,3*,1*,2*,3*"
+                                            ColumnSpacing="0"
+                                            RowSpacing="0">
+                                            <Border
+                                                Grid.Column="0"
+                                                Margin="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    HorizontalOptions="Center"
+                                                    Text="STT"
+                                                    TextColor="Black" />
+                                            </Border>
+                                            <Border
+                                                Grid.Column="1"
+                                                Margin="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    Text="Tên món"
+                                                    TextColor="Black" />
+                                            </Border>
+                                            <Border
+                                                Grid.Column="2"
+                                                Margin="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    HorizontalOptions="Center"
+                                                    Text="SL"
+                                                    TextColor="Black" />
+                                            </Border>
+                                            <Border
+                                                Grid.Column="3"
+                                                Margin="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    Text="Đơn giá"
+                                                    TextColor="Black" />
+                                            </Border>
+                                            <Border
+                                                Grid.Column="4"
+                                                Margin="0"
+                                                Padding="0"
+                                                BackgroundColor="Transparent">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    Text="Thành tiền"
+                                                    TextColor="Black" />
+                                            </Border>
+                                        </Grid>
                                     </Frame>
+                                    <Frame
+                                        Grid.Row="3"
+                                        Padding="0"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Black"
+                                        CornerRadius="0">
+                                        <!--  Dữ liệu được nhập vào trong VerticalStackLayout  -->
+                                        <VerticalStackLayout>
+                                            <CollectionView ItemsSource="{Binding OrderDetailVM.OrderDetails}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid
+                                                            Grid.Row="0"
+                                                            ColumnDefinitions="1*,3*,1*,2*,3*"
+                                                            ColumnSpacing="0"
+                                                            RowSpacing="0">
 
-                                    
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </VerticalStackLayout>
-                </ScrollView>
 
+                                                            <Border
+                                                                Grid.Column="0"
+                                                                Margin="0"
+                                                                Padding="0"
+                                                                BackgroundColor="Transparent">
+                                                                <Label
+                                                                    FontSize="18"
+                                                                    HorizontalOptions="Center"
+                                                                    Text="{Binding OrderDetail.Id}"
+                                                                    TextColor="Black" />
+                                                            </Border>
+                                                            <Border
+                                                                Grid.Column="1"
+                                                                Margin="0"
+                                                                Padding="0"
+                                                                BackgroundColor="Transparent">
+                                                                <VerticalStackLayout>
+                                                                    <Label
+                                                                        FontSize="18"
+                                                                        Text="{Binding Product.Name}"
+                                                                        TextColor="Black" />
+                                                                    <Label
+                                                                        FontAttributes="Italic"
+                                                                        FontSize="17"
+                                                                        Text="{Binding OrderDetail.Note}"
+                                                                        TextColor="Black" />
+                                                                </VerticalStackLayout>
+
+                                                            </Border>
+
+
+                                                            <Border
+                                                                Grid.Column="2"
+                                                                Margin="0"
+                                                                Padding="0"
+                                                                BackgroundColor="Transparent">
+                                                                <Label
+                                                                    FontSize="18"
+                                                                    HorizontalOptions="Center"
+                                                                    Text="{Binding OrderDetail.Quantity}"
+                                                                    TextColor="Black" />
+                                                            </Border>
+                                                            <Border
+                                                                Grid.Column="3"
+                                                                Margin="0"
+                                                                Padding="0"
+                                                                BackgroundColor="Transparent">
+                                                                <Label
+                                                                    FontSize="18"
+                                                                    Text="{Binding Product.Price, StringFormat='{}$ {0:0.00}'}"
+                                                                    TextColor="Black" />
+                                                            </Border>
+                                                            <Border
+                                                                Grid.Column="4"
+                                                                Margin="0"
+                                                                Padding="0"
+                                                                BackgroundColor="Transparent">
+                                                                <Label
+                                                                    FontSize="18"
+                                                                    Text="{Binding OrderDetail.TotalPrice, StringFormat='{}$ {0:0.00}'}"
+                                                                    TextColor="Black" />
+                                                            </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </Grid>
+                                <!--  Tổng số món  -->
+                                <Label
+                                    Grid.Row="3"
+                                    FontSize="18"
+                                    Text="{Binding OrderDetailVM.TotalQuantity, StringFormat='{}Tổng số sản phẩm: {0:0}'}"
+                                    TextColor="Black" />
+
+                                <!--  Thành tiền và ưu đãi  -->
+                                <Grid Grid.Row="4" RowDefinitions="Auto,Auto">
+                                    <CollectionView ItemsSource="{Binding OrderDetailVM.Orders}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Grid.Row="0" ColumnDefinitions="4*,1*" RowDefinitions="Auto,Auto">
+                                                    <Label
+                                                        Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="18"
+                                                        Text="Thành tiền"
+                                                        TextColor="Black" />
+                                                    <Label
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
+                                                        FontAttributes="Bold"
+                                                        FontSize="18"
+                                                        Text="{Binding Amount, StringFormat='{}$ {0:0.00}'}"
+                                                        TextColor="Black" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Grid.Column="0"
+                                                        FontSize="18"
+                                                        Text="{Binding VoucherId, StringFormat='{}Ưu đãi: KM{0:0}'}"
+                                                        TextColor="Black" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Grid.Column="1"
+                                                        FontSize="18"
+                                                        Text="{Binding DiscountValue, StringFormat='{}-$ {0:0.00}'}"
+                                                        TextColor="Black" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                    <BoxView
+                                        Grid.Row="1"
+                                        BackgroundColor="Black"
+                                        HeightRequest="1" />
+                                </Grid>
+
+                                <!--  Tổng tiền và ghi chú  -->
+                                <Grid Grid.Row="5" RowDefinitions="Auto">
+                                    <CollectionView ItemsSource="{Binding OrderDetailVM.Orders}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Grid.Row="0" ColumnDefinitions="4*,1*">
+                                                    <Label
+                                                        Grid.Column="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="20"
+                                                        Text="Tổng tiền"
+                                                        TextColor="Black" />
+                                                    <Label
+                                                        Grid.Column="1"
+                                                        FontAttributes="Bold"
+                                                        FontSize="20"
+                                                        Text="{Binding FinalAmount, StringFormat='{}$ {0:0.00}'}"
+                                                        TextColor="Black" />
+
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </Grid>
+
+                            </Grid>
+                        </ScrollView>
+                    </Frame>
+
+                    <Button
+                        Style="{StaticResource HoverButtonStyle}"
+                        Grid.Row="1"
+                        Clicked="OnCloseDetailClicked"
+                        CornerRadius="10"
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        Text="Đóng" />
+                </Grid>
             </Grid>
 
-        </VerticalStackLayout>
-    </ScrollView>
-
+        </Grid>
+    </Grid>
 </ContentPage>

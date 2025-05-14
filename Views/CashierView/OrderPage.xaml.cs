@@ -13,7 +13,6 @@ public partial class OrderPage : ContentPage
     {
         InitializeComponent();
 
-        // viewModel = BindingContext as ProductViewModel;
 
         mainViewModel = BindingContext as CashierViewModel;
 
@@ -164,12 +163,109 @@ public partial class OrderPage : ContentPage
     // XAC NHAN DAT MON
     public void OnOrderButtonClicked(object sender, EventArgs e)
     {
+        
         if (mainViewModel != null)
         {
-            mainViewModel .OrderDetailVM.UpdateTotalPrice();
+            mainViewModel .OrderDetailVM.ConfirmOrder();
             
+        }
+        AddQueue.IsVisible = true;
+        SaveQueue.IsVisible = false;
+        var frame = new Frame
+        {
+            HeightRequest = 100,
+            BackgroundColor = Colors.LightGray,
+            CornerRadius = 10
+        };
+    }
+    public void DeleteDetailClicked(object sender, EventArgs e) 
+    {
+        if (mainViewModel != null)
+        {
+            var button = sender as Button;
+            var orderItem = button?.BindingContext as OrderItemViewModel;
+
+            if (orderItem != null)
+            {
+                mainViewModel.OrderDetailVM.DeleteAllQuantity(orderItem);
+            }
         }
     }
 
+    //Nút tạo hoá đơn chờ
+    public void OnAddQueueClicked(object sender, EventArgs e)
+    {
+        AddQueue.IsVisible = true;
+        SaveQueue.IsVisible = false;
+        var frame = new Frame
+        {
+            HeightRequest = 100,
+            BackgroundColor = Colors.LightGray,
+            CornerRadius = 10
+        };
+    }
+    //Mở popup thêm ưu đãi
+    public async void OnAddPromotionClicked(object sender, EventArgs e)
+    {
+        PopupPromotion.IsVisible = true;
+        if (mainViewModel != null)
+        {
+            await mainViewModel.VoucherVM.GetAllVouchers();
+        }
+    }
+    //Mở popup thêm mô tả và chi tiết sản phẩm
+    public void OnDetailProductTapped(object sender, EventArgs e)
+    {
+        PopupOverlay.IsVisible = true;
+    }
+    //POPUP mở mô tả sản phẩm
+    private void OnOverlayTapped(object sender, EventArgs e)
+    {
+        PopupOverlay.IsVisible = false;
 
+    }
+
+    //Thoát popup
+    private void OnOutPromotionTapped(object sender, EventArgs e)
+    {
+        PopupPromotion.IsVisible = false;
+
+    }
+
+    //Thoát popup
+    private void OnOpenDetailTapped(object sender, EventArgs e)
+    {
+        AddQueue.IsVisible = false;
+        SaveQueue.IsVisible = true;
+
+        if(mainViewModel != null)
+        {
+            var grid = sender as Grid;
+            var Order = grid?.BindingContext as Order;
+            
+
+            if (Order != null)
+            {
+                int idOrder = Order.Id;
+                mainViewModel.OrderDetailVM.ShowOrderQueue(idOrder);
+            }
+        }
+
+    }
+
+
+    // LUU GHI CHU
+    private void OnSaveNoteClicked(object sender, EventArgs e)
+    {
+        if (mainViewModel != null)
+        {
+            var button = sender as Button;
+            var orderItem = button?.BindingContext as OrderItemViewModel;
+            
+            if (orderItem != null)
+            {
+                //mainViewModel.OrderDetailVM.SaveNote(orderItem, note);
+            }
+        }
+    }
 }

@@ -16,6 +16,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels;
 public class ProductViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Product> Products { get; set; } = new();
+    public ObservableCollection<string> Categories { get; set; } = new();
 
     public ProductService productService = new ProductService();
 
@@ -24,8 +25,16 @@ public class ProductViewModel : INotifyPropertyChanged
         List<Product> listProduct = await productService.GetProductsAsync();
 
         Products.Clear();
+        Categories.Clear();
         foreach (var item in listProduct)
+        {
             Products.Add(item);
+            if (!Categories.Contains(item.Category))
+            {
+                Categories.Add(item.Category);
+            }
+        }
+            
     }
 
     public async Task CoffeeCategory()

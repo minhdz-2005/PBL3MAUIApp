@@ -15,9 +15,10 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
     public class OrderViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Order> Orders { get; set; } = new();
+        public ObservableCollection<OrderDetail> OrderDetails { get; set; } = new();
 
-        public OrderService orderService = new OrderService();
-
+        private OrderService orderService = new OrderService();
+        private OrderDetailService orderDetailService = new OrderDetailService();
         // GET ORDER
         public async Task GetAllOrders()
         {

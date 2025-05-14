@@ -68,6 +68,10 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Views\CashierView\NewFolder\" />
+	</ItemGroup>
+
 	
 
 </Project>

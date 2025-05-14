@@ -20,14 +20,40 @@ public class OrderDetail : INotifyPropertyChanged
             }
         }
     }
-    public decimal TotalPrice { get; set; }
+    private decimal totalPrice;
+    public decimal TotalPrice 
+    {
+        get => totalPrice;
+        set
+        {
+            if(totalPrice != value)
+            {
+                totalPrice = value;
+                OnPropertyChanged(nameof(TotalPrice));
+            }
+        }
+    }
+    private string? note;
+    public string? Note
+    {
+        get => note;
+        set
+        {
+            if (note != value)
+            {
+                note = value;
+                OnPropertyChanged(nameof(Note));
+            }
+        }
+    }
 
     public OrderDetail () {}
-    public OrderDetail (int orderId ,int productId, int quantity, decimal totalPrice) {
+    public OrderDetail (int orderId ,int productId, int quantity, decimal totalPrice, string? note) {
         OrderId = orderId;
         ProductId = productId;
         Quantity = quantity;
         TotalPrice = totalPrice;
+        Note = note;
     }
     public event PropertyChangedEventHandler? PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)

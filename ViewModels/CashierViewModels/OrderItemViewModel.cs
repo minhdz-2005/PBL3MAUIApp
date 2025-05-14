@@ -23,7 +23,15 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
 
-        
+        public decimal TotalPrice
+        {
+            get => OrderDetail.TotalPrice;
+            set
+            {
+                OrderDetail.TotalPrice = value;
+                OnPropertyChanged(nameof(TotalPrice));
+            }
+        }
 
         public OrderItemViewModel(OrderDetail o, Product p)
         {
