@@ -14,16 +14,19 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
     public class VoucherViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Voucher> Vouchers { get; set; } = new();
-        public VoucherService voucherService = new VoucherService();
+        public ObservableCollection<Voucher> VoucherList { get; set; } = new();
+        private VoucherService voucherService = new VoucherService();
 
         // GET VOUCHER
         public async Task GetAllVouchers()
         {
             Vouchers.Clear();
+            VoucherList.Clear();
             var vouchers = await voucherService.GetVouchersAsync();
             foreach (var voucher in vouchers)
             {
                 Vouchers.Add(voucher);
+                VoucherList.Add(voucher);
             }
         }
 
@@ -38,6 +41,47 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
 
+        // FILTER VOUCHER
+        public async void FilterVouchers(string filter)
+        {
+            var listVoucher = await voucherService.GetVouchersAsync(); // DANH SACH VOUCHER LUU TRU TAM THOI
+            Vouchers.Clear(); // XOA DANH SACH VOUCHER HIEN TAI TRONG UI
+            VoucherList.Clear(); // XOA DANH SACH VOUCHER HIEN TAI TRONG UI
+
+            if (filter == "DangDienRa")
+            {
+                foreach (var voucher in listVoucher)
+                {
+                    if (voucher.StartDate <= DateTime.Now && voucher.EndDate >= DateTime.Now)
+                    {
+                        Vouchers.Add(voucher);
+                        VoucherList.Add(voucher);
+                    }
+                }
+            }
+            if(filter == "SapToi")
+            {
+                foreach (var voucher in listVoucher)
+                {
+                    if (voucher.StartDate > DateTime.Now)
+                    {
+                        Vouchers.Add(voucher);
+                        VoucherList.Add(voucher);
+                    }
+                }
+            }
+            if (filter == "DaKetThuc")
+            {
+                foreach (var voucher in listVoucher)
+                {
+                    if (voucher.EndDate < DateTime.Now)
+                    {
+                        Vouchers.Add(voucher);
+                        VoucherList.Add(voucher);
+                    }
+                }
+            }
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

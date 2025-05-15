@@ -31,14 +31,20 @@ public partial class UuDaiPage : ContentPage
             }
         };
     }
+    private bool isDangDienRaClicked = false;
+    private bool isSapToiClicked = false;
+    private bool isDaKetThucClicked = false;
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         if (mainViewModel != null) await mainViewModel.VoucherVM.GetAllVouchers();
+        All.BackgroundColor = Color.FromArgb("#FFB800"); // mau click
+        DangDienRa.BackgroundColor = Color.FromArgb("#C41E3A"); // mau mac dinh
+        SapToi.BackgroundColor = Color.FromArgb("#7B6A54"); // mau mac dinh
+        DaKetThuc.BackgroundColor = Color.FromArgb("#D4BFAA"); // mau mac dinh
     }
 
     // BAM VAO UU DAI
-    private bool isVoucherSelected = false;
     private async void OnVoucherButtonClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
@@ -49,17 +55,121 @@ public partial class UuDaiPage : ContentPage
             int id = selectedVoucher.Id;
             if(mainViewModel != null)
             {
-                if(isVoucherSelected == false)
-                {
-                    await mainViewModel.VoucherVM.GetVoucherById(id);
-                    isVoucherSelected = true;
-                }
-                else
-                {
-                    await mainViewModel.VoucherVM.GetAllVouchers();
-                    isVoucherSelected = false;
-                }
+                await mainViewModel.VoucherVM.GetVoucherById(id);
             }
         }
     }
+
+    // VOUCHER FILTERING
+    
+    private async void OnAllClicked(object sender, EventArgs e)
+    {
+        All.BackgroundColor = Color.FromArgb("#FFB800"); // mau click
+
+        if (mainViewModel != null)
+        {
+            await mainViewModel.VoucherVM.GetAllVouchers();
+        }
+
+        isDangDienRaClicked = false;
+        isSapToiClicked = false;
+        isDaKetThucClicked = false;
+
+        DangDienRa.BackgroundColor = Color.FromArgb("#C41E3A"); // mau mac dinh
+        SapToi.BackgroundColor = Color.FromArgb("#7B6A54"); // mau mac dinh
+        DaKetThuc.BackgroundColor = Color.FromArgb("#D4BFAA"); // mau mac dinh
+    }
+    private async void OnDangDienRaClicked (object sender, EventArgs e)
+    {
+        if (!isDangDienRaClicked)
+        {
+            DangDienRa.BackgroundColor = Color.FromArgb("#FFB800");
+            All.BackgroundColor = Color.FromArgb("#C41EAC"); // mau mac dinh
+
+            if (mainViewModel != null)
+            {
+                mainViewModel.VoucherVM.FilterVouchers("DangDienRa");
+            }
+
+            isDangDienRaClicked = true;
+            isSapToiClicked = false;
+            isDaKetThucClicked = false;
+        }
+        else
+        {
+            if (mainViewModel != null) await mainViewModel.VoucherVM.GetAllVouchers();
+
+            All.BackgroundColor = Color.FromArgb("#FFB800"); // mau click
+            DangDienRa.BackgroundColor = Color.FromArgb("#C41E3A"); // mau mac dinh
+
+            isDangDienRaClicked = false;
+            isSapToiClicked = false;
+            isDaKetThucClicked = false;
+        }
+        SapToi.BackgroundColor = Color.FromArgb("#7B6A54"); // mau mac dinh
+        DaKetThuc.BackgroundColor = Color.FromArgb("#D4BFAA"); // mau mac dinh
+    }
+    private async void OnSapToiClicked(object sender, EventArgs e)
+    {
+        if (!isSapToiClicked)
+        {
+            SapToi.BackgroundColor = Color.FromArgb("#FFB800");
+            All.BackgroundColor = Color.FromArgb("#C41EAC"); // mau mac dinh
+
+            if (mainViewModel != null)
+            {
+                mainViewModel.VoucherVM.FilterVouchers("SapToi");
+            }
+
+            isDangDienRaClicked = false;
+            isSapToiClicked = true;
+            isDaKetThucClicked = false;
+        }
+        else
+        {
+            if (mainViewModel != null) await mainViewModel.VoucherVM.GetAllVouchers();
+
+            All.BackgroundColor = Color.FromArgb("#FFB800"); // mau click
+            SapToi.BackgroundColor = Color.FromArgb("#7B6A54"); // mau mac dinh
+
+            isDangDienRaClicked = false;
+            isSapToiClicked = false;
+            isDaKetThucClicked = false;
+
+        }
+        DangDienRa.BackgroundColor = Color.FromArgb("#C41E3A"); // mau mac dinh
+        DaKetThuc.BackgroundColor = Color.FromArgb("#D4BFAA"); // mau mac dinh
+    }
+    private async void OnDaKetThucClicked(object sender, EventArgs e)
+    {
+        if (!isDaKetThucClicked)
+        {
+            DaKetThuc.BackgroundColor = Color.FromArgb("#FFB800");
+            All.BackgroundColor = Color.FromArgb("#C41EAC"); // mau mac dinh
+
+            if (mainViewModel != null)
+            {
+                mainViewModel.VoucherVM.FilterVouchers("DaKetThuc");
+            }
+
+            isDangDienRaClicked = false;
+            isSapToiClicked = false;
+            isDaKetThucClicked = true;
+        }
+        else
+        {
+            if (mainViewModel != null) await mainViewModel.VoucherVM.GetAllVouchers();
+
+            All.BackgroundColor = Color.FromArgb("#FFB800"); // mau click
+            DaKetThuc.BackgroundColor = Color.FromArgb("#D4BFAA"); // mau mac dinh
+
+            isDangDienRaClicked = false;
+            isSapToiClicked = false;
+            isDaKetThucClicked = false;
+
+        }
+        DangDienRa.BackgroundColor = Color.FromArgb("#C41E3A"); // mau mac dinh
+        SapToi.BackgroundColor = Color.FromArgb("#7B6A54"); // mau mac dinh
+    }
+
 }
