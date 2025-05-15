@@ -75,5 +75,9 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         
 
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

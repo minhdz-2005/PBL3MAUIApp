@@ -12,6 +12,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         public OrderDetailViewModel OrderDetailVM { get; set; }
         public OrderViewModel OrderVM { get; set; }
         public VoucherViewModel VoucherVM { get; set; }
+        public RevenueViewModel RevenueVM { get; set; }
         
 
         public CashierViewModel()
@@ -20,6 +21,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             OrderDetailVM = new OrderDetailViewModel();
             OrderVM = new OrderViewModel();
             VoucherVM = new VoucherViewModel();
+            RevenueVM = new RevenueViewModel();
         }
     }
 }

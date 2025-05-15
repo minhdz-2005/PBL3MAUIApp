@@ -5,14 +5,19 @@
     x:Class="PBL3MAUIApp.Views.CashierView.DoanhThuPage"
     ControlTemplate="{StaticResource SharedPageTemplate}"
     BackgroundColor="#F7EFE9"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
     NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewModels:CashierViewModel />
+    </ContentPage.BindingContext>
 
     <Grid Padding="15" RowDefinitions="Auto,*">
 
         <!-- Header -->
         <VerticalStackLayout Grid.Row="0" Spacing="5">
             <Label Text="☕" FontSize="32" HorizontalOptions="Center"/>
-            <Label Text="THỐNG KÊ DOANH THU THEO CA"
+            <Label Text="THỐNG KÊ DOANH THU THEO NGÀY"
                    FontSize="28"
                    FontAttributes="Bold"
                    TextColor="#4B3621"
@@ -43,7 +48,7 @@
                             <Label Text="📅" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="Chọn ngày:" FontSize="14" TextColor="#4B3621"/>
-                                <DatePicker TextColor="#4B3621" BackgroundColor="Transparent"/>
+                                <DatePicker x:Name="WorkDatePicker" TextColor="#4B3621" BackgroundColor="Transparent"/>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
                     </Border>
@@ -54,48 +59,57 @@
                             <Label Text="⏰" FontSize="20" VerticalOptions="Center"/>
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="Chọn ca làm việc:" FontSize="14" TextColor="#4B3621"/>
-                                <Picker TextColor="#4B3621" BackgroundColor="Transparent">
+                                <Picker 
+                                    x:Name="ShiftPicker" 
+                                    TextColor="#4B3621" 
+                                    BackgroundColor="Transparent"
+                                    SelectedIndex="0">
                                     <Picker.Items>
-                                        <x:String>Ca sáng (7h00 - 12h00)</x:String>
-                                        <x:String>Ca chiều (12h00 - 17h00)</x:String>
-                                        <x:String>Ca tối (17h00 - 22h00)</x:String>
+                                        <x:String>Tất cả</x:String>
+                                        <x:String>Ca sáng (6h00 - 12h00)</x:String>
+                                        <x:String>Ca chiều (12h00 - 18h00)</x:String>
+                                        <x:String>Ca tối (18h00 - 24h00)</x:String>
                                     </Picker.Items>
                                 </Picker>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
                     </Border>
 
-                    <Button Text="XEM THỐNG KÊ"
-                            BackgroundColor="#4B3621"
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            CornerRadius="10"
-                            HeightRequest="50"
-                            HorizontalOptions="Fill"/>
+                    <Button 
+                        Clicked="OnViewStatisticsClicked"
+                        Style="{StaticResource HoverButtonStyle}"
+                        Text="XEM THỐNG KÊ"
+                        BackgroundColor="#4B3621"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        HorizontalOptions="Fill"/>
                 </VerticalStackLayout>
             </Frame>
 
             <!-- RIGHT: Static Sample Result -->
-            <Frame Grid.Column="1"
-                   BackgroundColor="White"
-                   BorderColor="#F2E2D6"
-                   CornerRadius="15"
-                   Padding="20"
-                   HasShadow="False">
+            <Frame 
+                Grid.Column="1"
+                BackgroundColor="White"
+                BorderColor="#F2E2D6"
+                CornerRadius="15"
+                Padding="20"
+                HasShadow="False">
 
                 <ScrollView>
                     <VerticalStackLayout Spacing="15">
-
                         <!-- Ca sáng -->
-                        <Frame Padding="20" 
-                               BackgroundColor="White" 
-                               BorderColor="#F2E2D6"
-                               CornerRadius="12"
-                               HasShadow="False">
+                        <Frame x:Name="CaSang"
+                            Padding="20" 
+                            BackgroundColor="White" 
+                            BorderColor="#F2E2D6"
+                            CornerRadius="12"
+                            HasShadow="False">
                             <VerticalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="⏰" FontSize="18"/>
-                                    <Label Text="Ca sáng (7h00 - 12h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                    <Label Text="Ca sáng (6h00 - 12h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
                                 </HorizontalStackLayout>
                                 <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
                                     <Grid ColumnDefinitions="Auto,*">
@@ -103,27 +117,29 @@
                                             <Label Text="💰" FontSize="16"/>
                                             <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
                                         </HorizontalStackLayout>
-                                        <Label Grid.Column="1"
-                                               Text="1.200.000đ"
-                                               FontSize="18"
-                                               TextColor="#C41E3A"
-                                               FontAttributes="Bold"
-                                               HorizontalOptions="End"/>
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding RevenueVM.TotalRevenueShift_1, StringFormat='{}$ {0:0.00}'}"
+                                            FontSize="18"
+                                            TextColor="#C41E3A"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="End"/>
                                     </Grid>
                                 </Border>
                             </VerticalStackLayout>
                         </Frame>
 
                         <!-- Ca chiều -->
-                        <Frame Padding="20" 
-                               BackgroundColor="White" 
-                               BorderColor="#F2E2D6"
-                               CornerRadius="12"
-                               HasShadow="False">
+                        <Frame  x:Name="CaChieu"
+                            Padding="20" 
+                            BackgroundColor="White" 
+                            BorderColor="#F2E2D6"
+                            CornerRadius="12"
+                            HasShadow="False">
                             <VerticalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="⏰" FontSize="18"/>
-                                    <Label Text="Ca chiều (12h00 - 17h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                    <Label Text="Ca chiều (12h00 - 18h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
                                 </HorizontalStackLayout>
                                 <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
                                     <Grid ColumnDefinitions="Auto,*">
@@ -132,26 +148,27 @@
                                             <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
                                         </HorizontalStackLayout>
                                         <Label Grid.Column="1"
-                                               Text="1.800.000đ"
-                                               FontSize="18"
-                                               TextColor="#C41E3A"
-                                               FontAttributes="Bold"
-                                               HorizontalOptions="End"/>
+                                            Text="{Binding RevenueVM.TotalRevenueShift_2, StringFormat='{}$ {0:0.00}'}"
+                                            FontSize="18"
+                                            TextColor="#C41E3A"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="End"/>
                                     </Grid>
                                 </Border>
                             </VerticalStackLayout>
                         </Frame>
 
                         <!-- Ca tối -->
-                        <Frame Padding="20" 
-                               BackgroundColor="White" 
-                               BorderColor="#F2E2D6"
-                               CornerRadius="12"
-                               HasShadow="False">
+                        <Frame  x:Name="CaToi"
+                            Padding="20" 
+                            BackgroundColor="White" 
+                            BorderColor="#F2E2D6"
+                            CornerRadius="12"
+                            HasShadow="False">
                             <VerticalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="⏰" FontSize="18"/>
-                                    <Label Text="Ca tối (17h00 - 22h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                    <Label Text="Ca tối (18h00 - 24h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
                                 </HorizontalStackLayout>
                                 <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
                                     <Grid ColumnDefinitions="Auto,*">
@@ -160,16 +177,15 @@
                                             <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
                                         </HorizontalStackLayout>
                                         <Label Grid.Column="1"
-                                               Text="2.500.000đ"
-                                               FontSize="18"
-                                               TextColor="#C41E3A"
-                                               FontAttributes="Bold"
-                                               HorizontalOptions="End"/>
+                                            Text="{Binding RevenueVM.TotalRevenueShift_3, StringFormat='{}$ {0:0.00}'}"
+                                            FontSize="18"
+                                            TextColor="#C41E3A"
+                                            FontAttributes="Bold"
+                                            HorizontalOptions="End"/>
                                     </Grid>
                                 </Border>
                             </VerticalStackLayout>
                         </Frame>
-
                     </VerticalStackLayout>
                 </ScrollView>
 
