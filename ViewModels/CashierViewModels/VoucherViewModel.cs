@@ -82,6 +82,17 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
                 }
             }
         }
+        
+        // APPLY VOUCHER ORDERPAGE
+        public async Task ApplyVoucher(int id)
+        {
+            var voucher = await voucherService.GetVoucherByIdAsync(id);
+            if (voucher != null)
+            {
+                Vouchers.Clear();
+                Vouchers.Add(voucher);
+            }
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

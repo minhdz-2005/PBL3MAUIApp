@@ -204,11 +204,50 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
                     Orders.Add(item);
                 }
             }
-            foreach (var item in OrderDetails)
+            foreach (var item in OrderDetailsQueue)
             {
                 if(item.OrderDetail.OrderId == id)
                 {
                     OrderDetails.Add(item);
+                }
+            }
+        }
+        // SAVE ORDER
+        public void SaveOrderQueue(int id)
+        {
+
+            // XOA CAC BIEN TAM
+            Orders.Clear();
+            order = new Order();
+            OrderDetails.Clear();
+            createOrder = false;
+        }
+
+        // DELETE ORDER
+        public void DeleteOrderQueue(int id)
+        {
+            // XOA BIEN TAM
+            Orders.Clear();
+            order = new Order();
+            OrderDetails.Clear();
+            createOrder = false;
+
+            // XOA ORDER WUEUE
+            foreach (var item in OrderQueue)
+            {
+                if (item.Id == id)
+                {
+                    OrderQueue.Remove(item);
+                    break;
+                }
+            }
+            // XOA ORDER DETAIL QUEUE
+            foreach (var item in OrderDetailsQueue)
+            {
+                if (item.OrderDetail.OrderId == id)
+                {
+                    OrderDetailsQueue.Remove(item);
+                    break;
                 }
             }
         }
@@ -228,7 +267,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
 
 
 
-        // Xem ORDER
+        // Xem ORDER trang DS ORDER
 
         public async Task ViewOrder(int id)
         {

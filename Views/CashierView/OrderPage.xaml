@@ -387,7 +387,7 @@
                         </CollectionView>
 
                         <!--  Order Button  -->
-                        <Grid ColumnDefinitions="*,*,*">
+                        <Grid ColumnDefinitions="*,*,*,*">
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
                                 Grid.Column="0"
@@ -401,7 +401,7 @@
                                 TextColor="White" />
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
-                                x:Name="AddQueue"
+                                x:Name="ConfirmButton"
                                 Grid.Column="1"
                                 Margin="0,15,0,0"
                                 BackgroundColor="#C41E3A"
@@ -413,21 +413,35 @@
                                 TextColor="White" />
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
-                                x:Name="SaveQueue"
+                                x:Name="SaveButton"
                                 Grid.Column="1"
                                 Margin="0,15,0,0"
                                 BackgroundColor="#C41E3A"
-                                Clicked="OnAddQueueClicked"
+                                Clicked="OnSaveButtonClicked"
                                 CornerRadius="5"
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
                                 IsVisible="False"
                                 Text="LƯU"
                                 TextColor="White" />
+                            <Button
+                                Style="{StaticResource HoverButtonStyle}"
+                                x:Name="DeleteButton"
+                                Grid.Column="2"
+                                Margin="0,15,0,0"
+                                BackgroundColor="#C41E3A"
+                                Clicked="OnDeleteButtonClicked"
+                                CornerRadius="5"
+                                HeightRequest="45"
+                                HorizontalOptions="Center"
+                                IsVisible="False"
+                                Text="XOÁ"
+                                TextColor="White" />
 
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
-                                Grid.Column="2"
+                                x:Name="PaidButton"
+                                Grid.Column="3"
                                 Margin="0,15,0,0"
                                 BackgroundColor="#C41E3A"
                                 CornerRadius="5"
@@ -587,19 +601,15 @@
             Grid.ColumnSpan="3"
             BackgroundColor="#80000000"
             IsVisible="False">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnOutPromotionTapped" />
-            </Grid.GestureRecognizers>
-
             <Frame
                 x:Name="AddPromotionPopup"
                 Padding="5"
                 BackgroundColor="White"
                 CornerRadius="10"
-                HeightRequest="500"
+                HeightRequest="400"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                WidthRequest="400">
+                WidthRequest="550">
                 <Grid RowSpacing="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -642,41 +652,60 @@
                             <CollectionView Margin="20" ItemsSource="{Binding VoucherVM.Vouchers}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Frame
-                                            
-                                            Padding="5"
-                                            BorderColor="White"
-                                            CornerRadius="10"
-                                            HasShadow="False">
-                                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                                <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                                        <Grid ColumnDefinitions="4*,*">
+                                            <Frame
+                                                BackgroundColor="#4E4545" 
+                                                Grid.Column="0"
+                                                Padding="5"
+                                                BorderColor="White"
+                                                CornerRadius="10"
+                                                HasShadow="False">
+
+                                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                                                        <Label
+                                                            FontAttributes="Bold"
+                                                            FontSize="18"
+                                                            Text="{Binding Name}"
+                                                            TextColor="#FFFFFF" />
+                                                        <Label
+                                                            FontSize="15"
+                                                            Text="{Binding Id, StringFormat='{}KM{0:0}'}"
+                                                            TextColor="#FFFFFF" />
+                                                    </VerticalStackLayout>
                                                     <Label
+                                                        Grid.Row="0"
+                                                        Grid.Column="1"
                                                         FontAttributes="Bold"
                                                         FontSize="18"
-                                                        Text="{Binding Name}"
+                                                        Text="{Binding DiscountValue, StringFormat='{}$ {0:0.00}'}"
+                                                        TextColor="#FFFFFF"
+                                                        VerticalOptions="Center" />
+                                                    <Label
+                                                        Grid.Row="1"
+                                                        Grid.Column="0"
+                                                        Grid.ColumnSpan="2"
+                                                        FontSize="15"
+                                                        Text="{Binding StartDate, StringFormat='{}Từ ngày: {0:dd/MM/yyyy} , thời gian bắt đầu: {0:hh} giờ {0:mm} phút'}"
                                                         TextColor="#FFFFFF" />
                                                     <Label
+                                                        Grid.Row="2"
+                                                        Grid.Column="0"
+                                                        Grid.ColumnSpan="2"
                                                         FontSize="15"
-                                                        Text="{Binding Id, StringFormat='{}KM{0:0}'}"
+                                                        Text="{Binding EndDate, StringFormat='{}Đến ngày: {0:dd/MM/yyyy} , thời gian kết thúc: {0:hh} giờ {0:mm} phút'}"
                                                         TextColor="#FFFFFF" />
-                                                </VerticalStackLayout>
-                                                <Label
-                                                    Grid.Row="0"
-                                                    Grid.Column="1"
-                                                    FontAttributes="Bold"
-                                                    FontSize="18"
-                                                    Text="{Binding DiscountValue}"
-                                                    TextColor="#FFFFFF"
-                                                    VerticalOptions="Center" />
-                                                <Label
-                                                    Grid.Row="1"
-                                                    Grid.Column="0"
-                                                    Grid.ColumnSpan="2"
-                                                    FontSize="15"
-                                                    Text="{Binding EndDate, StringFormat='Thời gian kết thúc: {0:dd/MM/yyyy}'}"
-                                                    TextColor="#FFFFFF" />
-                                            </Grid>
-                                        </Frame>
+                                                </Grid>
+                                            </Frame>
+                                            <Button
+                                                Style="{StaticResource HoverButtonStyle}"
+                                                Margin="0,30,0,30"
+                                                Grid.Column="1"
+                                                HorizontalOptions="Center"
+                                                Text="Áp dụng" 
+                                                Clicked="OnApplyPromotionButtonClicked"/>
+                                            
+                                        </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
@@ -687,13 +716,14 @@
                             Style="{StaticResource HoverButtonStyle}"
                             Grid.Column="0"
                             HorizontalOptions="Center"
-                            Text="Xoá" />
+                            Text="Thoát" 
+                            Clicked="OnOutPromotionButtonClicked"/>
                         <Button
                             Style="{StaticResource HoverButtonStyle}"
                             Grid.Column="1"
                             HorizontalOptions="Center"
-                            Text="Áp dụng" 
-                            Clicked="OnOutPromotionTapped"/>
+                            Text="Xoá áp dụng" 
+                            Clicked="OnDeletePromotionButtonClicked"/>
                     </Grid>
                 </Grid>
             </Frame>
