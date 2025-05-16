@@ -117,6 +117,7 @@
 
                     <!--  Nút Đăng nhập  -->
                     <Button
+                        Style="{StaticResource HoverButtonStyle}"
                         x:Name="LoginButton"
                         Grid.Row="5"
                         BackgroundColor="#8EB8BB"

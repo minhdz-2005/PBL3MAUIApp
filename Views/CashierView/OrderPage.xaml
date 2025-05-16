@@ -269,8 +269,9 @@
                         <CollectionView ItemsSource="{Binding OrderDetailVM.OrderDetails}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0,5" ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto">
+                                    <Grid Margin="0,5" ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto" RowDefinitions="2*,*">
                                         <Label
+                                            Grid.Row="0"
                                             Text="{Binding Product.Name}"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center">
@@ -278,6 +279,13 @@
                                                 <TapGestureRecognizer Tapped="OnDetailProductTapped" />
                                             </Label.GestureRecognizers>
                                         </Label>
+                                        <Label
+                                            Grid.Row="1"
+                                            Margin="10,0"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding OrderDetail.Note, StringFormat='{}Ghi chú: {0:0}'}"
+                                            TextColor="#4B3621"
+                                            VerticalOptions="Center" />
                                         <Button
                                             Style="{StaticResource HoverButtonStyle}"
                                             Grid.Column="1"
@@ -360,13 +368,13 @@
 
                                         <Label
                                             Grid.Row="1"
-                                            Text="Ưu đãi áp dụng:....... - Giảm giá"
+                                            Text="{Binding VoucherId, StringFormat='{}Ưu đãi áp dụng: KM {0:0}'}"
                                             TextColor="#4B3621" />
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="1"
                                             HorizontalOptions="End"
-                                            Text="0"
+                                            Text="{Binding DiscountValue, StringFormat='{}- ${0:0.00}'}"
                                             TextColor="#4B3621" />
 
                                         <Label
@@ -448,7 +456,8 @@
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
                                 Text="THANH TOÁN"
-                                TextColor="White" />
+                                TextColor="White" 
+                                Clicked="OnPaidButtonClicked"/>
                         </Grid>
 
                     </StackLayout>
@@ -457,16 +466,16 @@
         </Frame>
         <!--  POPUP chi tiet san pham  -->
         <Grid
-            x:Name="PopupOverlay"
+            RowDefinitions="6*,*"
+            ColumnDefinitions="*,*,*"
+            x:Name="PopupNote"
             Grid.RowSpan="2"
             Grid.ColumnSpan="3"
             BackgroundColor="#80000000"
             IsVisible="False">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnOverlayTapped" />
-            </Grid.GestureRecognizers>
-
             <Frame
+                Grid.Row="0"
+                Grid.Column="1"
                 x:Name="AddProductPopup"
                 Padding="5"
                 BackgroundColor="White"
@@ -521,7 +530,7 @@
                                                 Grid.Column="1"
                                                 FontSize="18"
                                                 HorizontalOptions="End"
-                                                Text="{Binding Product.Price}"
+                                                Text="{Binding Product.Price, StringFormat='{}$ {0:0.00}'}"
                                                 TextColor="Black" />
                                         </Grid>
                                         <Border>
@@ -532,11 +541,13 @@
                                                     TextColor="Black"
                                                     VerticalOptions="Center" />
                                                 <Entry
+                                                    Text="{Binding OrderDetail.Note}"
                                                     Grid.Column="1"
                                                     Placeholder="Ghi chú"
                                                     TextColor="Black" />
                                             </Grid>
                                         </Border>
+                                        
                                     </VerticalStackLayout>
 
                                 </ScrollView>
@@ -562,7 +573,6 @@
                                         Text="{Binding OrderDetail.Quantity}"
                                         TextColor="#4B3621"
                                         VerticalOptions="Center" />
-                                    <!--  Thêm Style="{StaticResource HoverButtonStyle}"  -->
                                     <Button
                                         Style="{StaticResource HoverButtonStyle}"
                                         Grid.Row="0"
@@ -581,18 +591,33 @@
                                         TextColor="Black"
                                         VerticalOptions="Center" />
                                     <Button
-                                        Style="{StaticResource HoverButtonStyle}"
                                         Grid.Row="1"
                                         Grid.ColumnSpan="4"
+                                        Style="{StaticResource HoverButtonStyle}"
+                                        BackgroundColor="#C45C00"
+                                        BorderColor="White"
+                                        BorderWidth="1"
                                         Margin="5"
-                                        Text="Lưu" 
-                                        Clicked="OnSaveNoteClicked"/>
+                                        Text="Xóa ghi chú" 
+                                        Clicked="OnDeleteNoteClicked"/>
                                 </Grid>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Frame>
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource HoverButtonStyle}"
+                BackgroundColor="#9A9A9A"
+                BorderColor="White"
+                BorderWidth="1"
+                CornerRadius="15"
+                Margin="5"
+                Text="Lưu các ghi chú" 
+                Clicked="OnSaveNoteClicked"/>
+            
         </Grid>
         <!--  POPUP them uu dai  -->
         <Grid

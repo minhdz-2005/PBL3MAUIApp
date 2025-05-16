@@ -61,6 +61,8 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         private OrderDetailService orderDetailService = new OrderDetailService();
         private ProductService productService = new ProductService();
         private StaffService staffService = new StaffService();
+        private VoucherService voucherService = new VoucherService();
+        private ShiftService shiftService = new ShiftService();
 
         private bool createOrder = false;
 
@@ -252,20 +254,147 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
 
-        // LUU NOTE
-        public void SaveNote(OrderItemViewModel orderItem, string note)
+        // AP DUNG VOUCHER
+        public async Task ApplyVoucherToOrder(int voucherId)
         {
-            var item = OrderDetails.FirstOrDefault(x => x.OrderDetail.ProductId == orderItem.OrderDetail.ProductId);
-            if (item != null)
+            var voucher = await voucherService.GetVoucherByIdAsync(voucherId);
+
+            // THEM ORDER VO LIST ORDER
+            if (createOrder == false)
             {
-                item.OrderDetail.Note = note;
+                order.Id = ++countIdOrder;
+                order.VoucherId = voucherId;
+
+                
+                if (voucher != null)
+                {
+                    order.DiscountValue = voucher.DiscountValue;
+                    order.FinalAmount = order.Amount - order.DiscountValue;
+                }
+                else
+                {
+                    order.DiscountValue = 0;
+                    order.FinalAmount = order.Amount;
+                }
+
+                Orders.Add(order);
+                createOrder = true;
+            }
+            else
+            {
+                foreach (var item in Orders)
+                {
+                    item.VoucherId = voucherId;
+                    if (voucher != null)
+                    {
+                        item.DiscountValue = voucher.DiscountValue;
+                        item.FinalAmount = item.Amount - item.DiscountValue;
+                    }
+                    else
+                    {
+                        item.DiscountValue = 0;
+                        item.FinalAmount = item.Amount;
+                    }
+                }
             }
         }
+        // XOA AP DUNG VOUCHER
+        public void RemoveVoucherOfOrder()
+        {
+            // XOA VOUCHER DA AP DUNG
+            foreach (var item in Orders)
+            {
+                item.VoucherId = 0;
+                item.DiscountValue = 0;
+                item.FinalAmount = item.Amount;
+            }
+            
+        }
 
+        // BAM VAO NUT THANH TOAN
+        public async Task PayOrder()
+        {
+            int orderId = order.Id;
+            // XOA CAC BIEN TAM
+            Orders.Clear();
+            order = new Order();
+            OrderDetails.Clear();
+            createOrder = false;
 
+            int orderIdTemp = 0;
 
+            // XOA ORDER QUEUE orderId
+            foreach (var item in OrderQueue)
+            {
+                if (item.Id == orderId)
+                {
+                    var listOrder = await orderService.GetOrdersAsync();
+                    item.Id = listOrder.Last().Id + 1;
+                    orderIdTemp = item.Id;
 
+                    item.StaffId = LoginViewModels.LoginViewModel.staffID;
 
+                    var shift = await shiftService.GetShiftsAsync();
+                    if (shift != null)
+                    {
+                        foreach (var s in shift)
+                        {
+                            if(item.TimeAndDate.Day == s.StartTime.Day && item.TimeAndDate.Month == s.StartTime.Month && item.TimeAndDate.Year == s.StartTime.Year
+                                && item.TimeAndDate.Hour >= s.StartTime.Hour && item.TimeAndDate.Hour <= s.EndTime.Hour)
+                            {
+                                item.ShiftId = s.Id;
+                            }
+                        }
+                    }
+
+                    //Debug.WriteLine($"ID: {item.Id} " +
+                    //    $"staffID: {item.StaffId} " +
+                    //    $"shiftID: {item.ShiftId} " +
+                    //    $"voucherID: {item.VoucherId} " +
+                    //    $"time: {item.TimeAndDate} " +
+                    //    $"Amont: {item.Amount} " +
+                    //    $"DIS: {item.DiscountValue} " +
+                    //    $"FIL: {item.FinalAmount} "
+                    //    );
+                    // LUU VO DB
+                    item.Id = 0;
+                    await orderService.AddOrderAsync(item);
+
+                    // XOA KHOI HANG CHO
+                    OrderQueue.Remove(item);
+                    break;
+
+                }
+            }
+            
+            foreach (var item in OrderDetailsQueue)
+            {
+                if (item.OrderDetail.OrderId == orderId)
+                {
+                    
+                    item.OrderDetail.OrderId = orderIdTemp;
+                    //Debug.WriteLine($"orderid {item.OrderDetail.OrderId} " +
+                    //    $"prod id {item.OrderDetail.ProductId} " +
+                    //    $"quan {item.OrderDetail.Quantity} " +
+                    //    $"Note {item.OrderDetail.Note} " +
+                    //    $"total {item.OrderDetail.TotalPrice} "
+                    //    );
+
+                    // LUU VAO DB
+                    await orderDetailService.AddOrderDetailAsync(item.OrderDetail);
+                    
+                }
+            }
+            // XOA ORDER DETAIL QUEUE orderId
+            foreach (var item in OrderDetailsQueue)
+            {
+                if (item.OrderDetail.OrderId == orderId)
+                {
+                    OrderDetailsQueue.Remove(item);
+                    break;
+                }
+            }
+        }
 
         // Xem ORDER trang DS ORDER
 
@@ -291,7 +420,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             foreach (var item in ListOrderDetail)
             {
                 var p = await productService.GetProductByIdAsync(item.ProductId);
-                if (p != null)
+                if (p != null && item.OrderId == order.Id)
                 {
                     OrderDetails.Add(new OrderItemViewModel(item, p));
                 }
@@ -306,6 +435,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
 
             Debug.WriteLine($"Total: {TotalQuantity}");
         }
+        
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

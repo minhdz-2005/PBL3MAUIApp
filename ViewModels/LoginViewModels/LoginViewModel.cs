@@ -10,8 +10,10 @@ namespace PBL3MAUIApp.ViewModels.LoginViewModels;
 public class LoginViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<Account> Accounts { get; set; } = new();
+    public static int staffID = 0;
 
-    public AccountService accountService = new AccountService();
+    private AccountService accountService = new AccountService();
+    private StaffService staffService = new StaffService();
     public async Task GetAllAccount()
     {
         List<Account> listAccount = await accountService.GetAccountsAsync();
@@ -35,6 +37,20 @@ public class LoginViewModel : INotifyPropertyChanged
                 }
                 else
                 {
+                    var staffs = await staffService.GetStaffsAsync();
+                    if (staffs != null)
+                    {
+                        //Debug.WriteLine("Chay 3");
+                        foreach (var st in staffs)
+                        {
+                            //Debug.WriteLine($"Chay 4 {username}, {st.Username}");
+                            if (username == st.Username)
+                            {
+                                //Debug.WriteLine("Chay 5");
+                                staffID = st.Id;
+                            }
+                        }
+                    }
                     await Shell.Current.GoToAsync("//MainPageCashier");
                 }
             }

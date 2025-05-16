@@ -172,7 +172,7 @@ public partial class OrderPage : ContentPage
         if (mainViewModel != null)
         {
             mainViewModel .OrderDetailVM.ConfirmOrder();
-            
+            mainViewModel.VoucherVM.FilterVouchers("DangDienRa");
         }
         
     }
@@ -226,14 +226,9 @@ public partial class OrderPage : ContentPage
     //Mở popup thêm mô tả và chi tiết sản phẩm
     private void OnDetailProductTapped(object sender, EventArgs e)
     {
-        PopupOverlay.IsVisible = true;
+        PopupNote.IsVisible = true;
     }
     //POPUP mở mô tả sản phẩm
-    private void OnOverlayTapped(object sender, EventArgs e)
-    {
-        PopupOverlay.IsVisible = false;
-
-    }
 
 
     //Mở popup thêm ưu đãi
@@ -255,6 +250,7 @@ public partial class OrderPage : ContentPage
             if (voucher != null)
             {
                 await mainViewModel.VoucherVM.ApplyVoucher(voucher.Id);
+                await mainViewModel.OrderDetailVM.ApplyVoucherToOrder(voucher.Id);
             }
         }
     }
@@ -264,6 +260,7 @@ public partial class OrderPage : ContentPage
         if (mainViewModel != null)
         {
             mainViewModel.VoucherVM.FilterVouchers("DangDienRa");
+            mainViewModel.OrderDetailVM.RemoveVoucherOfOrder();
         }
     }
     // BAM NUT THOAT POP UP ADD VOUCHER
@@ -295,10 +292,31 @@ public partial class OrderPage : ContentPage
 
     }
 
+    // NHAN VAO NUT THANH TOAN
+    private async void OnPaidButtonClicked(object sender, EventArgs e)
+    {
+        ConfirmButton.IsVisible = true;
+        SaveButton.IsVisible = false;
+        DeleteButton.IsVisible = false;
 
-    // LUU GHI CHU
+        if (mainViewModel != null)
+        {
+            // XU LI THANH TOAN, gan OrderId, StaffId, ShiftId, Status
+            mainViewModel.VoucherVM.FilterVouchers("DangDienRa");
+            await mainViewModel.OrderDetailVM.PayOrder();
+        }
+    }
+     
+    
+    // THOAT POPUP GHI CHU
     private void OnSaveNoteClicked(object sender, EventArgs e)
     {
+        PopupNote.IsVisible = false;
+    }
+    // LUU GHI CHU
+    private void OnDeleteNoteClicked(object sender, EventArgs e)
+    {
+        
         if (mainViewModel != null)
         {
             var button = sender as Button;
@@ -306,7 +324,7 @@ public partial class OrderPage : ContentPage
             
             if (orderItem != null)
             {
-                //mainViewModel.OrderDetailVM.SaveNote(orderItem, note);
+                orderItem.OrderDetail.Note = "";
             }
         }
     }
