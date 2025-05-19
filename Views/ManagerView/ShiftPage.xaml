@@ -5,5 +5,1159 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   BackgroundColor="#F7EFE9"
   ControlTemplate="{StaticResource SharedManagerPageTemplate}">
-  
+
+
+
+    <Grid Margin="{DynamicResource DynamicMargin_Main}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!--  Header  -->
+            <RowDefinition Height="*" />
+            <!--  Main Content  -->
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!--  Emoji  -->
+                <RowDefinition Height="Auto" />
+                <!--  Tiêu đề  -->
+            </Grid.RowDefinitions>
+            <Label
+        Grid.Row="0"
+        FontSize="{DynamicResource DynamicFontSizeTitle}"
+        HorizontalOptions="Center"
+        Text="📅" />
+            <Label
+        Grid.Row="1"
+        FontAttributes="Bold"
+        FontSize="{DynamicResource DynamicFontSizeTitle}"
+        HorizontalOptions="Center"
+        Text="QUẢN LÝ CA LÀM VIỆC"
+        TextColor="Black"
+        VerticalOptions="End" />
+        </Grid>
+
+        <!--  Main Grid  -->
+        <Frame
+      Grid.Row="1"
+      Padding="{DynamicResource DynamicPadding}"
+      BackgroundColor="White"
+      BorderColor="Brown"
+      CornerRadius="{DynamicResource DynamicCornerRadius}"
+      HasShadow="False">
+            <Grid ColumnDefinitions="3*, *" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                <!--  Phần 1: Hiển thị ca làm (bên trái)  -->
+                <ScrollView Grid.Column="0">
+                    <Frame
+            Padding="{DynamicResource DynamicPadding}"
+            BackgroundColor="#FFEFD5"
+            BorderColor="#F4A460"
+            CornerRadius="{DynamicResource DynamicCornerRadius}"
+            HorizontalOptions="Center"
+            VerticalOptions="Start">
+                        <Grid RowSpacing="{DynamicResource DynamicSpacing}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <!--  Ca 1  -->
+                                <RowDefinition Height="Auto" />
+                                <!--  Chi tiết Ca 1  -->
+                                <RowDefinition Height="Auto" />
+                                <!--  Ca 2  -->
+                                <RowDefinition Height="Auto" />
+                                <!--  Chi tiết Ca 2  -->
+                                <RowDefinition Height="Auto" />
+                                <!--  Ca 3  -->
+                                <RowDefinition Height="Auto" />
+                                <!--  Chi tiết Ca 3  -->
+                                <RowDefinition Height="Auto" />
+                                <!--  Ngày làm  -->
+                                <RowDefinition Height="*" />
+                                <!--  Khoảng trống  -->
+                            </Grid.RowDefinitions>
+                            <!--  Ca 1  -->
+                            <Frame
+                Grid.Row="0"
+                Padding="{DynamicResource DynamicPadding}"
+                BackgroundColor="#F4A460"
+                BorderColor="Transparent"
+                CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                <Grid ColumnDefinitions="3*,*">
+                                    <Frame
+                    x:Name="Shift1Header"
+                    Grid.Column="0"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ToggleShift1_Tapped" />
+                                        </Frame.GestureRecognizers>
+                                        <Label
+                      FontAttributes="Bold"
+                      FontSize="{DynamicResource DynamicFontSizeLarge}"
+                      HorizontalOptions="Start"
+                      Text="Ca 1"
+                      TextColor="Black" />
+                                    </Frame>
+                                    <Button
+                    Grid.Column="1"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#FAEBD7"
+                    Clicked="AddEmployeeToShift1_Clicked"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}"
+                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                    Text="Thêm nhân viên"
+                    VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                            <Grid
+                x:Name="Shift1Details"
+                Grid.Row="1"
+                IsVisible="False"
+                RowSpacing="{DynamicResource DynamicSpacing}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Thu ngân  -->
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Pha chế  -->
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Phục vụ  -->
+                                    <RowDefinition Height="*" />
+                                    <!--  Khoảng trống  -->
+                                </Grid.RowDefinitions>
+                                <!--  Vai trò: Thu ngân  -->
+                                <Label
+                  Grid.Row="0"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="0"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn A"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2001"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                                <!--  Vai trò: Pha chế  -->
+                                <Label
+                  Grid.Row="1"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="1"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn B"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2002"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                                <!--  Vai trò: Phục vụ  -->
+                                <Label
+                  Grid.Row="2"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="2"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn C"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2003"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+
+                            <!--  Ca 2  -->
+                            <Frame
+                Grid.Row="2"
+                Padding="{DynamicResource DynamicPadding}"
+                BackgroundColor="#F4A460"
+                BorderColor="Transparent"
+                CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                <Grid ColumnDefinitions="3*,*">
+                                    <Frame
+                    x:Name="Shift2Header"
+                    Grid.Column="0"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ToggleShift2_Tapped" />
+                                        </Frame.GestureRecognizers>
+                                        <Label
+                      FontAttributes="Bold"
+                      FontSize="{DynamicResource DynamicFontSizeLarge}"
+                      HorizontalOptions="Start"
+                      Text="Ca 2"
+                      TextColor="Black" />
+                                    </Frame>
+                                    <Button
+                    Grid.Column="1"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#FAEBD7"
+                    Clicked="AddEmployeeToShift2_Clicked"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}"
+                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                    Text="Thêm nhân viên"
+                    VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                            <Grid
+                x:Name="Shift2Details"
+                Grid.Row="3"
+                IsVisible="False"
+                RowSpacing="{DynamicResource DynamicSpacing}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Thu ngân  -->
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Pha chế  -->
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Phục vụ  -->
+                                    <RowDefinition Height="*" />
+                                    <!--  Khoảng trống  -->
+                                </Grid.RowDefinitions>
+                                <!--  Vai trò: Thu ngân  -->
+                                <Label
+                  Grid.Row="0"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="0"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn D"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2004"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                                <!--  Vai trò: Pha chế  -->
+                                <Label
+                  Grid.Row="1"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="1"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn E"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2005"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                                <!--  Vai trò: Phục vụ  -->
+                                <Label
+                  Grid.Row="2"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="2"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn F"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2006"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+
+                            <!--  Ca 3  -->
+                            <Frame
+                Grid.Row="4"
+                Padding="{DynamicResource DynamicPadding}"
+                BackgroundColor="#F4A460"
+                BorderColor="Transparent"
+                CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                <Grid ColumnDefinitions="3*,*">
+                                    <Frame
+                    x:Name="Shift3Header"
+                    Grid.Column="0"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ToggleShift3_Tapped" />
+                                        </Frame.GestureRecognizers>
+                                        <Label
+                      FontAttributes="Bold"
+                      FontSize="{DynamicResource DynamicFontSizeLarge}"
+                      HorizontalOptions="Start"
+                      Text="Ca 3"
+                      TextColor="Black" />
+                                    </Frame>
+                                    <Button
+                    Grid.Column="1"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#FAEBD7"
+                    Clicked="AddEmployeeToShift3_Clicked"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}"
+                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                    Text="Thêm nhân viên"
+                    VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                            <Grid
+                x:Name="Shift3Details"
+                Grid.Row="5"
+                IsVisible="False"
+                RowSpacing="{DynamicResource DynamicSpacing}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Thu ngân  -->
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Pha chế  -->
+                                    <RowDefinition Height="Auto" />
+                                    <!--  Phục vụ  -->
+                                    <RowDefinition Height="*" />
+                                    <!--  Khoảng trống  -->
+                                </Grid.RowDefinitions>
+                                <!--  Vai trò: Thu ngân  -->
+                                <Label
+                  Grid.Row="0"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Thu ngân"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="0"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn G"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2007"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Thu ngân"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                                <!--  Vai trò: Pha chế  -->
+                                <Label
+                  Grid.Row="1"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Pha chế"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="1"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn H"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2008"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Pha chế"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                                <!--  Vai trò: Phục vụ  -->
+                                <Label
+                  Grid.Row="2"
+                  FontAttributes="Bold"
+                  FontSize="{DynamicResource DynamicFontSizeLarge}"
+                  Text="Phục vụ"
+                  TextColor="Black" />
+                                <Frame
+                  Grid.Row="2"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FFEFD5"
+                  BorderColor="Transparent"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                    <Grid ColumnDefinitions="2*, *, *, *, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Label
+                      Grid.Column="0"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Nguyễn Văn I"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="1"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="1/1/2009"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="2"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="0342856245"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Label
+                      Grid.Column="3"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Phục vụ"
+                      TextColor="Black"
+                      VerticalOptions="Center" />
+                                        <Button
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="Red"
+                      Clicked="RemoveEmployee_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="Xóa"
+                      TextColor="White" />
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+
+                            <!--  Ngày làm  -->
+                            <Grid Grid.Row="6" ColumnDefinitions="*,Auto">
+                                <ScrollView
+                  Grid.Column="0"
+                  BackgroundColor="Transparent"
+                  Orientation="Horizontal">
+                                    <Grid ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button
+                      x:Name="DateButton1"
+                      Grid.Column="0"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#FF9999"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="01/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton2"
+                      Grid.Column="1"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="02/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton3"
+                      Grid.Column="2"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="03/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton4"
+                      Grid.Column="3"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="04/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton5"
+                      Grid.Column="4"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="05/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton6"
+                      Grid.Column="5"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="06/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton7"
+                      Grid.Column="6"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="07/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton8"
+                      Grid.Column="7"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="08/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton9"
+                      Grid.Column="8"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="09/04"
+                      TextColor="White" />
+                                        <Button
+                      x:Name="DateButton10"
+                      Grid.Column="9"
+                      Padding="{DynamicResource DynamicPadding}"
+                      BackgroundColor="#CCCCCC"
+                      Clicked="SelectDate_Clicked"
+                      CornerRadius="{DynamicResource DynamicCornerRadius}"
+                      FontSize="{DynamicResource DynamicFontSizeMedium}"
+                      Text="10/04"
+                      TextColor="White" />
+                                    </Grid>
+                                </ScrollView>
+                                <Button
+                  Grid.Column="1"
+                  Padding="{DynamicResource DynamicPadding}"
+                  BackgroundColor="#FAEBD7"
+                  Clicked="AddDate_Clicked"
+                  CornerRadius="{DynamicResource DynamicCornerRadius}"
+                  FontSize="{DynamicResource DynamicFontSizeMedium}"
+                  Text="+"
+                  TextColor="Black" />
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </ScrollView>
+
+                <!--  Phần 2: Thống kê chi tiết ca làm (bên phải)  -->
+                <ScrollView Grid.Column="1">
+                    <Grid RowSpacing="{DynamicResource DynamicSpacing}" VerticalOptions="Start">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <!--  Ngày làm  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Tổng nhân viên  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 1  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 2  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 3  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Tổng theo vị trí  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 1: Thu ngân  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 1: Pha chế  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 1: Phục vụ  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 2: Thu ngân  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 2: Pha chế  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 2: Phục vụ  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 3: Thu ngân  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 3: Pha chế  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Ca 3: Phục vụ  -->
+                            <RowDefinition Height="*" />
+                            <!--  Ca 3: Phục vụ  -->
+                            <RowDefinition Height="*" />
+                            <!--  Ca 3: Phục vụ  -->
+                            <RowDefinition Height="*" />
+                            <!--  Khoảng trống  -->
+                        </Grid.RowDefinitions>
+                        <Label
+              x:Name="SelectedDateLabel"
+              Grid.Row="0"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeLarge}"
+              HorizontalOptions="Start"
+              Text="Ngày làm: 01/04/2025"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="1"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeLarge}"
+              Text="Tổng nhân viên:"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="2"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Ca 1: 3"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="3"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Ca 2: 3"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="4"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Ca 3: 3"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="5"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeLarge}"
+              Text="Tổng nhân viên theo vị trí:"
+              TextColor="Black" />
+                        <!--  Ca 1  -->
+                        <Label
+              Grid.Row="6"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Ca 1:"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="7"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Thu ngân: 1"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="8"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Pha chế: 1"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="9"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Phục vụ: 1"
+              TextColor="Black" />
+                        <!--  Ca 2  -->
+                        <Label
+              Grid.Row="10"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Ca 2:"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="11"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Thu ngân: 1"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="12"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Pha chế: 1"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="13"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Phục vụ: 1"
+              TextColor="Black" />
+                        <!--  Ca 3  -->
+                        <Label
+              Grid.Row="14"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Ca 3:"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="15"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Thu ngân: 1"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="16"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Pha chế: 1"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="17"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              Text="Phục vụ: 1"
+              TextColor="Black" />
+                    </Grid>
+                </ScrollView>
+            </Grid>
+        </Frame>
+
+        <!--  popup them nhan vien vao ca lam  -->
+        <Grid
+      x:Name="AddStaffIntoShiftPopup"
+      Grid.RowSpan="2"
+      Grid.ColumnSpan="2"
+      BackgroundColor="#80000000"
+      ColumnDefinitions="1*,2*,1*"
+      IsVisible="False"
+      RowDefinitions="1*,5*,1*">
+
+            <Frame
+        x:Name="AddStaffIntoShiftPopupFrame"
+        Grid.Row="1"
+        Grid.Column="1"
+        Padding="{DynamicResource DynamicPadding}"
+        BackgroundColor="White"
+        CornerRadius="{DynamicResource DynamicCornerRadius}"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+                <Grid ColumnDefinitions="1*,2*,2*">
+                    <Frame
+            Grid.Column="0"
+            Padding="0"
+            BackgroundColor="Transparent"
+            BorderColor="#624E45"
+            CornerRadius="0">
+                        <Grid RowDefinitions="Auto,*,Auto">
+                            <Grid
+                Grid.Row="0"
+                BackgroundColor="#E0C0A9"
+                RowDefinitions="Auto,Auto,Auto">
+                                <Label
+                  Grid.Row="0"
+                  FontSize="18"
+                  Text="Ngày: DD/MM/YYYY"
+                  TextColor="Black" />
+                                <Label
+                  Grid.Row="1"
+                  FontSize="18"
+                  Text="Ca: ..."
+                  TextColor="Black" />
+                                <Label
+                  Grid.Row="2"
+                  FontSize="18"
+                  Text="Tổng: ..."
+                  TextColor="Black" />
+                            </Grid>
+
+                            <ScrollView Grid.Row="1" VerticalOptions="Center">
+                                <VerticalStackLayout Spacing="20">
+                                    <Border
+                    BackgroundColor="#FFE4B5"
+                    Stroke="#F2E2D6"
+                    StrokeThickness="1">
+                                        <Label
+                      x:Name="RoleCashier"
+                      Style="{DynamicResource DynamicLabelMediumStyle}"
+                      Text="Thu ngân"
+                      TextColor="#4B3621"
+                      VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnRoleClicked" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Border>
+                                    <Border
+                    BackgroundColor="#FFE4B5"
+                    Stroke="#F2E2D6"
+                    StrokeThickness="1">
+                                        <Label
+                      x:Name="RoleWaiter"
+                      Style="{DynamicResource DynamicLabelMediumStyle}"
+                      Text="Phục vụ"
+                      TextColor="#4B3621"
+                      VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnRoleClicked" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Border>
+                                    <Border
+                    BackgroundColor="#FFE4B5"
+                    Stroke="#F2E2D6"
+                    StrokeThickness="1">
+                                        <Label
+                      x:Name="RoleBarista"
+                      Style="{DynamicResource DynamicLabelMediumStyle}"
+                      Text="Pha chế"
+                      TextColor="#4B3621"
+                      VerticalOptions="Center">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnRoleClicked" />
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </Border>
+                                </VerticalStackLayout>
+                            </ScrollView>
+                            <Button
+                Grid.Row="2"
+                Margin="0,20,0,0"
+                Clicked="OnCancelEditShiftClicked"
+                CornerRadius="20"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="Đóng"
+                TextColor="Red" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+            Grid.Column="1"
+            BackgroundColor="Transparent"
+            BorderColor="#624E45"
+            CornerRadius="0">
+                        <Grid RowDefinitions="Auto,*">
+                            <Label
+                Grid.Row="0"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="Đã trong ca"
+                TextColor="Black"
+                TextTransform="Uppercase" />
+                            <!--  Nhân viên đã có trong ca làm  -->
+                            <ScrollView Grid.Row="1">
+                                <!--  Nhap du lieu trong VerticalStackLayout  -->
+                                <VerticalStackLayout>
+                                    <Frame
+                    Grid.Row="0"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#FFEFD5"
+                    BorderColor="Transparent"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                        <Grid ColumnDefinitions="*, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                            <Label
+                        Grid.Column="0"
+                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                        Text="Nguyễn Văn A"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                                            <Button
+                        Grid.Column="1"
+                        Padding="{DynamicResource DynamicPadding}"
+                        BackgroundColor="Red"
+                        Clicked="RemoveEmployee_Clicked"
+                        CornerRadius="{DynamicResource DynamicCornerRadius}"
+                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                        Text="Xóa"
+                        TextColor="White" />
+                                        </Grid>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </ScrollView>
+                        </Grid>
+                    </Frame>
+                    <Frame
+            Grid.Column="2"
+            BackgroundColor="Transparent"
+            BorderColor="#624E45"
+            CornerRadius="0">
+                        <Grid RowDefinitions="Auto,*">
+                            <Label
+                Grid.Row="0"
+                FontSize="18"
+                HorizontalOptions="Center"
+                Text="Chưa trong ca"
+                TextColor="Black"
+                TextTransform="Uppercase" />
+                            <!--  Nhân viên Chưa có trong ca làm  -->
+                            <ScrollView Grid.Row="1">
+                                <!--  Nhap du lieu trong VerticalStackLayout  -->
+                                <VerticalStackLayout>
+                                    <Frame
+                    Grid.Row="0"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#FFEFD5"
+                    BorderColor="Transparent"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}">
+                                        <Grid ColumnDefinitions="*, Auto" ColumnSpacing="{DynamicResource DynamicSpacing}">
+                                            <Label
+                        Grid.Column="0"
+                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                        Text="Nguyễn Văn A"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
+                                            <Button
+                        Grid.Column="1"
+                        Padding="{DynamicResource DynamicPadding}"
+                        BackgroundColor="Red"
+                        Clicked="RemoveEmployee_Clicked"
+                        CornerRadius="{DynamicResource DynamicCornerRadius}"
+                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                        Text="Thêm"
+                        TextColor="White" />
+                                        </Grid>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </ScrollView>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Frame>
+        </Grid>
+    </Grid>
 </ContentPage>

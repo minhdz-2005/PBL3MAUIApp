@@ -1,10 +1,512 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-  x:Class="PBL3MAUIApp.Views.ManagerView.ProductPage"
-  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  BackgroundColor="#F7EFE9"
-  ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+    x:Class="PBL3MAUIApp.Views.ManagerView.ProductPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F7EFE9"
+    ControlTemplate="{StaticResource SharedManagerPageTemplate}">
 
-  
+
+    <Grid>
+        <!--  Grid chính: Chia thành 2 hàng và 2 cột  -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <!--  Header  -->
+            <RowDefinition Height="*" />
+            <!--  Nội dung  -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!--  Danh mục  -->
+            <ColumnDefinition Width="4*" />
+            <!--  Danh sách sản phẩm  -->
+        </Grid.ColumnDefinitions>
+
+        <!--  Header  -->
+        <Grid Grid.ColumnSpan="2" Style="{DynamicResource DynamicGridStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!--  Emoji  -->
+                <RowDefinition Height="Auto" />
+                <!--  Tiêu đề  -->
+            </Grid.RowDefinitions>
+            <Label
+        Grid.Row="0"
+        HorizontalOptions="Center"
+        Style="{DynamicResource DynamicLabelTitleStyle}"
+        Text="📦" />
+            <Label
+        Grid.Row="1"
+        FontAttributes="Bold"
+        HorizontalOptions="Center"
+        Style="{DynamicResource DynamicLabelTitleStyle}"
+        Text="QUẢN LÝ SẢN PHẨM"
+        TextColor="#4B3621" />
+        </Grid>
+
+        <!--  Danh mục bên trái  -->
+        <Frame
+      x:Name="MainFrame"
+      Grid.Row="1"
+      Grid.Column="0"
+      BackgroundColor="White"
+      BorderColor="#F2E2D6"
+      CornerRadius="{DynamicResource DynamicCornerRadius}"
+      Style="{DynamicResource DynamicFrameStyle}">
+            <Grid x:Name="LeftMenu" RowSpacing="{DynamicResource DynamicSpacing}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!--  Tiêu đề  -->
+                    <RowDefinition Height="Auto" />
+                    <!--  Danh mục  -->
+                    <RowDefinition Height="*" />
+                    <!--  Khoảng trống  -->
+                </Grid.RowDefinitions>
+                <Label
+          Grid.Row="0"
+          FontAttributes="Bold"
+          Style="{DynamicResource DynamicLabelLargeStyle}"
+          Text="DANH MỤC"
+          TextColor="#4B3621" />
+                <Grid Grid.Row="1" RowSpacing="{DynamicResource DynamicSpacing}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <!--  Cà phê  -->
+                        <RowDefinition Height="Auto" />
+                        <!--  Trà  -->
+                    </Grid.RowDefinitions>
+                    <Border
+            Grid.Row="0"
+            BackgroundColor="Transparent"
+            Stroke="#F2E2D6"
+            StrokeThickness="1">
+                        <Label
+              x:Name="CategoryCoffee"
+              Style="{DynamicResource DynamicLabelMediumStyle}"
+              Text="☕ CÀ PHÊ"
+              TextColor="#4B3621"
+              VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCategoryTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+                    <Border
+            Grid.Row="1"
+            BackgroundColor="Transparent"
+            Stroke="#F2E2D6"
+            StrokeThickness="1">
+                        <Label
+              x:Name="CategoryMilkTea"
+              Style="{DynamicResource DynamicLabelMediumStyle}"
+              Text="🍵 TRÀ"
+              TextColor="#4B3621"
+              VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCategoryTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Frame>
+        <!--  Thêm, xóa, xem danh sách  -->
+        <Grid
+      Grid.Row="1"
+      Grid.Column="1"
+      RowDefinitions="Auto,*"
+      RowSpacing="{DynamicResource DynamicSpacing}">
+            <!--  Tìm kiếm, thêm  -->
+            <Grid
+        Grid.Row="0"
+        ColumnDefinitions="*,Auto"
+        Style="{DynamicResource DynamicGridStyle}">
+                <Frame
+          Grid.Column="0"
+          Padding="{DynamicResource DynamicPadding}"
+          BackgroundColor="White"
+          CornerRadius="{DynamicResource DynamicCornerRadius}">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Entry
+              Grid.Column="0"
+              Placeholder="Tìm kiếm..."
+              Style="{DynamicResource DynamicEntryStyle}"
+              VerticalOptions="Center" />
+                        <Button
+              Grid.Column="1"
+              BackgroundColor="#D9D9D9"
+              Clicked="OnSearchClicked"
+              HorizontalOptions="End"
+              Style="{DynamicResource DynamicButtonInsideStyle}"
+              Text="Tìm"
+              TextColor="Black"
+              VerticalOptions="Center" />
+                    </Grid>
+                </Frame>
+                <Button
+          Grid.Column="1"
+          BackgroundColor="#B7B7B7"
+          Clicked="OnAddProductClicked"
+          Style="{DynamicResource DynamicButtonOutsideStyle}"
+          Text="Thêm sản phẩm"
+          TextColor="Black" />
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <VerticalStackLayout Padding="{DynamicResource DynamicPadding}">
+                    <!-- <CollectionView>
+            <CollectionView.ItemTemplate>
+              <DataTemplate>-->
+                    <Frame
+            Padding="{DynamicResource DynamicPadding}"
+            BackgroundColor="White"
+            BorderColor="#F2E2D6"
+            CornerRadius="{DynamicResource DynamicCornerRadius}">
+                        <Grid
+              ColumnDefinitions="Auto,*,Auto,Auto,Auto"
+              RowDefinitions="Auto,Auto"
+              RowSpacing="{DynamicResource DynamicSpacing}">
+                            <Image Grid.RowSpan="2" Source="coffee.png" />
+                            <Label
+                Grid.Column="1"
+                Style="{DynamicResource DynamicLabelMediumStyle}"
+                Text="Cà phê đen"
+                TextColor="#4B3621" />
+                            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{DynamicResource DynamicLabelSmallStyle}"
+                Text="Đậm đà, nguyên chất"
+                TextColor="#7B6A54" />
+                            <Label
+                Grid.Column="2"
+                Style="{DynamicResource DynamicLabelMediumStyle}"
+                Text="25.000₫"
+                TextColor="#4B3621"
+                VerticalOptions="Center" />
+                            <Button
+                Grid.Column="3"
+                BackgroundColor="#79CDCD"
+                Clicked="OnEditProductClicked"
+                Style="{DynamicResource DynamicButtonInsideStyle}"
+                Text="Sửa"
+                TextColor="Black" />
+                            <Button
+                Grid.Column="4"
+                BackgroundColor="#FF0000"
+                BorderWidth="0"
+                HorizontalOptions="Center"
+                Style="{DynamicResource DynamicButtonInsideStyle}"
+                Text="Xoá"
+                TextColor="White"
+                VerticalOptions="Center" />
+                        </Grid>
+                    </Frame>
+                    <!-- </DataTemplate>
+            </CollectionView.ItemTemplate>
+          </CollectionView>-->
+
+                    <!--  Các sản phẩm mẫu  -->
+                    <!--  (Cà phê, Trà sữa, Bánh ngọt như trước đó)  -->
+
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+        <!--  Popup Thêm sản phẩm  -->
+        <Grid
+      x:Name="PopupOverlay"
+      Grid.RowSpan="2"
+      Grid.ColumnSpan="2"
+      BackgroundColor="#80000000"
+      ColumnDefinitions="1*,1*,3*,1*,1*"
+      IsVisible="False"
+      RowDefinitions="1*,3*,1*">
+            <Frame
+        x:Name="AddProductPopup"
+        Grid.Row="1"
+        Grid.Column="2"
+        Padding="{DynamicResource DynamicPadding}"
+        BackgroundColor="White"
+        CornerRadius="{DynamicResource DynamicCornerRadius}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+                <Grid RowSpacing="{DynamicResource DynamicSpacing}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <!--  Tiêu đề  -->
+                        <RowDefinition Height="Auto" />
+                        <!--  Nhóm sản phẩm  -->
+                        <RowDefinition Height="Auto" />
+                        <!--  Tên sản phẩm  -->
+                        <RowDefinition Height="Auto" />
+                        <!--  Mô tả  -->
+                        <RowDefinition Height="Auto" />
+                        <!--  Giá  -->
+                        <RowDefinition Height="Auto" />
+                        <!--  Nút  -->
+                    </Grid.RowDefinitions>
+                    <Label
+            Grid.Row="0"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            Style="{DynamicResource DynamicLabelTitleStyle}"
+            Text="THÊM SẢN PHẨM"
+            TextColor="Black" />
+                    <Border
+            Grid.Row="1"
+            Margin="0"
+            Padding="0">
+                        <Label
+              x:Name="ProductGroupLabel"
+              Style="{DynamicResource DynamicEntryStyle}"
+              Text="Nhóm sản phẩm"
+              TextColor="Black">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnProductGroupLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+                    <Border
+            Grid.Row="2"
+            Margin="0"
+            Padding="0">
+
+                        <Entry
+              x:Name="ProductNameEntry"
+              Placeholder="Tên sản phẩm"
+              Style="{DynamicResource DynamicEntryStyle}"
+              TextColor="Black" />
+                    </Border>
+                    <Border
+            Grid.Row="3"
+            Margin="0"
+            Padding="0">
+
+                        <Entry
+              x:Name="ProductDescriptionEntry"
+              Placeholder="Mô tả"
+              Style="{DynamicResource DynamicEntryStyle}"
+              TextColor="Black" />
+                    </Border>
+                    <Border
+            Grid.Row="4"
+            Margin="0"
+            Padding="0">
+
+                        <Entry
+              x:Name="ProductPriceEntry"
+              Keyboard="Numeric"
+              Placeholder="Giá (VNĐ)"
+              Style="{DynamicResource DynamicEntryStyle}"
+              TextColor="Black" />
+                    </Border>
+                    <Grid Grid.Row="5" ColumnDefinitions="*,*">
+                        <Button
+              Grid.Column="0"
+              Clicked="OnSaveProductClicked"
+              Style="{DynamicResource DynamicButtonOutsideStyle}"
+              Text="Lưu"
+              TextColor="Black" />
+                        <Button
+              Grid.Column="1"
+              BackgroundColor="#FF0000"
+              Clicked="OnCancelProductClicked"
+              Style="{DynamicResource DynamicButtonOutsideStyle}"
+              Text="Hủy"
+              TextColor="White" />
+                    </Grid>
+                </Grid>
+            </Frame>
+        </Grid>
+
+        <!--  Popup Chỉnh sửa sản phẩm  -->
+        <Grid
+      x:Name="EditProductPopup"
+      Grid.RowSpan="2"
+      Grid.ColumnSpan="2"
+      BackgroundColor="#80000000"
+      ColumnDefinitions="1*,1*,3*,1*,1*"
+      IsVisible="False"
+      RowDefinitions="1*,3*,1*">
+
+            <Frame
+        x:Name="EditProductPopupFrame"
+        Grid.Row="1"
+        Grid.Column="2"
+        Padding="{DynamicResource DynamicPadding}"
+        BackgroundColor="White"
+        CornerRadius="{DynamicResource DynamicCornerRadius}"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+                <Grid RowSpacing="{DynamicResource DynamicSpacing}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label
+            Grid.Row="0"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            Style="{DynamicResource DynamicLabelTitleStyle}"
+            Text="CHỈNH SỬA SẢN PHẨM"
+            TextColor="Black" />
+
+                    <Border
+            Grid.Row="1"
+            Margin="0"
+            Padding="0">
+                        <Label
+              x:Name="EditProductGroupLabel"
+              Style="{DynamicResource DynamicEntryStyle}"
+              Text="Nhóm sản phẩm"
+              TextColor="Black">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnProductGroupLabelTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Border>
+
+                    <Border
+            Grid.Row="2"
+            Margin="0"
+            Padding="0">
+                        <Entry
+              x:Name="EditProductNameEntry"
+              Placeholder="Tên sản phẩm"
+              Style="{DynamicResource DynamicEntryStyle}"
+              TextColor="Black" />
+                    </Border>
+
+                    <Border
+            Grid.Row="3"
+            Margin="0"
+            Padding="0">
+                        <Entry
+              x:Name="EditProductDescriptionEntry"
+              Placeholder="Mô tả"
+              Style="{DynamicResource DynamicEntryStyle}"
+              TextColor="Black" />
+                    </Border>
+
+                    <Border
+            Grid.Row="4"
+            Margin="0"
+            Padding="0">
+                        <Entry
+              x:Name="EditProductPriceEntry"
+              Keyboard="Numeric"
+              Placeholder="Giá (VNĐ)"
+              Style="{DynamicResource DynamicEntryStyle}"
+              TextColor="Black" />
+                    </Border>
+
+                    <Grid Grid.Row="5" ColumnDefinitions="*,*">
+                        <Button
+              Grid.Column="0"
+              Clicked="OnSaveEditProductClicked"
+              Style="{DynamicResource DynamicButtonOutsideStyle}"
+              Text="Lưu"
+              TextColor="Black" />
+                        <Button
+              Grid.Column="1"
+              BackgroundColor="#FF0000"
+              Clicked="OnCancelEditProductClicked"
+              Style="{DynamicResource DynamicButtonOutsideStyle}"
+              Text="Hủy"
+              TextColor="White" />
+                    </Grid>
+                </Grid>
+            </Frame>
+        </Grid>
+
+
+        <!--  Popup nhom san pham  -->
+        <Grid
+      x:Name="ProductGroupOptions"
+      Grid.RowSpan="2"
+      Grid.ColumnSpan="2"
+      BackgroundColor="#80000000"
+      ColumnDefinitions="1*,1*,3*,1*,1*"
+      IsVisible="False"
+      RowDefinitions="1*,3*,1*">
+            <Grid
+        Grid.Row="1"
+        Grid.Column="2"
+        Padding="{DynamicResource DynamicPadding}"
+        BackgroundColor="White"
+        HorizontalOptions="Center"
+        RowDefinitions="Auto,*"
+        VerticalOptions="Center">
+                <Label
+          Grid.Row="0"
+          FontAttributes="Bold"
+          FontSize="18"
+          HorizontalOptions="Center"
+          Text="Nhóm sản phẩm"
+          TextColor="Black"
+          TextTransform="Uppercase"
+          VerticalOptions="Center" />
+                <Frame
+          Grid.Row="1"
+          Padding="0"
+          BackgroundColor="Transparent">
+                    <ScrollView>
+                        <VerticalStackLayout Spacing="5">
+
+                            <Border
+                BackgroundColor="Transparent"
+                Stroke="#F2E2D6"
+                StrokeThickness="1">
+                                <Label
+                  Style="{DynamicResource DynamicLabelMediumStyle}"
+                  Text="🍵 CÀ PHÊ"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnCoffeeOptionSelected" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Border>
+                            <Border
+                BackgroundColor="Transparent"
+                Stroke="#F2E2D6"
+                StrokeThickness="1">
+                                <Label
+                  Style="{DynamicResource DynamicLabelMediumStyle}"
+                  Text="🍵 TRÀ"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnTeaOptionSelected" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Border>
+                            <Border
+                BackgroundColor="Transparent"
+                Stroke="#F2E2D6"
+                StrokeThickness="1">
+                                <Label
+                  Style="{DynamicResource DynamicLabelMediumStyle}"
+                  Text="🍰 Bánh ngọt"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnPastryOptionSelected" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Border>
+                        </VerticalStackLayout>
+                    </ScrollView>
+                </Frame>
+
+            </Grid>
+        </Grid>
+    </Grid>
+
 </ContentPage>

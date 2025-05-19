@@ -22,4 +22,6 @@ public partial class Templates_Manager : ResourceDictionary
         => await Shell.Current.GoToAsync("//OrderPageManager", animate: false);
     private async void OnRevenueClicked(object sender, EventArgs e)
         => await Shell.Current.GoToAsync("//RevenuePage", animate: false);
+    private async void OnAccountClicked(object sender, EventArgs e)
+        => await Shell.Current.GoToAsync("//AccountPage", animate: false);
 }

@@ -4,5 +4,147 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    
+    <ControlTemplate x:Key="SharedManagerPageTemplate">
+        <Grid>
+            <!--  Phân chia lưới 2 dòng: Navbar và Content  -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!--  NavigationBar  -->
+                <RowDefinition Height="*" />
+                <!--  Page Content  -->
+            </Grid.RowDefinitions>
+
+            <!--  Navigation Bar  -->
+            <Grid
+                Grid.Row="0"
+                Padding="{DynamicResource DynamicPadding}"
+                BackgroundColor="#5D4037"
+                HeightRequest="{DynamicResource NaviHeightRequest}"
+                ZIndex="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!--  Icon tab menu  -->
+                <ImageButton
+                    x:Name="FlyoutBarButton"
+                    Grid.Column="0"
+                    Aspect="AspectFit"
+                    HeightRequest="{DynamicResource TabMenuHeightRequest}"
+                    Source="tabmenu.png"
+                    VerticalOptions="Center"
+                    WidthRequest="{DynamicResource TabMenuWidthRequest}" />
+
+                <BoxView
+                    Grid.Column="1"
+                    BackgroundColor="#5D4037"
+                    Color="Transparent" />
+
+                <!--  Menu Items với HorizontalScrollView  -->
+
+                <Grid
+                    Grid.Column="2"
+                    ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                    ColumnSpacing="{DynamicResource NaviItemSpacing}"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center">
+                    <Label
+                        Grid.Column="0"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Trang chủ">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnHomeClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Sản phẩm">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnProductClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="2"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Nhân viên">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStaffClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="3"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Ca làm">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnShiftClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="4"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Ưu đãi">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnPromotionClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="5"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Order">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnOrderClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="6"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Doanh thu">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRevenueClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="7"
+                        Style="{StaticResource MenuItemStyle}"
+                        Text="Tài khoản">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Grid>
+
+            <ContentPresenter
+                Grid.Row="1"
+                Margin="0"
+                ZIndex="1" />
+        </Grid>
+    </ControlTemplate>
+
+    <!--  Style cho các menu item  -->
+    <Style x:Key="MenuItemStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{DynamicResource NaviTextFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Margin" Value="{DynamicResource NaviMargin}" />
+        <Setter Property="Padding" Value="{DynamicResource NaviPadding}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="PointerOver">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="#795548" />
+                            <Setter Property="TextColor" Value="#FFEB3B" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
 </ResourceDictionary>

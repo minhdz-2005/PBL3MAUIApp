@@ -116,7 +116,13 @@ public partial class AccountCashierPage : ContentPage
         {
             mainViewModel?.AccountVM.SavePassword(oldPassword, newPassword);
         }
+    }
+    // BAM VAO NUT DANG XUAT
+    private async void OnLogOutClicked(object sender, EventArgs e)
+        => await Shell.Current.GoToAsync("//LoginView", animate: false);
 
+    private void Button_Clicked(object sender, EventArgs e)
+    {
 
     }
 }

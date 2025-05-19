@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PBL3MAUIApp.Views.ManagerView.AccountPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F5E9E2"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.ManagerViewModels"
+    ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModels:ManagerViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid ColumnDefinitions="1*,4*,1*" RowDefinitions="1*,5*,1*">
+        <Frame
+      Grid.Row="1"
+      Grid.Column="1"
+      Padding="0"
+      BackgroundColor="Transparent">
+            <Grid ColumnDefinitions="1*,3*" RowDefinitions="*">
+                <!--  Menu bên trái  -->
+                <Grid
+          Grid.Column="0"
+          Padding="20"
+          BackgroundColor="#E0C0A9"
+          RowDefinitions="2*,7*,2*">
+                    <Label
+            Grid.Row="0"
+            FontSize="{DynamicResource DynamicFontSizeMedium}"
+            HorizontalOptions="Center"
+            Text="Tên đăng nhập"
+            TextColor="#2D2D2D"
+            VerticalOptions="Center" />
+                    <Frame
+            Grid.Row="1"
+            Padding="0"
+            BackgroundColor="Transparent"
+            BorderColor="Transparent">
+                        <VerticalStackLayout>
+                            <Border
+                BackgroundColor="#C07F5D"
+                Stroke="#F2E2D6"
+                StrokeThickness="1">
+                                <Label
+                  HorizontalOptions="Center"
+                  Style="{DynamicResource DynamicLabelMediumStyle}"
+                  Text="Đổi mật khẩu"
+                  TextColor="#4B3621"
+                  VerticalOptions="Center" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </Frame>
+
+
+                    <Button
+                        Clicked="OnLogOutClicked"
+            Grid.Row="2"
+            Margin="0,20,0,0"
+            Padding="10"
+            BackgroundColor="#FF5555"
+            CornerRadius="20"
+            FontSize="{DynamicResource DynamicFontSizeMedium}"
+            HorizontalOptions="Center"
+            Text="Đăng xuất"
+            TextColor="White"
+            VerticalOptions="Center" />
+                </Grid>
+
+                <!--  Nội dung chính bên phải  -->
+                <Grid
+          Grid.Column="1"
+          Padding="20"
+          BackgroundColor="#EFDFCF"
+          ColumnSpacing="15"
+          RowDefinitions="Auto,*"
+          RowSpacing="20">
+                    <!--  Tiêu đề  -->
+                    <Label
+            Grid.Row="0"
+            Margin="0,0,0,20"
+            FontAttributes="Bold"
+            FontSize="24"
+            HorizontalOptions="Center"
+            Text="ĐỔI MẬT KHẨU"
+            TextColor="#2D2D2D" />
+
+                    <Grid
+            Grid.Row="1"
+            BackgroundColor="Transparent"
+            ColumnDefinitions="*,2*"
+            ColumnSpacing="15"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+            RowSpacing="25">
+
+                        <!--  Old Password  -->
+                        <Label
+              Grid.Row="0"
+              Grid.Column="0"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              HorizontalOptions="End"
+              Text="Mật Khẩu Cũ"
+              TextColor="#2D2D2D"
+              VerticalOptions="Center" />
+                        <Border
+              Grid.Row="0"
+              Grid.Column="1"
+              Padding="10"
+              BackgroundColor="#F7F7F7"
+              Stroke="#D3D3D3"
+              StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Entry
+                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                IsPassword="True"
+                Placeholder="Nhập mật khẩu cũ..."
+                PlaceholderColor="#A9A9A9"
+                TextColor="#2D2D2D" />
+                        </Border>
+
+                        <!--  New Password  -->
+                        <Label
+              Grid.Row="1"
+              Grid.Column="0"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              HorizontalOptions="End"
+              Text="Mật Khẩu Mới"
+              TextColor="#2D2D2D"
+              VerticalOptions="Center" />
+                        <Border
+              Grid.Row="1"
+              Grid.Column="1"
+              Padding="10"
+              BackgroundColor="#F7F7F7"
+              Stroke="#D3D3D3"
+              StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Entry
+                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                IsPassword="True"
+                Placeholder="Nhập mật khẩu mới..."
+                PlaceholderColor="#A9A9A9"
+                TextColor="#2D2D2D" />
+                        </Border>
+
+                        <!--  Confirm Password  -->
+                        <Label
+              Grid.Row="2"
+              Grid.Column="0"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              HorizontalOptions="End"
+              Text="Xác Nhận Mật Khẩu"
+              TextColor="#2D2D2D"
+              VerticalOptions="Center" />
+                        <Border
+              Grid.Row="2"
+              Grid.Column="1"
+              Padding="10"
+              BackgroundColor="#F7F7F7"
+              Stroke="#D3D3D3"
+              StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Entry
+                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                IsPassword="True"
+                Placeholder="Xác nhận mật khẩu..."
+                PlaceholderColor="#A9A9A9"
+                TextColor="#2D2D2D" />
+                        </Border>
+
+                        <!--  Error Message  -->
+                        <Label
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              FontSize="{DynamicResource DynamicFontSizeSmall}"
+              HorizontalOptions="Center"
+              IsVisible="False"
+              Text="Lỗi: Vui lòng kiểm tra thông tin nhập vào."
+              TextColor="Red" />
+
+                        <!--  Save Button  -->
+                        <Button
+              Grid.Row="4"
+              Grid.ColumnSpan="2"
+              Margin="20,30,20,10"
+              Padding="15"
+              BackgroundColor="#FF6F61"
+              CornerRadius="10"
+              FontAttributes="Bold"
+              FontSize="{DynamicResource DynamicFontSizeMedium}"
+              HorizontalOptions="Fill"
+              Text="Lưu"
+              TextColor="White">
+                            <Button.Shadow>
+                                <Shadow
+                  Brush="#000000"
+                  Opacity="0.2"
+                  Radius="10"
+                  Offset="2,2" />
+                            </Button.Shadow>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Frame>
+    </Grid>
+
+</ContentPage>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -9,9 +9,57 @@ namespace PBL3MAUIApp.Views.ManagerView;
 
 public partial class RevenuePage : ContentPage
 {
+    private double _lastScale = -1;
     public RevenuePage()
     {
         InitializeComponent();
-        
+    }
+
+    protected override void OnSizeAllocated(double width, double height)
+    {
+        base.OnSizeAllocated(width, height);
+
+        double baseWidth = 400;
+        double baseHeight = 800;
+
+        double widthScale = width / baseWidth;
+        double heightScale = height / baseHeight;
+        double scale = widthScale < heightScale ? widthScale : heightScale;
+
+        scale = scale > 0.5 ? scale : 0.5;
+        double horizontalScale = (width / baseWidth) > 0.5 ? (width / baseWidth) : 0.5;
+
+
+        if (_lastScale < 0 || (scale > _lastScale + 0.01 || scale < _lastScale - 0.01))
+        {
+            Resources["DynamicFontSizeTitle"] = 30 * scale;
+            Resources["DynamicFontSizeLarge"] = 20 * scale;
+            Resources["DynamicFontSizeMedium"] = 16 * scale;
+            Resources["DynamicFontSizeSmall"] = 12 * scale;
+            Resources["DynamicPadding"] = 8 * scale;
+            Resources["DynamicMargin"] = 5 * scale;
+            Resources["DynamicSpacing"] = 10 * scale;
+            Resources["DynamicButtonSize"] = 40 * scale;
+            Resources["DynamicBorderThickness"] = 1 * scale;
+
+            double cornerRadius = 10 * scale;
+            Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
+
+            // AddProductPopup.WidthRequest = scale * 500; // Chiều rộng linh hoạt
+            // AddProductPopup.HeightRequest = scale * 600; // Chiều cao linh hoạt
+
+            // EditProductPopupFrame.WidthRequest = scale * 500;
+            // EditProductPopupFrame.HeightRequest = scale * 600;
+
+            Resources["NaviHeightRequest"] = 60 * scale;
+            Resources["TabMenuHeightRequest"] = 25 * scale;
+            Resources["TabMenuWidthRequest"] = 25 * scale;
+            Resources["NaviTextFontSize"] = 25 * scale;
+            Resources["NaviItemSpacing"] = 2 * horizontalScale;
+            Resources["NaviMargin"] = 2 * horizontalScale; // Điều chỉnh Margin theo chiều ngang
+            Resources["NaviPadding"] = 5 * horizontalScale;
+
+            _lastScale = scale;
+        }
     }
 }
