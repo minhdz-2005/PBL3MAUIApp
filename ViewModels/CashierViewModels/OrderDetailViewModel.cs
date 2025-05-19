@@ -52,6 +52,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
                 }
             }
         }
+
         // BIEN LUU TRU
         public ObservableCollection<Order> OrderQueue { get; set; } = new();
         public ObservableCollection<OrderItemViewModel> OrderDetailsQueue { get; set; } = new();
@@ -423,8 +424,9 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
                 if (p != null && item.OrderId == order.Id)
                 {
                     OrderDetails.Add(new OrderItemViewModel(item, p));
+                    TotalQuantity += item.Quantity;
                 }
-                TotalQuantity += item.Quantity;
+                
             }
             var staff = await staffService.GetStaffByIdAsync(order.StaffId);
             if(staff != null)

@@ -23,4 +23,7 @@ public partial class Templates : ResourceDictionary
 
     private async void OnDoanhThuTapped(object sender, EventArgs e)
         => await Shell.Current.GoToAsync("//DoanhThuPage", animate: false);
+
+    private async void OnAccountTapped(object sender, EventArgs e)
+        => await Shell.Current.GoToAsync("//AccountCashierPage", animate: false);
 }

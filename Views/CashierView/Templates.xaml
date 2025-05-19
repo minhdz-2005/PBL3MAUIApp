@@ -76,6 +76,12 @@
                         </Label.GestureRecognizers>
                     </Label>
 
+                    <Label Text="Tài khoản" Style="{StaticResource MenuItemStyle}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnAccountTapped" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
                 </FlexLayout>
 
             </Grid>

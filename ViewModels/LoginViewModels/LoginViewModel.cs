@@ -9,18 +9,12 @@ namespace PBL3MAUIApp.ViewModels.LoginViewModels;
 
 public class LoginViewModel : INotifyPropertyChanged
 {
-    public ObservableCollection<Account> Accounts { get; set; } = new();
+    public static Account LoginAccount = new Account();
     public static int staffID = 0;
 
     private AccountService accountService = new AccountService();
     private StaffService staffService = new StaffService();
-    public async Task GetAllAccount()
-    {
-        List<Account> listAccount = await accountService.GetAccountsAsync();
-        Accounts.Clear();
-        foreach (var item in listAccount)
-            Accounts.Add(item);
-    }
+ 
     public async Task CheckAccount(string username, string password)
     {
         Account account = await accountService.GetAccountByUsername(username);
@@ -30,12 +24,14 @@ public class LoginViewModel : INotifyPropertyChanged
             // Debug.WriteLine("Chay 2");
             if (account.Password == password)
             {
+                LoginAccount = account;
+                Debug.WriteLine($"us: {LoginAccount.Username}, {account.Username}");
                 // Debug.WriteLine("Chay 3");
                 if (account.Role == "Manager")
                 {
                     await Shell.Current.GoToAsync("//Manager_MainPage");
                 }
-                else
+                if (account.Role == "Cashier")
                 {
                     var staffs = await staffService.GetStaffsAsync();
                     if (staffs != null)
@@ -67,5 +63,10 @@ public class LoginViewModel : INotifyPropertyChanged
 
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
 

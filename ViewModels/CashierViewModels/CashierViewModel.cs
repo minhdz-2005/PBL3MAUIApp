@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using PBL3MAUIApp.Services;
+
 namespace PBL3MAUIApp.ViewModels.CashierViewModels
 {
     public class CashierViewModel
@@ -13,7 +15,9 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         public OrderViewModel OrderVM { get; set; }
         public VoucherViewModel VoucherVM { get; set; }
         public RevenueViewModel RevenueVM { get; set; }
-        
+        public AccountViewModel AccountVM { get; set; }
+
+
 
         public CashierViewModel()
         {
@@ -22,6 +26,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             OrderVM = new OrderViewModel();
             VoucherVM = new VoucherViewModel();
             RevenueVM = new RevenueViewModel();
+            AccountVM = new AccountViewModel();
         }
     }
 }

@@ -57,6 +57,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Views\CashierView\NewFolder\**" />
+	  <Compile Remove="Views\CashierView\NewFolder\**" />
+	  <EmbeddedResource Remove="Views\CashierView\NewFolder\**" />
+	  <MauiCss Remove="Views\CashierView\NewFolder\**" />
+	  <MauiXaml Remove="Views\CashierView\NewFolder\**" />
+	  <None Remove="Views\CashierView\NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
@@ -69,7 +78,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\CashierView\NewFolder\" />
+	  <MauiXaml Update="Views\CashierView\AccountCashierPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	
