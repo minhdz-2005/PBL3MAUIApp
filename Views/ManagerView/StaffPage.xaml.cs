@@ -10,6 +10,24 @@ public partial class StaffPage : ContentPage
     public StaffPage()
     {
         InitializeComponent();
+        this.SizeChanged += (s, e) =>
+        {
+            double width = this.Width;
+
+            double baseWidth = 1440; // chi?u r?ng chu?n thi?t k?
+            double scale = this.Width / baseWidth;
+
+            // Clamp ?? không quá nh? ho?c quá to
+            // scale = Math.Max(0.5, Math.Min(scale, 1.5));
+            if (Application.Current != null)
+            {
+                Application.Current.Resources["MenuFontSize"] = 20 * scale;
+                Application.Current.Resources["MenuItemPadding"] = new Thickness(8 * scale, 4 * scale);
+                Application.Current.Resources["MenuItemMargin"] = new Thickness(10 * scale, 0);
+                Application.Current.Resources["NavIconSize"] = 30 * scale;
+                Application.Current.Resources["NavBoxSize"] = 60 * scale;
+            }
+        };
     }
 
     // Sự kiện khi người dùng chọn một vai trò (giữ lại để tương thích nếu cần sau này)

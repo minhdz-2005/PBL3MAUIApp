@@ -15,11 +15,12 @@
             </Grid.RowDefinitions>
 
             <!-- Navigation Bar -->
-            <Grid Grid.Row="0"
-                  BackgroundColor="#5D4037"
-                  HeightRequest="{DynamicResource NavBoxSize}"
-                  Padding="20,0"
-                  ZIndex="2">
+            <Grid 
+                Grid.Row="0"
+                BackgroundColor="#5D4037"
+                HeightRequest="{DynamicResource NavBoxSize}"
+                Padding="20,0"
+                ZIndex="2">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -27,14 +28,9 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Icon tab menu -->
-                <Image Source="tabmenu.png"
-                       WidthRequest="{DynamicResource NavIconSize}"
-                       HeightRequest="{DynamicResource NavIconSize}"
-                       VerticalOptions="Center"
-                       Grid.Column="0" />
-
-                <BoxView Color="Transparent" Grid.Column="1" />
+                <BoxView 
+                    Color="Transparent" 
+                    Grid.Column="1" />
 
                 <!-- Menu Items -->
                 <FlexLayout Direction="Row"
@@ -44,7 +40,7 @@
                             Grid.Column="2"
                             HorizontalOptions="Fill"
                             VerticalOptions="Fill"
-                            Margin="0,0,70,0">
+                            Margin="0,0,0,0">
 
                     <Label Text="Trang chủ" Style="{StaticResource MenuItemStyle}" x:Name="MyLabel">
                         <Label.GestureRecognizers>
@@ -58,19 +54,19 @@
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Xem danh sách Order" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Đơn hàng" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOrderListTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Xem ưu đãi" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Ưu đãi" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnUuDaiTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Thống kê doanh thu trong ca" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Doanh thu" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnDoanhThuTapped" />
                         </Label.GestureRecognizers>

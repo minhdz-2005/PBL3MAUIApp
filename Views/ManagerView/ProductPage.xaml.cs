@@ -1,5 +1,10 @@
-﻿using Microsoft.Maui.Controls;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
 
+using Microsoft.Maui.Controls;
+
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.Models;
 namespace PBL3MAUIApp.Views.ManagerView;
 
 
@@ -8,35 +13,79 @@ public partial class ProductPage : ContentPage
     private double _lastScale = -1;
     private string _selectedProductName = string.Empty;
 
-
+    public CashierViewModel? mainViewModel;
 
     public ProductPage()
     {
         InitializeComponent();
+        mainViewModel = BindingContext as CashierViewModel;
+        this.SizeChanged += (s, e) =>
+        {
+            double width = this.Width;
 
+            double baseWidth = 1440; // chi?u r?ng chu?n thi?t k?
+            double scale = this.Width / baseWidth;
+
+            // Clamp ?? không quá nh? ho?c quá to
+            // scale = Math.Max(0.5, Math.Min(scale, 1.5));
+            if (Application.Current != null)
+            {
+                Application.Current.Resources["MenuFontSize"] = 20 * scale;
+                Application.Current.Resources["MenuItemPadding"] = new Thickness(8 * scale, 4 * scale);
+                Application.Current.Resources["MenuItemMargin"] = new Thickness(10 * scale, 0);
+                Application.Current.Resources["NavIconSize"] = 30 * scale;
+                Application.Current.Resources["NavBoxSize"] = 60 * scale;
+            }
+        };
+    }
+    // LOAD DANH SACH SAN PHAM KHI VAO TRANG
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (mainViewModel != null)
+        {
+            await mainViewModel.ProductVM.GetAllProduct();
+        }
     }
 
-    /////////////
-    private void OnCategoryTapped(object sender, EventArgs e)
+    // BAM VAO CHON DANH MUC
+    private async void OnCategoryTapped(object sender, EventArgs e)
     {
         if (sender is not Label label) return;
 
-        CategoryCoffee.BackgroundColor = label.Text == "☕ CÀ PHÊ" ? Colors.White : Colors.Transparent;
-        CategoryMilkTea.BackgroundColor = label.Text == "🍵 TRÀ" ? Colors.White : Colors.Transparent;
+        string cate = label.Text;
 
-        DisplayAlert("Thông báo", $"Bạn đã chọn danh mục: {label.Text}", "OK");
+        if (mainViewModel != null)
+        {
+            if (cate == "Tất cả") 
+                await mainViewModel.ProductVM.GetAllProduct();
+            else
+                await mainViewModel.ProductVM.FilterCategory(cate);
+        }
+
+        //CategoryCoffee.BackgroundColor = label.Text == "☕ CÀ PHÊ" ? Colors.White : Colors.Transparent;
+        //CategoryMilkTea.BackgroundColor = label.Text == "🍵 TRÀ" ? Colors.White : Colors.Transparent;
+
+        // await DisplayAlert("Thông báo", $"Bạn đã chọn danh mục: {label.Text}", "OK");
     }
 
-    private void OnSearchClicked(object sender, EventArgs e)
+    // BAM VAO NUT TIM SAN PHAM
+    private async void OnSearchClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Thông báo", "Bạn đã nhấn nút Tìm!", "OK");
+        string searchText = SearchEntry.Text;
+        Debug.WriteLine($"Tìm kiếm sản phẩm với từ khóa: {searchText}");
+
+        if (mainViewModel != null)
+        {
+            if (searchText == null)
+                await mainViewModel.ProductVM.GetAllProduct();
+            else
+                await mainViewModel.ProductVM.SearchProduct(searchText);
+        }
+
+
+        // DisplayAlert("Thông báo", "Bạn đã nhấn nút Tìm!", "OK");
     }
-
-
-
-
-
-
 
     protected override void OnSizeAllocated(double width, double height)
     {
@@ -86,59 +135,99 @@ public partial class ProductPage : ContentPage
         }
     }
 
+
+    
+
     private bool _isProductGroupOptionsVisible = false; // Biến trạng thái cho tùy chọn nhóm sản phẩm trong popup
     //Popup them san pham
+    // BAM VAO NUT THEM SAN PHAM
     private void OnAddProductClicked(object sender, EventArgs e)
     {
         PopupOverlay.IsVisible = true;
     }
-    private void OnSaveProductClicked(object sender, EventArgs e)
+    // BAM VAO NUT THEM
+    private async void OnSaveProductClicked(object sender, EventArgs e)
     {
+        string name = AddProductNameEntry.Text;
+        string description = AddProductDescriptionEntry.Text;
+        string cate = ProductGroupLabel.Text;
 
-        PopupOverlay.IsVisible = false;
+        decimal price;
+        bool isValid = decimal.TryParse(AddProductPriceEntry.Text, out price);
 
+        if (isValid)
+        {
+            Debug.WriteLine($"{name}, {description}, {price}, {cate}");
+
+            if(mainViewModel != null)
+            {
+                // await mainViewModel.ProductVM.AddProduct(new Product(name, price, cate, description));
+            }
+            PopupOverlay.IsVisible = false;
+        }
+        else
+        {
+            // Hiển thị lỗi hoặc xử lý khi nhập sai
+            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
+        }
     }
-
+    // BAM VAO NUT HUY
     private void OnCancelProductClicked(object sender, EventArgs e)
     {
         PopupOverlay.IsVisible = false;
 
     }
 
-
-
     //Popup edit san pharm
+    static int idProduct = 0;
+    // BAM VAO NUT CHINH SUA
     private void OnEditProductClicked(object sender, EventArgs e)
     {
         if (sender is Button button)
         {
-            _selectedProductName = button.BindingContext as string ?? string.Empty;
-            EditProductNameEntry.Text = _selectedProductName;
-            EditProductDescriptionEntry.Text = "Thông tin mô tả mẫu";
-            EditProductPriceEntry.Text = "100000";
+            var product = button.BindingContext as Product;
+
+            idProduct = 0;
+            if (product != null)
+            {
+                idProduct = product.Id;
+            }
+
+            Debug.WriteLine($"Sản phẩm được chọn: {product?.Name}, {product?.Price}");
+
+            EditProductGroupLabel.Text = product?.Category;
+            EditProductNameEntry.Text = product?.Name;
+            EditProductDescriptionEntry.Text = product?.Description;
+            EditProductPriceEntry.Text = product?.Price.ToString();
 
             EditProductPopup.IsVisible = true;
         }
     }
-    private void OnSaveEditProductClicked(object sender, EventArgs e)
+    // BAM VAO NUT LUU
+    private async void OnSaveEditProductClicked(object sender, EventArgs e)
     {
         string name = EditProductNameEntry.Text;
         string description = EditProductDescriptionEntry.Text;
-        string priceText = EditProductPriceEntry.Text;
+        string cate = EditProductGroupLabel.Text;
 
-        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(priceText))
+        decimal price;
+        bool isValid = decimal.TryParse(EditProductPriceEntry.Text, out price);
+
+        if (isValid)
         {
-            DisplayAlert("Thông báo", "Vui lòng nhập đầy đủ tên và giá sản phẩm.", "OK");
-            return;
-        }
+            Debug.WriteLine($"{idProduct}, {name}, {description}, {price}, {cate}");
 
-        if (!decimal.TryParse(priceText, out decimal price))
+            if (mainViewModel != null)
+            {
+                // await mainViewModel.ProductVM.UpdateProduct(idProduct, new Product(name, price, cate, description));
+            }
+            PopupOverlay.IsVisible = false;
+        }
+        else
         {
-            DisplayAlert("Lỗi", "Giá sản phẩm không hợp lệ.", "OK");
-            return;
+            // Hiển thị lỗi hoặc xử lý khi nhập sai
+            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
         }
-
-        SaveEditedProduct(name, description, price);
 
         EditProductPopup.IsVisible = false;
     }
@@ -148,20 +237,24 @@ public partial class ProductPage : ContentPage
         EditProductPopup.IsVisible = false;
     }
 
-    private void SaveEditedProduct(string name, string description, decimal price)
+    // XOA SAN PHAM
+    private void OnDeleteProductClicked(object sender, EventArgs e)
     {
-        Console.WriteLine($"Đã lưu sản phẩm: {name}, {description}, Giá: {price}");
+        if (sender is Button button)
+        {
+            var product = button.BindingContext as Product;
+            if (product != null)
+            {
+                Debug.WriteLine($"Sản phẩm được chọn để xóa: {product.Name}, {product.Price}");
+                // Xóa sản phẩm
+                // await mainViewModel.ProductVM.DeleteProduct(product.Id);
+            }
+        }
     }
 
-    public void ShowEditProductPopup(string name, string description, decimal price, string group)
-    {
-        EditProductNameEntry.Text = name;
-        EditProductDescriptionEntry.Text = description;
-        EditProductPriceEntry.Text = price.ToString();
-        EditProductGroupLabel.Text = group;
 
-        EditProductPopup.IsVisible = true;
-    }
+
+
     //Popup nhom san pham va cac thao tac trong do
     private void OnProductGroupLabelTapped(object sender, EventArgs e)
     {
@@ -169,28 +262,14 @@ public partial class ProductPage : ContentPage
         ProductGroupOptions.IsVisible = _isProductGroupOptionsVisible;
     }
 
-    private void OnCoffeeOptionSelected(object sender, EventArgs e)
+    private void OnGroupOptionSelected(object sender, EventArgs e)
     {
-        ProductGroupLabel.Text = "Cà phê";
-        _isProductGroupOptionsVisible = false;
-        ProductGroupOptions.IsVisible = _isProductGroupOptionsVisible;
-    }
+        if (sender is not Label label) return;
 
-    private void OnTeaOptionSelected(object sender, EventArgs e)
-    {
-        ProductGroupLabel.Text = "Trà";
+        ProductGroupLabel.Text = label.Text;
+        EditProductGroupLabel.Text = label.Text;
         _isProductGroupOptionsVisible = false;
         ProductGroupOptions.IsVisible = _isProductGroupOptionsVisible;
     }
-
-    private void OnPastryOptionSelected(object sender, EventArgs e)
-    {
-        ProductGroupLabel.Text = "Bánh ngọt";
-        _isProductGroupOptionsVisible = false;
-        ProductGroupOptions.IsVisible = _isProductGroupOptionsVisible;
-    }
-    private void OnCoffeeOptionClicked(object sender, EventArgs e) { }
-    private void OnTeaOptionClicked(object sender, EventArgs e) { }
-    private void OnPastryOptionClicked(object sender, EventArgs e) { }
 
 }

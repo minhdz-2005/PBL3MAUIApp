@@ -4,12 +4,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     BackgroundColor="#F5E9E2"
-    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.ManagerViewModels"
+    
     ControlTemplate="{StaticResource SharedManagerPageTemplate}">
 
-    <ContentPage.BindingContext>
-        <viewModels:ManagerViewModel />
-    </ContentPage.BindingContext>
+    
 
     <Grid ColumnDefinitions="1*,4*,1*" RowDefinitions="1*,5*,1*">
         <Frame

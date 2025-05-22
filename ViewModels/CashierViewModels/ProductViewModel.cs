@@ -67,6 +67,60 @@ public class ProductViewModel : INotifyPropertyChanged
             if (item.Category == "Bánh Ngọt") Products.Add(item);
         }
     }
+
+    // LOC SAN PHAM THEO DANH MUC
+    public async Task FilterCategory(string category)
+    {
+        List<Product> listProduct = await productService.GetProductsAsync();
+
+        Products.Clear();
+        foreach (var item in listProduct)
+        {
+            if (item.Category == category) Products.Add(item);
+        }
+    }
+
+    // TIM KIEM SAN PHAM THEO TEN
+    public async Task SearchProduct(string name)
+    {
+        List<Product> listProduct = await productService.GetProductsAsync();
+        Products.Clear();
+        foreach (var item in listProduct)
+        {
+            if (item.Name.ToLower().Contains(name.ToLower())) Products.Add(item);
+        }
+    }
+
+    // THEM SAN PHAM
+    public async Task AddProduct(Product a)
+    {
+        await productService.AddProductAsync(a);
+        Products.Add(a);
+    }
+    // CHINH SUA SAN PHAM
+    public async Task UpdateProduct(int id, Product a)
+    {
+        await productService.UpdateProductAsync(id, a);
+        var product = Products.FirstOrDefault(p => p.Id == id);
+        if (product != null)
+        {
+            product.Name = a.Name;
+            product.Price = a.Price;
+            product.Category = a.Category;
+            product.Description = a.Description;
+        }
+    }
+    // XOA SAN PHAM
+    public async Task DeleteProduct(int id)
+    {
+        await productService.DeleteProductAsync(id);
+        var product = Products.FirstOrDefault(p => p.Id == id);
+        if (product != null)
+        {
+            Products.Remove(product);
+        }
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
     protected virtual void OnPropertyChanged(string propertyName)
     {
