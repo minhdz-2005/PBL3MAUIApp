@@ -104,6 +104,41 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
 
+
+        // THEM TAI KHOAN (MANAGER)
+        public async Task<bool> AddAccount(string username, string password, string role)
+        {
+            Account account = new Account(username, password, role);
+            var result = await accountService.AddAccountAsync(account);
+            if (result)
+            {
+                await Shell.Current.DisplayAlert("Success", "Account added successfully", "OK");
+                return true;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Failed to add account", "OK");
+                return false;
+            }
+        }
+        // CHINH SUA TAI KHOAN (MANAGER)
+        public async Task UpdateAccount(string username, string password, string role)
+        {
+            Account account = new Account(username, password, role);
+            var list = await accountService.GetAccountsAsync();
+            foreach (var item in list)
+            {
+                if (item.Username == username)
+                {
+                    account.Id = item.Id;
+                    await accountService.UpdateAccountAsync(item.Id, account);
+                    break;
+                }
+            }
+        }
+
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

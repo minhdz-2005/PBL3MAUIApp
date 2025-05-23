@@ -134,10 +134,6 @@ public partial class ProductPage : ContentPage
             _lastScale = scale;
         }
     }
-
-
-    
-
     private bool _isProductGroupOptionsVisible = false; // Biến trạng thái cho tùy chọn nhóm sản phẩm trong popup
     //Popup them san pham
     // BAM VAO NUT THEM SAN PHAM
@@ -155,7 +151,7 @@ public partial class ProductPage : ContentPage
         decimal price;
         bool isValid = decimal.TryParse(AddProductPriceEntry.Text, out price);
 
-        if (isValid)
+        if (isValid && cate != "Nhóm sản phẩm" && cate != null)
         {
             Debug.WriteLine($"{name}, {description}, {price}, {cate}");
 
@@ -252,9 +248,6 @@ public partial class ProductPage : ContentPage
         }
     }
 
-
-
-
     //Popup nhom san pham va cac thao tac trong do
     private void OnProductGroupLabelTapped(object sender, EventArgs e)
     {
@@ -271,5 +264,10 @@ public partial class ProductPage : ContentPage
         _isProductGroupOptionsVisible = false;
         ProductGroupOptions.IsVisible = _isProductGroupOptionsVisible;
     }
-
+    // THEM DANH MUC MOi
+    private void OnAddGroupButtonClicked (object sender, EventArgs e)
+    {
+        ProductGroupLabel.Text = AddGroupProductEntry.Text;
+        ProductGroupOptions.IsVisible = false;
+    }
 }

@@ -50,76 +50,13 @@ public partial class OrderPage : ContentPage
     private bool isTeaClick = false;
     private bool isCakeClick = false;
     // Nhan vao nut DANH MUC Ca Phe
-    private async void OnCoffeeButtonClicked(object sender, EventArgs e)
+    private async void OnCategoryButtonClicked(object sender, EventArgs e)
     {
-        if(mainViewModel != null)
+        var button = sender as Button;
+        var category = button?.BindingContext as string;
+        if (mainViewModel != null && category != null)
         {
-            if (isCoffeeClick == false)
-            {
-                CoffeeButton.BackgroundColor = Color.FromArgb("#FF9C9C");
-                TeaButton.BackgroundColor = Colors.Transparent;
-                CakeButton.BackgroundColor = Colors.Transparent;
-
-                isCoffeeClick = true;
-                isTeaClick = false;
-                isCakeClick = false;
-                await mainViewModel.ProductVM.CoffeeCategory();
-            }
-            else
-            {
-                CoffeeButton.BackgroundColor = Colors.Transparent;
-                isCoffeeClick = false;
-                await mainViewModel.ProductVM.GetAllProduct();
-            }
-        }
-    }
-    // Nhan vao nut DANH MUC Tra
-    private async void OnTeaButtonClicked(object sender, EventArgs e)
-    {
-        if (mainViewModel != null)
-        {
-            if (isTeaClick == false)
-            {
-                TeaButton.BackgroundColor = Color.FromArgb("#FF9C9C");
-                CoffeeButton.BackgroundColor = Colors.Transparent;
-                CakeButton.BackgroundColor = Colors.Transparent;
-
-
-                isTeaClick = true;
-                isCoffeeClick = false;
-                isCakeClick = false;
-                await mainViewModel.ProductVM.TeaCategory();
-            }
-            else
-            {
-                TeaButton.BackgroundColor = Colors.Transparent;
-                isTeaClick = false;
-                await mainViewModel.ProductVM.GetAllProduct();
-            }
-        }
-    }
-    // Nhan vao nut DANH MUC Banh Ngot
-    private async void OnCakeButtonClicked(object sender, EventArgs e)
-    {
-        if (mainViewModel != null)
-        {
-            if (isCakeClick == false)
-            {
-                CakeButton.BackgroundColor = Color.FromArgb("#FF9C9C");
-                CoffeeButton.BackgroundColor = Colors.Transparent;
-                TeaButton.BackgroundColor = Colors.Transparent;
-
-                isCakeClick = true;
-                isCoffeeClick = false;
-                isTeaClick = false;
-                await mainViewModel.ProductVM.CakeCategory();
-            }
-            else
-            {
-                CakeButton.BackgroundColor = Colors.Transparent;
-                isCakeClick = false;
-                await mainViewModel.ProductVM.GetAllProduct();
-            }
+            await mainViewModel.ProductVM.FilterCategory(category);
         }
     }
     

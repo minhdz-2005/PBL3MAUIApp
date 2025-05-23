@@ -1,15 +1,21 @@
 ﻿using Microsoft.Maui.Controls;
 
 namespace PBL3MAUIApp.Views.ManagerView;
-
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.Models;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 public partial class StaffPage : ContentPage
 {
     private Frame? _currentEditingFrame;
     private double _lastScale = -1;
+
+    public CashierViewModel? mainViewModel;
     public StaffPage()
     {
         InitializeComponent();
+        mainViewModel = BindingContext as CashierViewModel;
         this.SizeChanged += (s, e) =>
         {
             double width = this.Width;
@@ -29,17 +35,37 @@ public partial class StaffPage : ContentPage
             }
         };
     }
-
-    // Sự kiện khi người dùng chọn một vai trò (giữ lại để tương thích nếu cần sau này)
-    private void OnRoleClicked(object sender, EventArgs e)
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if(mainViewModel != null)
+        {
+            await mainViewModel.StaffVM.GetAllStaff();
+        }
+    }
+    static int idStaff = 0;
+    // Sự kiện khi người dùng chọn một vai trò (giữ lại để tương thích nếu cần sau này) x
+    private async void OnRoleClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
-        if (button == null) return;
+        var role = button?.Text;
+        Debug.WriteLine($"Selected role: {role}");
 
-        RoleAll.BackgroundColor = button.Text == "Tất cả" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        RoleCashier.BackgroundColor = button.Text == "Thu ngân" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        RoleBartender.BackgroundColor = button.Text == "Pha chế" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        RoleWaiter.BackgroundColor = button.Text == "Phục vụ" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        if (mainViewModel != null && role != null)
+        {
+            if (role == "Tất cả")
+            {
+                await mainViewModel.StaffVM.GetAllStaff();
+            }
+            else
+            {
+                await mainViewModel.StaffVM.GetStaffByRole(role);
+            }
+        }
+        //RoleAll.BackgroundColor = button.Text == "Tất cả" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        //RoleCashier.BackgroundColor = button.Text == "Thu ngân" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        //RoleBartender.BackgroundColor = button.Text == "Pha chế" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        //RoleWaiter.BackgroundColor = button.Text == "Phục vụ" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
     }
 
     // Sự kiện khi nhấn nút "Xóa" trên mỗi hàng nhân viên
@@ -58,10 +84,17 @@ public partial class StaffPage : ContentPage
     }
 
 
-    // Sự kiện khi nhấn nút "Tìm"
-    private void OnSearchClicked(object sender, EventArgs e)
+    // Sự kiện khi nhấn nút "Tìm" x
+    private async void OnSearchClicked(object sender, EventArgs e)
     {
-        DisplayAlert("Thông báo", "Bạn đã nhấn nút Tìm!", "OK");
+        string name = SearchEntry.Text;
+        if (mainViewModel != null)
+        {
+            await mainViewModel.StaffVM.SearchStaff(name);
+        }
+
+
+        // await DisplayAlert("Thông báo", "Bạn đã nhấn nút Tìm!", "OK");
     }
 
     // Sự kiện khi nhấn nút "Xoá" (toàn bộ)
@@ -70,207 +103,237 @@ public partial class StaffPage : ContentPage
         DisplayAlert("Thông báo", "Bạn đã nhấn nút Xoá toàn bộ!", "OK");
     }
 
-    // Sự kiện khi nhấn nút "Thêm"
+    // Sự kiện khi nhấn nút "Thêm" x
     private void OnAddStaffClicked(object sender, EventArgs e)
     {
         AddStaffPopup.IsVisible = true;
+
+        UsernameEntry.IsEnabled = false;
+        PasswordEntry.IsEnabled = false;
     }
 
-    // Sự kiện khi nhấn nút "Lưu" trong popup
-    private void OnSaveAddStaffClicked(object sender, EventArgs e)
+    // Sự kiện khi nhấn nút "Lưu" trong popup x
+    private async void OnSaveAddStaffClicked(object sender, EventArgs e)
     {
-        if (!string.IsNullOrWhiteSpace(StaffNameEntry.Text) &&
-            !string.IsNullOrWhiteSpace(StaffDOBEntry.Text) &&
-            !string.IsNullOrWhiteSpace(StaffPhoneEntry.Text) &&
-            !string.IsNullOrWhiteSpace(StaffAddressEntry.Text) &&
-            !string.IsNullOrWhiteSpace(AddStaffRoleLabel.Text))
+        string username = StaffUsernameEntry.Text;
+        string password = StaffPasswordEntry.Text;
+        string staffName = StaffNameEntry.Text;
+        string staffPhone = StaffPhoneEntry.Text;
+
+        string staffRole = AddStaffRoleLabel.Text;
+
+        decimal staffSalary;
+        bool isSaValid = decimal.TryParse(StaffSalaryEntry.Text, out staffSalary);
+        int phone;
+        bool isPhoneValid = int.TryParse(StaffPhoneEntry.Text, out phone);
+
+        if (isSaValid && isPhoneValid)
         {
-            var frame = new Frame
+            Debug.WriteLine($"{username}, {password}, {staffName}, {staffPhone}, {staffSalary}, {staffRole}");
+
+            if (mainViewModel != null)
             {
-                Margin = new Thickness(0, 0, 0, 5),
-                Padding = 10,
-                BackgroundColor = Color.FromArgb("#F8E0E0"),
-                BorderColor = Colors.Transparent,
-                CornerRadius = 5
-            };
-
-            var grid = new Grid
-            {
-                ColumnDefinitions = new ColumnDefinitionCollection
-                {
-                    new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = GridLength.Auto }
-                },
-                ColumnSpacing = 10
-            };
-
-            // Thêm Label cho Họ tên
-            var nameLabel = new Label
-            {
-                Text = StaffNameEntry.Text,
-                FontSize = 16,
-                TextColor = Colors.Black,
-                VerticalOptions = LayoutOptions.Center
-            };
-            grid.Children.Add(nameLabel);
-            Grid.SetColumn(nameLabel, 0);
-
-            // Thêm Label cho Ngày sinh
-            var dobLabel = new Label
-            {
-                Text = StaffDOBEntry.Text,
-                FontSize = 16,
-                TextColor = Colors.Black,
-                VerticalOptions = LayoutOptions.Center
-            };
-            grid.Children.Add(dobLabel);
-            Grid.SetColumn(dobLabel, 1);
-
-            // Thêm Label cho Số điện thoại
-            var phoneLabel = new Label
-            {
-                Text = StaffPhoneEntry.Text,
-                FontSize = 16,
-                TextColor = Colors.Black,
-                VerticalOptions = LayoutOptions.Center
-            };
-            grid.Children.Add(phoneLabel);
-            Grid.SetColumn(phoneLabel, 2);
-
-            // Thêm Label cho Vị trí
-            var roleLabel = new Label
-            {
-                Text = AddStaffRoleLabel.Text,
-                FontSize = 16,
-                TextColor = Colors.Black,
-                VerticalOptions = LayoutOptions.Center
-            };
-            grid.Children.Add(roleLabel);
-            Grid.SetColumn(roleLabel, 3);
-
-            // Thêm nút Xóa
-            var deleteButton = new Button
-            {
-                Padding = 5,
-                BackgroundColor = Colors.Red,
-                CornerRadius = 5,
-                FontSize = 14,
-                Text = "Xóa",
-                TextColor = Colors.White
-            };
-            deleteButton.Clicked += RemoveEmployee_Clicked;
-            grid.Children.Add(deleteButton);
-            Grid.SetColumn(deleteButton, 4);
-
-            frame.Content = grid;
-            StaffList.Children.Add(frame);
-
-            AddStaffPopup.IsVisible = false;
-            StaffNameEntry.Text = string.Empty;
-            StaffDOBEntry.Text = string.Empty;
-            StaffPhoneEntry.Text = string.Empty;
-            StaffAddressEntry.Text = string.Empty;
-            AddStaffRoleLabel.Text = string.Empty;
+                // await mainViewModel.StaffVM.AddStaff(new Staff(username, staffName, staffPhone, staffRole, staffSalary));
+                //if (staffRole == "Thu ngân")
+                //    await mainViewModel.AccountVM.AddAccount(username, password, staffRole);
+            }
         }
         else
         {
-            DisplayAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin!", "OK");
+            // Hiển thị lỗi hoặc xử lý khi nhập sai
+            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
         }
+        
+
+        //if (!string.IsNullOrWhiteSpace(StaffNameEntry.Text) &&
+        //    !string.IsNullOrWhiteSpace(StaffDOBEntry.Text) &&
+        //    !string.IsNullOrWhiteSpace(StaffPhoneEntry.Text) &&
+        //    !string.IsNullOrWhiteSpace(StaffAddressEntry.Text) &&
+        //    !string.IsNullOrWhiteSpace(AddStaffRoleLabel.Text))
+        //{
+        //    var frame = new Frame
+        //    {
+        //        Margin = new Thickness(0, 0, 0, 5),
+        //        Padding = 10,
+        //        BackgroundColor = Color.FromArgb("#F8E0E0"),
+        //        BorderColor = Colors.Transparent,
+        //        CornerRadius = 5
+        //    };
+
+        //    var grid = new Grid
+        //    {
+        //        ColumnDefinitions = new ColumnDefinitionCollection
+        //        {
+        //            new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
+        //            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+        //            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+        //            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+        //            new ColumnDefinition { Width = GridLength.Auto }
+        //        },
+        //        ColumnSpacing = 10
+        //    };
+
+        //    // Thêm Label cho Họ tên
+        //    var nameLabel = new Label
+        //    {
+        //        Text = StaffNameEntry.Text,
+        //        FontSize = 16,
+        //        TextColor = Colors.Black,
+        //        VerticalOptions = LayoutOptions.Center
+        //    };
+        //    grid.Children.Add(nameLabel);
+        //    Grid.SetColumn(nameLabel, 0);
+
+        //    // Thêm Label cho Ngày sinh
+        //    var dobLabel = new Label
+        //    {
+        //        Text = StaffDOBEntry.Text,
+        //        FontSize = 16,
+        //        TextColor = Colors.Black,
+        //        VerticalOptions = LayoutOptions.Center
+        //    };
+        //    grid.Children.Add(dobLabel);
+        //    Grid.SetColumn(dobLabel, 1);
+
+        //    // Thêm Label cho Số điện thoại
+        //    var phoneLabel = new Label
+        //    {
+        //        Text = StaffPhoneEntry.Text,
+        //        FontSize = 16,
+        //        TextColor = Colors.Black,
+        //        VerticalOptions = LayoutOptions.Center
+        //    };
+        //    grid.Children.Add(phoneLabel);
+        //    Grid.SetColumn(phoneLabel, 2);
+
+        //    // Thêm Label cho Vị trí
+        //    var roleLabel = new Label
+        //    {
+        //        Text = AddStaffRoleLabel.Text,
+        //        FontSize = 16,
+        //        TextColor = Colors.Black,
+        //        VerticalOptions = LayoutOptions.Center
+        //    };
+        //    grid.Children.Add(roleLabel);
+        //    Grid.SetColumn(roleLabel, 3);
+
+        //    // Thêm nút Xóa
+        //    var deleteButton = new Button
+        //    {
+        //        Padding = 5,
+        //        BackgroundColor = Colors.Red,
+        //        CornerRadius = 5,
+        //        FontSize = 14,
+        //        Text = "Xóa",
+        //        TextColor = Colors.White
+        //    };
+        //    deleteButton.Clicked += RemoveEmployee_Clicked;
+        //    grid.Children.Add(deleteButton);
+        //    Grid.SetColumn(deleteButton, 4);
+
+        //    frame.Content = grid;
+        //    StaffList.Children.Add(frame);
+
+        //    AddStaffPopup.IsVisible = false;
+        //    StaffNameEntry.Text = string.Empty;
+        //    StaffDOBEntry.Text = string.Empty;
+        //    StaffPhoneEntry.Text = string.Empty;
+        //    StaffAddressEntry.Text = string.Empty;
+        //    AddStaffRoleLabel.Text = string.Empty;
+        //}
+        //else
+        //{
+        //    DisplayAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin!", "OK");
+        //}
     }
 
-    // Sự kiện khi nhấn nút "Hủy" trong popup
+    // Sự kiện khi nhấn nút "Hủy" trong popup x
     private void OnCancelAddStaffClicked(object sender, EventArgs e)
     {
         AddStaffPopup.IsVisible = false;
+        StaffUsernameEntry.Text = string.Empty;
+        StaffPasswordEntry.Text = string.Empty;
         StaffNameEntry.Text = string.Empty;
-        StaffDOBEntry.Text = string.Empty;
         StaffPhoneEntry.Text = string.Empty;
-        StaffAddressEntry.Text = string.Empty;
-        AddStaffRoleLabel.Text = string.Empty;
+        StaffSalaryEntry.Text = string.Empty;
+        AddStaffRoleLabel.Text = "Vị trí(Thu ngân / Pha chế / Phục vụ)";
     }
 
-    // thay doi thong tin nhan vien
+    // thay doi thong tin nhan vien x
     private void OnEditStaffClicked(object sender, EventArgs e)
     {
-        // Vì danh sách là tĩnh, cần chọn nhân viên để chỉnh sửa
-        // Ở đây tôi sẽ giả định chọn nhân viên đầu tiên để minh họa
-        if (StaffList.Children.Count > 0)
+        EditStaffPopup.IsVisible = true;
+
+        var button = sender as Button;
+        var staff = button?.BindingContext as Staff;
+        if (staff != null)
         {
-            // Tìm Frame đầu tiên chứa nhân viên
-            foreach (var child in StaffList.Children)
+            idStaff = staff.Id;
+            EditStaffUsernameEntry.Text = staff.Username;
+            if (staff.Role == "Thu ngân")
             {
-                if (child is Frame frame && frame.Content is Grid grid)
-                {
-                    _currentEditingFrame = frame;
-                    var nameLabel = grid.Children[0] as Label;
-                    var dobLabel = grid.Children[1] as Label;
-                    var phoneLabel = grid.Children[2] as Label;
-                    var roleLabel = grid.Children[3] as Label;
-
-                    EditStaffNameEntry.Text = nameLabel?.Text;
-                    EditStaffDOBEntry.Text = dobLabel?.Text;
-                    EditStaffPhoneEntry.Text = phoneLabel?.Text;
-                    EditStaffRoleLabel.Text = roleLabel?.Text;
-                    EditStaffAddressEntry.Text = "Địa chỉ mặc định"; // Vì không có địa chỉ trong danh sách tĩnh
-
-                    EditStaffPopup.IsVisible = true;
-                    break;
-                }
+                EditUsernameEntry.IsEnabled = true;
+                EditPasswordEntry.IsEnabled = true;
             }
-        }
-        else
-        {
-            DisplayAlert("Thông báo", "Không có nhân viên để chỉnh sửa!", "OK");
+
+            EditStaffNameEntry.Text = staff.Name;
+            EditStaffPhoneEntry.Text = staff.PhoneNumber;
+            EditStaffSalaryEntry.Text = staff.Salary.ToString();
+            EditStaffRoleLabel.Text = staff.Role;
+
         }
     }
-    private void OnSaveEditStaffClicked(object sender, EventArgs e)
+    private async void OnSaveEditStaffClicked(object sender, EventArgs e)
     {
-        if (!string.IsNullOrWhiteSpace(EditStaffNameEntry.Text) &&
-            !string.IsNullOrWhiteSpace(EditStaffDOBEntry.Text) &&
-            !string.IsNullOrWhiteSpace(EditStaffPhoneEntry.Text) &&
-            !string.IsNullOrWhiteSpace(EditStaffAddressEntry.Text) &&
-            !string.IsNullOrWhiteSpace(EditStaffRoleLabel.Text))
+        string username = StaffUsernameEntry.Text;
+        string password = StaffPasswordEntry.Text;
+        string staffName = StaffNameEntry.Text;
+        string staffPhone = StaffPhoneEntry.Text;
+
+        string staffRole = AddStaffRoleLabel.Text;
+
+        decimal staffSalary;
+        bool isSaValid = decimal.TryParse(StaffSalaryEntry.Text, out staffSalary);
+        int phone;
+        bool isPhoneValid = int.TryParse(StaffPhoneEntry.Text, out phone);
+
+        if (isSaValid && isPhoneValid)
         {
-            if (_currentEditingFrame != null && _currentEditingFrame.Content is Grid grid)
+            Debug.WriteLine($"{username}, {password}, {staffName}, {staffPhone}, {staffSalary}, {staffRole}");
+
+            if (mainViewModel != null)
             {
-                var nameLabel = grid.Children[0] as Label;
-                var dobLabel = grid.Children[1] as Label;
-                var phoneLabel = grid.Children[2] as Label;
-                var roleLabel = grid.Children[3] as Label;
-
-                if (nameLabel != null) nameLabel.Text = EditStaffNameEntry.Text;
-                if (dobLabel != null) dobLabel.Text = EditStaffDOBEntry.Text;
-                if (phoneLabel != null) phoneLabel.Text = EditStaffPhoneEntry.Text;
-                if (roleLabel != null) roleLabel.Text = EditStaffRoleLabel.Text;
-
-                EditStaffPopup.IsVisible = false;
-                EditStaffNameEntry.Text = string.Empty;
-                EditStaffDOBEntry.Text = string.Empty;
-                EditStaffPhoneEntry.Text = string.Empty;
-                EditStaffAddressEntry.Text = string.Empty;
-                EditStaffRoleLabel.Text = string.Empty;
-                _currentEditingFrame = null;
+                // await mainViewModel.StaffVM.UpdateStaff(idStaff, new Staff(username, staffName, staffPhone, staffRole, staffSalary));
+                //if (staffRole == "Thu ngân")
+                //    await mainViewModel.AccountVM.UpdateAccount(username, password, staffRole);
             }
         }
         else
         {
-            DisplayAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin!", "OK");
+            // Hiển thị lỗi hoặc xử lý khi nhập sai
+            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
         }
     }
 
-    // Sự kiện khi nhấn nút "Hủy" trong popup chỉnh sửa nhân viên
+    // Sự kiện khi nhấn nút "Hủy" trong popup chỉnh sửa nhân viên x
     private void OnCancelEditStaffClicked(object sender, EventArgs e)
     {
         EditStaffPopup.IsVisible = false;
-        EditStaffNameEntry.Text = string.Empty;
-        EditStaffDOBEntry.Text = string.Empty;
-        EditStaffPhoneEntry.Text = string.Empty;
-        EditStaffAddressEntry.Text = string.Empty;
-        EditStaffRoleLabel.Text = string.Empty;
-        _currentEditingFrame = null;
+    }
+    
+    // BAM VAO NUT XOA NHAN VIEN
+    private async void OnDeleteStaffClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var staff = button?.BindingContext as Staff;
+        if (staff != null)
+        {
+            if (mainViewModel != null)
+            {
+                // await mainViewModel.StaffVM.DeleteStaff(staff.Id);
+                await DisplayAlert("Thông báo", "Nhân viên đã được xóa!", "OK");
+            }
+        }
     }
     protected override void OnSizeAllocated(double width, double height)
     {
@@ -319,8 +382,9 @@ public partial class StaffPage : ContentPage
             _lastScale = scale;
         }
     }
+    
     private bool _isStaffGroupOptionsVisible = false;
-    //Popup Nhóm nhân viên và các thao tác trong đó
+    //Popup Nhóm nhân viên và các thao tác trong đó x
     private void OnStaffGroupLabelTapped(object sender, EventArgs e)
     {
         _isStaffGroupOptionsVisible = true;
@@ -329,26 +393,49 @@ public partial class StaffPage : ContentPage
 
     private void OnCashierOptionSelected(object sender, EventArgs e)
     {
+        AddStaffRoleLabel.Text = "Thu ngân";
         EditStaffRoleLabel.Text = "Thu ngân";
+
+        UsernameEntry.IsEnabled = true;
+        PasswordEntry.IsEnabled = true;
+
+        EditUsernameEntry.IsEnabled = true;
+        EditPasswordEntry.IsEnabled = true;
+
         _isStaffGroupOptionsVisible = false;
         StaffGroupOptions.IsVisible = _isStaffGroupOptionsVisible;
     }
 
     private void OnBaristaOptionSelected(object sender, EventArgs e)
     {
+        AddStaffRoleLabel.Text = "Pha chế";
         EditStaffRoleLabel.Text = "Pha chế";
+
+        UsernameEntry.IsEnabled = false;
+        PasswordEntry.IsEnabled = false;
+
+        EditUsernameEntry.IsEnabled = false;
+        EditPasswordEntry.IsEnabled = false;
+
+
         _isStaffGroupOptionsVisible = false;
         StaffGroupOptions.IsVisible = _isStaffGroupOptionsVisible;
     }
 
     private void OnWaiterOptionSelected(object sender, EventArgs e)
     {
+        AddStaffRoleLabel.Text = "Phục vụ";
         EditStaffRoleLabel.Text = "Phục vụ";
+
+        UsernameEntry.IsEnabled = false;
+        PasswordEntry.IsEnabled = false;
+
+        EditUsernameEntry.IsEnabled = false;
+        EditPasswordEntry.IsEnabled = false;
+
+
         _isStaffGroupOptionsVisible = false;
         StaffGroupOptions.IsVisible = _isStaffGroupOptionsVisible;
     }
-    private void OnCoffeeOptionClicked(object sender, EventArgs e) { }
-    private void OnTeaOptionClicked(object sender, EventArgs e) { }
-    private void OnPastryOptionClicked(object sender, EventArgs e) { }
 
 }

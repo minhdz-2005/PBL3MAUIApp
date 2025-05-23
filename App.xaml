@@ -22,13 +22,51 @@
             <x:Double x:Key="NavIconSize">30</x:Double>
             <x:Double x:Key="NavBoxSize">60</x:Double>
 
-
-
-            
-
-
-
-            
+            <!--  Style cho Label  -->
+            <Style x:Key="DynamicLabelTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource DynamicFontSizeTitle}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+            </Style>
+            <Style x:Key="DynamicLabelLargeStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource DynamicFontSizeLarge}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+            </Style>
+            <Style x:Key="DynamicLabelMediumStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="{DynamicResource DynamicFontSizeMedium}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+            </Style>
+            <!--  Style cho Button  -->
+            <Style x:Key="DynamicButtonInsideStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="{DynamicResource DynamicFontSizeMedium}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+                <Setter Property="CornerRadius" Value="{DynamicResource DynamicCornerRadius}" />
+            </Style>
+            <Style x:Key="DynamicButtonOutsideStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="{DynamicResource DynamicFontSizeLarge}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+                <Setter Property="CornerRadius" Value="{DynamicResource DynamicCornerRadius}" />
+            </Style>
+            <!--  Style cho Frame  -->
+            <Style x:Key="DynamicFrameStyle" TargetType="Frame">
+                <Setter Property="Padding" Value="{DynamicResource DynamicPadding}" />
+                <Setter Property="CornerRadius" Value="{DynamicResource DynamicCornerRadius}" />
+            </Style>
+            <!--  Style cho Grid  -->
+            <Style x:Key="DynamicGridStyle" TargetType="Grid">
+                <Setter Property="Padding" Value="{DynamicResource DynamicPadding}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+                <Setter Property="RowSpacing" Value="{DynamicResource DynamicSpacing}" />
+            </Style>
+            <!--  Style cho Entry  -->
+            <Style x:Key="DynamicEntryStyle" TargetType="Entry">
+                <Setter Property="FontSize" Value="{DynamicResource DynamicFontSizeMedium}" />
+                <Setter Property="Margin" Value="{DynamicResource DynamicMargin}" />
+            </Style>
+            <!--  Style cho Border  -->
+            <Style x:Key="DynamicBorderStyle" TargetType="Border">
+                <Setter Property="Padding" Value="{DynamicResource DynamicPadding}" />
+                <Setter Property="StrokeThickness" Value="{DynamicResource DynamicBorderThickness}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

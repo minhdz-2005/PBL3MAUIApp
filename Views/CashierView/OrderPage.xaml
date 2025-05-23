@@ -62,73 +62,34 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+                    <CollectionView Grid.Row="1" ItemsSource="{Binding ProductVM.Categories}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Grid.Row="0"
+                                    Padding="0"
+                                    BackgroundColor="Transparent"
+                                    Stroke="#F2E2D6"
+                                    StrokeShape="RoundRectangle 10"
+                                    StrokeThickness="1">
 
-                    <Border
-                        Grid.Row="0"
-                        Padding="0"
-                        BackgroundColor="Transparent"
-                        Stroke="#F2E2D6"
-                        StrokeShape="RoundRectangle 10"
-                        StrokeThickness="1">
+                                    <Button
+                                        Style="{StaticResource HoverButtonStyle}"
+                                        x:Name="CoffeeButton"
+                                        Padding="0,0,38,0"
+                                        BackgroundColor="Transparent"
+                                        BorderWidth="0"
+                                        Clicked="OnCategoryButtonClicked"
+                                        FontSize="16"
+                                        HorizontalOptions="Fill"
+                                        Text="{Binding}"
+                                        TextColor="#4B3621"
+                                        VerticalOptions="Start" />
 
-                        <Button
-                            Style="{StaticResource HoverButtonStyle}"
-                            x:Name="CoffeeButton"
-                            Padding="0,0,38,0"
-                            BackgroundColor="Transparent"
-                            BorderWidth="0"
-                            Clicked="OnCoffeeButtonClicked"
-                            FontSize="16"
-                            HorizontalOptions="Fill"
-                            Text="☕ CÀ PHÊ"
-                            TextColor="#4B3621"
-                            VerticalOptions="Start" />
-
-                    </Border>
-
-                    <Border
-                        Grid.Row="1"
-                        Padding="0"
-                        BackgroundColor="Transparent"
-                        Stroke="#F2E2D6"
-                        StrokeShape="RoundRectangle 10"
-                        StrokeThickness="1">
-                        <Button
-                            Style="{StaticResource HoverButtonStyle}"
-                            x:Name="TeaButton"
-                            Padding="0,0,64,0"
-                            BackgroundColor="Transparent"
-                            BorderWidth="0"
-                            Clicked="OnTeaButtonClicked"
-                            FontSize="16"
-                            HorizontalOptions="Fill"
-                            Text="🍵 TRÀ"
-                            TextColor="#4B3621"
-                            VerticalOptions="Start" />
-                    </Border>
-
-                    <Border
-                        Grid.Row="2"
-                        Padding="0"
-                        BackgroundColor="Transparent"
-                        Stroke="#F2E2D6"
-                        StrokeShape="RoundRectangle 10"
-                        StrokeThickness="1">
-
-                        <Button
-                            Style="{StaticResource HoverButtonStyle}"
-                            x:Name="CakeButton"
-                            Padding="0"
-                            BackgroundColor="Transparent"
-                            BorderWidth="0"
-                            Clicked="OnCakeButtonClicked"
-                            FontSize="16"
-                            HorizontalOptions="Fill"
-                            Text="🍰 BÁNH NGỌT"
-                            TextColor="#4B3621"
-                            VerticalOptions="Start" />
-                    </Border>
-
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
 
                 <BoxView
@@ -143,46 +104,46 @@
 
         <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="4*,1*">
             <ScrollView Grid.Row="0">
-            <VerticalStackLayout  Spacing="10">
-                
-                <!--  Món  -->
-                <CollectionView Margin="20" ItemsSource="{Binding ProductVM.Products}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame
+                <VerticalStackLayout  Spacing="10">
+
+                    <!--  Món  -->
+                    <CollectionView Margin="20" ItemsSource="{Binding ProductVM.Products}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
                                     Padding="10"
                                     BackgroundColor="White"
                                     BorderColor="#F2E2D6"
                                     CornerRadius="10">
-                                <Grid
+                                    <Grid
                                         ColumnDefinitions="Auto,*,Auto,Auto"
                                         RowDefinitions="Auto,Auto"
                                         RowSpacing="5">
-                                    <Image
+                                        <Image
                                             Grid.RowSpan="2"
                                             Margin="0,0,15,0"
                                             HeightRequest="50"
                                             Source="coffee.png"
                                             WidthRequest="50" />
-                                    <Label
+                                        <Label
                                             Grid.Column="1"
                                             FontSize="16"
                                             Text="{Binding Name}"
                                             TextColor="#4B3621" />
-                                    <Label
+                                        <Label
                                             Grid.Row="1"
                                             Grid.Column="1"
                                             FontSize="12"
                                             Text="{Binding Description}"
                                             TextColor="#7B6A54" />
-                                    <Label
+                                        <Label
                                             Grid.Column="2"
                                             Margin="0,0,10,0"
                                             FontSize="16"
                                             Text="{Binding Price, StringFormat='${0:0.00}'}"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center" />
-                                    <Button
+                                        <Button
                                             Style="{StaticResource HoverButtonStyle}"
                                             Grid.Column="3"
                                             BackgroundColor="#4B3621"
@@ -196,12 +157,12 @@
                                             TextColor="White"
                                             VerticalOptions="Center"
                                             WidthRequest="30" />
-                                </Grid>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
             </ScrollView>
             <!--  Hang cho  -->
             <Frame Padding="0"
@@ -547,7 +508,7 @@
                                                     TextColor="Black" />
                                             </Grid>
                                         </Border>
-                                        
+
                                     </VerticalStackLayout>
 
                                 </ScrollView>
@@ -617,7 +578,7 @@
                 Margin="5"
                 Text="Lưu các ghi chú" 
                 Clicked="OnSaveNoteClicked"/>
-            
+
         </Grid>
         <!--  POPUP them uu dai  -->
         <Grid
@@ -729,7 +690,7 @@
                                                 HorizontalOptions="Center"
                                                 Text="Áp dụng" 
                                                 Clicked="OnApplyPromotionButtonClicked"/>
-                                            
+
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
