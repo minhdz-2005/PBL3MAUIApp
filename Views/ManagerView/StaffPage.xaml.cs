@@ -8,7 +8,6 @@ using System.Diagnostics;
 
 public partial class StaffPage : ContentPage
 {
-    private Frame? _currentEditingFrame;
     private double _lastScale = -1;
 
     public CashierViewModel? mainViewModel;
@@ -119,132 +118,17 @@ public partial class StaffPage : ContentPage
         string password = StaffPasswordEntry.Text;
         string staffName = StaffNameEntry.Text;
         string staffPhone = StaffPhoneEntry.Text;
-
+        string staffSalary = StaffSalaryEntry.Text;
         string staffRole = AddStaffRoleLabel.Text;
 
-        decimal staffSalary;
-        bool isSaValid = decimal.TryParse(StaffSalaryEntry.Text, out staffSalary);
-        int phone;
-        bool isPhoneValid = int.TryParse(StaffPhoneEntry.Text, out phone);
-
-        if (isSaValid && isPhoneValid)
+        if (mainViewModel != null)
         {
-            Debug.WriteLine($"{username}, {password}, {staffName}, {staffPhone}, {staffSalary}, {staffRole}");
-
-            if (mainViewModel != null)
+            bool added = await mainViewModel.StaffVM.AddStaff(username, password, staffName, staffPhone, staffRole, staffSalary);
+            if (added)
             {
-                // await mainViewModel.StaffVM.AddStaff(new Staff(username, staffName, staffPhone, staffRole, staffSalary));
-                //if (staffRole == "Thu ngân")
-                //    await mainViewModel.AccountVM.AddAccount(username, password, staffRole);
+                AddStaffPopup.IsVisible = false;
             }
         }
-        else
-        {
-            // Hiển thị lỗi hoặc xử lý khi nhập sai
-            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
-        }
-        
-
-        //if (!string.IsNullOrWhiteSpace(StaffNameEntry.Text) &&
-        //    !string.IsNullOrWhiteSpace(StaffDOBEntry.Text) &&
-        //    !string.IsNullOrWhiteSpace(StaffPhoneEntry.Text) &&
-        //    !string.IsNullOrWhiteSpace(StaffAddressEntry.Text) &&
-        //    !string.IsNullOrWhiteSpace(AddStaffRoleLabel.Text))
-        //{
-        //    var frame = new Frame
-        //    {
-        //        Margin = new Thickness(0, 0, 0, 5),
-        //        Padding = 10,
-        //        BackgroundColor = Color.FromArgb("#F8E0E0"),
-        //        BorderColor = Colors.Transparent,
-        //        CornerRadius = 5
-        //    };
-
-        //    var grid = new Grid
-        //    {
-        //        ColumnDefinitions = new ColumnDefinitionCollection
-        //        {
-        //            new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-        //            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-        //            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-        //            new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-        //            new ColumnDefinition { Width = GridLength.Auto }
-        //        },
-        //        ColumnSpacing = 10
-        //    };
-
-        //    // Thêm Label cho Họ tên
-        //    var nameLabel = new Label
-        //    {
-        //        Text = StaffNameEntry.Text,
-        //        FontSize = 16,
-        //        TextColor = Colors.Black,
-        //        VerticalOptions = LayoutOptions.Center
-        //    };
-        //    grid.Children.Add(nameLabel);
-        //    Grid.SetColumn(nameLabel, 0);
-
-        //    // Thêm Label cho Ngày sinh
-        //    var dobLabel = new Label
-        //    {
-        //        Text = StaffDOBEntry.Text,
-        //        FontSize = 16,
-        //        TextColor = Colors.Black,
-        //        VerticalOptions = LayoutOptions.Center
-        //    };
-        //    grid.Children.Add(dobLabel);
-        //    Grid.SetColumn(dobLabel, 1);
-
-        //    // Thêm Label cho Số điện thoại
-        //    var phoneLabel = new Label
-        //    {
-        //        Text = StaffPhoneEntry.Text,
-        //        FontSize = 16,
-        //        TextColor = Colors.Black,
-        //        VerticalOptions = LayoutOptions.Center
-        //    };
-        //    grid.Children.Add(phoneLabel);
-        //    Grid.SetColumn(phoneLabel, 2);
-
-        //    // Thêm Label cho Vị trí
-        //    var roleLabel = new Label
-        //    {
-        //        Text = AddStaffRoleLabel.Text,
-        //        FontSize = 16,
-        //        TextColor = Colors.Black,
-        //        VerticalOptions = LayoutOptions.Center
-        //    };
-        //    grid.Children.Add(roleLabel);
-        //    Grid.SetColumn(roleLabel, 3);
-
-        //    // Thêm nút Xóa
-        //    var deleteButton = new Button
-        //    {
-        //        Padding = 5,
-        //        BackgroundColor = Colors.Red,
-        //        CornerRadius = 5,
-        //        FontSize = 14,
-        //        Text = "Xóa",
-        //        TextColor = Colors.White
-        //    };
-        //    deleteButton.Clicked += RemoveEmployee_Clicked;
-        //    grid.Children.Add(deleteButton);
-        //    Grid.SetColumn(deleteButton, 4);
-
-        //    frame.Content = grid;
-        //    StaffList.Children.Add(frame);
-
-        //    AddStaffPopup.IsVisible = false;
-        //    StaffNameEntry.Text = string.Empty;
-        //    StaffDOBEntry.Text = string.Empty;
-        //    StaffPhoneEntry.Text = string.Empty;
-        //    StaffAddressEntry.Text = string.Empty;
-        //    AddStaffRoleLabel.Text = string.Empty;
-        //}
-        //else
-        //{
-        //    DisplayAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin!", "OK");
-        //}
     }
 
     // Sự kiện khi nhấn nút "Hủy" trong popup x
@@ -285,33 +169,21 @@ public partial class StaffPage : ContentPage
     }
     private async void OnSaveEditStaffClicked(object sender, EventArgs e)
     {
-        string username = StaffUsernameEntry.Text;
-        string password = StaffPasswordEntry.Text;
-        string staffName = StaffNameEntry.Text;
-        string staffPhone = StaffPhoneEntry.Text;
+        string username = EditStaffUsernameEntry.Text;
+        string password = EditStaffPasswordEntry.Text;
+        string staffName = EditStaffNameEntry.Text;
+        string staffPhone = EditStaffPhoneEntry.Text;
+        string staffSalary = EditStaffSalaryEntry.Text;
+        string staffRole = EditStaffRoleLabel.Text;
 
-        string staffRole = AddStaffRoleLabel.Text;
-
-        decimal staffSalary;
-        bool isSaValid = decimal.TryParse(StaffSalaryEntry.Text, out staffSalary);
-        int phone;
-        bool isPhoneValid = int.TryParse(StaffPhoneEntry.Text, out phone);
-
-        if (isSaValid && isPhoneValid)
+        if (mainViewModel != null)
         {
-            Debug.WriteLine($"{username}, {password}, {staffName}, {staffPhone}, {staffSalary}, {staffRole}");
-
-            if (mainViewModel != null)
+            bool edited = await mainViewModel.StaffVM.UpdateStaff(username, password, staffName, staffPhone, staffRole, staffSalary, idStaff);
+            if (edited)
             {
-                // await mainViewModel.StaffVM.UpdateStaff(idStaff, new Staff(username, staffName, staffPhone, staffRole, staffSalary));
-                //if (staffRole == "Thu ngân")
-                //    await mainViewModel.AccountVM.UpdateAccount(username, password, staffRole);
+                EditStaffPopup.IsVisible = false;
             }
-        }
-        else
-        {
-            // Hiển thị lỗi hoặc xử lý khi nhập sai
-            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
+
         }
     }
 
@@ -330,7 +202,7 @@ public partial class StaffPage : ContentPage
         {
             if (mainViewModel != null)
             {
-                // await mainViewModel.StaffVM.DeleteStaff(staff.Id);
+                await mainViewModel.StaffVM.DeleteStaff(staff.Id);
                 await DisplayAlert("Thông báo", "Nhân viên đã được xóa!", "OK");
             }
         }

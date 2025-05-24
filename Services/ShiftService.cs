@@ -87,4 +87,20 @@ public class ShiftService
 
         return null;
     }
+    // READ BY DATE
+    public async Task<List<Shift>> GetShiftsByDateAsync(DateTime date)
+    {
+        var url = $"{GetBaseUrl()}/api/Shift/Date/{date:yyyy-MM-dd}";
+        var response = await _client.GetAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            var listShift = JsonSerializer.Deserialize<List<Shift>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return listShift ?? new List<Shift>();
+        }
+        return new List<Shift>();
+    }
 }

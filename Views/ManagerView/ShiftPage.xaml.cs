@@ -1,14 +1,19 @@
 ﻿using Microsoft.Maui.Controls;
 
 namespace PBL3MAUIApp.Views.ManagerView;
-
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.Models;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 public partial class ShiftPage : ContentPage
 {
     private double _lastScale = -1;
+    public CashierViewModel? mainViewModel;
     public ShiftPage()
     {
         InitializeComponent();
+        mainViewModel = BindingContext as CashierViewModel;
         this.SizeChanged += (s, e) =>
         {
             double width = this.Width;
@@ -29,81 +34,157 @@ public partial class ShiftPage : ContentPage
         };
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (mainViewModel != null)
+        {
+            await mainViewModel.ShiftVM.GetAllDay();
+        }
+    }
+    //
+    static DateTime selectedDate = new DateTime();
+    static int selectedShiftIndex = 0;
+
+
     // Sự kiện khi chạm vào tiêu đề Ca 1
     private void ToggleShift1_Tapped(object sender, EventArgs e)
     {
         Shift1Details.IsVisible = !Shift1Details.IsVisible;
+        selectedShiftIndex = 1;
     }
 
     // Sự kiện khi chạm vào tiêu đề Ca 2
     private void ToggleShift2_Tapped(object sender, EventArgs e)
     {
         Shift2Details.IsVisible = !Shift2Details.IsVisible;
+        selectedShiftIndex = 2;
     }
 
     // Sự kiện khi chạm vào tiêu đề Ca 3
     private void ToggleShift3_Tapped(object sender, EventArgs e)
     {
         Shift3Details.IsVisible = !Shift3Details.IsVisible;
+        selectedShiftIndex = 3;
     }
 
     // Sự kiện khi nhấn nút "Thêm nhân viên" cho Ca 1
-    private void AddEmployeeToShift1_Clicked(object sender, EventArgs e)
+    private async void AddEmployeeToShift1_Clicked(object sender, EventArgs e)
     {
-        // DisplayAlert("Thông báo", "Nút Thêm nhân viên cho Ca 1 đã được nhấn!", "OK");
+        selectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, 12, 0, 0);
+
+        if (selectedDate < DateTime.Now)
+        {
+            await DisplayAlert("Thông báo", "Không thể thêm nhân viên vào ca làm trong quá khứ.", "OK");
+            return;
+        }
+
         AddStaffIntoShiftPopup.IsVisible = true;
+
+        if(mainViewModel != null)
+        {
+            selectedShiftIndex = 1;
+            await mainViewModel.ShiftVM.ShowStaffShift(selectedDate, selectedShiftIndex);
+        }
     }
 
     // Sự kiện khi nhấn nút "Thêm nhân viên" cho Ca 2
-    private void AddEmployeeToShift2_Clicked(object sender, EventArgs e)
+    private async void AddEmployeeToShift2_Clicked(object sender, EventArgs e)
     {
-        // DisplayAlert("Thông báo", "Nút Thêm nhân viên cho Ca 2 đã được nhấn!", "OK");
-        AddStaffIntoShiftPopup.IsVisible = true;
+        selectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, 18, 0, 0);
 
+        if (selectedDate < DateTime.Now)
+        {
+            await DisplayAlert("Thông báo", "Không thể thêm nhân viên vào ca làm trong quá khứ.", "OK");
+            return;
+        }
+
+        AddStaffIntoShiftPopup.IsVisible = true;
+        if (mainViewModel != null)
+        {
+            selectedShiftIndex = 2;
+            await mainViewModel.ShiftVM.ShowStaffShift(selectedDate, selectedShiftIndex);
+        }
     }
 
     // Sự kiện khi nhấn nút "Thêm nhân viên" cho Ca 3
-    private void AddEmployeeToShift3_Clicked(object sender, EventArgs e)
+    private async void AddEmployeeToShift3_Clicked(object sender, EventArgs e)
     {
-        // DisplayAlert("Thông báo", "Nút Thêm nhân viên cho Ca 3 đã được nhấn!", "OK");
+        selectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, 23, 59, 59);
+
+        if (selectedDate < DateTime.Now)
+        {
+            await DisplayAlert("Thông báo", "Không thể thêm nhân viên vào ca làm trong quá khứ.", "OK");
+            return;
+        }
+
         AddStaffIntoShiftPopup.IsVisible = true;
+        if (mainViewModel != null)
+        {
+            selectedShiftIndex = 3;
+            await mainViewModel.ShiftVM.ShowStaffShift(selectedDate, selectedShiftIndex);
+        }
     }
 
     // Sự kiện khi nhấn nút "Xóa" nhân viên
-    private void RemoveEmployee_Clicked(object sender, EventArgs e)
+    private async void RemoveEmployee_Clicked(object sender, EventArgs e)
     {
-        DisplayAlert("Thông báo", "Nút Xóa nhân viên đã được nhấn!", "OK");
+        if (selectedShiftIndex == 1) selectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, 12, 0, 0);
+        else if (selectedShiftIndex == 2) selectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, 18, 0, 0);
+        else if (selectedShiftIndex == 3) selectedDate = new DateTime(selectedDate.Year, selectedDate.Month, selectedDate.Day, 23, 59, 59);
+        
+        if (selectedDate < DateTime.Now)
+        {
+            await DisplayAlert("Thông báo", "Không thể xóa nhân viên khỏi ca làm trong quá khứ.", "OK");
+            return;
+        }
+
+        if (mainViewModel != null)
+        {
+            var button = sender as Button;
+            if (button?.BindingContext is Staff staff)
+            {
+                Debug.WriteLine($"Removing staff: {staff.Name} from shift {selectedShiftIndex} on {selectedDate}");
+                await mainViewModel.ShiftVM.RemoveStaffFromShift(staff);
+            }
+        }
+    }
+    // Sự kiện khi nhấn nút "Them" nhân viên
+    private async void AddEmployee_Clicked(object sender, EventArgs e)
+    {
+        if (mainViewModel != null)
+        {
+            var button = sender as Button;
+            if (button?.BindingContext is Staff staff)
+            {
+                await mainViewModel.ShiftVM.AddStaffToShift(staff);
+            }
+        }
     }
 
     // Sự kiện khi chọn ngày
-    private void SelectDate_Clicked(object sender, EventArgs e)
+    private async void SelectDate_Clicked(object sender, EventArgs e)
     {
         var button = sender as Button;
-        if (button == null) return;
 
-        // Reset màu sắc của tất cả nút ngày
-        DateButton1.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton2.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton3.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton4.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton5.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton6.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton7.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton8.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton9.BackgroundColor = Color.FromArgb("#CCCCCC");
-        DateButton10.BackgroundColor = Color.FromArgb("#CCCCCC");
+        if (mainViewModel != null && button?.BindingContext is DateTime date)
+        {
+            selectedDate = date;
 
-        // Cập nhật màu nền cho nút ngày được chọn
-        button.BackgroundColor = Color.FromArgb("#FF9999");
+            await mainViewModel.ShiftVM.StaffInShift(date);
 
-        // Cập nhật label ngày làm
-        SelectedDateLabel.Text = $"Ngày làm: {button.Text}/2025";
+            // Cập nhật label ngày làm
+            SelectedDateLabel.Text = $"Ngày làm: {date:dd/MM/yyyy}";
+        }
     }
 
     // Sự kiện khi nhấn nút "Thêm ngày làm"
-    private void AddDate_Clicked(object sender, EventArgs e)
+    private async void AddDate_Clicked(object sender, EventArgs e)
     {
-        DisplayAlert("Thông báo", "Nút Thêm ngày làm đã được nhấn!", "OK");
+        if (mainViewModel != null)
+        {
+            await mainViewModel.ShiftVM.AddDayShift();
+        }
     }
     protected override void OnSizeAllocated(double width, double height)
     {
@@ -155,16 +236,21 @@ public partial class ShiftPage : ContentPage
         }
     }
     // Popup thêm nhân viên vào ca làm và các chức năng có trong đó
-    private void OnRoleClicked(object sender, EventArgs e)
+    private async void OnRoleClicked(object sender, EventArgs e)
     {
         var label = sender as Label;
         if (label == null) return;
 
+        RoleAll.BackgroundColor = label.Text == "Tất cả" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
         RoleCashier.BackgroundColor = label.Text == "Thu ngân" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
         RoleBarista.BackgroundColor = label.Text == "Pha chế" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
         RoleWaiter.BackgroundColor = label.Text == "Phục vụ" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+
+        if (mainViewModel != null)
+        {
+            await mainViewModel.ShiftVM.FilterStaffByRole(label.Text);
+        }
     }
-    private string _selectedShifttName = string.Empty;
 
     private void OnCancelEditShiftClicked(object sender, EventArgs e)
     {

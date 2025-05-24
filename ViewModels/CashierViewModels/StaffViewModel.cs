@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +32,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         }
 
         private StaffService staffService = new StaffService();
-
+        private AccountService accountService = new AccountService();
         // LOAD DANH SACH NHAN VIEN
         public async Task GetAllStaff()
         {
@@ -64,20 +66,153 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
         // THEM NHAN VIEN
-        public async Task AddStaff(Staff staff)
+        public async Task<bool> AddStaff(string username, string password, string name, string phone, string role, string salaryText)
         {
-            bool result = await staffService.AddStaffAsync(staff);
-            if (result)
+            // KIEM TRA GIA TRI
+
+            // kiem tra sdt
+            bool isNumeric = phone.All(char.IsDigit);
+            if (!isNumeric)
             {
-                Staffs.Add(staff);
-                Count++;
+                await Shell.Current.DisplayAlert("Thông báo", "Số điện thoại không hợp lệ", "OK");
+                return false;
             }
+            // kiem tra luong
+            decimal salary;
+            bool isValidSalary = decimal.TryParse(
+                salaryText,
+                NumberStyles.Number,
+                CultureInfo.InvariantCulture,
+                out salary
+            );
+            if (!isValidSalary || salary < 0)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Lương không hợp lệ", "OK");
+                return false;
+            }
+            // kiem tra so dien thoai va ten dang nhap
+            var list = await staffService.GetStaffsAsync();
+            bool existing = true;
+            foreach (var item in list)
+            {
+                if ((item.Username == username && username != null) || item.PhoneNumber == phone)
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập hoặc số điện thoại đã tồn tại", "OK");
+                    existing = false;
+                    return false;
+                }
+            }
+
+            //kiem tra ten dang nhap va mat khau (thu ngan)
+            bool isValidAccount = true;
+            if ((username == null || password == null) && role == "Thu ngân")
+            {
+                isValidAccount = false;
+                await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không hợp lệ", "OK");
+                return false;
+            }
+
+            // Debug.WriteLine($"{isNumeric}, {isValidSalary}, {existing}, {isValidAccount}");
+
+            // Them nhan vien vao db
+            if (isNumeric && isValidSalary && existing && isValidAccount)
+            {
+                if (role == "Thu ngân" && username != null && password != null)
+                {
+                    Staff staff = new Staff(username, name, phone, role, salary);
+                    await staffService.AddStaffAsync(staff);
+                    Staffs.Add(staff);
+                    Count++;
+
+                    await accountService.AddAccountAsync(new Account(username, password, role));
+                }
+                if (role != "Thu ngân")
+                {
+                    Staff staff = new Staff("", name, phone, role, salary);
+                    await staffService.AddStaffAsync(staff);
+                    Staffs.Add(staff);
+                    Count++;
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Thêm nhân viên không thành công", "OK");
+                    return false;
+                }
+            }
+            return true;
         }
         // CAP NHAT NHAN VIEN
-        public async Task UpdateStaff(int id, Staff staff)
+        public async Task<bool> UpdateStaff(string username, string password, string name, string phone, string role, string salaryText, int id)
         {
-            await staffService.UpdateStaffAsync(id, staff);
-            
+            // KIEM TRA GIA TRI
+
+            // kiem tra sdt
+            bool isNumeric = phone.All(char.IsDigit);
+            if (!isNumeric)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Số điện thoại không hợp lệ", "OK");
+                return false;
+            }
+            // kiem tra luong
+            decimal salary;
+            bool isValidSalary = decimal.TryParse(
+                salaryText,
+                NumberStyles.Number,
+                CultureInfo.InvariantCulture,
+                out salary
+            );
+            if (!isValidSalary || salary < 0)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Lương không hợp lệ", "OK");
+                return false;
+            }
+            // kiem tra va ten dang nhap
+            var list = await staffService.GetStaffsAsync();
+            bool existing = true;
+            foreach (var item in list)
+            {
+                if (item.Username == username && username != null && role == "Thu ngân")
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
+                    existing = false;
+                    return false;
+                }
+            }
+
+            //kiem tra ten dang nhap va mat khau (thu ngan)
+            bool isValidAccount = true;
+            if ((username == null || password == null) && role == "Thu ngân")
+            {
+                isValidAccount = false;
+                await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không hợp lệ", "OK");
+                return false;
+            }
+            // Cap nhat nhan vien vao db
+            if (isNumeric && isValidSalary && existing && isValidAccount)
+            {
+                if (role == "Thu ngân" && username != null && password != null)
+                {
+                    Staff staff = new Staff(username, name, phone, role, salary);
+                    await staffService.UpdateStaffAsync(id, staff);
+
+                    await accountService.AddAccountAsync(new Account(username, password, role));
+                }
+                if (role != "Thu ngân" && username != null)
+                {
+                    Staff staff = new Staff("", name, phone, role, salary);
+                    await staffService.UpdateStaffAsync(id, staff);
+                    var listAcc = await accountService.GetAccountsAsync();
+                    foreach (var item in listAcc)
+                    {
+                        if (item.Username == username)
+                        {
+                            await accountService.DeleteAccountAsync(item.Id);
+                            break;
+                        }
+                    }
+                }
+            }
+            return true;
         }
         // XOA NHAN VIEN
         public async Task DeleteStaff(int id)

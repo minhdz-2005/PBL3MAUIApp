@@ -16,8 +16,8 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         public VoucherViewModel VoucherVM { get; set; }
         public RevenueViewModel RevenueVM { get; set; }
         public AccountViewModel AccountVM { get; set; }
-
         public StaffViewModel StaffVM { get; set; }
+        public ShiftViewModel ShiftVM { get; set; }
 
         public CashierViewModel()
         {
@@ -28,6 +28,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             RevenueVM = new RevenueViewModel();
             AccountVM = new AccountViewModel();
             StaffVM = new StaffViewModel();
+            ShiftVM = new ShiftViewModel();
         }
     }
 }

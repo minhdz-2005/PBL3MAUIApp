@@ -58,22 +58,21 @@
                         Text="Tất cả" />
                     <VerticalStackLayout Spacing="10"
                         Margin="{DynamicResource DynamicMargin}"
-                
                         VerticalOptions="Center">
                         <CollectionView Grid.Row="1" ItemsSource="{Binding StaffVM.Roles}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
 
-                                    <Button Margin="0,10,0,10"
-                                    x:Name="Role"
-                                    Padding="5"
-                                    BackgroundColor="#FFE4B5"
-                                    BorderColor="#8B4513"
-                                    Clicked="OnRoleClicked"
-                                    CornerRadius="{DynamicResource DynamicCornerRadius}"
-                                    Style="{StaticResource HoverButtonStyle}"
-                                    TextColor="#000"
-                                    Text="{Binding}" />
+                                    <Button Margin="0,0,0,10"
+                                        x:Name="Role"
+                                        Padding="5"
+                                        BackgroundColor="#FFE4B5"
+                                        BorderColor="#8B4513"
+                                        Clicked="OnRoleClicked"
+                                        CornerRadius="{DynamicResource DynamicCornerRadius}"
+                                        Style="{StaticResource HoverButtonStyle}"
+                                        TextColor="#000"
+                                        Text="{Binding}" />
 
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
@@ -295,7 +294,7 @@
                             Grid.Row="6"
                             HeightRequest="40"
                             Margin="0"
-                            Padding="0,0,0,10">
+                            Padding="0,0,0,0">
                             <Label
                                 x:Name="AddStaffRoleLabel"
                                 Style="{DynamicResource DynamicEntryStyle}"

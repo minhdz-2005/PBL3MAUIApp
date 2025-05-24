@@ -157,7 +157,7 @@ public partial class ProductPage : ContentPage
 
             if(mainViewModel != null)
             {
-                // await mainViewModel.ProductVM.AddProduct(new Product(name, price, cate, description));
+                await mainViewModel.ProductVM.AddProduct(new Product(name, price, cate, description));
             }
             PopupOverlay.IsVisible = false;
         }
@@ -215,7 +215,7 @@ public partial class ProductPage : ContentPage
 
             if (mainViewModel != null)
             {
-                // await mainViewModel.ProductVM.UpdateProduct(idProduct, new Product(name, price, cate, description));
+                await mainViewModel.ProductVM.UpdateProduct(idProduct, new Product(name, price, cate, description));
             }
             PopupOverlay.IsVisible = false;
         }
@@ -234,16 +234,16 @@ public partial class ProductPage : ContentPage
     }
 
     // XOA SAN PHAM
-    private void OnDeleteProductClicked(object sender, EventArgs e)
+    private async void OnDeleteProductClicked(object sender, EventArgs e)
     {
         if (sender is Button button)
         {
             var product = button.BindingContext as Product;
-            if (product != null)
+            if (product != null && mainViewModel != null)
             {
                 Debug.WriteLine($"Sản phẩm được chọn để xóa: {product.Name}, {product.Price}");
                 // Xóa sản phẩm
-                // await mainViewModel.ProductVM.DeleteProduct(product.Id);
+                await mainViewModel.ProductVM.DeleteProduct(product.Id);
             }
         }
     }

@@ -42,6 +42,38 @@ public class ShiftStaffsService
 
         return new List<ShiftStaffs>();
     }
+    public async Task<List<ShiftStaffs>> GetShiftStaffsByShiftIdAsync(int shiftId)
+    {
+        var url = $"{GetBaseUrl()}/api/ShiftStaffs/idShift/{shiftId}";
+        var response = await _client.GetAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            var listShiftStaffs = JsonSerializer.Deserialize<List<ShiftStaffs>>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return listShiftStaffs ?? new List<ShiftStaffs>();
+        }
+        return new List<ShiftStaffs>();
+    }
+    // READ by ShiftId and StaffId
+    public async Task<ShiftStaffs?> GetShiftStaffsByShiftIdAndStaffIdAsync(int shiftId, int staffId)
+    {
+        var url = $"{GetBaseUrl()}/api/ShiftStaffs/idShift/{shiftId}/idStaff/{staffId}";
+        var response = await _client.GetAsync(url);
+        if (response.IsSuccessStatusCode)
+        {
+            var json = await response.Content.ReadAsStringAsync();
+            var a = JsonSerializer.Deserialize<ShiftStaffs>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+            return a;
+        }
+        return null;
+    }
+
 
     // CREATE
     public async Task<bool> AddShiftStaffsAsync(ShiftStaffs a)

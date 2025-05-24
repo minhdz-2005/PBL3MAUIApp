@@ -45,10 +45,6 @@ public partial class OrderPage : ContentPage
             mainViewModel.VoucherVM.FilterVouchers("DangDienRa");
         } 
     }
-    // Lua chon DANH MUC
-    private bool isCoffeeClick = false;
-    private bool isTeaClick = false;
-    private bool isCakeClick = false;
     // Nhan vao nut DANH MUC Ca Phe
     private async void OnCategoryButtonClicked(object sender, EventArgs e)
     {

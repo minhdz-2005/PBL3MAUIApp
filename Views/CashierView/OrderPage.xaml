@@ -76,7 +76,7 @@
                                     <Button
                                         Style="{StaticResource HoverButtonStyle}"
                                         x:Name="CoffeeButton"
-                                        Padding="0,0,38,0"
+                                        Padding="0,0,0,0"
                                         BackgroundColor="Transparent"
                                         BorderWidth="0"
                                         Clicked="OnCategoryButtonClicked"
