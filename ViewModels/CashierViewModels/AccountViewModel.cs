@@ -86,7 +86,7 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
             }
         }
         // LUU MAT KHAU
-        public async Task SavePassword(string oldPassword, string newPassword)
+        public async Task<bool> SavePassword(string oldPassword, string newPassword)
         {
             var account = await accountService.GetAccountByUsername(Account.Username);
             if (account != null)
@@ -96,12 +96,15 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
                     account.Password = newPassword;
                     await accountService.UpdateAccountAsync(account.Id, account);
                     await Shell.Current.DisplayAlert("Success", "Thay đổi mật khẩu thành công !", "OK");
+                    return true;
                 }
                 else
                 {
                     await Shell.Current.DisplayAlert("Error", "Sai mật khẩu !", "OK");
+                    return false;
                 }
             }
+            return false;
         }
 
 

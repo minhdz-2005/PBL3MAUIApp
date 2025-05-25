@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 using PBL3MAUIApp.ViewModels.CashierViewModels;
 using PBL3MAUIApp.ViewModels.LoginViewModels;
@@ -47,12 +48,6 @@ public partial class AccountCashierPage : ContentPage
             double cornerRadius = 10 * scale;
             Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
 
-            // FilterPopupOverlay.WidthRequest = scale * 500; // Chiều rộng linh hoạt
-            // FilterPopupOverlay.HeightRequest = scale * 600; // Chiều cao linh hoạt
-
-            // DetailPopup.WidthRequest = scale * 500;
-            // DetailPopup.HeightRequest = scale * 600;
-
             Resources["NaviHeightRequest"] = 60 * scale;
             Resources["TabMenuHeightRequest"] = 25 * scale;
             Resources["TabMenuWidthRequest"] = 25 * scale;
@@ -70,15 +65,6 @@ public partial class AccountCashierPage : ContentPage
         base.OnAppearing();
         mainViewModel?.AccountVM.LoadAccount();
     }
-    ///////////////////////
-    //private void OnRoleClicked(object sender, EventArgs e)
-    //{
-    //    var label = sender as Label;
-    //    if (label == null) return;
-
-    //    ChangePasswordOption.BackgroundColor = label.Text == "Đổi mật khẩu" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#4B3621");
-    //    InformationOption.BackgroundColor = label.Text == "Thông tin cá nhân" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#4B3621");
-    //}
     private void OnChangePasswordClicked(object Sender, EventArgs e)
     {
         Information.IsVisible = false;
@@ -101,7 +87,7 @@ public partial class AccountCashierPage : ContentPage
         mainViewModel?.AccountVM.SaveInfo(name, phone);
     }
     // BAM VAO NUT LUU MAT KHAU
-    private void OnSavePasswordClicked(object sender, EventArgs e)
+    private async void OnSavePasswordClicked(object sender, EventArgs e)
     {
         string oldPassword = OldPassEntry.Text;
         string newPassword = NewPassEntry.Text;
@@ -109,20 +95,25 @@ public partial class AccountCashierPage : ContentPage
 
         if (newPassword != rePassword)
         {
-            DisplayAlert("Error", "Mật khẩu mới không khớp nhau !", "OK");
+            await DisplayAlert("Error", "Mật khẩu mới không khớp nhau !", "OK");
             return;
         }
         else
         {
-            mainViewModel?.AccountVM.SavePassword(oldPassword, newPassword);
+            if (mainViewModel != null)
+            {
+                bool isUpdated = await mainViewModel.AccountVM.SavePassword(oldPassword, newPassword);
+                if (isUpdated)
+                {
+                    OldPassEntry.Text = string.Empty;
+                    NewPassEntry.Text = string.Empty;
+                    RePassEntry.Text = string.Empty;
+                }
+            }
         }
     }
     // BAM VAO NUT DANG XUAT
     private async void OnLogOutClicked(object sender, EventArgs e)
         => await Shell.Current.GoToAsync("//LoginView", animate: false);
 
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-
-    }
 }

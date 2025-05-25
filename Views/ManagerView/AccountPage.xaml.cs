@@ -1,11 +1,13 @@
 namespace PBL3MAUIApp.Views.ManagerView;
-
+using PBL3MAUIApp.ViewModels.CashierViewModels;
 public partial class AccountPage : ContentPage
 {
     private double _lastScale = -1;
+    public CashierViewModel? mainViewModel;
     public AccountPage()
     {
         InitializeComponent();
+        mainViewModel = BindingContext as CashierViewModel;
         // Resources["IndexToBooleanConverter"] = new IndexToBooleanConverter();
         this.SizeChanged += (s, e) =>
         {
@@ -26,7 +28,11 @@ public partial class AccountPage : ContentPage
             }
         };
     }
-
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        mainViewModel?.AccountVM.LoadAccount();
+    }
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
@@ -75,6 +81,32 @@ public partial class AccountPage : ContentPage
         }
     }
 
+
+    private async void OnSavePasswordClicked(object sender, EventArgs e)
+    {
+        string oldPassword = OldPassEntry.Text;
+        string newPassword = NewPassEntry.Text;
+        string rePassword = RePassEntry.Text;
+
+        if (newPassword != rePassword)
+        {
+            await DisplayAlert("Error", "Mật khẩu mới không khớp nhau !", "OK");
+            return;
+        }
+        else
+        {
+            if (mainViewModel != null)
+            {
+                bool isUpdated = await mainViewModel.AccountVM.SavePassword(oldPassword, newPassword);
+                if (isUpdated)
+                {
+                    OldPassEntry.Text = string.Empty;
+                    NewPassEntry.Text = string.Empty;
+                    RePassEntry.Text = string.Empty;
+                }
+            }
+        }
+    }
     private async void OnLogOutClicked(object sender, EventArgs e)
         => await Shell.Current.GoToAsync("//LoginView", animate: false);
 }
