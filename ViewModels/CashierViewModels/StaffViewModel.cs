@@ -70,6 +70,18 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         {
             // KIEM TRA GIA TRI
 
+            // kiem tra ten nhan vien
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên không được để trống", "OK");
+                return false;
+            }
+            // kiem tra ten nhan vien da ton tai hay chua
+            if (Staffs.Any(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên đã tồn tại", "OK");
+                return false;
+            }
             // kiem tra sdt
             bool isNumeric = phone.All(char.IsDigit);
             if (!isNumeric)
@@ -145,6 +157,19 @@ namespace PBL3MAUIApp.ViewModels.CashierViewModels
         public async Task<bool> UpdateStaff(string username, string password, string name, string phone, string role, string salaryText, int id)
         {
             // KIEM TRA GIA TRI
+
+            // kiem tra ten nhan vien
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên không được để trống", "OK");
+                return false;
+            }
+            // kiem tra ten nhan vien da ton tai hay chua
+            if (Staffs.Any(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && s.Id != id))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên đã tồn tại", "OK");
+                return false;
+            }
 
             // kiem tra sdt
             bool isNumeric = phone.All(char.IsDigit);

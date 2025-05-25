@@ -1,268 +1,758 @@
 ﻿<ContentPage
-  x:Class="PBL3MAUIApp.Views.ManagerView.RevenuePage"
-  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  xmlns:converters="clr-namespace:PBL3MAUIApp.Converters"
-  BackgroundColor="#F7EFE9"
-  ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+    x:Class="PBL3MAUIApp.Views.ManagerView.RevenuePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:PBL3MAUIApp.Converters"
+    BackgroundColor="#F7EFE9"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
+    ControlTemplate="{StaticResource SharedManagerPageTemplate}">
 
+    <ContentPage.BindingContext>
+        <viewModels:CashierViewModel />
+    </ContentPage.BindingContext>
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*">
+    <Grid RowDefinitions="Auto,*">
         <Grid Grid.Row="0" RowDefinitions="Auto,Auto">
             <Label
-        Grid.Row="0"
-        FontSize="30"
-        HorizontalOptions="Center"
-        Text="📈" />
+                Grid.Row="0"
+                FontSize="{DynamicResource DynamicFontSizeTitle}"
+                HorizontalOptions="Center"
+                Text="📈" />
             <Label
-        Grid.Row="1"
-        FontAttributes="Bold"
-        FontSize="28"
-        HorizontalOptions="Center"
-        Text="Thống kê doanh thu"
-        TextColor="Black"
-        TextTransform="Uppercase" />
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="{DynamicResource DynamicFontSizeTitle}"
+                HorizontalOptions="Center"
+                Text="Thống kê doanh thu"
+                TextColor="Black"
+                TextTransform="Uppercase" />
         </Grid>
 
         <Grid
-      Grid.Row="1"
-      Margin="20"
-      ColumnDefinitions="*,*,*">
-            <Button
-        Grid.Column="0"
-        CornerRadius="10"
-        FontSize="18"
-        Text="Tổng" />
-            <Button
-        Grid.Column="1"
-        CornerRadius="10"
-        FontSize="18"
-        Text="Nhân viên" />
-            <Button
-        Grid.Column="2"
-        CornerRadius="10"
-        FontSize="18"
-        Text="Sản phẩm" />
-        </Grid>
-        <!--  Thống kê tổng quát  -->
-        <!-- <Grid
-      Grid.Row="2"
-      ColumnDefinitions="1*,3*"
-      HorizontalOptions="Center"
-      IsVisible="False">
-      <Grid Grid.Row="0" RowDefinitions="Auto,Auto">
-        <Grid
-          Grid.Row="0"
-          Padding="10"
-          RowDefinitions="*,*">
-          <Label
-            Grid.Row="0"
-            FontSize="18"
-            Text="Tháng này"
-            TextColor="Black" />
-          <Label
-            Grid.Row="0"
-            Text="Số tiền"
-            TextColor="Red" />
-        </Grid>
-        <Grid
-          Grid.Row="1"
-          Padding="10"
-          RowDefinitions="*,*">
-          <Label
-            Grid.Row="0"
-            FontSize="18"
-            Text="Tháng trước"
-            TextColor="Black" />
-          <Label
-            Grid.Row="0"
-            Text="Số tiền"
-            TextColor="Red" />
-        </Grid>
-      </Grid>
-
-    </Grid>-->
-
-        <!--  Thống kê theo sản phẩm  -->
-        <Grid
-      Grid.Row="2"
-      ColumnDefinitions="*,*,*"
-      HorizontalOptions="Center"
-      IsVisible="False"
-      RowDefinitions="Auto,Auto,Auto">
-            <Grid Grid.Row="0" Grid.ColumnSpan="3">
-                <HorizontalStackLayout>
-                    <Label
-            Text="Lọc tất cả"
-            TextColor="Black"
-            VerticalOptions="Center" />
-                    <Border VerticalOptions="Center">
-                        <Entry Placeholder="Tất cả" />
-                    </Border>
-                </HorizontalStackLayout>
-
-            </Grid>
-
-            <Grid
-        Grid.Row="1"
-        Grid.Column="0"
-        ColumnDefinitions="*,*">
-                <Label
-          Grid.Column="0"
-          FontSize="18"
-          HorizontalOptions="End"
-          Text="Ngày bắt đầu"
-          TextColor="Black"
-          VerticalOptions="Center" />
-                <Border
-          Grid.Column="1"
-          HorizontalOptions="Start"
-          VerticalOptions="Center">
-                    <Entry Placeholder="DD/MM/YYYY" />
-                </Border>
-            </Grid>
-
-            <Grid
-        Grid.Row="1"
-        Grid.Column="1"
-        ColumnDefinitions="*,*">
-                <Label
-          Grid.Column="0"
-          FontSize="18"
-          HorizontalOptions="End"
-          Text="Ngày kết thúc"
-          TextColor="Black"
-          VerticalOptions="Center" />
-                <Border
-          Grid.Column="1"
-          HorizontalOptions="Start"
-          VerticalOptions="Center">
-                    <Entry Placeholder="DD/MM/YYYY" />
-                </Border>
-            </Grid>
-            <Button Grid.Row="2" Text="Tìm" />
-        </Grid>
-        <Border Grid.Row="3" IsVisible="False">
-            <ScrollView>
-                <Grid RowDefinitions="Auto,*,Auto">
-                    <Grid
-            Grid.Row="0"
-            ColumnDefinitions="Auto,Auto"
-            RowDefinitions="*,*">
-                        <Label
-              Grid.Row="0"
-              Grid.Column="0"
-              FontSize="18"
-              Text="Tổng doanh thu:...."
-              TextColor="Black" />
-                        <Label
-              Grid.Row="0"
-              Grid.Column="1"
-              Text="10.000.000đ"
-              TextColor="Black" />
-                        <Label
-              Grid.Row="1"
-              Grid.Column="0"
-              FontSize="18"
-              Text="Ngày cao nhất: DD/MM/YYYY"
-              TextColor="Black" />
-                        <Label
-              Grid.Row="1"
-              Grid.Column="1"
-              FontSize="18"
-              Text="Tổng chiết khấu:..... "
-              TextColor="Black" />
-                    </Grid>
-                    <Grid Grid.Row="1" RowDefinitions="Auto,Auto">
-                        <!--  Dữ liệu được nhập cho nhóm món  -->
-                        <Border Grid.Row="0">
-                            <Grid RowDefinitions="Auto,Auto">
-                                <Grid Grid.Row="0" ColumnDefinitions="*,*,*">
+            Grid.Row="1"
+            Margin="{DynamicResource DynamicMargin}"
+            ColumnDefinitions="1*,3*"
+            ColumnSpacing="10"
+            RowSpacing="10">
+            <Frame
+                Grid.Column="0"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                VerticalOptions="Fill">
+                <Grid
+                    Grid.Row="1"
+                    RowDefinitions="Auto,Auto,*"
+                    VerticalOptions="Fill">
+                    <Frame
+                        Grid.Row="1"
+                        Padding="10"
+                        BackgroundColor="White"
+                        BorderColor="Transparent">
+                        <VerticalStackLayout>
+                            <Border
+                                Padding="10"
+                                Stroke="#F2E2D6"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1">
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                                     <Label
-                    Grid.Column="0"
-                    FontSize="20"
-                    Text="Nhóm món"
-                    TextColor="Black" />
+                                        FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                        Text="📅"
+                                        VerticalOptions="Center" />
+                                    <VerticalStackLayout Spacing="5">
+                                        <Label
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Từ ngày:"
+                                            TextColor="#4B3621" />
+                                        <DatePicker 
+                                            x:Name="FromDatePicker"
+                                            BackgroundColor="Transparent" 
+                                            TextColor="#4B3621" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Border>
+                            <Border
+                                Padding="10"
+                                Stroke="#F2E2D6"
+                                StrokeShape="RoundRectangle 10"
+                                StrokeThickness="1">
+                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                                     <Label
-                    Grid.Column="1"
-                    FontSize="20"
-                    Text="Số lượng"
-                    TextColor="Black" />
-                                    <Label
-                    Grid.Column="2"
-                    FontSize="20"
-                    Text="Doanh thu"
-                    TextColor="Black" />
-                                </Grid>
-                                <VerticalStackLayout Grid.Row="1">
-                                    <!--  data duoc nhap trong verticalStackLayout  -->
-                                    <Grid ColumnDefinitions="*,*,*">
+                                        FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                        Text="📅"
+                                        VerticalOptions="Center" />
+                                    <VerticalStackLayout Spacing="5">
                                         <Label
-                      Grid.Column="0"
-                      FontSize="18"
-                      Text="Ca phe"
-                      TextColor="Black" />
-                                        <Label
-                      Grid.Column="1"
-                      FontSize="18"
-                      Text="5"
-                      TextColor="Black" />
-                                        <Label
-                      Grid.Column="2"
-                      FontSize="18"
-                      Text="5.000.000"
-                      TextColor="Black" />
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                        <!--  Dữ liệu được nhập cho từng loại món  -->
-                        <Border Grid.Row="1">
-                            <Grid RowDefinitions="Auto,Auto">
-                                <Grid Grid.Row="0" ColumnDefinitions="*,*,*">
-                                    <Label
-                    Grid.Column="0"
-                    FontSize="20"
-                    Text="Tên món"
-                    TextColor="Black" />
-                                    <Label
-                    Grid.Column="1"
-                    FontSize="20"
-                    Text="Đã bán"
-                    TextColor="Black" />
-                                    <Label
-                    Grid.Column="2"
-                    FontSize="20"
-                    Text="Doanh thu"
-                    TextColor="Black" />
-                                </Grid>
-                                <VerticalStackLayout Grid.Row="1">
-                                    <!--  data duoc nhap trong verticalStackLayout  -->
-                                    <Grid ColumnDefinitions="*,*,*">
-                                        <Label
-                      Grid.Column="0"
-                      FontSize="18"
-                      Text="Ca phe"
-                      TextColor="Black" />
-                                        <Label
-                      Grid.Column="1"
-                      FontSize="18"
-                      Text="5"
-                      TextColor="Black" />
-                                        <Label
-                      Grid.Column="2"
-                      FontSize="18"
-                      Text="5.000.000"
-                      TextColor="Black" />
-                                    </Grid>
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Đến ngày ngày:"
+                                            TextColor="#4B3621" />
+                                        <DatePicker 
+                                            x:Name="ToDatePicker"
+                                            BackgroundColor="Transparent" 
+                                            TextColor="#4B3621" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Border>
 
-                    </Grid>
+                            <Button
+                                Style="{StaticResource HoverButtonStyle}"
+                                Clicked="OnFilteringClicked"
+                                BackgroundColor="#C41E3A"
+                                CornerRadius="12"
+                                FontAttributes="Bold"
+                                FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                HorizontalOptions="Center"
+                                Text="🔍 Tìm kiếm"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame
+                        Grid.Row="0"
+                        BackgroundColor="White"
+                        BorderColor="Transparent"
+                        VerticalOptions="Fill">
+                        <Grid RowDefinitions="Auto,Auto">
+                            <Label
+                                Grid.Row="0"
+                                FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                Text="{Binding RevenueVM.Total, StringFormat='{}Tổng doanh thu: $ {0:0.00}'}"
+                                TextColor="Black" />
+                            <Label
+                                Grid.Row="1"
+                                FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                Text="{Binding RevenueVM.BestDayRevenue, StringFormat='{}Ngày cao nhất: {0:dd/MM/yyyy}'}"
+                                TextColor="Black" />
+                        </Grid>
+                    </Frame>
+
                 </Grid>
-            </ScrollView>
-        </Border>
 
+            </Frame>
+            <Frame
+                Grid.Column="1"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+                <Grid RowDefinitions="Auto,*" RowSpacing="10">
+                    <HorizontalStackLayout
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        Spacing="10"
+                        VerticalOptions="Center">
+                        <Button
+                            Style="{StaticResource HoverButtonStyle}"
+                            BackgroundColor="#9C7055"
+                            Clicked="OnAllRevenueClicked"
+                            CornerRadius="10"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            Text="Tổng"
+                            TextColor="White" />
+                        <Button
+                            IsVisible="False"
+                            Style="{StaticResource HoverButtonStyle}"
+                            BackgroundColor="#9C7055"
+                            Clicked="OnRevenueByStaffClicked"
+                            CornerRadius="10"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            Text="Nhân viên"
+                            TextColor="White" />
+                        <Button
+                            Style="{StaticResource HoverButtonStyle}"
+                            BackgroundColor="#9C7055"
+                            Clicked="OnRevenueByProductClicked"
+                            CornerRadius="10"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            Text="Sản phẩm"
+                            TextColor="White" />
+                        <Button
+                            Style="{StaticResource HoverButtonStyle}"
+                            BackgroundColor="#9C7055"
+                            Clicked="OnPromotionUsedClicked"
+                            CornerRadius="10"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            Text="Ưu đãi"
+                            TextColor="White" />
+                    </HorizontalStackLayout>
+                    <!--  Tổng quát  -->
+                    <Grid
+                        x:Name="SummaryRevenue"
+                        Grid.Row="1"
+                        ColumnDefinitions="*,*,*"
+                        ColumnSpacing="10"
+                        HorizontalOptions="Center"
+                        IsVisible="True"
+                        RowDefinitions="Auto,*"
+                        RowSpacing="10"
+                        VerticalOptions="Fill">
+                        <Frame
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            BackgroundColor="#E0C0A9"
+                            BorderColor="Transparent"
+                            CornerRadius="10"
+                            VerticalOptions="Fill">
+                            <VerticalStackLayout>
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                    HorizontalOptions="Center"
+                                    Text="Tổng doanh thu"
+                                    TextColor="Black" />
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding RevenueVM.TotalRevenue, StringFormat='{}$ {0:0.00}'}"
+                                    TextColor="Black" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            BackgroundColor="#E0C0A9"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <VerticalStackLayout>
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                    HorizontalOptions="Center"
+                                    Text="Số đơn hàng"
+                                    TextColor="Black" />
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding RevenueVM.TotalOrders}"
+                                    TextColor="Black" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            BackgroundColor="#E0C0A9"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <VerticalStackLayout>
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                    HorizontalOptions="Center"
+                                    Text="Tổng tiền chiết khấu"
+                                    TextColor="Black" />
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding RevenueVM.TotalDiscounts, StringFormat='{}$ {0:0.00}'}"
+                                    TextColor="Black" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame
+                            IsVisible="False"
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            BackgroundColor="#E0C0A9"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <VerticalStackLayout>
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                    HorizontalOptions="Center"
+                                    Text="Mức tăng trưởng"
+                                    TextColor="Black" />
+                                <Label
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    HorizontalOptions="Center"
+                                    Text="..."
+                                    TextColor="Black" />
+                            </VerticalStackLayout>
+                        </Frame>
+                        <!--  Top 5 nhan vien  -->
+                        <Frame
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            VerticalOptions="Fill">
+                            <Grid ColumnSpacing="10" RowDefinitions="Auto,*">
+                                <Label
+                                    Grid.Row="0"
+                                    FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                    Text="Top 5 Nhân viên"
+                                    TextColor="Black" />
+                                <Frame
+                                    Grid.Row="1"
+                                    BackgroundColor="#EDE0CF"
+                                    BorderColor="Transparent"
+                                    VerticalOptions="Fill">
+                                    <Grid RowDefinitions="Auto,Auto">
+                                        <Grid Grid.Row="0" ColumnDefinitions="*,*">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Tên nhân viên"
+                                                TextColor="#69472E" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Doanh thu"
+                                                TextColor="#69472E" />
+                                        </Grid>
+                                        <ScrollView Grid.Row="1">
+                                            <CollectionView Grid.Row="1" ItemsSource="{Binding RevenueVM.StaffAndRevenues}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <VerticalStackLayout>
+                                                            <!--  data duoc nhap trong verticalStackLayout  -->
+                                                            <Grid ColumnDefinitions="*,*">
+                                                                <Label
+                                                                    Grid.Column="0"
+                                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                    Text="{Binding StaffName}"
+                                                                    TextColor="Black" />
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                    Text="{Binding Revenue, StringFormat='{}$ {0:0.00}'}"
+                                                                    TextColor="Black" />
+                                                            </Grid>
+                                                        </VerticalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                        <!--  Top 5 san pham  -->
+                        <Frame
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="Transparent"
+                            BorderColor="Transparent"
+                            VerticalOptions="Fill">
+                            <Grid
+                                Grid.ColumnSpan="2"
+                                ColumnSpacing="10"
+                                RowDefinitions="Auto,*">
+                                <Label
+                                    Grid.Row="0"
+                                    FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                    Text="Top 5 Sản phẩm"
+                                    TextColor="Black" />
+                                <Frame
+                                    Grid.Row="1"
+                                    BackgroundColor="#EDE0CF"
+                                    BorderColor="Transparent"
+                                    VerticalOptions="Fill">
+                                    <Grid RowDefinitions="Auto,Auto">
+                                        <Grid Grid.Row="0" ColumnDefinitions="*,*">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Tên sản phẩm"
+                                                TextColor="#69472E" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Doanh thu"
+                                                TextColor="#69472E" />
+                                        </Grid>
+                                        <ScrollView Grid.Row="1">
+                                            <CollectionView Grid.Row="1" ItemsSource="{Binding RevenueVM.ProductAndRevenues}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <VerticalStackLayout>
+                                                            <!--  data duoc nhap trong verticalStackLayout  -->
+                                                            <Grid ColumnDefinitions="*,*">
+                                                                <Label
+                                                                    Grid.Column="0"
+                                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                    Text="{Binding ProductName}"
+                                                                    TextColor="Black" />
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                    Text="{Binding Revenue, StringFormat='{}$ {0:0.00}'}"
+                                                                    TextColor="Black" />
+                                                            </Grid>
+                                                        </VerticalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                    <!--  Doanh thu theo san pham  -->
+                    <Grid
+                        x:Name="ProductRevenue"
+                        Grid.Row="1"
+                        IsVisible="False"
+                        RowDefinitions="Auto,*"
+                        RowSpacing="10">
+                        <Grid
+                            IsVisible="False"
+                            Grid.Row="0"
+                            ColumnDefinitions="*,*,*,*"
+                            ColumnSpacing="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Frame
+                                Grid.Column="0"
+                                BackgroundColor="#E0C0A9"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <VerticalStackLayout>
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                        HorizontalOptions="Center"
+                                        Text="Tổng doanh thu"
+                                        TextColor="Black" />
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding RevenueVM.TotalRevenue, StringFormat='{}$ {0:0.00}'}"
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame
+                                Grid.Column="1"
+                                BackgroundColor="#E0C0A9"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <VerticalStackLayout>
+
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                        HorizontalOptions="Center"
+                                        Text="Số lượng bán"
+                                        TextColor="Black" />
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding RevenueVM.TotalOrders}"
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame
+                                Grid.Column="2"
+                                BackgroundColor="#E0C0A9"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <VerticalStackLayout>
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                        HorizontalOptions="Center"
+                                        Text="Sản phẩm"
+                                        TextColor="Black" />
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                        HorizontalOptions="Center"
+                                        Text="..."
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+                            </Frame>
+                            <Frame
+                                Grid.Column="3"
+                                BackgroundColor="#E0C0A9"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <VerticalStackLayout>
+                                    <Label
+                                        FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                        HorizontalOptions="Center"
+                                        Text="Nhóm sản phẩm"
+                                        TextColor="Black" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                        HorizontalOptions="Center"
+                                        Text="..."
+                                        TextColor="Black" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="10">
+                            <!--  San pham  -->
+                            <Frame
+                                Grid.Column="0"
+                                BackgroundColor="#EDE0CF"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <ScrollView>
+                                    <VerticalStackLayout>
+                                        <Label
+                                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                            Text="Sản phẩm"
+                                            TextColor="Black" />
+                                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Tên món"
+                                                TextColor="#69472E" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Đã bán"
+                                                TextColor="#69472E" />
+                                            <Label
+                                                Grid.Column="2"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Doanh thu"
+                                                TextColor="#69472E" />
+                                        </Grid>
+                                        <!--  data duoc nhap trong verticalStackLayout  -->
+                                        <CollectionView Grid.Row="1" ItemsSource="{Binding RevenueVM.ProductAndRevenues}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid ColumnDefinitions="*,*,*">
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                            Text="{Binding ProductName}"
+                                                            TextColor="Black" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                            Text="{Binding Quantity}"
+                                                            TextColor="Black" />
+                                                        <Label
+                                                            Grid.Column="2"
+                                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                            Text="{Binding Revenue, StringFormat='{}$ {0:0.00}'}"
+                                                            TextColor="Black" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </Frame>
+                            <!--  Nhom san pham  -->
+                            <Frame
+                                Grid.Column="1"
+                                BackgroundColor="#EDE0CF"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <ScrollView>
+                                    <VerticalStackLayout>
+                                        <Label
+                                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                            Text="Nhóm sản phẩm"
+                                            TextColor="Black" />
+                                        <Grid ColumnDefinitions="*,*,*">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Nhóm món"
+                                                TextColor="#69472E" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Số lượng"
+                                                TextColor="#69472E" />
+                                            <Label
+                                                Grid.Column="2"
+                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                Text="Doanh thu"
+                                                TextColor="#69472E" />
+                                        </Grid>
+                                        <VerticalStackLayout>
+                                            <CollectionView Grid.Row="1" ItemsSource="{Binding RevenueVM.CategoryAndRevenues}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <!--  data duoc nhap trong verticalStackLayout  -->
+                                                        <Grid ColumnDefinitions="*,*,*">
+                                                            <Label
+                                                                Grid.Column="0"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="{Binding Category}"
+                                                                TextColor="Black" />
+                                                            <Label
+                                                                Grid.Column="1"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="{Binding Quantity}"
+                                                                TextColor="Black" />
+                                                            <Label
+                                                                Grid.Column="2"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="{Binding Revenue, StringFormat='{}$ {0:0.00}'}"
+                                                                TextColor="Black" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                </ScrollView>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                    <!--  Doanh thu theo nhan vien  -->
+                    <Frame
+                        x:Name="StaffRevenue"
+                        Grid.Row="1"
+                        BackgroundColor="#EDE0CF"
+                        BorderColor="Transparent"
+                        IsVisible="False"
+                        VerticalOptions="Fill">
+                        <Grid RowDefinitions="Auto,Auto,*">
+                            <Label
+                                Grid.Row="0"
+                                FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                Text="Nhân viên"
+                                TextColor="Black" />
+                            <Frame
+                                Grid.Column="2"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <Grid RowDefinitions="Auto,Auto">
+                                    <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*">
+                                        <Label
+                                            Grid.Column="0"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Nhóm món"
+                                            TextColor="#69472E" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Số lượng"
+                                            TextColor="#69472E" />
+                                        <Label
+                                            Grid.Column="2"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Doanh thu"
+                                            TextColor="#69472E" />
+                                        <Label
+                                            Grid.Column="3"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Tỉ lệ"
+                                            TextColor="#69472E" />
+                                    </Grid>
+                                    <ScrollView Grid.Row="1">
+                                        <VerticalStackLayout>
+                                            <!--  data duoc nhap trong verticalStackLayout  -->
+                                            <Grid ColumnDefinitions="*,*,*,*">
+                                                <Label
+                                                    Grid.Column="0"
+                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                    Text="Ca phe"
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Column="1"
+                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                    Text="5"
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Column="2"
+                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                    Text="5.000.000"
+                                                    TextColor="Black" />
+                                                <Label
+                                                    Grid.Column="3"
+                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                    Text="100%"
+                                                    TextColor="Black" />
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </ScrollView>
+                                </Grid>
+                            </Frame>
+                            
+                        </Grid>
+                    </Frame>
+                    <!--  Doanh thu theo uu dai  -->
+                    <Frame
+                        x:Name="PromotionUsed"
+                        Grid.Row="1"
+                        BackgroundColor="#EDE0CF"
+                        BorderColor="Transparent"
+                        IsVisible="False"
+                        VerticalOptions="Fill">
+                        <Grid RowDefinitions="Auto,Auto,*">
+                            <Label
+                                Grid.Row="0"
+                                FontSize="{DynamicResource DynamicFontSizeLarge}"
+                                Text="Ưu đãi"
+                                TextColor="Black" />
+                            <Frame
+                                Grid.Column="2"
+                                BackgroundColor="Transparent"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <Grid RowDefinitions="Auto,Auto">
+                                    <Grid Grid.Row="0" ColumnDefinitions="*,*,*,*">
+                                        <Label
+                                            Grid.Column="0"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Tên ưu đãi"
+                                            TextColor="#69472E" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Số lượng áp dụng"
+                                            TextColor="#69472E" />
+                                        <Label
+                                            Grid.Column="2"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Số tiền áp dụng"
+                                            TextColor="#69472E" />
+                                        <Label
+                                            Grid.Column="3"
+                                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                            Text="Tỉ lệ"
+                                            TextColor="#69472E" />
+                                    </Grid>
+                                    <ScrollView Grid.Row="1">
+                                        <VerticalStackLayout>
+                                            <!--  data duoc nhap trong verticalStackLayout  -->
+                                            <CollectionView Grid.Row="1" ItemsSource="{Binding RevenueVM.VoucherAndDiscounts}">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid ColumnDefinitions="*,*,*,*">
+                                                            <Label
+                                                                Grid.Column="0"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="{Binding VoucherCode}"
+                                                                TextColor="Black" />
+                                                            <Label
+                                                                Grid.Column="1"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="{Binding ApplyTimes}"
+                                                                TextColor="Black" />
+                                                            <Label
+                                                                Grid.Column="2"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="{Binding DiscountAmount, StringFormat='{}$ {0:0.00}'}"
+                                                                TextColor="Black" />
+                                                            <Label
+                                                                Grid.Column="3"
+                                                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                                Text="100%"
+                                                                TextColor="Black" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </VerticalStackLayout>
+                                    </ScrollView>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </Grid>
+
+            </Frame>
+        </Grid>
     </Grid>
 </ContentPage>

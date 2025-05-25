@@ -5,14 +5,18 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 
 namespace PBL3MAUIApp.Views.ManagerView;
-
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.Models;
+using System.Threading.Tasks;
 
 public partial class RevenuePage : ContentPage
 {
     private double _lastScale = -1;
+    public CashierViewModel? mainViewModel;
     public RevenuePage()
     {
         InitializeComponent();
+        mainViewModel = BindingContext as CashierViewModel;
         this.SizeChanged += (s, e) =>
         {
             double width = this.Width;
@@ -31,6 +35,56 @@ public partial class RevenuePage : ContentPage
                 Application.Current.Resources["NavBoxSize"] = 60 * scale;
             }
         };
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        if (mainViewModel != null)
+        {
+            await mainViewModel.RevenueVM.CalcTotalAndBestDay();
+            await mainViewModel.RevenueVM.CalcRevenue();
+        }
+    }
+    public async void OnFilteringClicked(object sender, EventArgs e)
+    {
+        DateTime fromDate = FromDatePicker.Date;              // Từ ngày
+        DateTime toDate = ToDatePicker.Date;
+
+        // TRUYEN GIA TRI DEN VIEWMODEL
+        if (mainViewModel != null)
+        {
+            await mainViewModel.RevenueVM.ByDayFiltering(fromDate, toDate);
+        }
+    }
+
+    public void OnAllRevenueClicked(object sender, EventArgs e)
+    {
+        ProductRevenue.IsVisible = false;
+        StaffRevenue.IsVisible = false;
+        PromotionUsed.IsVisible = false;
+        SummaryRevenue.IsVisible = true;
+    }
+    public void OnRevenueByStaffClicked(object sender, EventArgs e)
+    {
+        ProductRevenue.IsVisible = false;
+        StaffRevenue.IsVisible = true;
+        PromotionUsed.IsVisible = false;
+        SummaryRevenue.IsVisible = false;
+    }
+    public void OnRevenueByProductClicked(object sender, EventArgs e)
+    {
+        ProductRevenue.IsVisible = true;
+        StaffRevenue.IsVisible = false;
+        PromotionUsed.IsVisible = false;
+        SummaryRevenue.IsVisible = false;
+    }
+    public void OnPromotionUsedClicked(object sender, EventArgs e)
+    {
+        ProductRevenue.IsVisible = false;
+        StaffRevenue.IsVisible = false;
+        PromotionUsed.IsVisible = true;
+        SummaryRevenue.IsVisible = false;
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -62,12 +116,6 @@ public partial class RevenuePage : ContentPage
 
             double cornerRadius = 10 * scale;
             Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
-
-            // AddProductPopup.WidthRequest = scale * 500; // Chiều rộng linh hoạt
-            // AddProductPopup.HeightRequest = scale * 600; // Chiều cao linh hoạt
-
-            // EditProductPopupFrame.WidthRequest = scale * 500;
-            // EditProductPopupFrame.HeightRequest = scale * 600;
 
             Resources["NaviHeightRequest"] = 60 * scale;
             Resources["TabMenuHeightRequest"] = 25 * scale;
