@@ -147,24 +147,16 @@ public partial class ProductPage : ContentPage
         string name = AddProductNameEntry.Text;
         string description = AddProductDescriptionEntry.Text;
         string cate = ProductGroupLabel.Text;
+        string price = AddProductPriceEntry.Text;
 
-        decimal price;
-        bool isValid = decimal.TryParse(AddProductPriceEntry.Text, out price);
-
-        if (isValid && cate != "Nhóm sản phẩm" && cate != null)
+        if(mainViewModel != null)
         {
-            Debug.WriteLine($"{name}, {description}, {price}, {cate}");
-
-            if(mainViewModel != null)
+            bool isAdded = await mainViewModel.ProductVM.AddProduct(name, price, cate, description);
+            if(isAdded)
             {
-                await mainViewModel.ProductVM.AddProduct(new Product(name, price, cate, description));
+                AddProductPopup.IsVisible = false;
+                PopupOverlay.IsVisible = false; // Đóng overlay sau khi thêm sản phẩm thành công
             }
-            PopupOverlay.IsVisible = false;
-        }
-        else
-        {
-            // Hiển thị lỗi hoặc xử lý khi nhập sai
-            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
         }
     }
     // BAM VAO NUT HUY
@@ -205,27 +197,18 @@ public partial class ProductPage : ContentPage
         string name = EditProductNameEntry.Text;
         string description = EditProductDescriptionEntry.Text;
         string cate = EditProductGroupLabel.Text;
+        string price = EditProductPriceEntry.Text;
 
-        decimal price;
-        bool isValid = decimal.TryParse(EditProductPriceEntry.Text, out price);
-
-        if (isValid)
+        
+        if (mainViewModel != null)
         {
-            Debug.WriteLine($"{idProduct}, {name}, {description}, {price}, {cate}");
-
-            if (mainViewModel != null)
+            bool isEdited = await mainViewModel.ProductVM.UpdateProduct(idProduct, name, price, cate, description);
+            if (isEdited)
             {
-                await mainViewModel.ProductVM.UpdateProduct(idProduct, new Product(name, price, cate, description));
-            }
-            PopupOverlay.IsVisible = false;
-        }
-        else
-        {
-            // Hiển thị lỗi hoặc xử lý khi nhập sai
-            await DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
-        }
+                EditProductPopup.IsVisible = false;
 
-        EditProductPopup.IsVisible = false;
+            }
+        }
     }
 
     private void OnCancelEditProductClicked(object sender, EventArgs e)

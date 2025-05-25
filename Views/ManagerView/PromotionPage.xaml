@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-  x:Class="PBL3MAUIApp.Views.ManagerView.PromotionPage"
-  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-  BackgroundColor="#F7EFE9"
-  ControlTemplate="{StaticResource SharedManagerPageTemplate}">
+    x:Class="PBL3MAUIApp.Views.ManagerView.PromotionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#F7EFE9"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
+    ControlTemplate="{StaticResource SharedManagerPageTemplate}">
 
+    <ContentPage.BindingContext>
+        <viewModels:CashierViewModel />
+    </ContentPage.BindingContext>
 
     <Grid Margin="{DynamicResource DynamicMargin_Main}">
         <Grid.RowDefinitions>
@@ -17,34 +21,34 @@
 
         <!--  Tiêu đề  -->
         <Label
-      Grid.Row="0"
-      FontAttributes="Bold"
-      FontSize="{DynamicResource DynamicFontSizeTitle}"
-      HorizontalOptions="Center"
-      Text="QUẢN LÝ ƯU ĐÃI 🎁"
-      TextColor="Black"
-      TextTransform="Uppercase" />
+            Grid.Row="0"
+            FontAttributes="Bold"
+            FontSize="{DynamicResource DynamicFontSizeTitle}"
+            HorizontalOptions="Center"
+            Text="QUẢN LÝ ƯU ĐÃI 🎁"
+            TextColor="Black"
+            TextTransform="Uppercase" />
 
         <!--  Frame chứa nội dung chính  -->
         <Frame
-      Grid.Row="1"
-      Margin="{DynamicResource DynamicMargin}"
-      Padding="{DynamicResource DynamicPadding}"
-      BackgroundColor="#FFFFFF"
-      BorderColor="Brown"
-      CornerRadius="{DynamicResource DynamicCornerRadius}"
-      HasShadow="False">
+            Grid.Row="1"
+            Margin="{DynamicResource DynamicMargin}"
+            Padding="{DynamicResource DynamicPadding}"
+            BackgroundColor="#FFFFFF"
+            BorderColor="Brown"
+            CornerRadius="{DynamicResource DynamicCornerRadius}"
+            HasShadow="False">
             <Grid
-        BackgroundColor="Transparent"
-        ColumnDefinitions="*, 2*, *"
-        ColumnSpacing="{DynamicResource DynamicSpacing}">
+                BackgroundColor="Transparent"
+                ColumnDefinitions="*, 2*, *"
+                ColumnSpacing="{DynamicResource DynamicSpacing}">
                 <!--  Cột 1: Thêm ưu đãi  -->
                 <Frame
-          Grid.Column="0"
-          Padding="{DynamicResource DynamicPadding}"
-          BackgroundColor="#4B3621"
-          CornerRadius="{DynamicResource DynamicCornerRadius}"
-          HasShadow="False">
+                    Grid.Column="0"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#4B3621"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}"
+                    HasShadow="False">
                     <Grid RowSpacing="{DynamicResource DynamicSpacing}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -65,103 +69,106 @@
                             <!--  Khoảng trống  -->
                         </Grid.RowDefinitions>
                         <Label
-              Grid.Row="0"
-              FontAttributes="Bold"
-              FontSize="{DynamicResource DynamicFontSizeLarge}"
-              Text="THÊM ƯU ĐÃI"
-              TextColor="White" />
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            Text="THÊM ƯU ĐÃI"
+                            TextColor="White" />
 
                         <!--  Tên ưu đãi  -->
                         <Border
-              Grid.Row="1"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="1"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Entry
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                Placeholder="Tên ưu đãi"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="AddName"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                Placeholder="Tên ưu đãi"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Mã ưu đãi  -->
                         <Border
-              Grid.Row="2"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="2"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Entry
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                Placeholder="Mã ưu đãi"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="AddCode"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                Placeholder="Mã ưu đãi"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Mô tả  -->
                         <Border
-              Grid.Row="3"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="3"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Editor
-                AutoSize="TextChanges"
-                Placeholder="Mô tả"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="AddDescription"
+                                AutoSize="TextChanges"
+                                Placeholder="Mô tả"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Số tiền ưu đãi  -->
                         <Border
-              Grid.Row="4"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="4"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Entry
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                Placeholder="Giá trị"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="AddDiscount"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                Placeholder="Giá trị (USD)"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Ngày bắt đầu / kết thúc  -->
                         <Grid
-              Grid.Row="5"
-              ColumnDefinitions="*,*"
-              ColumnSpacing="{DynamicResource DynamicSpacing}">
+                            Grid.Row="5"
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="{DynamicResource DynamicSpacing}">
                             <Border
-                Padding="{DynamicResource DynamicPadding}"
-                Stroke="White"
-                StrokeThickness="1">
-                                <Entry
-                  FontSize="{DynamicResource DynamicFontSizeMedium}"
-                  Placeholder="DD/MM/YYYY"
-                  TextColor="White"
-                  VerticalOptions="Fill" />
+                                Padding="{DynamicResource DynamicPadding}"
+                                Stroke="White"
+                                StrokeThickness="1">
+                                <DatePicker
+                                    x:Name="AddStart"
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    TextColor="White"
+                                    VerticalOptions="Fill" />
                             </Border>
                             <Border
-                Grid.Column="1"
-                Padding="{DynamicResource DynamicPadding}"
-                Stroke="White"
-                StrokeThickness="1">
-                                <Entry
-                  FontSize="{DynamicResource DynamicFontSizeMedium}"
-                  IsEnabled="False"
-                  Placeholder="DD/MM/YYYY"
-                  TextColor="White"
-                  VerticalOptions="Fill" />
+                                Grid.Column="1"
+                                Padding="{DynamicResource DynamicPadding}"
+                                Stroke="White"
+                                StrokeThickness="1">
+                                <DatePicker
+                                    x:Name="AddEnd"
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    TextColor="White"
+                                    VerticalOptions="Fill" />
                             </Border>
                         </Grid>
                         <Button
-              x:Name="AddButton"
-              Grid.Row="6"
-              Padding="{DynamicResource DynamicPadding}"
-              BackgroundColor="#FFFF99"
-              Clicked="AddButton_Clicked"
-              CornerRadius="{DynamicResource DynamicCornerRadius}"
-              FontSize="{DynamicResource DynamicFontSizeMedium}"
-              HorizontalOptions="Center"
-              Text="Thêm"
-              TextColor="Black" />
+                            x:Name="AddButton"
+                            Grid.Row="6"
+                            Padding="{DynamicResource DynamicPadding}"
+                            BackgroundColor="#FFFF99"
+                            Clicked="AddButton_Clicked"
+                            CornerRadius="{DynamicResource DynamicCornerRadius}"
+                            FontSize="{DynamicResource DynamicFontSizeMedium}"
+                            HorizontalOptions="Center"
+                            Text="Thêm"
+                            TextColor="Black" />
                     </Grid>
                 </Frame>
 
@@ -175,42 +182,61 @@
                     </Grid.RowDefinitions>
                     <!--  Bộ lọc  -->
                     <Grid
-            Grid.Row="0"
-            ColumnDefinitions="*,*,*"
-            ColumnSpacing="{DynamicResource DynamicSpacing}">
+                        Grid.Row="0"
+                        ColumnDefinitions="*,*,*,*"
+                        ColumnSpacing="{DynamicResource DynamicSpacing}">
                         <Button
-              x:Name="OngoingFilterButton"
-              Grid.Column="0"
-              Padding="{DynamicResource DynamicPadding}"
-              BackgroundColor="#C41E3A"
-              CornerRadius="{DynamicResource DynamicCornerRadius}"
-              FontAttributes="Bold"
-              FontSize="{DynamicResource DynamicFontSizeLarge}"
-              HeightRequest="{DynamicResource DynamicButtonHeight}"
-              Text="🔥 Đang diễn ra"
-              TextColor="White" />
+                            x:Name="All"
+                            Clicked="OnAllClicked"
+                            Style="{StaticResource HoverButtonStyle}"
+                            Grid.Column="0"
+                            Padding="{DynamicResource DynamicPadding}"
+                            BackgroundColor="#C41E3A"
+                            CornerRadius="{DynamicResource DynamicCornerRadius}"
+                            FontAttributes="Bold"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            HeightRequest="{DynamicResource DynamicButtonHeight}"
+                            Text="Tất cả"
+                            TextColor="White" />
                         <Button
-              x:Name="UpcomingFilterButton"
-              Grid.Column="1"
-              Padding="{DynamicResource DynamicPadding}"
-              BackgroundColor="#7B6A54"
-              CornerRadius="{DynamicResource DynamicCornerRadius}"
-              FontAttributes="Bold"
-              FontSize="{DynamicResource DynamicFontSizeLarge}"
-              HeightRequest="{DynamicResource DynamicButtonHeight}"
-              Text="📅 Sắp tới"
-              TextColor="White" />
+                            x:Name="DangDienRa"
+                            Clicked="OnDangDienRaClicked"
+                            Style="{StaticResource HoverButtonStyle}"
+                            Grid.Column="1"
+                            Padding="{DynamicResource DynamicPadding}"
+                            BackgroundColor="#C41E3A"
+                            CornerRadius="{DynamicResource DynamicCornerRadius}"
+                            FontAttributes="Bold"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            HeightRequest="{DynamicResource DynamicButtonHeight}"
+                            Text="🔥 Đang diễn ra"
+                            TextColor="White" />
                         <Button
-              x:Name="CompletedFilterButton"
-              Grid.Column="2"
-              Padding="{DynamicResource DynamicPadding}"
-              BackgroundColor="#D4BFAA"
-              CornerRadius="{DynamicResource DynamicCornerRadius}"
-              FontAttributes="Bold"
-              FontSize="{DynamicResource DynamicFontSizeLarge}"
-              HeightRequest="{DynamicResource DynamicButtonHeight}"
-              Text="📦 Đã kết thúc"
-              TextColor="#4B3621" />
+                            x:Name="SapToi"
+                            Clicked="OnSapToiClicked"
+                            Style="{StaticResource HoverButtonStyle}"
+                            Grid.Column="2"
+                            Padding="{DynamicResource DynamicPadding}"
+                            BackgroundColor="#7B6A54"
+                            CornerRadius="{DynamicResource DynamicCornerRadius}"
+                            FontAttributes="Bold"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            HeightRequest="{DynamicResource DynamicButtonHeight}"
+                            Text="📅 Sắp tới"
+                            TextColor="White" />
+                        <Button
+                            x:Name="DaKetThuc"
+                            Clicked="OnDaKetThucClicked"
+                            Style="{StaticResource HoverButtonStyle}"
+                            Grid.Column="3"
+                            Padding="{DynamicResource DynamicPadding}"
+                            BackgroundColor="#D4BFAA"
+                            CornerRadius="{DynamicResource DynamicCornerRadius}"
+                            FontAttributes="Bold"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            HeightRequest="{DynamicResource DynamicButtonHeight}"
+                            Text="📦 Đã kết thúc"
+                            TextColor="#4B3621" />
                     </Grid>
 
                     <!--  Danh sách ưu đãi  -->
@@ -226,125 +252,62 @@
                                 <RowDefinition Height="*" />
                                 <!--  Khoảng trống  -->
                             </Grid.RowDefinitions>
-                            <!--  Ưu đãi 1  -->
-                            <Frame
-                Grid.Row="0"
-                Padding="{DynamicResource DynamicPadding}"
-                BorderColor="#F2E2D6"
-                CornerRadius="{DynamicResource DynamicCornerRadius}"
-                HasShadow="False">
-                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
-                                        <Label
-                      FontAttributes="Bold"
-                      FontSize="{DynamicResource DynamicFontSizeMedium}"
-                      Text="Giảm giá 20% toàn bộ menu"
-                      TextColor="#4B3621" />
-                                        <Label
-                      FontSize="{DynamicResource DynamicFontSizeSmall}"
-                      Text="KM20MENU"
-                      TextColor="#7B6A54" />
-                                    </VerticalStackLayout>
-                                    <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="{DynamicResource DynamicFontSizeMedium}"
-                    Text="20%"
-                    TextColor="#C41E3A"
-                    VerticalOptions="Center" />
-                                    <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontSize="{DynamicResource DynamicFontSizeSmall}"
-                    Text="Áp dụng toàn menu từ 01/05 đến 31/05."
-                    TextColor="#7B6A54" />
-                                </Grid>
-                            </Frame>
-                            <!--  Ưu đãi 2  -->
-                            <Frame
-                Grid.Row="1"
-                Padding="{DynamicResource DynamicPadding}"
-                BorderColor="#F2E2D6"
-                CornerRadius="{DynamicResource DynamicCornerRadius}"
-                HasShadow="False">
-                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
-                                        <Label
-                      FontAttributes="Bold"
-                      FontSize="{DynamicResource DynamicFontSizeMedium}"
-                      Text="Mua 1 tặng 1 - Trà Sữa Trân Châu"
-                      TextColor="#4B3621" />
-                                        <Label
-                      FontSize="{DynamicResource DynamicFontSizeSmall}"
-                      Text="BOGO-TS"
-                      TextColor="#7B6A54" />
-                                    </VerticalStackLayout>
-                                    <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="{DynamicResource DynamicFontSizeMedium}"
-                    Text="1+1"
-                    TextColor="#C41E3A"
-                    VerticalOptions="Center" />
-                                    <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontSize="{DynamicResource DynamicFontSizeSmall}"
-                    Text="Áp dụng vào các ngày thứ 7, Chủ Nhật trong tháng 5."
-                    TextColor="#7B6A54" />
-                                </Grid>
-                            </Frame>
-                            <!--  Ưu đãi 3  -->
-                            <Frame
-                Grid.Row="2"
-                Padding="{DynamicResource DynamicPadding}"
-                BorderColor="#F2E2D6"
-                CornerRadius="{DynamicResource DynamicCornerRadius}"
-                HasShadow="False">
-                                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
-                                        <Label
-                      FontAttributes="Bold"
-                      FontSize="{DynamicResource DynamicFontSizeMedium}"
-                      Text="Ưu đãi thành viên - Giảm 10%"
-                      TextColor="#4B3621" />
-                                        <Label
-                      FontSize="{DynamicResource DynamicFontSizeSmall}"
-                      Text="MEMBER10"
-                      TextColor="#7B6A54" />
-                                    </VerticalStackLayout>
-                                    <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    FontAttributes="Bold"
-                    FontSize="{DynamicResource DynamicFontSizeMedium}"
-                    Text="10%"
-                    TextColor="#C41E3A"
-                    VerticalOptions="Center" />
-                                    <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    FontSize="{DynamicResource DynamicFontSizeSmall}"
-                    Text="Áp dụng cho khách thành viên đăng ký trước ngày 15/05."
-                    TextColor="#7B6A54" />
-                                </Grid>
-                            </Frame>
+                            <!--  Ưu đãi  -->
+                            <CollectionView ItemsSource="{Binding VoucherVM.Vouchers}" Margin="20">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame
+                                            Grid.Row="0"
+                                            Padding="{DynamicResource DynamicPadding}"
+                                            BorderColor="#F2E2D6"
+                                            CornerRadius="{DynamicResource DynamicCornerRadius}"
+                                            HasShadow="False">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnPromotionTapped"/>
+                                            </Frame.GestureRecognizers>
+                                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                                                <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                        Text="{Binding Name}"
+                                                        TextColor="#fff" />
+                                                    <Label
+                                                        FontSize="{DynamicResource DynamicFontSizeSmall}"
+                                                        Text="{Binding Code}"
+                                                        TextColor="#fff" />
+                                                </VerticalStackLayout>
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    FontAttributes="Bold"
+                                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                                    Text="{Binding DiscountValue, StringFormat='{}Giảm ${0:0.00}'}"
+                                                    TextColor="#fff"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    Grid.Row="1"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="2"
+                                                    FontSize="{DynamicResource DynamicFontSizeSmall}"
+                                                    Text="{Binding Description}"
+                                                    TextColor="#fff" />
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </Grid>
                     </ScrollView>
                 </Grid>
 
                 <!--  Cột 3: Thông tin chi tiết ưu đãi  -->
                 <Frame
-          Grid.Column="2"
-          Padding="{DynamicResource DynamicPadding}"
-          BackgroundColor="#4B3621"
-          CornerRadius="{DynamicResource DynamicCornerRadius}"
-          HasShadow="False">
+                    Grid.Column="2"
+                    Padding="{DynamicResource DynamicPadding}"
+                    BackgroundColor="#4B3621"
+                    CornerRadius="{DynamicResource DynamicCornerRadius}"
+                    HasShadow="False">
                     <Grid RowSpacing="{DynamicResource DynamicSpacing}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -365,121 +328,127 @@
                             <!--  Khoảng trống  -->
                         </Grid.RowDefinitions>
                         <Label
-              Grid.Row="0"
-              FontAttributes="Bold"
-              FontSize="{DynamicResource DynamicFontSizeLarge}"
-              Text="THÔNG TIN ƯU ĐÃI"
-              TextColor="White" />
+                            Grid.Row="0"
+                            FontAttributes="Bold"
+                            FontSize="{DynamicResource DynamicFontSizeLarge}"
+                            Text="THÔNG TIN ƯU ĐÃI"
+                            TextColor="White" />
 
                         <!--  Tên ưu đãi  -->
                         <Border
-              Grid.Row="1"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="1"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Entry
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                IsEnabled="False"
-                Text="Giảm giá 20% toàn bộ menu"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="EditName"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                IsEnabled="False"
+                                Text="None"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Mã ưu đãi  -->
                         <Border
-              Grid.Row="2"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="2"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Entry
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                IsEnabled="False"
-                Text="KM20MENU"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="EditCode"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                IsEnabled="False"
+                                Text="None"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Mô tả  -->
                         <Border
-              Grid.Row="3"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="3"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Editor
-                AutoSize="TextChanges"
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                IsEnabled="False"
-                Text="Áp dụng cho toàn bộ thực đơn từ ngày 01/05 đến 31/05."
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="EditDescription"
+                                AutoSize="TextChanges"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                IsEnabled="False"
+                                Text="None"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Số tiền ưu đãi  -->
                         <Border
-              Grid.Row="4"
-              Padding="{DynamicResource DynamicPadding}"
-              Stroke="White"
-              StrokeThickness="1">
+                            Grid.Row="4"
+                            Padding="{DynamicResource DynamicPadding}"
+                            Stroke="White"
+                            StrokeThickness="1">
                             <Entry
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                IsEnabled="False"
-                Text="20%"
-                TextColor="White"
-                VerticalOptions="Fill" />
+                                x:Name="EditDiscount"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                IsEnabled="False"
+                                Text="None"
+                                TextColor="White"
+                                VerticalOptions="Fill" />
                         </Border>
 
                         <!--  Ngày bắt đầu / kết thúc  -->
                         <Grid
-              Grid.Row="5"
-              ColumnDefinitions="*,*"
-              ColumnSpacing="{DynamicResource DynamicSpacing}">
+                            Grid.Row="5"
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="{DynamicResource DynamicSpacing}">
                             <Border
-                Padding="{DynamicResource DynamicPadding}"
-                Stroke="White"
-                StrokeThickness="1">
+                                Padding="{DynamicResource DynamicPadding}"
+                                Stroke="White"
+                                StrokeThickness="1">
                                 <DatePicker
-                  Date="2025-05-01"
-                  FontSize="{DynamicResource DynamicFontSizeMedium}"
-                  IsEnabled="False"
-                  TextColor="White"
-                  VerticalOptions="Fill" />
+                                    x:Name="EditStart"
+                                    Date="0001-01-01"
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    IsEnabled="False"
+                                    TextColor="White"
+                                    VerticalOptions="Fill" />
                             </Border>
                             <Border
-                Grid.Column="1"
-                Padding="{DynamicResource DynamicPadding}"
-                Stroke="White"
-                StrokeThickness="1">
+                                Grid.Column="1"
+                                Padding="{DynamicResource DynamicPadding}"
+                                Stroke="White"
+                                StrokeThickness="1">
                                 <DatePicker
-                  Date="2025-05-31"
-                  FontSize="{DynamicResource DynamicFontSizeMedium}"
-                  IsEnabled="False"
-                  TextColor="White"
-                  VerticalOptions="Fill" />
+                                    x:Name="EditEnd"
+                                    Date="0001-01-01"
+                                    FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                    IsEnabled="False"
+                                    TextColor="White"
+                                    VerticalOptions="Fill" />
                             </Border>
                         </Grid>
                         <Grid
-              Grid.Row="6"
-              ColumnDefinitions="*,*"
-              ColumnSpacing="{DynamicResource DynamicSpacing}"
-              HorizontalOptions="Center">
+                            Grid.Row="6"
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="{DynamicResource DynamicSpacing}"
+                            HorizontalOptions="Center">
                             <Button
-                x:Name="SaveButton"
-                Grid.Column="0"
-                Padding="{DynamicResource DynamicPadding}"
-                BackgroundColor="#D3D3D3"
-                Clicked="SaveButton_Clicked"
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                Text="Lưu"
-                TextColor="Black" />
+                                x:Name="SaveButton"
+                                Grid.Column="0"
+                                Padding="{DynamicResource DynamicPadding}"
+                                BackgroundColor="#D3D3D3"
+                                Clicked="SaveButton_Clicked"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                Text="Lưu"
+                                TextColor="Black" />
                             <Button
-                x:Name="DeleteButton"
-                Grid.Column="1"
-                Padding="{DynamicResource DynamicPadding}"
-                BackgroundColor="#FF6347"
-                Clicked="DeleteButton_Clicked"
-                FontSize="{DynamicResource DynamicFontSizeMedium}"
-                Text="Xóa"
-                TextColor="White" />
+                                x:Name="DeleteButton"
+                                Grid.Column="1"
+                                Padding="{DynamicResource DynamicPadding}"
+                                BackgroundColor="#FF6347"
+                                Clicked="DeleteButton_Clicked"
+                                FontSize="{DynamicResource DynamicFontSizeMedium}"
+                                Text="Xóa"
+                                TextColor="White" />
                         </Grid>
                     </Grid>
                 </Frame>

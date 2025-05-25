@@ -5,16 +5,21 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 
 namespace PBL3MAUIApp.Views.ManagerView;
+using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.Models;
+using System.Threading.Tasks;
 
 public partial class OrderPageManager : ContentPage
 {
     private double _lastScale = -1;
     private Frame? _selectedShift;
     /// ///////////////
+    public CashierViewModel? mainViewModel;
 
     public OrderPageManager()
     {
         InitializeComponent();
+        mainViewModel = BindingContext as CashierViewModel;
         this.SizeChanged += (s, e) =>
         {
             double width = this.Width;
@@ -34,18 +39,20 @@ public partial class OrderPageManager : ContentPage
             }
         };
     }
-
-
-    // Sự kiện khi nhấn nút "Lọc"
-    private void FilterButton_Clicked(object sender, EventArgs e)
+    private static DateTime selectedDay = DateTime.Now;
+    private static int selectedShiftIndex = 0;
+    protected override async void OnAppearing()
     {
-        DisplayAlert("Thông báo", "Nút Lọc đã được nhấn!", "OK");
+        base.OnAppearing();
+        if (mainViewModel != null)
+        {
+            await mainViewModel.OrderVM.LoadOrdersByDate(DateTime.Now);
+        }
     }
 
-    private void ViewOrderDetail_Clicked(object sender, EventArgs e)
-    {
-        DisplayAlert("Thông báo", "Nút Xem chi tiết đã được nhấn!", "OK");
-    }
+
+
+
     private void OnShiftClicked(object sender, EventArgs e)
     {
 
@@ -56,15 +63,23 @@ public partial class OrderPageManager : ContentPage
         // var frame = sender as Frame;
         if (_selectedShift == FirstShift)
         {
+            selectedShiftIndex = 1;
             FirstShift.BackgroundColor = Color.FromArgb("#C6E2FF");
         }
         if (_selectedShift == SecondShift)
         {
+            selectedShiftIndex = 2;
             SecondShift.BackgroundColor = Color.FromArgb("#C6E2FF");
         }
         if (_selectedShift == ThirdShift)
         {
+            selectedShiftIndex = 3;
             ThirdShift.BackgroundColor = Color.FromArgb("#C6E2FF");
+        }
+
+        if (mainViewModel != null)
+        {
+            mainViewModel.OrderVM.LoadOrderByShift(selectedShiftIndex);
         }
     }
 
@@ -78,15 +93,17 @@ public partial class OrderPageManager : ContentPage
 
 
     // Sự kiện khi nhấn nút "Áp dụng" trong popup lọc
-    private void OnApplyFilterClicked(object sender, EventArgs e)
+    private async void OnApplyFilterClicked(object sender, EventArgs e)
     {
-        var selectedDate = FilterDatePicker.Date.ToString("dd/MM/yyyy");
-        // Cập nhật ngày trên giao diện (ví dụ: Label trong Frame header)
-        var dateLabel = this.FindByName<Label>("dateLabel"); // Giả định có Label tên "dateLabel"
-        if (dateLabel != null)
+        selectedDay = FilterDatePicker.Date;
+
+        SelectedDate.Text = $"{selectedDay: dd/MM/yyyy}";
+
+        if (mainViewModel != null)
         {
-            dateLabel.Text = selectedDate;
+            await mainViewModel.OrderVM.LoadOrdersByDate(selectedDay);
         }
+
         FilterPopupOverlay.IsVisible = false;
     }
 
@@ -97,9 +114,11 @@ public partial class OrderPageManager : ContentPage
     }
 
     // Sự kiện khi nhấn nút "Xem chi tiết"
-    private void OnViewDetailClicked(object sender, EventArgs e)
+    private async void OnViewDetailClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
+        var order = button?.BindingContext as Order;
+        // if(order != null) Debug.WriteLine($"id: {order.Id}");
         if (button != null)
         {
             var grid = button.Parent as Grid;
@@ -107,6 +126,7 @@ public partial class OrderPageManager : ContentPage
             {
 
                 DetailPopupOverlay.IsVisible = true;
+                if (mainViewModel != null && order != null) await mainViewModel.OrderDetailVM.ViewOrder(order.Id);
 
             }
         }

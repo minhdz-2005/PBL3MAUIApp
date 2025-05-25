@@ -37,37 +37,6 @@ public class ProductViewModel : INotifyPropertyChanged
             
     }
 
-    public async Task CoffeeCategory()
-    {
-        List<Product> listProduct = await productService.GetProductsAsync();
-
-        Products.Clear();
-        foreach (var item in listProduct)
-        {
-            if (item.Category == "Cà Phê") Products.Add(item);
-        }
-    }
-    public async Task TeaCategory()
-    {
-        List<Product> listProduct = await productService.GetProductsAsync();
-
-        Products.Clear();
-        foreach (var item in listProduct)
-        {
-            if (item.Category == "Trà") Products.Add(item);
-        }
-    }
-    public async Task CakeCategory()
-    {
-        List<Product> listProduct = await productService.GetProductsAsync();
-
-        Products.Clear();
-        foreach (var item in listProduct)
-        {
-            if (item.Category == "Bánh Ngọt") Products.Add(item);
-        }
-    }
-
     // LOC SAN PHAM THEO DANH MUC
     public async Task FilterCategory(string category)
     {
@@ -92,23 +61,56 @@ public class ProductViewModel : INotifyPropertyChanged
     }
 
     // THEM SAN PHAM
-    public async Task AddProduct(Product a)
+    public async Task<bool> AddProduct(string name, string priceText, string cate, string description)
     {
-        await productService.AddProductAsync(a);
-        Products.Add(a);
+        // KIEM TRA CAC GIA TRI DAU VAO
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(priceText) || string.IsNullOrWhiteSpace(cate))
+        {
+            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng điền đầy đủ thông tin sản phẩm.", "OK");
+            return false; // Khong the them san pham neu cac truong bat buoc rong
+        }
+        if (!decimal.TryParse(priceText, out decimal price) || price < 0)
+        {
+            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
+            return false; // Khong the them san pham neu gia khong hop le
+        }
+        // Tao san pham moi
+        Product newProduct = new Product(name, price, cate, description);
+        // Goi dich vu de them san pham
+        bool result = await productService.AddProductAsync(newProduct);
+        if (result)
+        {
+            await GetAllProduct();
+        }
+        else
+        {
+            await Shell.Current.DisplayAlert("Lỗi", "Không thể thêm sản phẩm. Vui lòng thử lại.", "OK");
+        }
+        return result; // Tra ve ket qua them san pham
     }
     // CHINH SUA SAN PHAM
-    public async Task UpdateProduct(int id, Product a)
+    public async Task<bool> UpdateProduct(int id, string name, string priceText, string cate, string description)
     {
-        await productService.UpdateProductAsync(id, a);
-        var product = Products.FirstOrDefault(p => p.Id == id);
-        if (product != null)
+        // KIEM TRA GIA TRI DAU VAO
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(priceText) || string.IsNullOrWhiteSpace(cate))
         {
-            product.Name = a.Name;
-            product.Price = a.Price;
-            product.Category = a.Category;
-            product.Description = a.Description;
+            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng điền đầy đủ thông tin sản phẩm.", "OK");
+            return false; // Khong the cap nhat san pham neu cac truong bat buoc rong
         }
+        if (!decimal.TryParse(priceText, out decimal price) || price < 0)
+        {
+            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
+            return false; // Khong the cap nhat san pham neu gia khong hop le
+        }
+        // Tao san pham moi voi id da cho
+        Product updatedProduct = new Product(name, price, cate, description);
+        // Goi dich vu de cap nhat san pham
+        bool result = await productService.UpdateProductAsync(id, updatedProduct);
+        if (result)
+        {
+            await GetAllProduct();
+        }
+        return true;
     }
     // XOA SAN PHAM
     public async Task DeleteProduct(int id)
