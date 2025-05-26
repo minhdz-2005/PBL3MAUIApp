@@ -47,6 +47,7 @@ public class ProductViewModel : INotifyPropertyChanged
         {
             if (item.Category == category) Products.Add(item);
         }
+        if (category == "Tất cả") await GetAllProduct();
     }
 
     // TIM KIEM SAN PHAM THEO TEN

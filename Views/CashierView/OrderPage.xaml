@@ -62,6 +62,25 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+                    <Border
+                        Grid.Row="0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Stroke="#F2E2D6"
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1">
+                        <Button
+                            Style="{StaticResource HoverButtonStyle}"
+                            Padding="0,0,0,0"
+                            BackgroundColor="Transparent"
+                            BorderWidth="0"
+                            Clicked="OnCategoryButtonClicked"
+                            FontSize="16"
+                            HorizontalOptions="Fill"
+                            Text="Tất cả"
+                            TextColor="#4B3621"
+                            VerticalOptions="Start" />
+                    </Border>
                     <CollectionView Grid.Row="1" ItemsSource="{Binding ProductVM.Categories}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -75,7 +94,6 @@
 
                                     <Button
                                         Style="{StaticResource HoverButtonStyle}"
-                                        x:Name="CoffeeButton"
                                         Padding="0,0,0,0"
                                         BackgroundColor="Transparent"
                                         BorderWidth="0"
@@ -620,10 +638,12 @@
                     <Border Grid.Row="1">
                         <Grid ColumnDefinitions="*,Auto">
                             <Entry
+                                x:Name="SearchPromotionEntry"
                                 Grid.Column="0"
-                                Placeholder="Tìm kiếm"
+                                Placeholder="Tìm kiếm theo tên ưu đãi"
                                 TextColor="Black" />
                             <Button
+                                Clicked="OnSearchPromotionClicked"
                                 Style="{StaticResource HoverButtonStyle}"
                                 Grid.Column="1"
                                 CornerRadius="20"

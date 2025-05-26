@@ -49,7 +49,7 @@
                     <ScrollView>
                         <VerticalStackLayout Spacing="10">
                             <Label 
-                                Text="THÔNG TIN ƯU ĐÃI" 
+                                Text="DANH SÁCH ƯU ĐÃI" 
                                 TextColor="White" 
                                 FontSize="18"
                                 FontAttributes="Bold"
@@ -67,7 +67,7 @@
                                             <Button 
                                                 x:Name="VoucherSelectButton"
                                                 Style="{StaticResource HoverButtonStyle}"
-                                                Text="{Binding Id, StringFormat='{}Khuyến mãi {0:0}'}"
+                                                Text="{Binding Code}"
                                                 TextColor="White"
                                                 VerticalOptions="Fill"
                                                 HorizontalOptions="Fill"
@@ -145,7 +145,7 @@
                                             <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
                                                 <VerticalStackLayout Grid.Column="0" Grid.Row="0">
                                                     <Label 
-                                                        Text="{Binding Id, StringFormat='{}Khuyến mãi số: {0:0}'}"
+                                                        Text="{Binding Code, StringFormat='{}Mã ưu đãi: {0:0}'}"
                                                         TextColor="#FFFFFF"
                                                         FontSize="16"
                                                         FontAttributes="Bold"/>

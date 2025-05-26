@@ -45,13 +45,15 @@ public partial class OrderPage : ContentPage
             mainViewModel.VoucherVM.FilterVouchers("DangDienRa");
         } 
     }
-    // Nhan vao nut DANH MUC Ca Phe
+    // Nhan vao nut DANH MUC
     private async void OnCategoryButtonClicked(object sender, EventArgs e)
     {
         var button = sender as Button;
         var category = button?.BindingContext as string;
+        if (category == null) category = "Tất cả";
         if (mainViewModel != null && category != null)
         {
+            Debug.WriteLine($"Category selected: {category}");
             await mainViewModel.ProductVM.FilterCategory(category);
         }
     }
@@ -165,6 +167,13 @@ public partial class OrderPage : ContentPage
 
 
     //Mở popup thêm ưu đãi
+    private async void OnSearchPromotionClicked(object sender, EventArgs e)
+    {
+        if (mainViewModel != null)
+        {
+            await mainViewModel.VoucherVM.GetVoucherByName(SearchPromotionEntry.Text);
+        }
+    }
     private void OnAddPromotionClicked(object sender, EventArgs e)
     {
         PopupPromotion.IsVisible = true;

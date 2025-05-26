@@ -56,7 +56,19 @@ namespace PBL3MAUIApp.ViewModels
                 Vouchers.Add(voucher);
             }
         }
-
+        // GET VOUCHER BY NAME
+        public async Task GetVoucherByName(string name)
+        {
+            Vouchers.Clear();
+            var vouchers = await voucherService.GetVouchersAsync();
+            foreach (var voucher in vouchers)
+            {
+                if (voucher.Name.ToLower().Contains(name.ToLower()))
+                {
+                    Vouchers.Add(voucher);
+                }
+            }
+        }
         // FILTER VOUCHER
         public async void FilterVouchers(string filter)
         {
