@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 using PBL3MAUIApp.ViewModels.LoginViewModels;
 
 namespace PBL3MAUIApp.Views.CashierView;

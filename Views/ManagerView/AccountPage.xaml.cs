@@ -1,5 +1,5 @@
 namespace PBL3MAUIApp.Views.ManagerView;
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 public partial class AccountPage : ContentPage
 {
     private double _lastScale = -1;

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="PBL3MAUIApp.Views.CashierView.OrderPage"
     x:Name="OrderPageRoot"
-    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels"
     
     BackgroundColor="#F7EFE9"
     ControlTemplate="{StaticResource SharedPageTemplate}"
@@ -329,7 +329,7 @@
 
                                         <Label
                                             Grid.Row="1"
-                                            Text="{Binding VoucherId, StringFormat='{}Ưu đãi áp dụng: KM {0:0}'}"
+                                            Text="{Binding VoucherId, StringFormat='{}Ưu đãi áp dụng: KM {0:00}'}"
                                             TextColor="#4B3621" />
                                         <Label
                                             Grid.Row="1"
@@ -656,7 +656,7 @@
                                                             TextColor="#FFFFFF" />
                                                         <Label
                                                             FontSize="15"
-                                                            Text="{Binding Id, StringFormat='{}KM{0:0}'}"
+                                                            Text="{Binding Code}"
                                                             TextColor="#FFFFFF" />
                                                     </VerticalStackLayout>
                                                     <Label

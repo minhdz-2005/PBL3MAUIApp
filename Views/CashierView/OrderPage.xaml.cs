@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using PBL3MAUIApp.Models;
 using PBL3MAUIApp.Services;
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 
 namespace PBL3MAUIApp.Views.CashierView;
 

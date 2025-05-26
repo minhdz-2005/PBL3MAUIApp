@@ -13,7 +13,7 @@ using PBL3MAUIApp.ViewModels.LoginViewModels;
 
 using static Microsoft.Maui.ApplicationModel.Permissions;
 
-namespace PBL3MAUIApp.ViewModels.CashierViewModels
+namespace PBL3MAUIApp.ViewModels
 {
     public class AccountViewModel : INotifyPropertyChanged
     {

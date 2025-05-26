@@ -5,24 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PBL3MAUIApp.ViewModels.CashierViewModels
+namespace PBL3MAUIApp.ViewModels
 {
-    public class CategoryAndRevenue : INotifyPropertyChanged
+    public class ProductAndRevenue : INotifyPropertyChanged
     {
-        private string _category = string.Empty;
-        public string Category
+        private string _productName = String.Empty;
+        public string ProductName
         {
-            get => _category;
+            get => _productName;
             set
             {
-                if (_category != value)
+                if (_productName != value)
                 {
-                    _category = value;
-                    OnPropertyChanged(nameof(Category));
+                    _productName = value;
+                    OnPropertyChanged(nameof(ProductName));
                 }
             }
         }
-        private int _quantity = 0;
+        public int _quantity = 0;
         public int Quantity
         {
             get => _quantity;

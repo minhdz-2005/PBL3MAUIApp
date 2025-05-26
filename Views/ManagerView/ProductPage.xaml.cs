@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Maui.Controls;
 
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 using PBL3MAUIApp.Models;
 namespace PBL3MAUIApp.Views.ManagerView;
 
@@ -115,20 +115,14 @@ public partial class ProductPage : ContentPage
             Resources["DynamicBorderThickness"] = 1 * scale;
 
             double cornerRadius = 10 * scale;
-            Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
-
-            // AddProductPopup.WidthRequest = scale * 500; // Chiều rộng linh hoạt
-            // AddProductPopup.HeightRequest = scale * 600; // Chiều cao linh hoạt
-
-            // EditProductPopupFrame.WidthRequest = scale * 500;
-            // EditProductPopupFrame.HeightRequest = scale * 600;
+            //Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
 
             Resources["NaviHeightRequest"] = 60 * scale;
             Resources["TabMenuHeightRequest"] = 25 * scale;
             Resources["TabMenuWidthRequest"] = 25 * scale;
             Resources["NaviTextFontSize"] = 25 * scale;
             Resources["NaviItemSpacing"] = 2 * horizontalScale;
-            Resources["NaviMargin"] = 2 * horizontalScale; // Điều chỉnh Margin theo chiều ngang
+            Resources["NaviMargin"] = 2 * horizontalScale;
             Resources["NaviPadding"] = 5 * horizontalScale;
 
             _lastScale = scale;

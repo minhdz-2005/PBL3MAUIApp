@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 
 namespace PBL3MAUIApp.Views.ManagerView;
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 using PBL3MAUIApp.Models;
 using System.Threading.Tasks;
 using System.Diagnostics;
@@ -272,7 +272,7 @@ public partial class PromotionPage : ContentPage
             Resources["DynamicBorderThickness"] = 1 * scale;
 
             double cornerRadius = 10 * scale;
-            Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
+            //Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
 
 
 

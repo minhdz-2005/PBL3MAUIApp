@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using PBL3MAUIApp.Services;
 using PBL3MAUIApp.Models;
 
-namespace PBL3MAUIApp.ViewModels.CashierViewModels
+namespace PBL3MAUIApp.ViewModels
 {
     public class RevenueViewModel : INotifyPropertyChanged
     {

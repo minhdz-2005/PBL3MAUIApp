@@ -1,4 +1,4 @@
-﻿using PBL3MAUIApp.ViewModels.CashierViewModels;
+﻿using PBL3MAUIApp.ViewModels;
 using PBL3MAUIApp.Models;
 using System.Threading.Tasks;
 namespace PBL3MAUIApp.Views.CashierView;

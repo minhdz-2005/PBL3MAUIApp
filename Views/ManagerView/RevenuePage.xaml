@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:PBL3MAUIApp.Converters"
     BackgroundColor="#F7EFE9"
-    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels"
     ControlTemplate="{StaticResource SharedManagerPageTemplate}">
 
     <ContentPage.BindingContext>

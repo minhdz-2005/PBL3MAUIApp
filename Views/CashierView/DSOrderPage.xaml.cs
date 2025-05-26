@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 
 using PBL3MAUIApp.Models;
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 
 namespace PBL3MAUIApp.Views.CashierView;
 

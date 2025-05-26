@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PBL3MAUIApp.ViewModels.CashierViewModels
+namespace PBL3MAUIApp.ViewModels
 {
     public class StaffAndRevenue : INotifyPropertyChanged
     {

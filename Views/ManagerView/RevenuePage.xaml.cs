@@ -5,7 +5,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 
 namespace PBL3MAUIApp.Views.ManagerView;
-using PBL3MAUIApp.ViewModels.CashierViewModels;
+using PBL3MAUIApp.ViewModels;
 using PBL3MAUIApp.Models;
 using System.Threading.Tasks;
 
@@ -115,7 +115,7 @@ public partial class RevenuePage : ContentPage
             Resources["DynamicBorderThickness"] = 1 * scale;
 
             double cornerRadius = 10 * scale;
-            Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
+            //Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
 
             Resources["NaviHeightRequest"] = 60 * scale;
             Resources["TabMenuHeightRequest"] = 25 * scale;

@@ -5,7 +5,7 @@
     x:Class="PBL3MAUIApp.Views.CashierView.DoanhThuPage"
     ControlTemplate="{StaticResource SharedPageTemplate}"
     BackgroundColor="#F7EFE9"
-    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels"
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels"
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>

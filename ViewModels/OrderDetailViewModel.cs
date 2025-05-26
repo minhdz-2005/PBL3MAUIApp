@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using PBL3MAUIApp.Models;
 using PBL3MAUIApp.Services;
 
-namespace PBL3MAUIApp.ViewModels.CashierViewModels
+namespace PBL3MAUIApp.ViewModels
 {
     public class OrderDetailViewModel : INotifyPropertyChanged
     {

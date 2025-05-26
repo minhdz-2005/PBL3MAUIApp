@@ -4,7 +4,7 @@
     x:Class="PBL3MAUIApp.Views.CashierView.DSOrderPage"
     BackgroundColor="#F7EFE9"
     ControlTemplate="{StaticResource SharedPageTemplate}"
-    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels.CashierViewModels">
+    xmlns:viewModels="clr-namespace:PBL3MAUIApp.ViewModels">
 
     <ContentPage.BindingContext>
         <viewModels:CashierViewModel />
