@@ -112,6 +112,7 @@
                             Placeholder="Enter password..."
                             TextColor="Black" 
                             VerticalOptions="Center"
+                            Unfocused="PasswordEntry_Unfocused"
                             Completed="OnLoginClicked"/>
                     </Border>
 
@@ -123,7 +124,7 @@
                         BackgroundColor="#8EB8BB"
                         CornerRadius="25"
                         HorizontalOptions="Center"
-                        Text="Đăng nhập"
+                        Text="Login"
                         TextColor="Black"
 			            Clicked="OnLoginClicked"/>
                 </Grid>

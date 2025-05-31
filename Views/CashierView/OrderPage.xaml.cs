@@ -50,7 +50,7 @@ public partial class OrderPage : ContentPage
     {
         var button = sender as Button;
         var category = button?.BindingContext as string;
-        if (category == null) category = "Tất cả";
+        if (category == null) category = "All";
         if (mainViewModel != null && category != null)
         {
             Debug.WriteLine($"Category selected: {category}");

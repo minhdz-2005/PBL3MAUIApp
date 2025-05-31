@@ -29,13 +29,13 @@
                 FontAttributes="Bold"
                 FontSize="28"
                 HorizontalOptions="Center"
-                Text="DANH MỤC - ORDER"
+                Text="CREATING ORDER"
                 TextColor="#4B3621" />
             <Label
                 Margin="0,0,0,20"
                 FontSize="16"
                 HorizontalOptions="Center"
-                Text="Tạo đơn hàng mới"
+                Text="Create new order"
                 TextColor="#7B6A54" />
         </VerticalStackLayout>
 
@@ -53,7 +53,7 @@
                     FontAttributes="Bold"
                     FontSize="20"
                     HorizontalOptions="Center"
-                    Text="DANH MỤC"
+                    Text="CATEGORIES"
                     TextColor="#4B3621" />
 
                 <Grid RowSpacing="10">
@@ -77,7 +77,7 @@
                             Clicked="OnCategoryButtonClicked"
                             FontSize="16"
                             HorizontalOptions="Fill"
-                            Text="Tất cả"
+                            Text="All"
                             TextColor="#4B3621"
                             VerticalOptions="Start" />
                     </Border>
@@ -242,7 +242,7 @@
                             Margin="0,0,0,15"
                             FontAttributes="Bold"
                             FontSize="20"
-                            Text="CHI TIẾT ĐƠN HÀNG"
+                            Text="ORDER DETAILS"
                             TextColor="#4B3621" />
 
                         <CollectionView ItemsSource="{Binding OrderDetailVM.OrderDetails}">
@@ -262,7 +262,7 @@
                                             Grid.Row="1"
                                             Margin="10,0"
                                             HorizontalOptions="Start"
-                                            Text="{Binding OrderDetail.Note, StringFormat='{}Ghi chú: {0:0}'}"
+                                            Text="{Binding OrderDetail.Note, StringFormat='{}Description: {0:0}'}"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center" />
                                         <Button
@@ -335,7 +335,7 @@
 
                                         <Label
                                             Grid.Row="0"
-                                            Text="Tổng tiền:"
+                                            Text="Total Amount:"
                                             TextColor="#4B3621" />
                                         <Label
                                             Grid.Row="0"
@@ -347,7 +347,7 @@
 
                                         <Label
                                             Grid.Row="1"
-                                            Text="{Binding VoucherId, StringFormat='{}Ưu đãi áp dụng: KM {0:00}'}"
+                                            Text="{Binding VoucherId, StringFormat='{}Voucher Applied: KM {0:00}'}"
                                             TextColor="#4B3621" />
                                         <Label
                                             Grid.Row="1"
@@ -359,7 +359,7 @@
                                         <Label
                                             Grid.Row="2"
                                             FontAttributes="Bold"
-                                            Text="Thành tiền:"
+                                            Text="Final Amount:"
                                             TextColor="#4B3621" />
                                         <Label
                                             Grid.Row="2"
@@ -384,7 +384,7 @@
                                 CornerRadius="5"
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
-                                Text="THÊM ƯU ĐÃI"
+                                Text="ADD VOUCHER"
                                 TextColor="White" />
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
@@ -396,7 +396,7 @@
                                 CornerRadius="5"
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
-                                Text="XÁC NHẬN"
+                                Text="CREATE"
                                 TextColor="White" />
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
@@ -409,7 +409,7 @@
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
                                 IsVisible="False"
-                                Text="LƯU"
+                                Text="SAVE"
                                 TextColor="White" />
                             <Button
                                 Style="{StaticResource HoverButtonStyle}"
@@ -422,7 +422,7 @@
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
                                 IsVisible="False"
-                                Text="XOÁ"
+                                Text="DELETE"
                                 TextColor="White" />
 
                             <Button
@@ -434,7 +434,7 @@
                                 CornerRadius="5"
                                 HeightRequest="45"
                                 HorizontalOptions="Center"
-                                Text="THANH TOÁN"
+                                Text="DONE PAYMENT"
                                 TextColor="White" 
                                 Clicked="OnPaidButtonClicked"/>
                         </Grid>
@@ -503,7 +503,7 @@
                                                 Grid.Column="0"
                                                 FontSize="18"
                                                 HorizontalOptions="Start"
-                                                Text="Giá bán"
+                                                Text="Price"
                                                 TextColor="Black" />
                                             <Label
                                                 Grid.Column="1"
@@ -522,7 +522,7 @@
                                                 <Entry
                                                     Text="{Binding OrderDetail.Note}"
                                                     Grid.Column="1"
-                                                    Placeholder="Ghi chú"
+                                                    Placeholder="Description"
                                                     TextColor="Black" />
                                             </Grid>
                                         </Border>
@@ -577,7 +577,7 @@
                                         BorderColor="White"
                                         BorderWidth="1"
                                         Margin="5"
-                                        Text="Xóa ghi chú" 
+                                        Text="Delete Description" 
                                         Clicked="OnDeleteNoteClicked"/>
                                 </Grid>
                             </Grid>
@@ -594,7 +594,7 @@
                 BorderWidth="1"
                 CornerRadius="15"
                 Margin="5"
-                Text="Lưu các ghi chú" 
+                Text="Save Descriptions" 
                 Clicked="OnSaveNoteClicked"/>
 
         </Grid>
@@ -632,7 +632,7 @@
                         BackgroundColor="#C41E3A"
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="🔥 Đang diễn ra"
+                        Text="🔥 Ongoing"
                         TextColor="White" />
                     <!--  Tìm kiếm  -->
                     <Border Grid.Row="1">
@@ -640,7 +640,7 @@
                             <Entry
                                 x:Name="SearchPromotionEntry"
                                 Grid.Column="0"
-                                Placeholder="Tìm kiếm theo tên ưu đãi"
+                                Placeholder="Find by voucher's name"
                                 TextColor="Black" />
                             <Button
                                 Clicked="OnSearchPromotionClicked"
@@ -692,14 +692,14 @@
                                                         Grid.Column="0"
                                                         Grid.ColumnSpan="2"
                                                         FontSize="15"
-                                                        Text="{Binding StartDate, StringFormat='{}Từ ngày: {0:dd/MM/yyyy} , thời gian bắt đầu: {0:hh} giờ {0:mm} phút'}"
+                                                        Text="{Binding StartDate, StringFormat='{}Start Date: {0:dd/MM/yyyy} , time start: {0:hh}h{0:mm}m'}"
                                                         TextColor="#FFFFFF" />
                                                     <Label
                                                         Grid.Row="2"
                                                         Grid.Column="0"
                                                         Grid.ColumnSpan="2"
                                                         FontSize="15"
-                                                        Text="{Binding EndDate, StringFormat='{}Đến ngày: {0:dd/MM/yyyy} , thời gian kết thúc: {0:hh} giờ {0:mm} phút'}"
+                                                        Text="{Binding EndDate, StringFormat='{}End Date: {0:dd/MM/yyyy} , time end: {0:hh}h{0:mm}m'}"
                                                         TextColor="#FFFFFF" />
                                                 </Grid>
                                             </Frame>
@@ -708,7 +708,7 @@
                                                 Margin="0,30,0,30"
                                                 Grid.Column="1"
                                                 HorizontalOptions="Center"
-                                                Text="Áp dụng" 
+                                                Text="Apply" 
                                                 Clicked="OnApplyPromotionButtonClicked"/>
 
                                         </Grid>
@@ -722,13 +722,13 @@
                             Style="{StaticResource HoverButtonStyle}"
                             Grid.Column="0"
                             HorizontalOptions="Center"
-                            Text="Thoát" 
+                            Text="Cancel" 
                             Clicked="OnOutPromotionButtonClicked"/>
                         <Button
                             Style="{StaticResource HoverButtonStyle}"
                             Grid.Column="1"
                             HorizontalOptions="Center"
-                            Text="Xoá áp dụng" 
+                            Text="Unapply" 
                             Clicked="OnDeletePromotionButtonClicked"/>
                     </Grid>
                 </Grid>

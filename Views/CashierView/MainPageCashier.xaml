@@ -21,7 +21,7 @@
             HorizontalOptions="Fill"
             VerticalOptions="Fill"
             ZIndex="2">
-            <Label Text="Xin chào, Chúc bạn một ngày mới tốt lành"
+            <Label Text="Hello, Have a nice day!"
                    FontSize="{OnPlatform Default=36, MacCatalyst=28, Android=30, iOS=30}"
                    FontAttributes="Bold"
                    TextColor="White"

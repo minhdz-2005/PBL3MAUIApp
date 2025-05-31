@@ -52,7 +52,7 @@ public partial class StaffPage : ContentPage
 
         if (mainViewModel != null && role != null)
         {
-            if (role == "Tất cả")
+            if (role == "All")
             {
                 await mainViewModel.StaffVM.GetAllStaff();
             }
@@ -61,10 +61,6 @@ public partial class StaffPage : ContentPage
                 await mainViewModel.StaffVM.GetStaffByRole(role);
             }
         }
-        //RoleAll.BackgroundColor = button.Text == "Tất cả" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        //RoleCashier.BackgroundColor = button.Text == "Thu ngân" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        //RoleBartender.BackgroundColor = button.Text == "Pha chế" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        //RoleWaiter.BackgroundColor = button.Text == "Phục vụ" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
     }
 
     // Sự kiện khi nhấn nút "Xóa" trên mỗi hàng nhân viên

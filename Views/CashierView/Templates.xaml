@@ -42,37 +42,37 @@
                             VerticalOptions="Fill"
                             Margin="0,0,0,0">
 
-                    <Label Text="Trang chủ" Style="{StaticResource MenuItemStyle}" x:Name="MyLabel">
+                    <Label Text="Home" Style="{StaticResource MenuItemStyle}" x:Name="MyLabel">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnHomeTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Order" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Create Order" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOrderTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Đơn hàng" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="View Orders" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnOrderListTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Ưu đãi" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Voucher" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnUuDaiTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Doanh thu" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Revenue" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnDoanhThuTapped" />
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <Label Text="Tài khoản" Style="{StaticResource MenuItemStyle}">
+                    <Label Text="Account" Style="{StaticResource MenuItemStyle}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnAccountTapped" />
                         </Label.GestureRecognizers>

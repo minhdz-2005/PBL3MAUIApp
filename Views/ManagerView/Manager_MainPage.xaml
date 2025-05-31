@@ -29,7 +29,7 @@
                 FontAttributes="Bold"
                 FontSize="36"
                 HorizontalTextAlignment="Center"
-                Text="Xin chào, Chúc bạn một ngày mới tốt lành"
+                Text="Hello, Have a nice day!"
                 TextColor="White" />
         </StackLayout>
     </Grid>

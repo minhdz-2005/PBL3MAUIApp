@@ -26,7 +26,7 @@
         FontAttributes="Bold"
         FontSize="30"
         HorizontalOptions="Center"
-        Text="THỐNG KÊ ORDER"
+        Text="ORDER STATISTICS"
         TextColor="Black" />
 
             <!--  Frame chứa nội dung chính  -->
@@ -52,7 +52,7 @@
                                 FontAttributes="Bold"
                                 FontSize="30"
                                 HorizontalOptions="Center"
-                                Text="Hôm nay"
+                                Text="Today"
                                 TextColor="Black" />
                             <Button
                                 Margin="5"
@@ -62,7 +62,7 @@
                                 CornerRadius="5"
                                 FontSize="18"
                                 HorizontalOptions="End"
-                                Text="Lọc"
+                                Text="Filter"
                                 TextColor="Black" />
                         </Grid>
                     </Frame>
@@ -99,14 +99,14 @@
                                             FontAttributes="Bold"
                                             FontSize="20"
                                             HorizontalOptions="Center"
-                                            Text="Chi tiết ngày"
+                                            Text="Date details"
                                             TextColor="Black"
                                             TextTransform="Uppercase" />
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="0"
                                             FontSize="20"
-                                            Text="Tổng số đơn:"
+                                            Text="Total orders:"
                                             TextColor="Black" />
                                         <Label
                                             Grid.Row="1"
@@ -119,7 +119,7 @@
                                             Grid.Row="2"
                                             Grid.Column="0"
                                             FontSize="20"
-                                            Text="Doanh thu gốc:"
+                                            Text="Base revenue:"
                                             TextColor="Black" />
                                         <Label
                                             Grid.Row="2"
@@ -132,7 +132,7 @@
                                             Grid.Row="3"
                                             Grid.Column="0"
                                             FontSize="20"
-                                            Text="Ưu đãi áp dụng:"
+                                            Text="Total discount:"
                                             TextColor="Black" />
                                         <Label
                                             Grid.Row="3"
@@ -145,7 +145,7 @@
                                             Grid.Row="4"
                                             Grid.Column="0"
                                             FontSize="20"
-                                            Text="Doanh thu thực:"
+                                            Text="Final revenue:"
                                             TextColor="Black" />
                                         <Label
                                             Grid.Row="4"
@@ -172,14 +172,14 @@
                                             Grid.Row="0"
                                             Grid.Column="0"
                                             FontSize="18"
-                                            Text="Ca 1: 6h00 - 12h"
+                                            Text="Morning shift: 6h00 - 12h"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="0"
                                             FontSize="18"
-                                            Text="x"
+                                            Text="Empty"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
 
@@ -204,7 +204,7 @@
                                             Grid.Column="2"
                                             FontSize="18"
                                             HorizontalOptions="End"
-                                            Text="{Binding OrderVM.TotalOrderShift1, StringFormat='{}Số đơn: {0:0}'}"
+                                            Text="{Binding OrderVM.TotalOrderShift1, StringFormat='{}Total orders: {0:0}'}"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                     </Grid>
@@ -225,14 +225,14 @@
                                             Grid.Row="0"
                                             Grid.Column="0"
                                             FontSize="18"
-                                            Text="Ca 2: 12h - 18h00"
+                                            Text="Afternoon shift: 12h - 18h00"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="0"
                                             FontSize="18"
-                                            Text="x"
+                                            Text="Empty"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                         <Label
@@ -256,7 +256,7 @@
                                             Grid.Column="3"
                                             FontSize="18"
                                             HorizontalOptions="End"
-                                            Text="{Binding OrderVM.TotalOrderShift2, StringFormat='{}Số đơn: {0:0}'}"
+                                            Text="{Binding OrderVM.TotalOrderShift2, StringFormat='{}Total orders: {0:0}'}"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                     </Grid>
@@ -277,14 +277,14 @@
                                             Grid.Row="0"
                                             Grid.Column="0"
                                             FontSize="18"
-                                            Text="Ca 3: 18h00 - 24h"
+                                            Text="Evening shift: 18h00 - 24h"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="0"
                                             FontSize="18"
-                                            Text="x"
+                                            Text="Empty"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                         <Label
@@ -308,7 +308,7 @@
                                             Grid.Column="3"
                                             FontSize="18"
                                             HorizontalOptions="End"
-                                            Text="{Binding OrderVM.TotalOrderShift3, StringFormat='{}Số đơn: {0:0}'}"
+                                            Text="{Binding OrderVM.TotalOrderShift3, StringFormat='{}Total orders: {0:0}'}"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                     </Grid>
@@ -342,7 +342,7 @@
                                         Grid.Row="0"
                                         FontAttributes="Bold"
                                         FontSize="20"
-                                        Text="Chi tiết ca làm"
+                                        Text="Shift Details"
                                         TextColor="#333333" />
                                     <!--  Đơn hàng  -->
                                     <CollectionView Grid.Row="1" ItemsSource="{Binding OrderVM.OrderTam}">
@@ -358,27 +358,27 @@
                                                             Grid.Row="0"
                                                             Grid.Column="0"
                                                             FontSize="18"
-                                                            Text="{Binding Id, StringFormat='{}Mã đơn: {0:0}'}"
+                                                            Text="{Binding Id, StringFormat='{}Order ID: {0:0}'}"
                                                             TextColor="#333333" />
                                                         <Label
                                                             Grid.Row="1"
                                                             Grid.Column="0"
                                                             FontSize="18"
-                                                            Text="{Binding FinalAmount, StringFormat='{}Số tiền: $ {0:0.00}'}"
+                                                            Text="{Binding FinalAmount, StringFormat='{}Total amount: $ {0:0.00}'}"
                                                             TextColor="#333333" />
                                                         <Label
                                                             Grid.Row="0"
                                                             Grid.Column="1"
                                                             FontSize="15"
                                                             HorizontalOptions="Center"
-                                                            Text="{Binding TimeAndDate, StringFormat='{}Thời gian: {0:HH} giờ {0:mm} phút'}"
+                                                            Text="{Binding TimeAndDate, StringFormat='{}Time: {0:HH}h{0:mm}m'}"
                                                             TextColor="#666666" />
                                                         <Label
                                                             Grid.Row="1"
                                                             Grid.Column="1"
                                                             FontSize="15"
                                                             HorizontalOptions="Center"
-                                                            Text="Trạng thái: Đã thanh toán"
+                                                            Text="Trạng thái: Completed"
                                                             TextColor="#666666" />
                                                         <Button
                                                             Grid.RowSpan="2"
@@ -387,7 +387,7 @@
                                                             Clicked="OnViewDetailClicked"
                                                             FontSize="15"
                                                             HorizontalOptions="End"
-                                                            Text="Xem chi tiết&gt;&gt;"
+                                                            Text="Details&gt;&gt;"
                                                             TextColor="Black" />
                                                     </Grid>
                                                 </Frame>
@@ -400,7 +400,7 @@
                                         FontAttributes="Bold"
                                         FontSize="18"
                                         HorizontalOptions="End"
-                                        Text="{Binding OrderVM.TotalRevenueInShift, StringFormat='{}Tổng doanh thu ca: $ {0:0.00}'}"
+                                        Text="{Binding OrderVM.TotalRevenueInShift, StringFormat='{}Total revenue in shift: $ {0:0.00}'}"
                                         TextColor="#4A90E2" />
                                 </Grid>
                             </ScrollView>
@@ -437,7 +437,7 @@
                             FontAttributes="Bold"
                             FontSize="30"
                             HorizontalOptions="Center"
-                            Text="LỌC THEO NGÀY"
+                            Text="FILTER BY DATE"
                             TextColor="Black" />
                         <Border
                             Grid.Row="1"
@@ -461,7 +461,7 @@
                                 CornerRadius="10"
                                 FontSize="18"
                                 HorizontalOptions="Center"
-                                Text="Áp dụng" />
+                                Text="Confirm" />
                             <Button
                                 Grid.Column="1"
                                 BackgroundColor="Red"
@@ -469,7 +469,7 @@
                                 CornerRadius="10"
                                 FontSize="18"
                                 HorizontalOptions="Center"
-                                Text="Hủy"
+                                Text="Cancel"
                                 TextColor="White" />
                         </Grid>
                     </Grid>
@@ -502,7 +502,7 @@
                             FontAttributes="Bold"
                             FontSize="30"
                             HorizontalOptions="Center"
-                            Text="CHI TIẾT ĐƠN HÀNG 🧾"
+                            Text="ORDER DETAILS 🧾"
                             TextColor="Black" />
                                 <Border
                             Grid.Row="1"
@@ -515,7 +515,7 @@
                                     <Label
                                 x:Name="DetailOrderIdLabel"
                                 FontSize="18"
-                                Text="{Binding Id, StringFormat='{}Mã HĐ: {0:0}'}"
+                                Text="{Binding Id, StringFormat='{}Order ID: {0:0}'}"
                                 TextColor="Black" />
                                 </Border>
                             </VerticalStackLayout>
@@ -536,7 +536,7 @@
                                 x:Name="DetailCashierLabel"
                                 Grid.Row="0"
                                 FontSize="18"
-                                Text="{Binding OrderDetailVM.StaffName, StringFormat='{}Thu ngân: {0}'}"
+                                Text="{Binding OrderDetailVM.StaffName, StringFormat='{}Cashier: {0}'}"
                                 TextColor="Black" />
                                     <!--  Thời gian  -->
                                     <CollectionView ItemsSource="{Binding OrderDetailVM.Orders}">
@@ -580,7 +580,7 @@
                                             FontAttributes="Bold"
                                             FontSize="18"
                                             HorizontalOptions="Center"
-                                            Text="STT"
+                                            Text="No"
                                             TextColor="Black" />
                                             </Border>
                                             <Border
@@ -591,7 +591,7 @@
                                                 <Label
                                             FontAttributes="Bold"
                                             FontSize="18"
-                                            Text="Tên món"
+                                            Text="Product name"
                                             TextColor="Black" />
                                             </Border>
                                             <Border
@@ -603,7 +603,7 @@
                                             FontAttributes="Bold"
                                             FontSize="18"
                                             HorizontalOptions="Center"
-                                            Text="SL"
+                                            Text="Quantity"
                                             TextColor="Black" />
                                             </Border>
                                             <Border
@@ -614,7 +614,7 @@
                                                 <Label
                                             FontAttributes="Bold"
                                             FontSize="18"
-                                            Text="Đơn giá"
+                                            Text="Price"
                                             TextColor="Black" />
                                             </Border>
                                             <Border
@@ -625,7 +625,7 @@
                                                 <Label
                                             FontAttributes="Bold"
                                             FontSize="18"
-                                            Text="Thành tiền"
+                                            Text="Total"
                                             TextColor="Black" />
                                             </Border>
                                         </Grid>
@@ -721,7 +721,7 @@
                                 <Label
                             Grid.Row="3"
                             FontSize="18"
-                            Text="{Binding OrderDetailVM.TotalQuantity, StringFormat='{}Tổng số sản phẩm: {0:0}'}"
+                            Text="{Binding OrderDetailVM.TotalQuantity, StringFormat='{}Total product: {0:0}'}"
                             TextColor="Black" />
 
                                 <!--  Thành tiền và ưu đãi  -->
@@ -735,7 +735,7 @@
                                                 Grid.Column="0"
                                                 FontAttributes="Bold"
                                                 FontSize="18"
-                                                Text="Thành tiền"
+                                                Text="Total amount"
                                                 TextColor="Black" />
                                                     <Label
                                                 Grid.Row="0"
@@ -748,7 +748,7 @@
                                                 Grid.Row="1"
                                                 Grid.Column="0"
                                                 FontSize="18"
-                                                Text="{Binding VoucherId, StringFormat='{}Ưu đãi: KM{0:0}'}"
+                                                Text="{Binding VoucherId, StringFormat='{}Voucher: KM{0:0}'}"
                                                 TextColor="Black" />
                                                     <Label
                                                 Grid.Row="1"
@@ -776,7 +776,7 @@
                                                 Grid.Column="0"
                                                 FontAttributes="Bold"
                                                 FontSize="20"
-                                                Text="Tổng tiền"
+                                                Text="Final Amount"
                                                 TextColor="Black" />
                                                     <Label
                                                 Grid.Column="1"
@@ -802,7 +802,7 @@
                 CornerRadius="10"
                 FontSize="18"
                 HorizontalOptions="Center"
-                Text="Đóng" />
+                Text="Close" />
                 </Grid>
             </Grid>
 

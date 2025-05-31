@@ -174,7 +174,7 @@ public partial class ShiftPage : ContentPage
             await mainViewModel.ShiftVM.StaffInShift(date);
 
             // Cập nhật label ngày làm
-            SelectedDateLabel.Text = $"Ngày làm: {date:dd/MM/yyyy}";
+            SelectedDateLabel.Text = $"Date Time: {date:dd/MM/yyyy}";
         }
     }
 
@@ -241,10 +241,10 @@ public partial class ShiftPage : ContentPage
         var label = sender as Label;
         if (label == null) return;
 
-        RoleAll.BackgroundColor = label.Text == "Tất cả" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        RoleCashier.BackgroundColor = label.Text == "Thu ngân" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        RoleBarista.BackgroundColor = label.Text == "Pha chế" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
-        RoleWaiter.BackgroundColor = label.Text == "Phục vụ" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        RoleAll.BackgroundColor = label.Text == "All" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        RoleCashier.BackgroundColor = label.Text == "Cashier" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        RoleBarista.BackgroundColor = label.Text == "Barista" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
+        RoleWaiter.BackgroundColor = label.Text == "Waiter" ? Color.FromArgb("#C6E2FF") : Color.FromArgb("#FFE4B5");
 
         if (mainViewModel != null)
         {

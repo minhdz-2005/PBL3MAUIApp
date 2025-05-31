@@ -37,6 +37,19 @@ public partial class LoginView : ContentPage
         };
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        AccountEntry.Text = string.Empty;
+        PasswordEntry.Text = string.Empty;
+        PasswordEntry.IsPassword = true;
+        PasswordEntry.Focus();
+    }
+    private void PasswordEntry_Unfocused(object sender, FocusEventArgs e)
+    {
+        PasswordEntry.IsPassword = true;
+    }
+
     private async void OnLoginClicked(object sender, EventArgs e)
     {
         string account = AccountEntry.Text;

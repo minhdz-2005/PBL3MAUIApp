@@ -17,12 +17,12 @@
         <!-- Header -->
         <VerticalStackLayout Grid.Row="0" Spacing="5">
             <Label Text="☕" FontSize="32" HorizontalOptions="Center"/>
-            <Label Text="THỐNG KÊ DOANH THU THEO NGÀY"
+            <Label Text="REVENUE STATISTICS BY DAY"
                    FontSize="28"
                    FontAttributes="Bold"
                    TextColor="#4B3621"
                    HorizontalOptions="Center"/>
-            <Label Text="Theo ca làm việc"
+            <Label Text="By shift"
                    FontSize="16"
                    TextColor="#7B6A54"
                    HorizontalOptions="Center"
@@ -47,7 +47,7 @@
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                             <Label Text="📅" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="Chọn ngày:" FontSize="14" TextColor="#4B3621"/>
+                                <Label Text="Select datetime:" FontSize="14" TextColor="#4B3621"/>
                                 <DatePicker x:Name="WorkDatePicker" TextColor="#4B3621" BackgroundColor="Transparent"/>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
@@ -58,17 +58,17 @@
                         <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
                             <Label Text="⏰" FontSize="20" VerticalOptions="Center"/>
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="Chọn ca làm việc:" FontSize="14" TextColor="#4B3621"/>
+                                <Label Text="Select shift:" FontSize="14" TextColor="#4B3621"/>
                                 <Picker 
                                     x:Name="ShiftPicker" 
                                     TextColor="#4B3621" 
                                     BackgroundColor="Transparent"
                                     SelectedIndex="0">
                                     <Picker.Items>
-                                        <x:String>Tất cả</x:String>
-                                        <x:String>Ca sáng (6h00 - 12h00)</x:String>
-                                        <x:String>Ca chiều (12h00 - 18h00)</x:String>
-                                        <x:String>Ca tối (18h00 - 24h00)</x:String>
+                                        <x:String>All</x:String>
+                                        <x:String>Morning shift (6h00 - 12h00)</x:String>
+                                        <x:String>Afternoon shift (12h00 - 18h00)</x:String>
+                                        <x:String>Evening shift (18h00 - 24h00)</x:String>
                                     </Picker.Items>
                                 </Picker>
                             </VerticalStackLayout>
@@ -78,7 +78,7 @@
                     <Button 
                         Clicked="OnViewStatisticsClicked"
                         Style="{StaticResource HoverButtonStyle}"
-                        Text="XEM THỐNG KÊ"
+                        Text="VIEW STATISTICS"
                         BackgroundColor="#4B3621"
                         TextColor="White"
                         FontAttributes="Bold"
@@ -109,13 +109,13 @@
                             <VerticalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="⏰" FontSize="18"/>
-                                    <Label Text="Ca sáng (6h00 - 12h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                    <Label Text="Morning shift (6h00 - 12h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
                                 </HorizontalStackLayout>
                                 <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
                                     <Grid ColumnDefinitions="Auto,*">
                                         <HorizontalStackLayout Spacing="10">
                                             <Label Text="💰" FontSize="16"/>
-                                            <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
+                                            <Label Text="Revenue:" FontSize="16" TextColor="#7B6A54"/>
                                         </HorizontalStackLayout>
                                         <Label
                                             Grid.Column="1"
@@ -139,13 +139,13 @@
                             <VerticalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="⏰" FontSize="18"/>
-                                    <Label Text="Ca chiều (12h00 - 18h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                    <Label Text="Afternoon shift (12h00 - 18h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
                                 </HorizontalStackLayout>
                                 <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
                                     <Grid ColumnDefinitions="Auto,*">
                                         <HorizontalStackLayout Spacing="10">
                                             <Label Text="💰" FontSize="16"/>
-                                            <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
+                                            <Label Text="Revenue:" FontSize="16" TextColor="#7B6A54"/>
                                         </HorizontalStackLayout>
                                         <Label Grid.Column="1"
                                             Text="{Binding RevenueVM.TotalRevenueShift_2, StringFormat='{}$ {0:0.00}'}"
@@ -168,13 +168,13 @@
                             <VerticalStackLayout Spacing="10">
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="⏰" FontSize="18"/>
-                                    <Label Text="Ca tối (18h00 - 24h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
+                                    <Label Text="Evening shift (18h00 - 24h00)" FontSize="18" FontAttributes="Bold" TextColor="#4B3621"/>
                                 </HorizontalStackLayout>
                                 <Border Stroke="#F2E2D6" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="15,10">
                                     <Grid ColumnDefinitions="Auto,*">
                                         <HorizontalStackLayout Spacing="10">
                                             <Label Text="💰" FontSize="16"/>
-                                            <Label Text="Doanh thu:" FontSize="16" TextColor="#7B6A54"/>
+                                            <Label Text="Revenue:" FontSize="16" TextColor="#7B6A54"/>
                                         </HorizontalStackLayout>
                                         <Label Grid.Column="1"
                                             Text="{Binding RevenueVM.TotalRevenueShift_3, StringFormat='{}$ {0:0.00}'}"

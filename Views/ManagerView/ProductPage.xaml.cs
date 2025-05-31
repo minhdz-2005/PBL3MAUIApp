@@ -57,7 +57,7 @@ public partial class ProductPage : ContentPage
 
         if (mainViewModel != null)
         {
-            if (cate == "Tất cả") 
+            if (cate == "All") 
                 await mainViewModel.ProductVM.GetAllProduct();
             else
                 await mainViewModel.ProductVM.FilterCategory(cate);
