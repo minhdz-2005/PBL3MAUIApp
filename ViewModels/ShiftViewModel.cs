@@ -445,7 +445,7 @@ namespace PBL3MAUIApp.ViewModels
 
             Day.Add(ca1Start);
 
-            await Shell.Current.DisplayAlert("Thành công",$"Đã thêm ngày làm {ca1Start:dd/MM/yyyy} !","OK");
+            await Shell.Current.DisplayAlert("Success",$"Added date {ca1Start:dd/MM/yyyy} !","OK");
 
             // THEM VAO DB
             await shiftService.AddShiftAsync(new Shift(ca1Start, ca1End));

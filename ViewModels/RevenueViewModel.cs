@@ -282,7 +282,7 @@ namespace PBL3MAUIApp.ViewModels
             // KIEM TRA NGAY BAT DAU VA NGAY KET THUC
             if (fromDate > toDate)
             {
-                await Shell.Current.DisplayAlert("Error", "Ngày bắt đầu không thể lớn hơn ngày kết thúc.", "OK");
+                await Shell.Current.DisplayAlert("Error", "Start date cannot be greater than end date.", "OK");
                 return;
             }
             

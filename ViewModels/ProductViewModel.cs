@@ -47,7 +47,7 @@ public class ProductViewModel : INotifyPropertyChanged
         {
             if (item.Category == category) Products.Add(item);
         }
-        if (category == "Tất cả") await GetAllProduct();
+        if (category == "All") await GetAllProduct();
     }
 
     // TIM KIEM SAN PHAM THEO TEN
@@ -67,12 +67,12 @@ public class ProductViewModel : INotifyPropertyChanged
         // KIEM TRA CAC GIA TRI DAU VAO
         if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(priceText) || string.IsNullOrWhiteSpace(cate))
         {
-            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng điền đầy đủ thông tin sản phẩm.", "OK");
+            await Shell.Current.DisplayAlert("Error", "Please fill in complete product information.", "OK");
             return false; // Khong the them san pham neu cac truong bat buoc rong
         }
         if (!decimal.TryParse(priceText, out decimal price) || price < 0)
         {
-            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
+            await Shell.Current.DisplayAlert("Error", "Please enter a valid price.", "OK");
             return false; // Khong the them san pham neu gia khong hop le
         }
         // Tao san pham moi
@@ -85,7 +85,7 @@ public class ProductViewModel : INotifyPropertyChanged
         }
         else
         {
-            await Shell.Current.DisplayAlert("Lỗi", "Không thể thêm sản phẩm. Vui lòng thử lại.", "OK");
+            await Shell.Current.DisplayAlert("Error", "Unable to add product. Please try again.", "OK");
         }
         return result; // Tra ve ket qua them san pham
     }
@@ -95,12 +95,12 @@ public class ProductViewModel : INotifyPropertyChanged
         // KIEM TRA GIA TRI DAU VAO
         if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(priceText) || string.IsNullOrWhiteSpace(cate))
         {
-            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng điền đầy đủ thông tin sản phẩm.", "OK");
+            await Shell.Current.DisplayAlert("Error", "Please fill in complete product information.", "OK");
             return false; // Khong the cap nhat san pham neu cac truong bat buoc rong
         }
         if (!decimal.TryParse(priceText, out decimal price) || price < 0)
         {
-            await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập giá hợp lệ.", "OK");
+            await Shell.Current.DisplayAlert("Error", "Please enter a valid price.", "OK");
             return false; // Khong the cap nhat san pham neu gia khong hop le
         }
         // Tao san pham moi voi id da cho

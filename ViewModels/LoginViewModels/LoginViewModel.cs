@@ -27,11 +27,11 @@ public class LoginViewModel : INotifyPropertyChanged
                 LoginAccount = account;
                 Debug.WriteLine($"us: {LoginAccount.Username}, {account.Username}");
                 // Debug.WriteLine("Chay 3");
-                if (account.Role == "Quản lý")
+                if (account.Role == "Manager")
                 {
                     await Shell.Current.GoToAsync("//Manager_MainPage");
                 }
-                if (account.Role == "Thu ngân")
+                if (account.Role == "Cashier")
                 {
                     var staffs = await staffService.GetStaffsAsync();
                     if (staffs != null)
@@ -60,10 +60,6 @@ public class LoginViewModel : INotifyPropertyChanged
             await Shell.Current.DisplayAlert("Error", "Incorrect username or password", "OK");
         }
     }
-
-    
-
-
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

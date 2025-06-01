@@ -73,20 +73,20 @@ namespace PBL3MAUIApp.ViewModels
             // kiem tra ten nhan vien
             if (string.IsNullOrWhiteSpace(name))
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên không được để trống", "OK");
+                await Shell.Current.DisplayAlert("Error", "Employee name cannot be blank !", "OK");
                 return false;
             }
             // kiem tra ten nhan vien da ton tai hay chua
             if (Staffs.Any(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên đã tồn tại", "OK");
+                await Shell.Current.DisplayAlert("Error", "Employee name already exists", "OK");
                 return false;
             }
             // kiem tra sdt
             bool isNumeric = phone.All(char.IsDigit);
             if (!isNumeric)
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Số điện thoại không hợp lệ", "OK");
+                await Shell.Current.DisplayAlert("Error", "Invalid phone number", "OK");
                 return false;
             }
             // kiem tra luong
@@ -99,7 +99,7 @@ namespace PBL3MAUIApp.ViewModels
             );
             if (!isValidSalary || salary < 0)
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Lương không hợp lệ", "OK");
+                await Shell.Current.DisplayAlert("Error", "Invalid salary", "OK");
                 return false;
             }
             // kiem tra so dien thoai va ten dang nhap
@@ -109,7 +109,7 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if ((item.Username == username && username != null) || item.PhoneNumber == phone)
                 {
-                    await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập hoặc số điện thoại đã tồn tại", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Username or phone number already exists", "OK");
                     existing = false;
                     return false;
                 }
@@ -117,10 +117,10 @@ namespace PBL3MAUIApp.ViewModels
 
             //kiem tra ten dang nhap va mat khau (thu ngan)
             bool isValidAccount = true;
-            if ((username == null || password == null) && role == "Thu ngân")
+            if ((username == null || password == null) && role == "Cashier")
             {
                 isValidAccount = false;
-                await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không hợp lệ", "OK");
+                await Shell.Current.DisplayAlert("Error", "Invalid username or password", "OK");
                 return false;
             }
 
@@ -129,7 +129,7 @@ namespace PBL3MAUIApp.ViewModels
             // Them nhan vien vao db
             if (isNumeric && isValidSalary && existing && isValidAccount)
             {
-                if (role == "Thu ngân" && username != null && password != null)
+                if (role == "Cashier" && username != null && password != null)
                 {
                     Staff staff = new Staff(username, name, phone, role, salary);
                     await staffService.AddStaffAsync(staff);
@@ -138,7 +138,7 @@ namespace PBL3MAUIApp.ViewModels
 
                     await accountService.AddAccountAsync(new Account(username, password, role));
                 }
-                if (role != "Thu ngân")
+                if (role != "Cashier")
                 {
                     Staff staff = new Staff("", name, phone, role, salary);
                     await staffService.AddStaffAsync(staff);
@@ -147,7 +147,7 @@ namespace PBL3MAUIApp.ViewModels
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Thông báo", "Thêm nhân viên không thành công", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Add employee failed", "OK");
                     return false;
                 }
             }
@@ -161,13 +161,13 @@ namespace PBL3MAUIApp.ViewModels
             // kiem tra ten nhan vien
             if (string.IsNullOrWhiteSpace(name))
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên không được để trống", "OK");
+                await Shell.Current.DisplayAlert("Error", "Employee name cannot be blank", "OK");
                 return false;
             }
             // kiem tra ten nhan vien da ton tai hay chua
             if (Staffs.Any(s => s.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && s.Id != id))
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Tên nhân viên đã tồn tại", "OK");
+                await Shell.Current.DisplayAlert("Error", "Employee name already exists", "OK");
                 return false;
             }
 
@@ -175,7 +175,7 @@ namespace PBL3MAUIApp.ViewModels
             bool isNumeric = phone.All(char.IsDigit);
             if (!isNumeric)
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Số điện thoại không hợp lệ", "OK");
+                await Shell.Current.DisplayAlert("Error", "Invalid phone number", "OK");
                 return false;
             }
             // kiem tra luong
@@ -188,7 +188,7 @@ namespace PBL3MAUIApp.ViewModels
             );
             if (!isValidSalary || salary < 0)
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Lương không hợp lệ", "OK");
+                await Shell.Current.DisplayAlert("Error", "Invalid salary", "OK");
                 return false;
             }
             // kiem tra va ten dang nhap
@@ -196,9 +196,9 @@ namespace PBL3MAUIApp.ViewModels
             bool existing = true;
             foreach (var item in list)
             {
-                if (item.Username == username && username != null && role == "Thu ngân")
+                if (item.Username == username && username != null && role == "Cashier")
                 {
-                    await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Username already exist", "OK");
                     existing = false;
                     return false;
                 }
@@ -206,23 +206,23 @@ namespace PBL3MAUIApp.ViewModels
 
             //kiem tra ten dang nhap va mat khau (thu ngan)
             bool isValidAccount = true;
-            if ((username == null || password == null) && role == "Thu ngân")
+            if ((username == null || password == null) && role == "Cashier")
             {
                 isValidAccount = false;
-                await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không hợp lệ", "OK");
+                await Shell.Current.DisplayAlert("Error", "Invalid username or password", "OK");
                 return false;
             }
             // Cap nhat nhan vien vao db
             if (isNumeric && isValidSalary && existing && isValidAccount)
             {
-                if (role == "Thu ngân" && username != null && password != null)
+                if (role == "Cashier" && username != null && password != null)
                 {
                     Staff staff = new Staff(username, name, phone, role, salary);
                     await staffService.UpdateStaffAsync(id, staff);
 
                     await accountService.AddAccountAsync(new Account(username, password, role));
                 }
-                if (role != "Thu ngân" && username != null)
+                if (role != "Cashier" && username != null)
                 {
                     Staff staff = new Staff("", name, phone, role, salary);
                     await staffService.UpdateStaffAsync(id, staff);

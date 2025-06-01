@@ -347,16 +347,7 @@ namespace PBL3MAUIApp.ViewModels
                             }
                         }
                     }
-
-                    //Debug.WriteLine($"ID: {item.Id} " +
-                    //    $"staffID: {item.StaffId} " +
-                    //    $"shiftID: {item.ShiftId} " +
-                    //    $"voucherID: {item.VoucherId} " +
-                    //    $"time: {item.TimeAndDate} " +
-                    //    $"Amont: {item.Amount} " +
-                    //    $"DIS: {item.DiscountValue} " +
-                    //    $"FIL: {item.FinalAmount} "
-                    //    );
+                    item.Status = true; // DANG HOAT DONG
                     // LUU VO DB
                     item.Id = 0;
                     await orderService.AddOrderAsync(item);
@@ -374,12 +365,6 @@ namespace PBL3MAUIApp.ViewModels
                 {
                     
                     item.OrderDetail.OrderId = orderIdTemp;
-                    //Debug.WriteLine($"orderid {item.OrderDetail.OrderId} " +
-                    //    $"prod id {item.OrderDetail.ProductId} " +
-                    //    $"quan {item.OrderDetail.Quantity} " +
-                    //    $"Note {item.OrderDetail.Note} " +
-                    //    $"total {item.OrderDetail.TotalPrice} "
-                    //    );
 
                     // LUU VAO DB
                     await orderDetailService.AddOrderDetailAsync(item.OrderDetail);

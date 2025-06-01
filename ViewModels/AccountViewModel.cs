@@ -71,7 +71,7 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if (item.PhoneNumber == phone && item.Username != Account.Username)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Số điện thoại đã tồn tại !", "OK");
+                    await Shell.Current.DisplayAlert("Error", "The phonenumber already exist !", "OK");
                     return;
                 }
                 if (item.Username == Account.Username)
@@ -80,7 +80,7 @@ namespace PBL3MAUIApp.ViewModels
                     item.PhoneNumber = phone;
                     await staffService.UpdateStaffAsync(item.Id, item);
                     Debug.WriteLine($"Name: {item.Name}, Phone: {item.PhoneNumber}");
-                    await Shell.Current.DisplayAlert("Success", "Thay dổi thông tin thành công !", "OK");
+                    await Shell.Current.DisplayAlert("Success", "Update information successfully !", "OK");
                     break;
                 }
             }
@@ -95,12 +95,12 @@ namespace PBL3MAUIApp.ViewModels
                 {
                     account.Password = newPassword;
                     await accountService.UpdateAccountAsync(account.Id, account);
-                    await Shell.Current.DisplayAlert("Success", "Thay đổi mật khẩu thành công !", "OK");
+                    await Shell.Current.DisplayAlert("Success", "Update password successfully !", "OK");
                     return true;
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Sai mật khẩu !", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Incorrect password !", "OK");
                     return false;
                 }
             }
