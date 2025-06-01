@@ -62,11 +62,6 @@ public partial class ProductPage : ContentPage
             else
                 await mainViewModel.ProductVM.FilterCategory(cate);
         }
-
-        //CategoryCoffee.BackgroundColor = label.Text == "☕ CÀ PHÊ" ? Colors.White : Colors.Transparent;
-        //CategoryMilkTea.BackgroundColor = label.Text == "🍵 TRÀ" ? Colors.White : Colors.Transparent;
-
-        // await DisplayAlert("Thông báo", $"Bạn đã chọn danh mục: {label.Text}", "OK");
     }
 
     // BAM VAO NUT TIM SAN PHAM
@@ -82,9 +77,6 @@ public partial class ProductPage : ContentPage
             else
                 await mainViewModel.ProductVM.SearchProduct(searchText);
         }
-
-
-        // DisplayAlert("Thông báo", "Bạn đã nhấn nút Tìm!", "OK");
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -133,7 +125,15 @@ public partial class ProductPage : ContentPage
     // BAM VAO NUT THEM SAN PHAM
     private void OnAddProductClicked(object sender, EventArgs e)
     {
+        AddProductPopup.IsVisible = true;
         PopupOverlay.IsVisible = true;
+
+        // Đặt lại các trường nhập liệu
+        AddProductNameEntry.Text = string.Empty;
+        AddProductDescriptionEntry.Text = string.Empty;
+        AddProductPriceEntry.Text = string.Empty;
+        ProductGroupLabel.Text = "Select category";
+        AddGroupProductEntry.Text = "";
     }
     // BAM VAO NUT THEM
     private async void OnSaveProductClicked(object sender, EventArgs e)
@@ -143,7 +143,13 @@ public partial class ProductPage : ContentPage
         string cate = ProductGroupLabel.Text;
         string price = AddProductPriceEntry.Text;
 
-        if(mainViewModel != null)
+        if (cate == "Select category")
+        {
+            await DisplayAlert("Error", "Please select or enter a new category for the product.", "OK");
+            return;
+        }
+
+        if (mainViewModel != null)
         {
             bool isAdded = await mainViewModel.ProductVM.AddProduct(name, price, cate, description);
             if(isAdded)

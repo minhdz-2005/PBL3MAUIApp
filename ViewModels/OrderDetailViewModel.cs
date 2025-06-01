@@ -8,8 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
 using PBL3MAUIApp.Models;
 using PBL3MAUIApp.Services;
 
@@ -66,7 +64,7 @@ namespace PBL3MAUIApp.ViewModels
         private ShiftService shiftService = new ShiftService();
 
         private bool createOrder = false;
-
+        private Order orderTam = new Order();
 
         // CHON SAN PHAM
         public void ChooseProduct(Product p)
@@ -186,6 +184,7 @@ namespace PBL3MAUIApp.ViewModels
 
             // XOA CAC BIEN TAM
             Orders.Clear();
+            orderTam = order;
             order = new Order();
             OrderDetails.Clear();
             createOrder = false;
@@ -195,6 +194,7 @@ namespace PBL3MAUIApp.ViewModels
         {
             // XOA BIEN TAM
             Orders.Clear();
+            orderTam = order;
             order = new Order();
             OrderDetails.Clear();
             createOrder = true;
@@ -316,21 +316,25 @@ namespace PBL3MAUIApp.ViewModels
         public async Task PayOrder()
         {
             int orderId = order.Id;
-            // XOA CAC BIEN TAM
-            Orders.Clear();
-            order = new Order();
-            OrderDetails.Clear();
-            createOrder = false;
-
+            
             int orderIdTemp = 0;
 
             // XOA ORDER QUEUE orderId
+            bool existing = false;
             foreach (var item in OrderQueue)
             {
                 if (item.Id == orderId)
                 {
                     var listOrder = await orderService.GetOrdersAsync();
-                    item.Id = listOrder.Last().Id + 1;
+                    if (listOrder != null && listOrder.Any())
+                    {
+                        item.Id = listOrder.Last().Id + 1;
+                    }
+                    else
+                    {
+                        item.Id = 1;
+                    }
+
                     orderIdTemp = item.Id;
 
                     item.StaffId = LoginViewModels.LoginViewModel.staffID;
@@ -340,7 +344,7 @@ namespace PBL3MAUIApp.ViewModels
                     {
                         foreach (var s in shift)
                         {
-                            if(item.TimeAndDate.Day == s.StartTime.Day && item.TimeAndDate.Month == s.StartTime.Month && item.TimeAndDate.Year == s.StartTime.Year
+                            if (item.TimeAndDate.Day == s.StartTime.Day && item.TimeAndDate.Month == s.StartTime.Month && item.TimeAndDate.Year == s.StartTime.Year
                                 && item.TimeAndDate.Hour >= s.StartTime.Hour && item.TimeAndDate.Hour <= s.EndTime.Hour)
                             {
                                 item.ShiftId = s.Id;
@@ -354,21 +358,20 @@ namespace PBL3MAUIApp.ViewModels
 
                     // XOA KHOI HANG CHO
                     OrderQueue.Remove(item);
+                    existing = true;
                     break;
-
                 }
             }
-            
+
             foreach (var item in OrderDetailsQueue)
             {
                 if (item.OrderDetail.OrderId == orderId)
                 {
-                    
                     item.OrderDetail.OrderId = orderIdTemp;
 
+                    if (item.OrderDetail.Note == string.Empty || item.OrderDetail.Note == null) item.OrderDetail.Note = "None";
                     // LUU VAO DB
-                    await orderDetailService.AddOrderDetailAsync(item.OrderDetail);
-                    
+                    bool isAdd = await orderDetailService.AddOrderDetailAsync(item.OrderDetail);
                 }
             }
             // XOA ORDER DETAIL QUEUE orderId
@@ -379,6 +382,20 @@ namespace PBL3MAUIApp.ViewModels
                     OrderDetailsQueue.Remove(item);
                     break;
                 }
+            }
+            if (!existing)
+            {
+                ConfirmOrder();
+                ShowOrderQueue(orderTam.Id);
+                await PayOrder();
+            }
+            else
+            {
+                // XOA CAC BIEN TAM
+                Orders.Clear();
+                order = new Order();
+                OrderDetails.Clear();
+                createOrder = false;
             }
         }
 

@@ -103,15 +103,19 @@ namespace PBL3MAUIApp.ViewModels
                 return false;
             }
             // kiem tra so dien thoai va ten dang nhap
+            if (username != string.Empty) Debug.WriteLine($"Username: -{username}-");
             var list = await staffService.GetStaffsAsync();
             bool existing = true;
             foreach (var item in list)
             {
-                if ((item.Username == username && username != null) || item.PhoneNumber == phone)
+                if (username != string.Empty)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Username or phone number already exists", "OK");
-                    existing = false;
-                    return false;
+                    if (item.Username == username || item.PhoneNumber == phone)
+                    {
+                        await Shell.Current.DisplayAlert("Error", "Username or phone number already exists", "OK");
+                        existing = false;
+                        return false;
+                    }
                 }
             }
 
@@ -134,20 +138,22 @@ namespace PBL3MAUIApp.ViewModels
                     Staff staff = new Staff(username, name, phone, role, salary);
                     await staffService.AddStaffAsync(staff);
                     Staffs.Add(staff);
+                    await GetAllStaff();
                     Count++;
 
                     await accountService.AddAccountAsync(new Account(username, password, role));
                 }
-                if (role != "Cashier")
+                if (role != "Cashier" && role != "Role (Cashier/Barista/Waiter)")
                 {
                     Staff staff = new Staff("", name, phone, role, salary);
                     await staffService.AddStaffAsync(staff);
                     Staffs.Add(staff);
+                    await GetAllStaff();
                     Count++;
                 }
-                else
+                if (role == "Role (Cashier/Barista/Waiter)")
                 {
-                    await Shell.Current.DisplayAlert("Error", "Add employee failed", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Please select role for your employee", "OK");
                     return false;
                 }
             }
@@ -196,7 +202,7 @@ namespace PBL3MAUIApp.ViewModels
             bool existing = true;
             foreach (var item in list)
             {
-                if (item.Username == username && username != null && role == "Cashier")
+                if (item.Username == username && username != null && role == "Cashier" && item.Id != id)
                 {
                     await Shell.Current.DisplayAlert("Error", "Username already exist", "OK");
                     existing = false;

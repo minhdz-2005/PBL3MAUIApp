@@ -75,7 +75,7 @@ public partial class ShiftPage : ContentPage
 
         if (selectedDate < DateTime.Now)
         {
-            await DisplayAlert("Thông báo", "Không thể thêm nhân viên vào ca làm trong quá khứ.", "OK");
+            await DisplayAlert("Error", "Cannot add staff into ended date.", "OK");
             return;
         }
 
@@ -95,7 +95,7 @@ public partial class ShiftPage : ContentPage
 
         if (selectedDate < DateTime.Now)
         {
-            await DisplayAlert("Thông báo", "Không thể thêm nhân viên vào ca làm trong quá khứ.", "OK");
+            await DisplayAlert("Error", "Cannot add staff into ended date.", "OK");
             return;
         }
 
@@ -114,7 +114,7 @@ public partial class ShiftPage : ContentPage
 
         if (selectedDate < DateTime.Now)
         {
-            await DisplayAlert("Thông báo", "Không thể thêm nhân viên vào ca làm trong quá khứ.", "OK");
+            await DisplayAlert("Error", "Cannot add staff into ended date.", "OK");
             return;
         }
 
@@ -135,7 +135,7 @@ public partial class ShiftPage : ContentPage
         
         if (selectedDate < DateTime.Now)
         {
-            await DisplayAlert("Thông báo", "Không thể xóa nhân viên khỏi ca làm trong quá khứ.", "OK");
+            await DisplayAlert("Error", "Cannot remove staff of ended date.", "OK");
             return;
         }
 

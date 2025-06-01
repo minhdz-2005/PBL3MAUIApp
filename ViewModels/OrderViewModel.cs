@@ -349,34 +349,34 @@ namespace PBL3MAUIApp.ViewModels
             // Tính trạng thái ca
             if (DateTime.Now.Date > selectedDay.Date)
             {
-                StatusShift1 = "Đã kết thúc";
-                StatusShift2 = "Đã kết thúc";
-                StatusShift3 = "Đã kết thúc";
+                StatusShift1 = "Ended";
+                StatusShift2 = "Ended";
+                StatusShift3 = "Ended";
             }
             if (DateTime.Now.Date < selectedDay.Date)
             {
-                StatusShift1 = "Chưa bắt đầu";
-                StatusShift2 = "Chưa bắt đầu";
-                StatusShift3 = "Chưa bắt đầu";
+                StatusShift1 = "Incoming";
+                StatusShift2 = "Incoming";
+                StatusShift3 = "Incoming";
             }
 
             if (DateTime.Now.Hour < 12 && DateTime.Now.Day == selectedDay.Day && DateTime.Now.Month == selectedDay.Month && DateTime.Now.Year == selectedDay.Year)
             {
-                StatusShift1 = "Đang làm việc";
-                StatusShift2 = "Chưa bắt đầu";
-                StatusShift3 = "Chưa bắt đầu";
+                StatusShift1 = "Working";
+                StatusShift2 = "Incoming";
+                StatusShift3 = "Incoming";
             }
             else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18 && DateTime.Now.Day == selectedDay.Day && DateTime.Now.Month == selectedDay.Month && DateTime.Now.Year == selectedDay.Year)
             {
-                StatusShift1 = "Đã kết thúc";
-                StatusShift2 = "Đang làm việc";
-                StatusShift3 = "Chưa bắt đầu";
+                StatusShift1 = "Ended";
+                StatusShift2 = "Working";
+                StatusShift3 = "Incoming";
             }
             else if (DateTime.Now.Hour >= 18 && DateTime.Now.Day == selectedDay.Day && DateTime.Now.Month == selectedDay.Month && DateTime.Now.Year == selectedDay.Year)
             {
-                StatusShift1 = "Đã kết thúc";
-                StatusShift2 = "Đã kết thúc";
-                StatusShift3 = "Đang làm việc";
+                StatusShift1 = "Ended";
+                StatusShift2 = "Ended";
+                StatusShift3 = "Working";
             }
 
             // DANH SACH NHAN VIEN

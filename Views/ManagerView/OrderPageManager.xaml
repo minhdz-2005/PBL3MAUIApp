@@ -175,13 +175,6 @@
                                             Text="Morning shift: 6h00 - 12h"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
-                                        <Label
-                                            Grid.Row="1"
-                                            Grid.Column="0"
-                                            FontSize="18"
-                                            Text="Empty"
-                                            TextColor="#333333"
-                                            VerticalOptions="Center" />
 
                                         <Label
                                             Grid.Row="1"
@@ -230,13 +223,6 @@
                                             VerticalOptions="Center" />
                                         <Label
                                             Grid.Row="1"
-                                            Grid.Column="0"
-                                            FontSize="18"
-                                            Text="Empty"
-                                            TextColor="#333333"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            Grid.Row="1"
                                             Grid.Column="1"
                                             FontSize="18"
                                             HorizontalOptions="Center"
@@ -278,13 +264,6 @@
                                             Grid.Column="0"
                                             FontSize="18"
                                             Text="Evening shift: 18h00 - 24h"
-                                            TextColor="#333333"
-                                            VerticalOptions="Center" />
-                                        <Label
-                                            Grid.Row="1"
-                                            Grid.Column="0"
-                                            FontSize="18"
-                                            Text="Empty"
                                             TextColor="#333333"
                                             VerticalOptions="Center" />
                                         <Label
@@ -378,7 +357,7 @@
                                                             Grid.Column="1"
                                                             FontSize="15"
                                                             HorizontalOptions="Center"
-                                                            Text="Trạng thái: Completed"
+                                                            Text="Status: Completed"
                                                             TextColor="#666666" />
                                                         <Button
                                                             Grid.RowSpan="2"

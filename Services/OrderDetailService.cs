@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
-
+using System.Diagnostics;
 using PBL3MAUIApp.Models;
 
 namespace PBL3MAUIApp.Services;
@@ -48,6 +48,12 @@ public class OrderDetailService
     {
         var url = $"{GetBaseUrl()}/api/OrderDetail";
         var response = await _client.PostAsJsonAsync(url, a);
+        if (!response.IsSuccessStatusCode)
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine("Error: " + error); // hoặc log ra UI
+        }
+
         return response.IsSuccessStatusCode;
     }
 
