@@ -95,7 +95,7 @@ public partial class AccountCashierPage : ContentPage
 
         if (newPassword != rePassword)
         {
-            await DisplayAlert("Error", "Mật khẩu mới không khớp nhau !", "OK");
+            await DisplayAlert("Lỗi", "Mật khẩu mới không khớp nhau !", "OK");
             return;
         }
         else

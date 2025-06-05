@@ -28,7 +28,7 @@
                         Grid.Row="0"
                         FontSize="{DynamicResource DynamicFontSizeMedium}"
                         HorizontalOptions="Center"
-                        Text="Username"
+                        Text="Tên đăng nhập"
                         TextColor="#2D2D2D"
                         VerticalOptions="Center" />
                     <Frame
@@ -44,7 +44,7 @@
                                 <Label
                                     HorizontalOptions="Center"
                                     Style="{DynamicResource DynamicLabelMediumStyle}"
-                                    Text="Update password"
+                                    Text="Thay đổi mật khẩu"
                                     TextColor="#4B3621"
                                     VerticalOptions="Center" />
                             </Border>
@@ -62,7 +62,7 @@
                         CornerRadius="20"
                         FontSize="{DynamicResource DynamicFontSizeMedium}"
                         HorizontalOptions="Center"
-                        Text="Log out"
+                        Text="Đăng xuất"
                         TextColor="White"
                         VerticalOptions="Center" />
                 </Grid>
@@ -82,7 +82,7 @@
                         FontAttributes="Bold"
                         FontSize="24"
                         HorizontalOptions="Center"
-                        Text="UPDATE PASSWORD"
+                        Text="THAY ĐỔI MẬT KHẨU"
                         TextColor="#2D2D2D" />
 
                     <Grid
@@ -99,7 +99,7 @@
                             Grid.Column="0"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
                             HorizontalOptions="End"
-                            Text="Current password"
+                            Text="Mật khẩu hiện tại"
                             TextColor="#2D2D2D"
                             VerticalOptions="Center" />
                         <Border
@@ -116,7 +116,7 @@
                                 x:Name="OldPassEntry"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
                                 IsPassword="True"
-                                Placeholder="Enter current password..."
+                                Placeholder="Nhập mật khẩu hiện tại..."
                                 PlaceholderColor="#A9A9A9"
                                 TextColor="#2D2D2D" />
                         </Border>
@@ -127,7 +127,7 @@
                             Grid.Column="0"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
                             HorizontalOptions="End"
-                            Text="New password"
+                            Text="Mật khẩu mới"
                             TextColor="#2D2D2D"
                             VerticalOptions="Center" />
                         <Border
@@ -144,7 +144,7 @@
                                 x:Name="NewPassEntry"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
                                 IsPassword="True"
-                                Placeholder="Enter new password..."
+                                Placeholder="Nhập mật khẩu mới..."
                                 PlaceholderColor="#A9A9A9"
                                 TextColor="#2D2D2D" />
                         </Border>
@@ -155,7 +155,7 @@
                             Grid.Column="0"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
                             HorizontalOptions="End"
-                            Text="Confirm password"
+                            Text="Xác nhận mật khẩu"
                             TextColor="#2D2D2D"
                             VerticalOptions="Center" />
                         <Border
@@ -172,7 +172,7 @@
                                 x:Name="RePassEntry"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
                                 IsPassword="True"
-                                Placeholder="Confirm password..."
+                                Placeholder="Xác nhận mật khẩu..."
                                 PlaceholderColor="#A9A9A9"
                                 TextColor="#2D2D2D" />
                         </Border>
@@ -184,7 +184,7 @@
                             FontSize="{DynamicResource DynamicFontSizeSmall}"
                             HorizontalOptions="Center"
                             IsVisible="False"
-                            Text="Error: Please check the input information."
+                            Text="Lỗi: Hãy kiểm tra thông tin nhập vào."
                             TextColor="Red" />
 
                         <!--  Save Button  -->
@@ -200,7 +200,7 @@
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
                             HorizontalOptions="Fill"
-                            Text="Save"
+                            Text="Lưu"
                             TextColor="White">
                             <Button.Shadow>
                                 <Shadow

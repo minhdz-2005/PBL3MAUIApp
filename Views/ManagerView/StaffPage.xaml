@@ -28,7 +28,7 @@
         FontAttributes="Bold"
         HorizontalOptions="Center"
         Style="{DynamicResource DynamicLabelTitleStyle}"
-        Text="STAFF MANAGEMENT"
+        Text="QUẢN LÝ NHÂN VIÊN"
         TextColor="#4B3621" />
         </Grid>
 
@@ -55,7 +55,7 @@
                         Clicked="OnRoleClicked"
                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                         Style="{StaticResource HoverButtonStyle}"
-                        Text="All" />
+                        Text="Tất cả" />
                     <VerticalStackLayout Spacing="10"
                         Margin="{DynamicResource DynamicMargin}"
                         VerticalOptions="Center">
@@ -89,7 +89,7 @@
                     <Label
                         Grid.Column="0"
                         Style="{DynamicResource DynamicLabelLargeStyle}"
-                        Text="{Binding StaffVM.Count, StringFormat='{}Total: {0:0}'}"
+                        Text="{Binding StaffVM.Count, StringFormat='{}Tổng: {0:0}'}"
                         TextColor="Black"
                         VerticalOptions="Center" />
                     <Grid
@@ -116,7 +116,7 @@
                                     Clicked="OnSearchClicked"
                                     CornerRadius="{DynamicResource DynamicCornerRadius}"
                                     Style="{DynamicResource DynamicButtonInsideStyle}"
-                                    Text="Search"
+                                    Text="Tìm kiếm"
                                     TextColor="Black"
                                     VerticalOptions="Center" />
                             </Grid>
@@ -129,7 +129,7 @@
                             Clicked="OnAddStaffClicked"
                             CornerRadius="{DynamicResource DynamicCornerRadius}"
                             Style="{DynamicResource DynamicButtonOutsideStyle}"
-                            Text="Add"
+                            Text="Thêm"
                             TextColor="Black" />
                     </Grid>
                 </Grid>
@@ -162,7 +162,7 @@
                                             <Label
                                                 Grid.Column="2"
                                                 Style="{DynamicResource DynamicLabelMediumStyle}"
-                                                Text="{Binding Salary, StringFormat='{}$ {0:0.00}'}"
+                                                Text="{Binding Salary, StringFormat='{}{0:N0} VNĐ'}"
                                                 TextColor="Black"
                                                 VerticalOptions="Center" />
                                             <Label
@@ -178,7 +178,7 @@
                                                 Clicked="OnDeleteStaffClicked"
                                                 CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                 Style="{DynamicResource DynamicButtonInsideStyle}"
-                                                Text="Delete"
+                                                Text="Xóa"
                                                 TextColor="White" />
                                             <Button
                                                 Grid.Column="4"
@@ -187,7 +187,7 @@
                                                 Clicked="OnEditStaffClicked"
                                                 CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                 Style="{DynamicResource DynamicButtonInsideStyle}"
-                                                Text="Edit"
+                                                Text="Sửa"
                                                 TextColor="Black" />
                                         </Grid>
                                     </Frame>
@@ -230,7 +230,7 @@
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Style="{DynamicResource DynamicLabelTitleStyle}"
-                            Text="ADD NEW STAFF"
+                            Text="THÊM NHÂN VIÊN"
                             TextColor="Black" />
                         
                         <Border
@@ -240,7 +240,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="StaffUsernameEntry"
-                                Placeholder="Username (Only for cashier)"
+                                Placeholder="Tên đăng nhập (Chỉ thu ngân)"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -252,7 +252,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="StaffPasswordEntry"
-                                Placeholder="Password (Only for cashier)"
+                                Placeholder="Mật khẩu (Chỉ thu ngân)"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -263,7 +263,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="StaffNameEntry"
-                                Placeholder="Name"
+                                Placeholder="Tên nhân viên"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -274,7 +274,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="StaffPhoneEntry"
-                                Placeholder="Phone number"
+                                Placeholder="Số điện thoại"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -285,7 +285,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="StaffSalaryEntry"
-                                Placeholder="Salary"
+                                Placeholder="Mức lương"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -298,7 +298,7 @@
                             <Label
                                 x:Name="AddStaffRoleLabel"
                                 Style="{DynamicResource DynamicEntryStyle}"
-                                Text="Role (Cashier/Barista/Waiter)"
+                                Text="Chức năng (Thu ngân/Pha chế/Phục vụ)"
                                 TextColor="Black"
                                 VerticalOptions="Center">
                                 <Label.GestureRecognizers>
@@ -312,14 +312,14 @@
                                 Clicked="OnSaveAddStaffClicked"
                                 HorizontalOptions="Center"
                                 Style="{DynamicResource DynamicButtonOutsideStyle}"
-                                Text="Save" />
+                                Text="Lưu" />
                             <Button
                                 Grid.Column="1"
                                 BackgroundColor="Red"
                                 Clicked="OnCancelAddStaffClicked"
                                 HorizontalOptions="Center"
                                 Style="{DynamicResource DynamicButtonOutsideStyle}"
-                                Text="Cancel"
+                                Text="Hủy"
                                 TextColor="White" />
                         </Grid>
                     </Grid>
@@ -359,7 +359,7 @@
                             FontAttributes="Bold"
                             HorizontalOptions="Center"
                             Style="{DynamicResource DynamicLabelTitleStyle}"
-                            Text="EDIT STAFF INFORMATION"
+                            Text="CHỈNH SỬA THÔNG TIN NHÂN VIÊN"
                             TextColor="Black" />
                         <Border
                             IsEnabled="False"
@@ -369,7 +369,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="EditStaffUsernameEntry"
-                                Placeholder="Username (Only for cashier)"
+                                Placeholder="Tên đăng nhập (Chỉ thu ngân)"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -381,7 +381,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="EditStaffPasswordEntry"
-                                Placeholder="Password (Only for cashier)"
+                                Placeholder="Mật khẩu (Chỉ thu ngân)"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -391,7 +391,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="EditStaffNameEntry"
-                                Placeholder="Họ tên"
+                                Placeholder="Tên nhân viên"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -411,7 +411,7 @@
                             Padding="0">
                             <Entry
                                 x:Name="EditStaffSalaryEntry"
-                                Placeholder="Lương"
+                                Placeholder="Mức lương"
                                 Style="{DynamicResource DynamicEntryStyle}"
                                 TextColor="Black" />
                         </Border>
@@ -422,7 +422,7 @@
                             <Label
                                 x:Name="EditStaffRoleLabel"
                                 Style="{DynamicResource DynamicEntryStyle}"
-                                Text="Role (Cashier/Barista/Waiter)"
+                                Text="Chức năng (Thu ngân/Pha chế/Phục vụ)"
                                 TextColor="Black">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnStaffGroupLabelTapped" />
@@ -435,14 +435,14 @@
                                 Clicked="OnSaveEditStaffClicked"
                                 HorizontalOptions="Center"
                                 Style="{DynamicResource DynamicButtonOutsideStyle}"
-                                Text="Save" />
+                                Text="Lưu" />
                             <Button
                                 Grid.Column="1"
                                 BackgroundColor="Red"
                                 Clicked="OnCancelEditStaffClicked"
                                 HorizontalOptions="Center"
                                 Style="{DynamicResource DynamicButtonOutsideStyle}"
-                                Text="Cancel"
+                                Text="Hủy"
                                 TextColor="White" />
                         </Grid>
                     </Grid>
@@ -471,7 +471,7 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Center"
-                    Text="Select role"
+                    Text="Chọn chức năng"
                     TextColor="Black"
                     TextTransform="Uppercase"
                     VerticalOptions="Center" />
@@ -488,7 +488,7 @@
                                 StrokeThickness="1">
                                 <Label
                                     Style="{DynamicResource DynamicLabelMediumStyle}"
-                                    Text="Cashier"
+                                    Text="Thu ngân"
                                     TextColor="#4B3621"
                                     VerticalOptions="Center">
                                     <Label.GestureRecognizers>
@@ -502,7 +502,7 @@
                                 StrokeThickness="1">
                                 <Label
                                     Style="{DynamicResource DynamicLabelMediumStyle}"
-                                    Text="Waiter"
+                                    Text="Phục vụ"
                                     TextColor="#4B3621"
                                     VerticalOptions="Center">
                                     <Label.GestureRecognizers>
@@ -516,7 +516,7 @@
                                 StrokeThickness="1">
                                 <Label
                                     Style="{DynamicResource DynamicLabelMediumStyle}"
-                                    Text="Barista"
+                                    Text="Pha chế"
                                     TextColor="#4B3621"
                                     VerticalOptions="Center">
                                     <Label.GestureRecognizers>

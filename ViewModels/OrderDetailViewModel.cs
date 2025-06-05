@@ -181,7 +181,6 @@ namespace PBL3MAUIApp.ViewModels
                 }
             }
             
-
             // XOA CAC BIEN TAM
             Orders.Clear();
             orderTam = order;

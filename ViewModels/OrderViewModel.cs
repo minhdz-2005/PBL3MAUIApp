@@ -81,10 +81,7 @@ namespace PBL3MAUIApp.ViewModels
         public ObservableCollection<Staff?> StaffCa1 { get; set; } = new();
         public ObservableCollection<Staff?> StaffCa2 { get; set; } = new();
         public ObservableCollection<Staff?> StaffCa3 { get; set; } = new();
-
         public ObservableCollection<Order> OrderTam { get; set; } = new();
-
-
 
         private decimal _revenueShift1;
         public decimal RevenueShift1
@@ -349,34 +346,34 @@ namespace PBL3MAUIApp.ViewModels
             // Tính trạng thái ca
             if (DateTime.Now.Date > selectedDay.Date)
             {
-                StatusShift1 = "Ended";
-                StatusShift2 = "Ended";
-                StatusShift3 = "Ended";
+                StatusShift1 = "Đã kết thúc";
+                StatusShift2 = "Đã kết thúc";
+                StatusShift3 = "Đã kết thúc";
             }
             if (DateTime.Now.Date < selectedDay.Date)
             {
-                StatusShift1 = "Incoming";
-                StatusShift2 = "Incoming";
-                StatusShift3 = "Incoming";
+                StatusShift1 = "Chưa bắt đầu";
+                StatusShift2 = "Chưa bắt đầu";
+                StatusShift3 = "Chưa bắt đầu";
             }
 
             if (DateTime.Now.Hour < 12 && DateTime.Now.Day == selectedDay.Day && DateTime.Now.Month == selectedDay.Month && DateTime.Now.Year == selectedDay.Year)
             {
-                StatusShift1 = "Working";
-                StatusShift2 = "Incoming";
-                StatusShift3 = "Incoming";
+                StatusShift1 = "Đang làm việc";
+                StatusShift2 = "Chưa bắt đầu";
+                StatusShift3 = "Chưa bắt đầu";
             }
             else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18 && DateTime.Now.Day == selectedDay.Day && DateTime.Now.Month == selectedDay.Month && DateTime.Now.Year == selectedDay.Year)
             {
-                StatusShift1 = "Ended";
-                StatusShift2 = "Working";
-                StatusShift3 = "Incoming";
+                StatusShift1 = "Đã kết thúc";
+                StatusShift2 = "Đang làm việc";
+                StatusShift3 = "Chưa bắt đầu";
             }
             else if (DateTime.Now.Hour >= 18 && DateTime.Now.Day == selectedDay.Day && DateTime.Now.Month == selectedDay.Month && DateTime.Now.Year == selectedDay.Year)
             {
-                StatusShift1 = "Ended";
-                StatusShift2 = "Ended";
-                StatusShift3 = "Working";
+                StatusShift1 = "Đã kết thúc";
+                StatusShift2 = "Đã kết thúc";
+                StatusShift3 = "Đang làm việc";
             }
 
             // DANH SACH NHAN VIEN

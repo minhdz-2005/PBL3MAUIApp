@@ -44,7 +44,7 @@
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 Style="{DynamicResource DynamicLabelTitleStyle}"
-                Text="PRODUCT MANAGEMENT"
+                Text="QUẢN LÝ SẢN PHẨM"
                 TextColor="#4B3621" />
         </Grid>
 
@@ -70,7 +70,7 @@
                     Grid.Row="0"
                     FontAttributes="Bold" HorizontalOptions="Center"
                     Style="{DynamicResource DynamicLabelLargeStyle}"
-                    Text="CATEGORIES"
+                    Text="DANH MỤC"
                     TextColor="#4B3621" />
                 <Grid Grid.Row="1" RowSpacing="{DynamicResource DynamicSpacing}">
                     <Grid.RowDefinitions>
@@ -88,7 +88,7 @@
                         <Label
                             x:Name="CategoryCoffee"
                             Style="{DynamicResource DynamicLabelLargeStyle}"
-                            Text="All"
+                            Text="Tất cả"
                             TextColor="#4B3621"
                             VerticalOptions="Center">   
                             <Label.GestureRecognizers>
@@ -141,7 +141,7 @@
                         <Entry
                             x:Name="SearchEntry"
                             Grid.Column="0"
-                            Placeholder="Enter product's name..."
+                            Placeholder="Nhập tên sản phẩm..."
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black"
                             VerticalOptions="Center" />
@@ -151,7 +151,7 @@
                             Clicked="OnSearchClicked"
                             HorizontalOptions="End"
                             Style="{DynamicResource DynamicButtonInsideStyle}"
-                            Text="Search"
+                            Text="Tìm kiếm"
                             TextColor="Black"
                             VerticalOptions="Center" />
                     </Grid>
@@ -161,7 +161,7 @@
                     BackgroundColor="#B7B7B7"
                     Clicked="OnAddProductClicked"
                     Style="{DynamicResource DynamicButtonOutsideStyle}"
-                    Text="Add new product"
+                    Text="Thêm"
                     TextColor="Black" />
             </Grid>
             <ScrollView Grid.Row="1">
@@ -195,7 +195,7 @@
                                         <Label
                                             Grid.Column="2"
                                             Style="{DynamicResource DynamicLabelMediumStyle}"
-                                            Text="{Binding Price, StringFormat='{}$ {0:0.00}'}"
+                                            Text="{Binding Price, StringFormat='{}{0:N0} VNĐ'}"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center" />
                                         <Button
@@ -203,7 +203,7 @@
                                             BackgroundColor="#79CDCD"
                                             Clicked="OnEditProductClicked"
                                             Style="{DynamicResource DynamicButtonInsideStyle}"
-                                            Text="Edit"
+                                            Text="Sửa"
                                             TextColor="Black" />
                                         <Button
                                             Clicked="OnDeleteProductClicked"
@@ -212,7 +212,7 @@
                                             BorderWidth="0"
                                             HorizontalOptions="Center"
                                             Style="{DynamicResource DynamicButtonInsideStyle}"
-                                            Text="Delete"
+                                            Text="Xóa"
                                             TextColor="White"
                                             VerticalOptions="Center" />
                                     </Grid>
@@ -262,7 +262,7 @@
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
                         Style="{DynamicResource DynamicLabelTitleStyle}"
-                        Text="ADD NEW PRODUCT"
+                        Text="THÊM SẢN PHẨM"
                         TextColor="Black" />
                     <Border
                         Grid.Row="1"
@@ -271,7 +271,7 @@
                         <Label
                             x:Name="ProductGroupLabel"
                             Style="{DynamicResource DynamicEntryStyle}"
-                            Text="Category"
+                            Text="Danh mục"
                             TextColor="Black">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnProductGroupLabelTapped" />
@@ -284,7 +284,7 @@
                         Padding="0">
                         <Entry
                             x:Name="AddProductNameEntry"
-                            Placeholder="Product's name"
+                            Placeholder="Tên sản phẩm"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                     </Border>
@@ -294,7 +294,7 @@
                         Padding="0">
                         <Entry
                             x:Name="AddProductDescriptionEntry"
-                            Placeholder="Description"
+                            Placeholder="Mô tả"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                     </Border>
@@ -305,7 +305,7 @@
                         <Entry
                             x:Name="AddProductPriceEntry"
                             Keyboard="Numeric"
-                            Placeholder="Price (USD)"
+                            Placeholder="Giá (VNĐ)"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                     </Border>
@@ -314,14 +314,14 @@
                             Grid.Column="0"
                             Clicked="OnSaveProductClicked"
                             Style="{DynamicResource DynamicButtonOutsideStyle}"
-                            Text="Add"
+                            Text="Thêm"
                             TextColor="Black" />
                         <Button
                             Grid.Column="1"
                             BackgroundColor="#FF0000"
                             Clicked="OnCancelProductClicked"
                             Style="{DynamicResource DynamicButtonOutsideStyle}"
-                            Text="Cancel"
+                            Text="Hủy"
                             TextColor="White" />
                     </Grid>
                 </Grid>
@@ -363,7 +363,7 @@
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
                         Style="{DynamicResource DynamicLabelTitleStyle}"
-                        Text="UPDATE PRODUCT"
+                        Text="CHỈNH SỬA SAN PHẨM"
                         TextColor="Black" />
 
                     <Border
@@ -373,7 +373,7 @@
                         <Label
                             x:Name="EditProductGroupLabel"
                             Style="{DynamicResource DynamicEntryStyle}"
-                            Text="Category"
+                            Text="Danh mục"
                             TextColor="Black">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnProductGroupLabelTapped" />
@@ -387,7 +387,7 @@
                         Padding="0">
                         <Entry
                             x:Name="EditProductNameEntry"
-                            Placeholder="Product's name"
+                            Placeholder="Tên sản phẩm"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                     </Border>
@@ -398,7 +398,7 @@
                         Padding="0">
                         <Entry
                             x:Name="EditProductDescriptionEntry"
-                            Placeholder="Description"
+                            Placeholder="Mô tả"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                     </Border>
@@ -410,7 +410,7 @@
                         <Entry
                             x:Name="EditProductPriceEntry"
                             Keyboard="Numeric"
-                            Placeholder="Price (USD)"
+                            Placeholder="Giá (VNĐ)"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                     </Border>
@@ -420,14 +420,14 @@
                             Grid.Column="0"
                             Clicked="OnSaveEditProductClicked"
                             Style="{DynamicResource DynamicButtonOutsideStyle}"
-                            Text="Save"
+                            Text="Lưu"
                             TextColor="Black" />
                         <Button
                             Grid.Column="1"
                             BackgroundColor="#FF0000"
                             Clicked="OnCancelEditProductClicked"
                             Style="{DynamicResource DynamicButtonOutsideStyle}"
-                            Text="Cancel"
+                            Text="Hủy"
                             TextColor="White" />
                     </Grid>
                 </Grid>
@@ -458,7 +458,7 @@
                     FontAttributes="Bold"
                     FontSize="18"
                     HorizontalOptions="Center"
-                    Text="Category"
+                    Text="Danh mục"
                     TextColor="Black"
                     TextTransform="Uppercase"
                     VerticalOptions="Center" />
@@ -499,13 +499,13 @@
                     <Grid ColumnDefinitions="*,Auto">
                          <Entry Grid.Column="0"
                             x:Name="AddGroupProductEntry"
-                            Placeholder="Enter new category"
+                            Placeholder="Nhập danh mục mới"
                             Style="{DynamicResource DynamicEntryStyle}"
                             TextColor="Black" />
                         <Button 
                             Clicked="OnAddGroupButtonClicked"
                             Style="{StaticResource HoverButtonStyle}"
-                            Text="Confirm" 
+                            Text="Xác nhận" 
                             Grid.Column="1" 
                             CornerRadius="10" 
                             BackgroundColor="#4B3621" 

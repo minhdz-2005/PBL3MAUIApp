@@ -45,28 +45,28 @@ public partial class DoanhThuPage : ContentPage
         DateTime selectedDate = WorkDatePicker.Date;
 
         // Lấy ca làm việc từ Picker
-        string selectedShift = ShiftPicker.SelectedItem?.ToString() ?? "All";
+        string selectedShift = ShiftPicker.SelectedItem?.ToString() ?? "Tất cả";
 
         // LOC THEO CA
-        if (selectedShift == "All")
+        if (selectedShift == "Tất cả")
         {
             CaSang.IsVisible = true;
             CaChieu.IsVisible = true;
             CaToi.IsVisible = true;
         }
-        if (selectedShift == "Morning shift (6h00 - 12h00)")
+        if (selectedShift == "Ca sáng (6h00 - 12h00)")
         {
             CaSang.IsVisible = true;
             CaChieu.IsVisible = false;
             CaToi.IsVisible = false;
         }
-        if (selectedShift == "Afternoon shift (12h00 - 18h00)")
+        if (selectedShift == "Ca chiều (12h00 - 18h00)")
         {
             CaSang.IsVisible = false;
             CaChieu.IsVisible = true;
             CaToi.IsVisible = false;
         }
-        if (selectedShift == "Evening shift (18h00 - 24h00)")
+        if (selectedShift == "Ca tối (18h00 - 24h00)")
         {
             CaSang.IsVisible = false;
             CaChieu.IsVisible = false;

@@ -57,7 +57,7 @@ public partial class ProductPage : ContentPage
 
         if (mainViewModel != null)
         {
-            if (cate == "All") 
+            if (cate == "Tất cả") 
                 await mainViewModel.ProductVM.GetAllProduct();
             else
                 await mainViewModel.ProductVM.FilterCategory(cate);
@@ -132,7 +132,7 @@ public partial class ProductPage : ContentPage
         AddProductNameEntry.Text = string.Empty;
         AddProductDescriptionEntry.Text = string.Empty;
         AddProductPriceEntry.Text = string.Empty;
-        ProductGroupLabel.Text = "Select category";
+        ProductGroupLabel.Text = "Chọn danh mục";
         AddGroupProductEntry.Text = "";
     }
     // BAM VAO NUT THEM
@@ -143,9 +143,9 @@ public partial class ProductPage : ContentPage
         string cate = ProductGroupLabel.Text;
         string price = AddProductPriceEntry.Text;
 
-        if (cate == "Select category")
+        if (cate == "Chọn danh mục")
         {
-            await DisplayAlert("Error", "Please select or enter a new category for the product.", "OK");
+            await DisplayAlert("Lỗi", "Hãy chọn danh mục hoặc thêm danh mục mới cho sản phẩm.", "OK");
             return;
         }
 

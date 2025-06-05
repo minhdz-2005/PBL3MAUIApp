@@ -282,7 +282,7 @@ namespace PBL3MAUIApp.ViewModels
             // KIEM TRA NGAY BAT DAU VA NGAY KET THUC
             if (fromDate > toDate)
             {
-                await Shell.Current.DisplayAlert("Error", "Start date cannot be greater than end date.", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Ngày bắt đầu không thể nhỏ hơn ngày kết thúc.", "OK");
                 return;
             }
             
@@ -456,7 +456,7 @@ namespace PBL3MAUIApp.ViewModels
                             // THEM VOUCHER MOI VAO DANH SACH
                             VoucherAndDiscounts.Add(new VoucherAndDiscount
                             {
-                                VoucherCode = voucher.Name,
+                                VoucherCode = voucher.Code,
                                 ApplyTimes = 1, // SO LAN SU DUNG VOUCHER
                                 DiscountAmount = order.DiscountValue
                             });
@@ -502,8 +502,6 @@ namespace PBL3MAUIApp.ViewModels
                 
             }
         }
-
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

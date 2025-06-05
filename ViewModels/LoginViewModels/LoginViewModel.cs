@@ -14,50 +14,83 @@ public class LoginViewModel : INotifyPropertyChanged
 
     private AccountService accountService = new AccountService();
     private StaffService staffService = new StaffService();
- 
+    private ShiftStaffsService shiftStaffsService = new ShiftStaffsService();
+    private ShiftService shiftService = new ShiftService();
+
     public async Task CheckAccount(string username, string password)
     {
         Account account = await accountService.GetAccountByUsername(username);
-        // Debug.WriteLine("Chay 1");
         if (account != null)
         {
-            // Debug.WriteLine("Chay 2");
             if (account.Password == password)
             {
                 LoginAccount = account;
                 Debug.WriteLine($"us: {LoginAccount.Username}, {account.Username}");
-                // Debug.WriteLine("Chay 3");
-                if (account.Role == "Manager")
+                if (account.Role == "Quản lý")
                 {
                     await Shell.Current.GoToAsync("//Manager_MainPage");
+                    return;
                 }
-                if (account.Role == "Cashier")
+                if (account.Role == "Thu ngân")
                 {
                     var staffs = await staffService.GetStaffsAsync();
                     if (staffs != null)
                     {
-                        //Debug.WriteLine("Chay 3");
                         foreach (var st in staffs)
                         {
-                            //Debug.WriteLine($"Chay 4 {username}, {st.Username}");
                             if (username == st.Username)
                             {
-                                //Debug.WriteLine("Chay 5");
                                 staffID = st.Id;
+
+                                // KIEM TRA NHAN VIEN CO TRONG CA HIEN TAI HAY KHONG
+                                var shifts = await shiftService.GetShiftsAsync();
+                                if (shifts != null)
+                                {
+                                    //Debug.WriteLine("1");
+                                    foreach (var shift in shifts)
+                                    {
+                                        //Debug.WriteLine("____");
+                                        //Debug.WriteLine($"{shift.StartTime} vs {DateTime.Now}, {shift.EndTime} vs {DateTime.Now}");
+                                        if (shift.StartTime <= DateTime.Now && shift.EndTime >= DateTime.Now)
+                                        {
+                                            var shiftStaffs = await shiftStaffsService.GetShiftStaffsByShiftIdAsync(shift.Id);
+                                            if (shiftStaffs != null)
+                                            {
+                                                bool isInShift = shiftStaffs.Any(ss => ss.StaffId == staffID);
+                                                if (!isInShift)
+                                                {
+                                                    // Nhan vien khong co trong ca hien tai
+                                                    await Shell.Current.DisplayAlert("Thông báo", "Bạn không có ca làm việc hiện tại.", "OK");
+                                                    return;
+                                                }
+                                                else
+                                                {
+                                                    await Shell.Current.GoToAsync("//MainPageCashier");
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            await Shell.Current.DisplayAlert("Thông báo", "Bạn không có ca làm việc hiện tại.", "OK");
+                                            return;
+                                        }
+                                    }
+                                }
                             }
                         }
+                        
                     }
-                    await Shell.Current.GoToAsync("//MainPageCashier");
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Lỗi", "Tài khoản hoặc mật khẩu không đúng", "OK");
                 }
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Incorrect username or password", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Tài khoản hoặc mật khẩu không đúng", "OK");
             }
-        }
-        else
-        {
-            await Shell.Current.DisplayAlert("Error", "Incorrect username or password", "OK");
         }
     }
 

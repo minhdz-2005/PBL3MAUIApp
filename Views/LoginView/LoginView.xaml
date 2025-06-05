@@ -62,14 +62,14 @@
                         Grid.Row="0"
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
-                        Text="LOGIN"
+                        Text="ĐĂNG NHẬP"
                         TextColor="#000000" />
 
                     <!--  Label Account  -->
                     <Label
                         x:Name="AccountLabel"
                         Grid.Row="1"
-                        Text="Account"
+                        Text="Tài khoản"
                         TextColor="#000000" />
 
                     <!--  Entry Account  -->
@@ -84,7 +84,7 @@
                             x:Name="AccountEntry"
                             Margin="0"
                             BackgroundColor="Transparent"
-                            Placeholder="Enter username..."
+                            Placeholder="Nhập tên đăng nhập..."
                             TextColor="Black" 
                             Completed="OnLoginClicked"/>
                     </Border>
@@ -93,7 +93,7 @@
                     <Label
                         x:Name="PasswordLabel"
                         Grid.Row="3"
-                        Text="Password"
+                        Text="Mật khẩu"
                         TextColor="#000000" />
 
                     <!--  Entry Password  -->
@@ -109,7 +109,7 @@
                             Margin="0"
                             BackgroundColor="Transparent"
                             IsPassword="True"
-                            Placeholder="Enter password..."
+                            Placeholder="Nhập mật khẩu..."
                             TextColor="Black" 
                             VerticalOptions="Center"
                             Unfocused="PasswordEntry_Unfocused"
@@ -124,7 +124,7 @@
                         BackgroundColor="#8EB8BB"
                         CornerRadius="25"
                         HorizontalOptions="Center"
-                        Text="Login"
+                        Text="Đăng nhập"
                         TextColor="Black"
 			            Clicked="OnLoginClicked"/>
                 </Grid>

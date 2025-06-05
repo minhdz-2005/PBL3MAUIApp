@@ -37,7 +37,7 @@
         FontAttributes="Bold"
         FontSize="{DynamicResource DynamicFontSizeTitle}"
         HorizontalOptions="Center"
-        Text="SHIFT MANAGEMENT"
+        Text="QUẢN LÝ CA LÀM"
         TextColor="Black"
         VerticalOptions="End" />
         </Grid>
@@ -101,7 +101,7 @@
                                             FontAttributes="Bold"
                                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                                             HorizontalOptions="Start"
-                                            Text="Morning shift"
+                                            Text="Ca sáng"
                                             TextColor="Black" />
                                     </Frame>
                                     <Button
@@ -112,7 +112,7 @@
                                         Clicked="AddEmployeeToShift1_Clicked"
                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                        Text="Add staff"
+                                        Text="Thêm nhân viên"
                                         TextColor="Black"
                                         VerticalOptions="Center" />
                                 </Grid>
@@ -140,7 +140,7 @@
                                     Grid.Row="0"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Cashier"
+                                    Text="Thu ngân"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="1" ItemsSource="{Binding ShiftVM.StaffCa1_ThuNgan}">
                                     <CollectionView.ItemTemplate>
@@ -178,7 +178,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -190,7 +190,7 @@
                                     Grid.Row="2"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Barista"
+                                    Text="Pha chế"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="3" ItemsSource="{Binding ShiftVM.StaffCa1_PhaChe}">
                                     <CollectionView.ItemTemplate>
@@ -228,7 +228,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -241,7 +241,7 @@
                                     Grid.Row="4"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Waiter"
+                                    Text="Phục vụ"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="5" ItemsSource="{Binding ShiftVM.StaffCa1_PhucVu}">
                                     <CollectionView.ItemTemplate>
@@ -279,7 +279,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -310,7 +310,7 @@
                                             FontAttributes="Bold"
                                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                                             HorizontalOptions="Start"
-                                            Text="Afternoon shift"
+                                            Text="Ca chiều"
                                             TextColor="Black" />
                                     </Frame>
                                     <Button
@@ -321,7 +321,7 @@
                                         Clicked="AddEmployeeToShift2_Clicked"
                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                        Text="Add staff"
+                                        Text="Thêm nhân viên"
                                         TextColor="Black"
                                         VerticalOptions="Center" />
                                 </Grid>
@@ -349,7 +349,7 @@
                                     Grid.Row="0"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Cashier"
+                                    Text="Thu ngân"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="1" ItemsSource="{Binding ShiftVM.StaffCa2_ThuNgan}">
                                     <CollectionView.ItemTemplate>
@@ -387,7 +387,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -399,7 +399,7 @@
                                     Grid.Row="2"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Barista"
+                                    Text="Pha chế"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="3" ItemsSource="{Binding ShiftVM.StaffCa2_PhaChe}">
                                     <CollectionView.ItemTemplate>
@@ -437,7 +437,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -449,7 +449,7 @@
                                     Grid.Row="4"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Waiter"
+                                    Text="Phục vụ"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="5" ItemsSource="{Binding ShiftVM.StaffCa2_PhucVu}">
                                     <CollectionView.ItemTemplate>
@@ -487,7 +487,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -518,7 +518,7 @@
                                             FontAttributes="Bold"
                                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                                             HorizontalOptions="Start"
-                                            Text="Evening shift"
+                                            Text="Ca tối"
                                             TextColor="Black" />
                                     </Frame>
                                     <Button
@@ -529,7 +529,7 @@
                                         Clicked="AddEmployeeToShift3_Clicked"
                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                        Text="Add staff"
+                                        Text="Thêm nhân viên"
                                         TextColor="Black"
                                         VerticalOptions="Center" />
                                 </Grid>
@@ -557,7 +557,7 @@
                                     Grid.Row="0"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Cashier"
+                                    Text="Thu ngân"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="1" ItemsSource="{Binding ShiftVM.StaffCa3_ThuNgan}">
                                     <CollectionView.ItemTemplate>
@@ -595,7 +595,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -607,7 +607,7 @@
                                     Grid.Row="2"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Barista"
+                                    Text="Pha chế"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="3" ItemsSource="{Binding ShiftVM.StaffCa3_PhaChe}">
                                     <CollectionView.ItemTemplate>
@@ -645,7 +645,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -657,7 +657,7 @@
                                     Grid.Row="4"
                                     FontAttributes="Bold"
                                     FontSize="{DynamicResource DynamicFontSizeLarge}"
-                                    Text="Waiter"
+                                    Text="Phục vụ"
                                     TextColor="Black" />
                                 <CollectionView Grid.Row="5" ItemsSource="{Binding ShiftVM.StaffCa3_PhucVu}">
                                     <CollectionView.ItemTemplate>
@@ -695,7 +695,7 @@
                                                         Clicked="RemoveEmployee_Clicked"
                                                         CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                         FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                        Text="Remove"
+                                                        Text="Xóa"
                                                         TextColor="White" />
                                                 </Grid>
                                             </Frame>
@@ -794,34 +794,34 @@
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                             HorizontalOptions="Start"
-                            Text="Date time: dd/MM/yyyy"
+                            Text="Ngày làm: dd/MM/yyyy"
                             TextColor="Black" />
                         <Label
                             Grid.Row="1"
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
-                            Text="Total staff:"
+                            Text="Tổng nhân viên:"
                             TextColor="Black" />
                         <Label
                             Grid.Row="2"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.TotalNvCa1, StringFormat='{}Morning shift: {0:0}'}"
+                            Text="{Binding ShiftVM.TotalNvCa1, StringFormat='{}Ca sáng: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="3"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.TotalNvCa2, StringFormat='{}Afternoon shift: {0:0}'}"
+                            Text="{Binding ShiftVM.TotalNvCa2, StringFormat='{}Ca chiểu: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="4"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.TotalNvCa3, StringFormat='{}Evening shift: {0:0}'}"
+                            Text="{Binding ShiftVM.TotalNvCa3, StringFormat='{}Ca tối: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="5"
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
-                            Text="Total staff by role:"
+                            Text="Tổng nhân viên theo vị trí:"
                             TextColor="Black" />
                         <!--  Ca 1  -->
                         <Label
@@ -833,61 +833,61 @@
                         <Label
                             Grid.Row="7"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca1ThuNgan, StringFormat='{}Cashier: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca1ThuNgan, StringFormat='{}Thu ngân: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="8"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca1PhaChe, StringFormat='{}Barista: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca1PhaChe, StringFormat='{}Pha chế: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="9"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca1PhucVu, StringFormat='{}Waiter: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca1PhucVu, StringFormat='{}Phục vụ: {0:0}'}"
                             TextColor="Black" />
                         <!--  Ca 2  -->
                         <Label
                             Grid.Row="10"
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="Afternoon shift:"
+                            Text="Ca chiều:"
                             TextColor="Black" />
                         <Label
                             Grid.Row="11"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca2ThuNgan, StringFormat='{}Cashier: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca2ThuNgan, StringFormat='{}Thu ngân: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="12"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca2PhaChe, StringFormat='{}Barista: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca2PhaChe, StringFormat='{}Pha chế: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="13"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca2PhucVu, StringFormat='{}Waiter: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca2PhucVu, StringFormat='{}Phục vụ: {0:0}'}"
                             TextColor="Black" />
                         <!--  Ca 3  -->
                         <Label
                             Grid.Row="14"
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="Evening shift:"
+                            Text="Ca tối:"
                             TextColor="Black" />
                         <Label
                             Grid.Row="15"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca3ThuNgan, StringFormat='{}Cashier: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca3ThuNgan, StringFormat='{}Thu ngân: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="16"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca3PhaChe, StringFormat='{}Barista: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca3PhaChe, StringFormat='{}Pha chế: {0:0}'}"
                             TextColor="Black" />
                         <Label
                             Grid.Row="17"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                            Text="{Binding ShiftVM.Ca3PhucVu, StringFormat='{}Waiter: {0:0}'}"
+                            Text="{Binding ShiftVM.Ca3PhucVu, StringFormat='{}Phục vụ: {0:0}'}"
                             TextColor="Black" />
                     </Grid>
                 </ScrollView>
@@ -928,17 +928,17 @@
                                 <Label
                                     Grid.Row="0"
                                     FontSize="18"
-                                    Text="{Binding ShiftVM.SelectedDay, StringFormat='{}Date: {0:dd/MM/yyyy}'}"
+                                    Text="{Binding ShiftVM.SelectedDay, StringFormat='{}Ngày: {0:dd/MM/yyyy}'}"
                                     TextColor="Black" />
                                 <Label
                                     Grid.Row="1"
                                     FontSize="18"
-                                    Text="{Binding ShiftVM.SelectedShift, StringFormat='{}Shift: {0:0}'}"
+                                    Text="{Binding ShiftVM.SelectedShift, StringFormat='{}Ca làm: {0:0}'}"
                                     TextColor="Black" />
                                 <Label
                                     Grid.Row="2"
                                     FontSize="18"
-                                    Text="{Binding ShiftVM.SelectedTotal, StringFormat='{}Total: {0:0}'}"
+                                    Text="{Binding ShiftVM.SelectedTotal, StringFormat='{}Tổng: {0:0}'}"
                                     TextColor="Black" />
                             </Grid>
 
@@ -951,7 +951,7 @@
                                         <Label
                                             x:Name="RoleAll"
                                             Style="{DynamicResource DynamicLabelMediumStyle}"
-                                            Text="All"
+                                            Text="Tất cả"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center">
                                             <Label.GestureRecognizers>
@@ -966,7 +966,7 @@
                                         <Label
                                             x:Name="RoleCashier"
                                             Style="{DynamicResource DynamicLabelMediumStyle}"
-                                            Text="Cashier"
+                                            Text="Thu ngân"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center">
                                             <Label.GestureRecognizers>
@@ -981,7 +981,7 @@
                                         <Label
                                             x:Name="RoleWaiter"
                                             Style="{DynamicResource DynamicLabelMediumStyle}"
-                                            Text="Waiter"
+                                            Text="Phục vụ"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center">
                                             <Label.GestureRecognizers>
@@ -996,7 +996,7 @@
                                         <Label
                                             x:Name="RoleBarista"
                                             Style="{DynamicResource DynamicLabelMediumStyle}"
-                                            Text="Barista"
+                                            Text="Pha chế"
                                             TextColor="#4B3621"
                                             VerticalOptions="Center">
                                             <Label.GestureRecognizers>
@@ -1013,7 +1013,7 @@
                                 CornerRadius="20"
                                 FontSize="18"
                                 HorizontalOptions="Center"
-                                Text="Close"
+                                Text="Đóng"
                                 TextColor="Red" />
                         </Grid>
                     </Frame>
@@ -1027,7 +1027,7 @@
                                 Grid.Row="0"
                                 FontSize="18"
                                 HorizontalOptions="Center"
-                                Text="Staff in shift"
+                                Text="Nhân viên đã trong ca"
                                 TextColor="Black"
                                 TextTransform="Uppercase" />
                             <!--  Nhân viên đã có trong ca làm  -->
@@ -1057,7 +1057,7 @@
                                                             Clicked="RemoveEmployee_Clicked"
                                                             CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                            Text="Remove"
+                                                            Text="Xóa"
                                                             TextColor="White" />
                                                     </Grid>
                                                 </Frame>
@@ -1078,7 +1078,7 @@
                                 Grid.Row="0"
                                 FontSize="18"
                                 HorizontalOptions="Center"
-                                Text="Staff not in shift"
+                                Text="Nhân viên chưa trong ca"
                                 TextColor="Black"
                                 TextTransform="Uppercase" />
                             <!--  Nhân viên Chưa có trong ca làm  -->
@@ -1108,7 +1108,7 @@
                                                             Clicked="AddEmployee_Clicked"
                                                             CornerRadius="{DynamicResource DynamicCornerRadius}"
                                                             FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                            Text="Add"
+                                                            Text="Thêm"
                                                             TextColor="White" />
                                                     </Grid>
                                                 </Frame>

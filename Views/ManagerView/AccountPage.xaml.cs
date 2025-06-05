@@ -61,13 +61,6 @@ public partial class AccountPage : ContentPage
             Resources["DynamicBorderThickness"] = 1 * scale;
 
             double cornerRadius = 10 * scale;
-            Resources["DynamicCornerRadius"] = new CornerRadius(cornerRadius);
-
-            // FilterPopupOverlay.WidthRequest = scale * 500; // Chiều rộng linh hoạt
-            // FilterPopupOverlay.HeightRequest = scale * 600; // Chiều cao linh hoạt
-
-            // DetailPopup.WidthRequest = scale * 500;
-            // DetailPopup.HeightRequest = scale * 600;
 
             Resources["NaviHeightRequest"] = 60 * scale;
             Resources["TabMenuHeightRequest"] = 25 * scale;
@@ -90,7 +83,7 @@ public partial class AccountPage : ContentPage
 
         if (newPassword != rePassword)
         {
-            await DisplayAlert("Error", "Mật khẩu mới không khớp nhau !", "OK");
+            await DisplayAlert("Lỗi", "Mật khẩu mới không khớp nhau !", "OK");
             return;
         }
         else

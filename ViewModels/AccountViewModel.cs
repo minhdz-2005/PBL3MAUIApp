@@ -71,7 +71,7 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if (item.PhoneNumber == phone && item.Username != Account.Username)
                 {
-                    await Shell.Current.DisplayAlert("Error", "The phonenumber already exist !", "OK");
+                    await Shell.Current.DisplayAlert("Lỗi", "Số điện thoại này đã tồn tại !", "OK");
                     return;
                 }
                 if (item.Username == Account.Username)
@@ -80,7 +80,7 @@ namespace PBL3MAUIApp.ViewModels
                     item.PhoneNumber = phone;
                     await staffService.UpdateStaffAsync(item.Id, item);
                     Debug.WriteLine($"Name: {item.Name}, Phone: {item.PhoneNumber}");
-                    await Shell.Current.DisplayAlert("Success", "Update information successfully !", "OK");
+                    await Shell.Current.DisplayAlert("Thành công", "Thay đổi thông tin thành công !", "OK");
                     break;
                 }
             }
@@ -95,12 +95,12 @@ namespace PBL3MAUIApp.ViewModels
                 {
                     account.Password = newPassword;
                     await accountService.UpdateAccountAsync(account.Id, account);
-                    await Shell.Current.DisplayAlert("Success", "Update password successfully !", "OK");
+                    await Shell.Current.DisplayAlert("Thành công", "Thay đổi mật khẩu thành công !", "OK");
                     return true;
                 }
                 else
                 {
-                    await Shell.Current.DisplayAlert("Error", "Incorrect password !", "OK");
+                    await Shell.Current.DisplayAlert("Lỗi", "Sai mật khẩu !", "OK");
                     return false;
                 }
             }
@@ -115,12 +115,12 @@ namespace PBL3MAUIApp.ViewModels
             var result = await accountService.AddAccountAsync(account);
             if (result)
             {
-                await Shell.Current.DisplayAlert("Success", "Account added successfully", "OK");
+                await Shell.Current.DisplayAlert("Thành công", "Thêm tài khoản thành công", "OK");
                 return true;
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to add account", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Thêm tài khoản không thành công", "OK");
                 return false;
             }
         }
@@ -139,8 +139,6 @@ namespace PBL3MAUIApp.ViewModels
                 }
             }
         }
-
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

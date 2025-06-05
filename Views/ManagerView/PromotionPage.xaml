@@ -25,7 +25,7 @@
             FontAttributes="Bold"
             FontSize="{DynamicResource DynamicFontSizeTitle}"
             HorizontalOptions="Center"
-            Text="VOUCHER MANAGMENT 🎁"
+            Text="QUẢN LÝ DANH SÁCH ƯU ĐÃI 🎁"
             TextColor="Black"
             TextTransform="Uppercase" />
 
@@ -72,7 +72,7 @@
                             Grid.Row="0"
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
-                            Text="ADD NEW VOUCHER"
+                            Text="THÊM ƯU ĐÃI MỚI"
                             TextColor="White" />
 
                         <!--  Tên ưu đãi  -->
@@ -84,7 +84,7 @@
                             <Entry
                                 x:Name="AddName"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                Placeholder="Voucher name"
+                                Placeholder="Tên ưu đãi"
                                 TextColor="White"
                                 VerticalOptions="Fill" />
                         </Border>
@@ -98,7 +98,7 @@
                             <Entry
                                 x:Name="AddCode"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                Placeholder="Voucher code"
+                                Placeholder="Mã ưu đãi"
                                 TextColor="White"
                                 VerticalOptions="Fill" />
                         </Border>
@@ -112,7 +112,7 @@
                             <Editor
                                 x:Name="AddDescription"
                                 AutoSize="TextChanges"
-                                Placeholder="Description"
+                                Placeholder="Mô tả"
                                 TextColor="White"
                                 VerticalOptions="Fill" />
                         </Border>
@@ -126,7 +126,7 @@
                             <Entry
                                 x:Name="AddDiscount"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                Placeholder="Price (USD)"
+                                Placeholder="Giảm giá (VNĐ)"
                                 TextColor="White"
                                 VerticalOptions="Fill" />
                         </Border>
@@ -167,7 +167,7 @@
                             CornerRadius="{DynamicResource DynamicCornerRadius}"
                             FontSize="{DynamicResource DynamicFontSizeMedium}"
                             HorizontalOptions="Center"
-                            Text="Add"
+                            Text="Thêm"
                             TextColor="Black" />
                     </Grid>
                 </Frame>
@@ -196,7 +196,7 @@
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                             HeightRequest="{DynamicResource DynamicButtonHeight}"
-                            Text="All"
+                            Text="Tất cả"
                             TextColor="White" />
                         <Button
                             x:Name="DangDienRa"
@@ -209,7 +209,7 @@
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                             HeightRequest="{DynamicResource DynamicButtonHeight}"
-                            Text="🔥 Ongoing"
+                            Text="🔥 Đang diễn ra"
                             TextColor="White" />
                         <Button
                             x:Name="SapToi"
@@ -222,7 +222,7 @@
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                             HeightRequest="{DynamicResource DynamicButtonHeight}"
-                            Text="📅 Upcoming"
+                            Text="📅 Sắp tới"
                             TextColor="White" />
                         <Button
                             x:Name="DaKetThuc"
@@ -235,7 +235,7 @@
                             FontAttributes="Bold"
                             FontSize="{DynamicResource DynamicFontSizeLarge}"
                             HeightRequest="{DynamicResource DynamicButtonHeight}"
-                            Text="📦 Ended"
+                            Text="📦 Đã kết thúc"
                             TextColor="#4B3621" />
                     </Grid>
 
@@ -282,7 +282,7 @@
                                                     Grid.Column="1"
                                                     FontAttributes="Bold"
                                                     FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                                    Text="{Binding DiscountValue, StringFormat='{}Discount ${0:0.00}'}"
+                                                    Text="{Binding DiscountValue, StringFormat='{}Giảm {0:N0} VNĐ'}"
                                                     TextColor="#fff"
                                                     VerticalOptions="Center" />
                                                 <Label
@@ -438,7 +438,7 @@
                                 BackgroundColor="#D3D3D3"
                                 Clicked="SaveButton_Clicked"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                Text="Save"
+                                Text="Lưu"
                                 TextColor="Black" />
                             <Button
                                 x:Name="DeleteButton"
@@ -447,7 +447,7 @@
                                 BackgroundColor="#FF6347"
                                 Clicked="DeleteButton_Clicked"
                                 FontSize="{DynamicResource DynamicFontSizeMedium}"
-                                Text="Delete"
+                                Text="Xóa"
                                 TextColor="White" />
                         </Grid>
                     </Grid>

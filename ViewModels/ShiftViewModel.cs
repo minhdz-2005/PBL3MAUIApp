@@ -338,17 +338,17 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if (staff != null)
                 {
-                    if (staff.Role == "Cashier")
+                    if (staff.Role == "Thu ngân")
                     {
                         Ca1ThuNgan++;
                         StaffCa1_ThuNgan.Add(staff);
                     }
-                    else if (staff.Role == "Waiter")
+                    else if (staff.Role == "Phục vụ")
                     {
                         Ca1PhucVu++;
                         StaffCa1_PhucVu.Add(staff);
                     }
-                    else if (staff.Role == "Barista")
+                    else if (staff.Role == "Pha chế")
                     {
                         Ca1PhaChe++;
                         StaffCa1_PhaChe.Add(staff);
@@ -373,17 +373,17 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if (staff != null)
                 {
-                    if (staff.Role == "Cashier")
+                    if (staff.Role == "Thu ngân")
                     {
                         Ca2ThuNgan++;
                         StaffCa2_ThuNgan.Add(staff);
                     }
-                    else if (staff.Role == "Waiter")
+                    else if (staff.Role == "Phục vụ")
                     {
                         Ca2PhucVu++;
                         StaffCa2_PhucVu.Add(staff);
                     }
-                    else if (staff.Role == "Barista")
+                    else if (staff.Role == "Pha chế")
                     {
                         Ca2PhaChe++;
                         StaffCa2_PhaChe.Add(staff);
@@ -409,17 +409,17 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if (staff != null)
                 {
-                    if (staff.Role == "Cashier")
+                    if (staff.Role == "Thu ngân")
                     {
                         Ca3ThuNgan++;
                         StaffCa3_ThuNgan.Add(staff);
                     }
-                    else if (staff.Role == "Waiter")
+                    else if (staff.Role == "Phục vụ")
                     {
                         Ca3PhucVu++;
                         StaffCa3_PhucVu.Add(staff);
                     }
-                    else if (staff.Role == "Barista")
+                    else if (staff.Role == "Pha chế")
                     {
                         Ca3PhaChe++;
                         StaffCa3_PhaChe.Add(staff);
@@ -431,6 +431,12 @@ namespace PBL3MAUIApp.ViewModels
         // THEM NGAY LAM
         public async Task AddDayShift()
         {
+            // NEU Day Rong thi them ngay hom nay
+            if (Day.Count == 0)
+            {
+                Day.Add(DateTime.Now.Date);
+            }
+
             DateTime lastDay = Day.Last();
             Debug.WriteLine($"{lastDay:dd/MM/yyyy}");
 
@@ -445,7 +451,7 @@ namespace PBL3MAUIApp.ViewModels
 
             Day.Add(ca1Start);
 
-            await Shell.Current.DisplayAlert("Success",$"Added date {ca1Start:dd/MM/yyyy} !","OK");
+            await Shell.Current.DisplayAlert("Thành công",$"Đã thêm ngày làm {ca1Start:dd/MM/yyyy} !","OK");
 
             // THEM VAO DB
             await shiftService.AddShiftAsync(new Shift(ca1Start, ca1End));
@@ -532,7 +538,24 @@ namespace PBL3MAUIApp.ViewModels
         // Them nhan vien vao ca
         public async Task AddStaffToShift(Staff staff)
         {
-            if (staff != null)
+            // KIEM TRA NEU NGAY DO DA TON TAI NHAN VIEN ROI THI KHONG THEM NUA
+            bool trongCa = false;
+            foreach (var shift in DayShifts)
+            {
+                var listShiftStaff = await shiftStaffsService.GetShiftStaffsByShiftIdAsync(shift.Id);
+                foreach (var ss in listShiftStaff)
+                {
+                    if (ss != null && ss.StaffId == staff.Id && ss.ShiftId == shift.Id)
+                    {
+                        // Da co nhan vien trong ca
+                        await Shell.Current.DisplayAlert("Thông báo", $"{staff.Name} đã có trong ngày làm việc này, không thể thêm nữa.", "OK");
+                        trongCa = true;
+                    }
+                    //Debug.WriteLine($"Shift ID: {ss.ShiftId}, Staff ID: {ss.StaffId}");
+                }
+            }
+
+            if (staff != null && !trongCa)
             {
                 TotalStaffInShift.Add(staff);
                 TotalStaffOutShift.Remove(staff);
@@ -548,7 +571,7 @@ namespace PBL3MAUIApp.ViewModels
                         if (count == 1)
                         {
                             TotalNvCa1++;
-                            if (staff.Role == "Cashier")
+                            if (staff.Role == "Thu ngân")
                             {
                                 Ca1ThuNgan++;
                                 StaffCa1_ThuNgan.Add(staff);
@@ -557,7 +580,7 @@ namespace PBL3MAUIApp.ViewModels
                                     StaffCa1.Add(staff);
                                 }
                             }
-                            else if (staff.Role == "Waiter")
+                            else if (staff.Role == "Phục vụ")
                             {
                                 Ca1PhucVu++;
                                 StaffCa1_PhucVu.Add(staff);
@@ -566,7 +589,7 @@ namespace PBL3MAUIApp.ViewModels
                                     StaffCa1.Add(staff);
                                 }
                             }
-                            else if (staff.Role == "Barista")
+                            else if (staff.Role == "Pha chế")
                             {
                                 Ca1PhaChe++;
                                 StaffCa1_PhaChe.Add(staff);
@@ -579,7 +602,7 @@ namespace PBL3MAUIApp.ViewModels
                         else if (count == 2)
                         {
                             TotalNvCa2++;
-                            if (staff.Role == "Cashier")
+                            if (staff.Role == "Thu ngân")
                             {
                                 Ca2ThuNgan++;
                                 StaffCa2_ThuNgan.Add(staff);
@@ -588,7 +611,7 @@ namespace PBL3MAUIApp.ViewModels
                                     StaffCa2.Add(staff);
                                 }
                             }
-                            else if (staff.Role == "Waiter")
+                            else if (staff.Role == "Phục vụ")
                             {
                                 Ca2PhucVu++;
                                 StaffCa2_PhucVu.Add(staff);
@@ -597,7 +620,7 @@ namespace PBL3MAUIApp.ViewModels
                                     StaffCa2.Add(staff);
                                 }
                             }
-                            else if (staff.Role == "Barista")
+                            else if (staff.Role == "Pha chế")
                             {
                                 Ca2PhaChe++;
                                 StaffCa2_PhaChe.Add(staff);
@@ -611,7 +634,7 @@ namespace PBL3MAUIApp.ViewModels
                         else if (count == 3)
                         {
                             TotalNvCa3++;
-                            if (staff.Role == "Cashier")
+                            if (staff.Role == "Thu ngân")
                             {
                                 Ca3ThuNgan++;
                                 StaffCa3_ThuNgan.Add(staff);
@@ -620,7 +643,7 @@ namespace PBL3MAUIApp.ViewModels
                                     StaffCa3.Add(staff);
                                 }
                             }
-                            else if (staff.Role == "Waiter")
+                            else if (staff.Role == "Phục vụ")
                             {
                                 Ca3PhucVu++;
                                 StaffCa3_PhucVu.Add(staff);
@@ -629,7 +652,7 @@ namespace PBL3MAUIApp.ViewModels
                                     StaffCa3.Add(staff);
                                 }
                             }
-                            else if (staff.Role == "Barista")
+                            else if (staff.Role == "Pha chế")
                             {
                                 Ca3PhaChe++;
                                 StaffCa3_PhaChe.Add(staff);
@@ -669,19 +692,19 @@ namespace PBL3MAUIApp.ViewModels
                                 if (count == 1)
                                 {
                                     TotalNvCa1--;
-                                    if (staff.Role == "Cashier")
+                                    if (staff.Role == "Thu ngân")
                                     {
                                         Ca1ThuNgan--;
                                         StaffCa1_ThuNgan.Remove(staff);
                                         StaffCa1.Remove(staff);
                                     }
-                                    else if (staff.Role == "Waiter")
+                                    else if (staff.Role == "Phục vụ")
                                     {
                                         Ca1PhucVu--;
                                         StaffCa1_PhucVu.Remove(staff);
                                         StaffCa1.Remove(staff);
                                     }
-                                    else if (staff.Role == "Barista")
+                                    else if (staff.Role == "Pha chế")
                                     {
                                         Ca1PhaChe--;
                                         StaffCa1_PhaChe.Remove(staff);
@@ -692,19 +715,19 @@ namespace PBL3MAUIApp.ViewModels
                                 else if (count == 2)
                                 {
                                     TotalNvCa2--;
-                                    if (staff.Role == "Cashier")
+                                    if (staff.Role == "Thu ngân")
                                     {
                                         Ca2ThuNgan--;
                                         StaffCa2_ThuNgan.Remove(staff);
                                         StaffCa2.Remove(staff);
                                     }
-                                    else if (staff.Role == "Waiter")
+                                    else if (staff.Role == "Phục vụ")
                                     {
                                         Ca2PhucVu--;
                                         StaffCa2_PhucVu.Remove(staff);
                                         StaffCa2.Remove(staff);
                                     }
-                                    else if (staff.Role == "Barista")
+                                    else if (staff.Role == "Pha chế")
                                     {
                                         Ca2PhaChe--;
                                         StaffCa2_PhaChe.Remove(staff);
@@ -715,19 +738,19 @@ namespace PBL3MAUIApp.ViewModels
                                 else if (count == 3)
                                 {
                                     TotalNvCa3--;
-                                    if (staff.Role == "Cashier")
+                                    if (staff.Role == "Thu ngân")
                                     {
                                         Ca3ThuNgan--;
                                         StaffCa3_ThuNgan.Remove(staff);
                                         StaffCa3.Remove(staff);
                                     }
-                                    else if (staff.Role == "Waiter")
+                                    else if (staff.Role == "Phục vụ")
                                     {
                                         Ca3PhucVu--;
                                         StaffCa3_PhucVu.Remove(staff);
                                         StaffCa3.Remove(staff);
                                     }
-                                    else if (staff.Role == "Barista")
+                                    else if (staff.Role == "Pha chế")
                                     {
                                         Ca3PhaChe--;
                                         StaffCa3_PhaChe.Remove(staff);

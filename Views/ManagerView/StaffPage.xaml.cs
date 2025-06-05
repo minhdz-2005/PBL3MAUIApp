@@ -52,7 +52,7 @@ public partial class StaffPage : ContentPage
 
         if (mainViewModel != null && role != null)
         {
-            if (role == "All")
+            if (role == "Tất cả")
             {
                 await mainViewModel.StaffVM.GetAllStaff();
             }
@@ -74,7 +74,7 @@ public partial class StaffPage : ContentPage
         if (frame != null)
         {
             StaffList.Children.Remove(frame);
-            DisplayAlert("Success", "Staff deleted successfully!", "OK");
+            DisplayAlert("Thành công", "Xóa nhân viên thành công!", "OK");
         }
     }
 
@@ -116,7 +116,7 @@ public partial class StaffPage : ContentPage
         string staffSalary = StaffSalaryEntry.Text;
         string staffRole = AddStaffRoleLabel.Text;
 
-        if (staffRole != "Cashier")
+        if (staffRole != "Thu ngân")
         {
             Debug.WriteLine("Staff role is not Cashier, disabling username and password fields.");
             username = string.Empty; // Disable username for non-Cashier roles
@@ -142,7 +142,7 @@ public partial class StaffPage : ContentPage
         StaffNameEntry.Text = string.Empty;
         StaffPhoneEntry.Text = string.Empty;
         StaffSalaryEntry.Text = string.Empty;
-        AddStaffRoleLabel.Text = "Role (Cashier/Barista/Waiter)";
+        AddStaffRoleLabel.Text = "Chức năng (Thu ngân/Pha chế/Phục vụ)";
     }
 
     // thay doi thong tin nhan vien x
@@ -156,7 +156,7 @@ public partial class StaffPage : ContentPage
         {
             idStaff = staff.Id;
             EditStaffUsernameEntry.Text = staff.Username;
-            if (staff.Role == "Cashier")
+            if (staff.Role == "Thu ngân")
             {
                 EditUsernameEntry.IsEnabled = true;
                 EditPasswordEntry.IsEnabled = true;
@@ -269,8 +269,8 @@ public partial class StaffPage : ContentPage
 
     private void OnCashierOptionSelected(object sender, EventArgs e)
     {
-        AddStaffRoleLabel.Text = "Cashier";
-        EditStaffRoleLabel.Text = "Cashier";
+        AddStaffRoleLabel.Text = "Thu ngân";
+        EditStaffRoleLabel.Text = "Thu ngân";
 
         UsernameEntry.IsEnabled = true;
         PasswordEntry.IsEnabled = true;
@@ -284,8 +284,8 @@ public partial class StaffPage : ContentPage
 
     private void OnBaristaOptionSelected(object sender, EventArgs e)
     {
-        AddStaffRoleLabel.Text = "Barista";
-        EditStaffRoleLabel.Text = "Barista";
+        AddStaffRoleLabel.Text = "Pha chế";
+        EditStaffRoleLabel.Text = "Pha chế";
 
         UsernameEntry.IsEnabled = false;
         PasswordEntry.IsEnabled = false;
@@ -300,8 +300,8 @@ public partial class StaffPage : ContentPage
 
     private void OnWaiterOptionSelected(object sender, EventArgs e)
     {
-        AddStaffRoleLabel.Text = "Waiter";
-        EditStaffRoleLabel.Text = "Waiter";
+        AddStaffRoleLabel.Text = "Phục vụ";
+        EditStaffRoleLabel.Text = "Phục vụ";
 
         UsernameEntry.IsEnabled = false;
         PasswordEntry.IsEnabled = false;

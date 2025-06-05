@@ -136,22 +136,22 @@ namespace PBL3MAUIApp.ViewModels
                 {
                     if (voucher.Code == code)
                     {
-                        await Shell.Current.DisplayAlert("Error", "Voucher code already exists !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Mã giảm giá đã tồn tại !", "OK");
                         return false;
                     }
                     if (start <  DateTime.Now)
                     {
-                        await Shell.Current.DisplayAlert("Error", "Start date cannot be less than current date !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Ngày bắt đầu không thể nhỏ hơn ngày hiện tại !", "OK");
                         return false;
                     }
                     if (end < DateTime.Now)
                     {
-                        await Shell.Current.DisplayAlert("Error", "End date cannot be less than current date !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Ngày kết thúc không thể nhỏ hơn ngày hiện tại !", "OK");
                         return false;
                     }
                     if (start > end)
                     {
-                        await Shell.Current.DisplayAlert("Error", "Start date cannot be greater than end date !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Ngày bắt đầu không thể lớn hơn ngày kết thúc !", "OK");
                         return false;
                     }
                 }
@@ -167,7 +167,7 @@ namespace PBL3MAUIApp.ViewModels
             );
             if (!isValid || discountValue < 0)
             {
-                await Shell.Current.DisplayAlert("Error", "Invalid Discount value", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Giả trị giảm giá không hợp lệ", "OK");
                 return false;
             }
 
@@ -186,7 +186,7 @@ namespace PBL3MAUIApp.ViewModels
             // THEM UU DAI VAO DANH SACH
             await voucherService.AddVoucherAsync(newVoucher);
             await GetAllVouchers(); // CẬP NHẬT DANH SÁCH VOUCHER TRÊN GIAO DIỆN
-            await Shell.Current.DisplayAlert("Success", "Add voucher successfully !", "OK");
+            await Shell.Current.DisplayAlert("Thành công", "Thêm voucher thành công !", "OK");
 
             return true;
         }
@@ -197,7 +197,7 @@ namespace PBL3MAUIApp.ViewModels
             var v = await voucherService.GetVoucherByIdAsync(id);
             if (v!= null && v.EndDate < DateTime.Now)
             {
-                await Shell.Current.DisplayAlert("Error", "Cannot edit expired voucher !", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Không thể chỉnh sửa voucher đã kết thúc !", "OK");
                 return;
             }
             // KIEM TRA GIA TRI DAU VAO
@@ -207,22 +207,22 @@ namespace PBL3MAUIApp.ViewModels
                 {
                     if (voucher.Code == code && voucher.Id != id)
                     {
-                        await Shell.Current.DisplayAlert("Error", "Voucher code already exists !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Mã giảm giá đã tồn tại !", "OK");
                         return;
                     }
                     if (start < DateTime.Now)
                     {
-                        await Shell.Current.DisplayAlert("Error", "Start date cannot be less than current date !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Ngày bắt đầu không thể nhỏ hơn ngày hiện tại !", "OK");
                         return;
                     }
                     if (end < DateTime.Now)
                     {
-                        await Shell.Current.DisplayAlert("Error", "End date cannot be less than current date !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Ngày kết thúc không thể nhỏ hơn ngày hiện tại !", "OK");
                         return;
                     }
                     if (start > end)
                     {
-                        await Shell.Current.DisplayAlert("Error", "Start date cannot be greater than end date !", "OK");
+                        await Shell.Current.DisplayAlert("Lỗi", "Ngày bắt đầu không thể lớn hơn ngày kết thúc !", "OK");
                         return;
                     }
                 }
@@ -237,7 +237,7 @@ namespace PBL3MAUIApp.ViewModels
             );
             if (!isValid || discountValue < 0)
             {
-                await Shell.Current.DisplayAlert("Error", "Invalid Discount value", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Giá trị giảm giá không hợp lệ", "OK");
                 return;
             }
             // TAO UU DAI
@@ -255,7 +255,7 @@ namespace PBL3MAUIApp.ViewModels
             // SUA UU DAI VAO DANH SACH
             await voucherService.UpdateVoucherAsync(id, updatedVoucher);
             await GetAllVouchers(); // CẬP NHẬT DANH SÁCH VOUCHER TRÊN GIAO DIỆN
-            await Shell.Current.DisplayAlert("Success", "Edit voucher successful !", "OK");
+            await Shell.Current.DisplayAlert("Thành công", "Chỉnh sửa voucher thành công !", "OK");
         }
         // XOA UU DAI
         public async Task<bool> DeleteVoucher(int id)
@@ -266,11 +266,11 @@ namespace PBL3MAUIApp.ViewModels
             {
                 if (voucher.EndDate < DateTime.Now)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Cannot delete expired voucher !", "OK");
+                    await Shell.Current.DisplayAlert("Lỗi", "Không thể xóa voucher đã kết thúc !", "OK");
                     return false;
                 }
 
-                bool confirm = await Shell.Current.DisplayAlert("Confirm", "Are you sure you want to delete this voucher?", "Yes", "No");
+                bool confirm = await Shell.Current.DisplayAlert("Chắc chắn không?", "Bạn thục sự muốn xóa voucher này?", "Có", "Không");
                 if (confirm)
                 {
                     var listOrder = await orderService.GetOrdersAsync();
@@ -279,14 +279,14 @@ namespace PBL3MAUIApp.ViewModels
                     {
                         if (order.VoucherId == id)
                         {
-                            await Shell.Current.DisplayAlert("Error", "Cannot delete voucher that has been used in an order !", "OK");
+                            await Shell.Current.DisplayAlert("Lỗi", "Không thể xóa voucher đã được áp dụng trong đơn hàng !", "OK");
                             return false;
                         }
                     }
                     // XOA UU DAI
                     await voucherService.DeleteVoucherAsync(id);
                     await GetAllVouchers(); // CẬP NHẬT DANH SÁCH VOUCHER TRÊN GIAO DIỆN
-                    await Shell.Current.DisplayAlert("Success", "Voucher deleted successfully !", "OK");
+                    await Shell.Current.DisplayAlert("Thành công", "Xóa voucher thành công !", "OK");
 
                     return true;
                 }
