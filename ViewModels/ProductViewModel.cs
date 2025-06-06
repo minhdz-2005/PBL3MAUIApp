@@ -19,6 +19,7 @@ public class ProductViewModel : INotifyPropertyChanged
     public ObservableCollection<string> Categories { get; set; } = new();
 
     public ProductService productService = new ProductService();
+    private OrderDetailService orderDetailService = new OrderDetailService();
 
     public async Task GetAllProduct()
     {
@@ -116,6 +117,14 @@ public class ProductViewModel : INotifyPropertyChanged
     // XOA SAN PHAM
     public async Task DeleteProduct(int id)
     {
+        // Kiem tra xem san pham co ton tai trong danh sach OrderDetail hay khong
+        var orderDetails = await orderDetailService.GetOrderDetailsAsync();
+        if (orderDetails.Any(od => od.ProductId == id))
+        {
+            await Shell.Current.DisplayAlert("Lỗi", "Không thể xóa sản phẩm vì nó đã được đặt trong đơn hàng.", "OK");
+            return; // Khong the xoa san pham neu da ton tai trong OrderDetail
+        }
+
         await productService.DeleteProductAsync(id);
         var product = Products.FirstOrDefault(p => p.Id == id);
         if (product != null)

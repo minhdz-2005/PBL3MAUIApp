@@ -264,13 +264,14 @@ namespace PBL3MAUIApp.ViewModels
 
             if (voucher != null)
             {
+
                 if (voucher.EndDate < DateTime.Now)
                 {
                     await Shell.Current.DisplayAlert("Lỗi", "Không thể xóa voucher đã kết thúc !", "OK");
                     return false;
                 }
 
-                bool confirm = await Shell.Current.DisplayAlert("Chắc chắn không?", "Bạn thục sự muốn xóa voucher này?", "Có", "Không");
+                bool confirm = await Shell.Current.DisplayAlert("Xác nhận", "Bạn thục sự muốn xóa voucher này?", "Có", "Không");
                 if (confirm)
                 {
                     var listOrder = await orderService.GetOrdersAsync();

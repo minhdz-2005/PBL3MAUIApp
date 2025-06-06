@@ -363,7 +363,7 @@
                         FontAttributes="Bold"
                         HorizontalOptions="Center"
                         Style="{DynamicResource DynamicLabelTitleStyle}"
-                        Text="CHỈNH SỬA SAN PHẨM"
+                        Text="CHỈNH SỬA SẢN PHẨM"
                         TextColor="Black" />
 
                     <Border

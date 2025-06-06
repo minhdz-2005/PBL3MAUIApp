@@ -33,6 +33,9 @@ namespace PBL3MAUIApp.ViewModels
 
         private StaffService staffService = new StaffService();
         private AccountService accountService = new AccountService();
+        private ShiftStaffsService shiftStaffsService = new ShiftStaffsService();
+        private OrderService orderService = new OrderService();
+        private ShiftService shiftService = new ShiftService();
         // LOAD DANH SACH NHAN VIEN
         public async Task GetAllStaff()
         {
@@ -232,7 +235,15 @@ namespace PBL3MAUIApp.ViewModels
                     Staff staff = new Staff(username, name, phone, role, salary);
                     await staffService.UpdateStaffAsync(id, staff);
 
-                    await accountService.AddAccountAsync(new Account(username, password, role));
+                    var listAcc = await accountService.GetAccountsAsync();
+                    foreach (var item in listAcc)
+                    {
+                        if (item.Username == username)
+                        {
+                            await accountService.UpdateAccountAsync(item.Id, new Account(username, password, role));
+                            break;
+                        }
+                    }
                 }
                 if (role != "Thu ngân" && username != null)
                 {
@@ -256,6 +267,30 @@ namespace PBL3MAUIApp.ViewModels
         // XOA NHAN VIEN
         public async Task DeleteStaff(int id)
         {
+            // Kiem tra nhan vien co trong ca hay khong
+            var shiftStaffs = await shiftStaffsService.GetShiftStaffssAsync();
+            var shifts = await shiftService.GetShiftsAsync();
+           
+            foreach (var ss in shiftStaffs)
+            {
+                foreach (var s in shifts)
+                {
+                    if (ss.ShiftId == s.Id && s.EndTime < DateTime.Now && ss.StaffId == id)
+                    {
+                        await Shell.Current.DisplayAlert("Lỗi", "Nhân viên đã từng làm việc trong quán, không thể xóa !", "OK");
+                        return;
+                    }
+                }
+            }
+            
+            // Kiem tra nhan vien co trong don hang hay khong
+            var orders = await orderService.GetOrdersAsync();
+            if (orders.Any(o => o.StaffId == id))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Nhân viên đã phục vụ đơn hàng, không thể xóa !", "OK");
+                return;
+            }
+
             bool result = await staffService.DeleteStaffAsync(id);
             if (result)
             {

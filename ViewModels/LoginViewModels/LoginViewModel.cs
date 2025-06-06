@@ -47,34 +47,29 @@ public class LoginViewModel : INotifyPropertyChanged
                                 if (shifts != null)
                                 {
                                     //Debug.WriteLine("1");
+                                    bool isInShift = false;
                                     foreach (var shift in shifts)
                                     {
                                         //Debug.WriteLine("____");
-                                        //Debug.WriteLine($"{shift.StartTime} vs {DateTime.Now}, {shift.EndTime} vs {DateTime.Now}");
+                                        Debug.WriteLine($"{shift.StartTime} vs {DateTime.Now}, {shift.EndTime} vs {DateTime.Now}");
                                         if (shift.StartTime <= DateTime.Now && shift.EndTime >= DateTime.Now)
                                         {
                                             var shiftStaffs = await shiftStaffsService.GetShiftStaffsByShiftIdAsync(shift.Id);
                                             if (shiftStaffs != null)
                                             {
-                                                bool isInShift = shiftStaffs.Any(ss => ss.StaffId == staffID);
-                                                if (!isInShift)
-                                                {
-                                                    // Nhan vien khong co trong ca hien tai
-                                                    await Shell.Current.DisplayAlert("Thông báo", "Bạn không có ca làm việc hiện tại.", "OK");
-                                                    return;
-                                                }
-                                                else
-                                                {
-                                                    await Shell.Current.GoToAsync("//MainPageCashier");
-                                                    return;
-                                                }
+                                                isInShift = shiftStaffs.Any(ss => ss.StaffId == staffID);
                                             }
                                         }
-                                        else
-                                        {
-                                            await Shell.Current.DisplayAlert("Thông báo", "Bạn không có ca làm việc hiện tại.", "OK");
-                                            return;
-                                        }
+                                    }
+                                    if (isInShift)
+                                    {
+                                        await Shell.Current.GoToAsync("//MainPageCashier");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        await Shell.Current.DisplayAlert("Thông báo", "Bạn không có ca làm việc hiện tại.", "OK");
+                                        return;
                                     }
                                 }
                             }
